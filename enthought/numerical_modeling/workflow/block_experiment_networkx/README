@@ -1,0 +1,8 @@
+This is a port of the 'block' package to use networkx.Graph objects instead of
+dicts (supported by enthought.util.graph) to represent dependency graphs. This
+code is currently not in use and is intended as a reference for posterity.
+
+The port was straight-forward and opened up an extensive graph library
+maintained by others, but we don't use many graph algorithms in the first place
+and introducing new package dependencies is painful, so we decided to not use
+the port.
