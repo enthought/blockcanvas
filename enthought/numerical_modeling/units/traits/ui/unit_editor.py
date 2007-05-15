@@ -130,6 +130,11 @@ class SimpleEditor ( UIEditor ):
                 self.unit_view = \
                     UnitScalarView( units = self.value.units,
                                     magnitude = self.value) 
+                self.unit_view.on_trait_change(self._update, "magnitude")
+
+    def _update(self):
+        self.value = UnitArray(self.unit_view.magnitude, units=self.value.units)
+
                     
 #-------------------------------------------------------------------------------
 #  Create the editor factory object:
