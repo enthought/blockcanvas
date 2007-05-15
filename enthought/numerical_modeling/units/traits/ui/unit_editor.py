@@ -29,7 +29,7 @@ from enthought.units.unit \
     import unit
     
 from enthought.numerical_modeling.units.unit_scalar \
-    import UnitScalar
+    import UnitArray
     
 class UnitView ( HasPrivateTraits ):
     pass    
