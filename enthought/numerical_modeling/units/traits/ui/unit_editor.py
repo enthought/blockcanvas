@@ -138,7 +138,7 @@ class SimpleEditor ( UIEditor ):
                 self.unit_view.on_trait_change(self._update, "magnitude")
 
     def _update(self):
-        self.value = UnitArray(self.unit_view.magnitude, units=units_str)
+        self.value = UnitArray(self.unit_view.magnitude, units=self.value.units)
 
                     
 #-------------------------------------------------------------------------------
