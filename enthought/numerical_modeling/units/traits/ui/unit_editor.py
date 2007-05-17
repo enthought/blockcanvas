@@ -42,7 +42,7 @@ class UnitScalarView ( UnitView ):
     magnitude = CFloat
     
     # The units of the Units Scalar:
-    units = Instance( unit )
+    units = Str
 
     #-- Traits Views -----------------------------------------------------------
     
@@ -71,7 +71,7 @@ class UnitArrayView ( UnitView ):
     #-- Trait Definitions ------------------------------------------------------    
     
     # The units of the Units Scalar:
-    units = Instance( unit )
+    units =Str
     
     #-- Trait Views ------------------------------------------------------------
     
@@ -117,23 +117,28 @@ class SimpleEditor ( UIEditor ):
         """ Updates the editor when the object trait changes external to the 
             editor.
         """
+
+        if hasattr(self.value.units, 'label'):
+            units_str = self.value.units.label
+        else:
+            units_str = repr(self.value.units)
         
         try:
             if len(self.value) > 1: 
-                self.unit_view = UnitArrayView( units = self.value.units )
+                self.unit_view = UnitArrayView( units = units_str )
         except:
             if self.readonly:
                 self.unit_view = \
-                    ReadonlyUnitScalarView( units = self.value.units,
+                    ReadonlyUnitScalarView( units = units_str, 
                                             magnitude = self.value) 
             else:
                 self.unit_view = \
-                    UnitScalarView( units = self.value.units,
+                    UnitScalarView( units = units_str, 
                                     magnitude = self.value) 
                 self.unit_view.on_trait_change(self._update, "magnitude")
 
     def _update(self):
-        self.value = UnitArray(self.unit_view.magnitude, units=self.value.units)
+        self.value = UnitArray(self.unit_view.magnitude, units=units_str)
 
                     
 #-------------------------------------------------------------------------------
