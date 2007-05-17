@@ -91,6 +91,20 @@ class MappingObjectTest(BasicMappingProtocolTest, object):
 
 class NumericContextTest(MappingObjectTest):
 
+    def test_equality(self):
+        nc1 = NumericContext()
+        nc2 = NumericContext()
+        assert_not_equal(nc1, nc2)
+
+        nc1['a'] = 1
+        assert_not_equal(nc1, nc2)
+
+        nc2['a'] = 1
+        assert_not_equal(nc1, nc2)
+
+        return
+
+
     def test_events_single_name(self):
         'Events: single name'
 

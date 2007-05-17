@@ -47,7 +47,7 @@ from UserDict \
 #-------------------------------------------------------------------------------
 #  Utilities:
 #-------------------------------------------------------------------------------
-        
+
 # XXX Just use 'event.single_event' once 'ANumericContext.defer_events' works
 #def single_event(f):
 #    def g(self, *args, **kw):
@@ -62,18 +62,18 @@ from UserDict \
 #        finally:
 #            x.defer_events = old
 #    return g
-    
+
 #-------------------------------------------------------------------------------
-#  Define a trait to handle setting undefined context attributes:  
+#  Define a trait to handle setting undefined context attributes:
 #-------------------------------------------------------------------------------
-        
+
 def get_undef ( object, name ):
     return object.__getitem__( name )
-    
+
 def set_undef ( object, name, value ):
     object.__setitem__( name, value )
-    
-Undefed = Property( get_undef, set_undef )    
+
+Undefed = Property( get_undef, set_undef )
 
 #-------------------------------------------------------------------------------
 #  'ANumericContext' class:
@@ -86,7 +86,7 @@ class ANumericContext ( HasPrivateTraits, DictMixin ):
     #---------------------------------------------------------------------------
     #  Trait definitions:
     #---------------------------------------------------------------------------
-    
+
     # Define the rule for how to handle undefined traits:
     _ = Undefed
 
@@ -131,7 +131,7 @@ class ANumericContext ( HasPrivateTraits, DictMixin ):
 
     # The ContextDelegate the context uses to handle various policy decisions:
     #context_delegate = Instance( ContextDelegate )
-    
+
     # The list of all sub_context names:
     #sub_context_names = List( Str )
 
@@ -139,6 +139,26 @@ class ANumericContext ( HasPrivateTraits, DictMixin ):
     # true, no events are fired, and when reverted to false, one pair of event
     # fires that represents the net change since 'defer_events' was set.
     #defer_events = Bool
+
+    #########################################################################
+    # 'UserDict' interface
+    #########################################################################
+
+    #### operator methods ###################################################
+
+    def __cmp__(self, other):
+        if other is None:
+            return 1
+
+        result = super(ANumericContext, self).__cmp__(other)
+        # FIXME: If we want comparison based on contents being equal, then
+        # use the line below instead of the uncommented line underneath it.
+        #if result == 0 and len(self) == 0:
+        if result == 0:
+            result = cmp(id(self), id(other))
+
+        return result
+
 
     #---------------------------------------------------------------------------
     #  Post events:
