@@ -170,7 +170,7 @@ class NumericContext ( ANumericContext ):
         return state
 
     def __setstate__ ( self, state ):
-        version = state.pop( '__numeric_context_version__' )
+        version = state.pop( '__numeric_context_version__', 0)
 
         if version < 1:
             k = '__numeric_context_saved_bindings__'
