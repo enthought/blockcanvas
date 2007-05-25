@@ -98,6 +98,7 @@ class Block(HasTraits):
     def __init__(self, x=(), file=None, **kw):
         super(Block, self).__init__(**kw)
 
+        # fixme: Why not use static handlers for this?
         self.on_trait_change(self._structure_changed, 'sub_blocks')
         self.on_trait_change(self._structure_changed, 'sub_blocks_items')
         self.on_trait_change(self._structure_changed, 'ast')
@@ -127,6 +128,7 @@ class Block(HasTraits):
         if isinstance(x, basestring):
             # (BlockTransformer handles things like 'import *')
             self.ast = parse(x, mode='exec', transformer=BlockTransformer())
+            print self.ast
         elif isinstance(x, Node):
             self.ast = x
         elif is_sequence(x):
@@ -283,7 +285,7 @@ class Block(HasTraits):
                 self._updating_structure = True
 
                 if name == 'ast':
-
+                    print 'here'
                     # Policy: Keep our AST composable and tidy
                     if isinstance(self.ast, Module):
                         self.ast = self.ast.node
@@ -360,6 +362,8 @@ class Block(HasTraits):
         if not self.__dep_graph_is_valid:
 
             if self.sub_blocks is None:
+                # fixme: This is questionable.  Shouldn't it make a
+                #        graph with empty dependencies?
                 self.__dep_graph = None
             else:
                 inputs, outputs, conditional_outputs, self.__dep_graph = \
