@@ -667,5 +667,27 @@ class BlockRegressionTestCase(unittest.TestCase):
         except graph.CyclicGraph:
             self.fail()
 
+class BlockRegressionTestCase(unittest.TestCase):
+
+    def test_dep_graph_exists_for_line_of_code(self):
+        """ Does block treat 1 func blocks like multi-func blocks.
+        
+            It doesn't appear that simple blocks are forcing updates
+            to the dep_graph.  One func graphs Should be the same as
+            multi-line ones (I think).  Without this, we have to 
+            always check for None and special case that code path in
+            all the processing tools.
+            
+            fixme: I (eric) haven't examined this very deeply, it 
+                   just cropped up in some of my code.  This test
+                   is a reminder that we need to either fix it or
+                   verify that we don't want to fix it.
+        """
+        block = Block('b = foo(a)\nc=bar(b)\n')
+        self.assertTrue(block._dep_graph is not None)
+
+        block = Block('b = foo(a)\n')
+        self.assertTrue(block._dep_graph is not None)
+
 if __name__ == '__main__':
     unittest.main(argv=sys.argv)
