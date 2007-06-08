@@ -1,7 +1,6 @@
-import nose, re, sys, time, unittest
+import re, sys, time, unittest
 from compiler.ast import Discard, Module, Name, Stmt
 from cPickle import dumps, loads
-from nose.tools import timed
 from StringIO import StringIO
 
 from enthought.testing.api import doctest_for_module, skip
