@@ -128,7 +128,6 @@ class Block(HasTraits):
         if isinstance(x, basestring):
             # (BlockTransformer handles things like 'import *')
             self.ast = parse(x, mode='exec', transformer=BlockTransformer())
-            print self.ast
         elif isinstance(x, Node):
             self.ast = x
         elif is_sequence(x):
@@ -136,7 +135,7 @@ class Block(HasTraits):
         else:
             raise ValueError('Expecting string, Node, or sequence. Got %r' % x)
 
-        # We really want to keep the filename for "pristine" blocks, and 
+        # We really want to keep the filename for "pristine" blocks, and
         # _structure_changed nukes it most times
         self.filename = saved_filename
 
@@ -285,7 +284,6 @@ class Block(HasTraits):
                 self._updating_structure = True
 
                 if name == 'ast':
-                    print 'here'
                     # Policy: Keep our AST composable and tidy
                     if isinstance(self.ast, Module):
                         self.ast = self.ast.node
@@ -408,15 +406,19 @@ class Block(HasTraits):
 
         # TODO Look within 'for', 'if', 'try', etc. (#1165)
         if isinstance(ast, Module):
-            return cls._decompose(ast.node)
+            result = cls._decompose(ast.node)
         elif isinstance(ast, Stmt):
-            if len(ast.nodes) != 1:
-                return map(Block, ast.nodes)
-            else:
+            if len(ast.nodes) == 0:
+                result = None
+            elif len(ast.nodes) == 1:
                 # Treat 'Stmt([node])' the same as 'node'
-                return cls._decompose(ast.nodes[0])
+                result = cls._decompose(ast.nodes[0])
+            else:
+                result = map(Block, ast.nodes)
         else:
-            return None
+            result = None
+
+        return result
 
     ###########################################################################
     # Block static protected interface
