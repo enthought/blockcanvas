@@ -21,11 +21,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import maximum, minimum
+
 from enthought.traits.api \
     import List, Property, Enum
-
-from enthought.util.scipyx \
-    import maximum, minimum
 
 from a_numeric_filter \
     import ANumericFilter

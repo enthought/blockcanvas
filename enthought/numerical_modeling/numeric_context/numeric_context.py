@@ -20,6 +20,9 @@
 import logging
 logger = logging.getLogger( __name__ )
 
+from numpy \
+    import ndarray, arange, array, empty
+
 from enthought.traits.api \
     import HasTraits, Instance, Str, List, Property, Undefined, \
            TraitDictEvent, TraitError, Dict, Bool
@@ -30,8 +33,6 @@ from enthought.util.dict \
 from enthought.util.sequence \
     import concat, disjoint
 
-from enthought.util.scipyx \
-    import ndarray, arange, array, empty, bool_, int_, float_, complex_, object_
 
 from a_numeric_context \
     import ANumericContext
@@ -242,11 +243,11 @@ class NumericContext ( ANumericContext ):
         # and fill it with the correct default value for the specified name
         # and value:
         if   isinstance( value, ndarray ): dtype = value.dtype
-        elif isinstance( value, float ):   dtype = float_
-        elif isinstance( value, int ):     dtype = int_
-        elif isinstance( value, bool ):    dtype = bool_
-        elif isinstance( value, complex ): dtype = complex_
-        else: dtype = object_
+        elif isinstance( value, float ):   dtype = float
+        elif isinstance( value, int ):     dtype = int
+        elif isinstance( value, bool ):    dtype = bool
+        elif isinstance( value, complex ): dtype = complex
+        else: dtype = object
         new_value = empty( shape = current_group[0], dtype = dtype )
         new_value.fill( self.context_delegate.default_value_for( name, value ) )
         return new_value

@@ -17,12 +17,11 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import not_equal
+
 from enthought.traits.api \
     import HasPrivateTraits, Event, Bool, Int, RGBAColor
 
-from enthought.util.scipyx \
-    import not_equal
-    
 #-------------------------------------------------------------------------------
 #  'ANumericFilter' class (abstract base class):
 #-------------------------------------------------------------------------------

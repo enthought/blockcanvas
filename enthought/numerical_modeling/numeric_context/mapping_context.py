@@ -21,11 +21,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import arange, ones, putmask, take
+
 from enthought.traits.api \
     import Property, Undefined
-
-from enthought.util.scipyx \
-    import arange, ones, putmask, take
 
 from constants \
     import CreateContext
@@ -98,7 +97,7 @@ class MappingContext ( FilterContext ):
         data = self.context.get_context_data( name )
         mask = self._imask
         if mask is not None:
-            putmask( data, ones( data.shape ), value )
+            putmask( data, ones( data.shape, bool ), value )
             data = take( data, mask, axis = 0 )
             self.context.set_context_data( name, data )
         else:
@@ -117,7 +116,7 @@ class MappingContext ( FilterContext ):
         else:
             data = self.context.get_context_undefined( name, value )
             if data is not Undefined:
-                putmask( data, ones( data.shape ), value )
+                putmask( data, ones( data.shape, bool ), value )
                 data = take( data, mask, axis = 0 )
                 self.context.set_context_undefined( name, data )
 

@@ -21,11 +21,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import isfinite, logical_not
+
 from enthought.traits.api \
     import Bool
-
-from enthought.util.scipyx \
-    import isfinite, logical_not
 
 from a_numeric_filter \
     import ANumericFilter

@@ -23,15 +23,15 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy \
+    import maximum, sum
+
 from enthought.traits.api \
     import Property
-    
-from enthought.util.scipyx \
-    import maximum, sum
-    
+
 from constants \
     import CreateContext
-    
+ 
 from filter_context \
     import FilterContext
 

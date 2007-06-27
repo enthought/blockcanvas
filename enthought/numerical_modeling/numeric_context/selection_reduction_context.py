@@ -21,12 +21,12 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy \
+    import compress, nonzero, put
+
 from enthought.traits.api \
     import Constant, Undefined
     
-from enthought.util.scipyx \
-    import compress, nonzero, put
-
 from termination_context \
     import TerminationContext
     

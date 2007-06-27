@@ -17,11 +17,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import nan
+
 from enthought.traits.api \
     import HasPrivateTraits, Instance, List, Any, Str, RGBAColor
-    
-from enthought.util.scipyx \
-    import NaN
     
 from a_numeric_context import ANumericContext
 
@@ -52,7 +51,7 @@ class ANumericItem ( HasPrivateTraits ):
     #data = Property
 
     # Value to be substituted in reduction filters when 'use_value' is True:
-    value = Any( NaN )
+    value = Any( nan )
 
 #-- View related ---------------------------------------------------------------
 

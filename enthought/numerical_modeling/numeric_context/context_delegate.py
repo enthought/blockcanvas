@@ -18,12 +18,11 @@
 #-------------------------------------------------------------------------------
 #  Imports:
 #-------------------------------------------------------------------------------
-    
+
+from numpy import ndarray, nan
+
 from enthought.traits.api \
     import Undefined
-
-from enthought.util.scipyx \
-    import ndarray, NaN
 
 #-------------------------------------------------------------------------------
 #  'ContextDelegate' class:
@@ -46,7 +45,7 @@ class ContextDelegate ( object ):
             except:
                 return Undefined
 
-        if isinstance( value, float ):      return NaN
+        if isinstance( value, float ):      return nan
         if isinstance( value, int ):        return 0
         if isinstance( value, basestring ): return ''
         if isinstance( value, bool ):       return False

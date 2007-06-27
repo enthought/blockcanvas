@@ -19,15 +19,14 @@
 
 import copy
 
+from numpy import ndarray
+
 from enthought.numerical_modeling.numeric_context.event \
     import single_event
 
 from enthought.traits.api \
     import HasPrivateTraits, Constant, Event, TraitDictEvent, Undefined, \
            Property, Bool
-
-from enthought.util.scipyx \
-    import ndarray
 
 from constants \
     import QueryContext, CreateContext

@@ -19,12 +19,11 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import ones, zeros
+
 from enthought.traits.api \
     import List, Int, Bool
 
-from enthought.util.scipyx \
-    import ones, zeros, Int as NumericInt
-    
 from a_numeric_filter \
     import ANumericFilter
     
@@ -78,10 +77,10 @@ class IndexFilter ( ANumericFilter ):
         indices = list( context.context_indices )
         if self.invert:
             value  = 0
-            result = ones( ( len( indices ), ), NumericInt )
+            result = ones( ( len( indices ), ), bool )
         else:
             value  = 1
-            result = zeros( ( len( indices ), ), NumericInt )
+            result = zeros( ( len( indices ), ), bool )
 
         try:
             result[ indices ] = value

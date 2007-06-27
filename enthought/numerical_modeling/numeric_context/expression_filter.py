@@ -19,17 +19,13 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy import issubdtype
+
 from enthought.traits.api \
     import Expression, Property
 
 from enthought.traits.ui.api \
     import View
-
-from enthought.util.numerix \
-    import typecode
-
-from enthought.util.scipyx \
-    import Int as NumericInt
 
 from enthought.numerical_modeling.workflow.block.api \
     import Expression as ExpressionBlock
@@ -130,7 +126,9 @@ class ExpressionFilter ( ANumericFilter ):
         """
         try:
             mask = self._block.evaluate( context )
-            if (mask is None) or (typecode( mask ) == NumericInt):
+            if ((mask is None) or 
+                issubdtype(mask.dtype, bool) or 
+                issubdtype(mask.dtype, int)):
                 return mask
             return (mask != 0.0)
         except:

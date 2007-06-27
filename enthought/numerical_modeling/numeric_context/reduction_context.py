@@ -21,11 +21,11 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
+from numpy \
+    import compress, nonzero, put, putmask
+
 from enthought.traits.api \
     import Bool, Property, Undefined
-
-from enthought.util.scipyx \
-    import compress, nonzero, put, putmask
 
 from constants \
     import CreateContext
