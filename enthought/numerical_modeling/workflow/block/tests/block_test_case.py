@@ -639,6 +639,39 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertRaises(ValueError, b.restrict, inputs='a')
         self.assertRaises(ValueError, b.restrict, outputs='b')
         self.assertRaises(ValueError, b.restrict)
+        
+    def test_imports(self):
+        'restrict blocks containing imports'
+        
+        # Test 'from' syntax
+        b = Block('from math import sin, pi\n'\
+                  'b=sin(pi/a)\n' \
+                  'd = c * 3.3')
+        
+        sub_block = b.restrict(inputs=('a'))
+        self.assertEqual(sub_block.inputs, set(['a']))
+        self.assertEqual(sub_block.outputs, set(['b', 'sin', 'pi']))
+        
+        context = {'a':2, 'c':0.0}
+        b.execute(context)
+        self.assertTrue(context.has_key('b'))
+        self.assertEqual(context['b'], 1.0)
+        
+        # Test 'import' syntax
+        b = Block('import math\n'\
+                  'b=math.sin(math.pi/a)\n' \
+                  'd = c * 3.3')
+        
+        sub_block = b.restrict(inputs=('a'))
+        self.assertEqual(sub_block.inputs, set(['a']))
+        self.assertEqual(sub_block.outputs, set(['b', 'math']))
+        
+        context = {'a':2, 'c':0.0}
+        b.execute(context)
+        self.assertTrue(context.has_key('b'))
+        self.assertEqual(context['b'], 1.0)
+        
+        
 
 class BlockPickleTestCase(unittest.TestCase):
 

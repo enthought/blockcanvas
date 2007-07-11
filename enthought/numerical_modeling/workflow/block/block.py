@@ -222,7 +222,15 @@ class Block(HasTraits):
         # If we don't decompose, then we are already as restricted as possible
         if self.sub_blocks is None:
             return self
-
+        
+        # we must keep a list of import blocks. Imports are lost because
+        # they are not reachable during the reversing of the graph
+        import_sub_blocks = []
+        for sub_block in self.sub_blocks:
+            if isinstance(sub_block.ast, compiler.ast.Import) or \
+               isinstance(sub_block.ast, compiler.ast.From):
+                import_sub_blocks.append(sub_block)
+                
         # We use the mock constructors `In` and `Out` to separate input and
         # output names in the dep graph in order to avoid cyclic graphs (in
         # case input and output names overlap)
@@ -245,7 +253,7 @@ class Block(HasTraits):
                 map_values(lambda l: map(wrap_names(In), l), self._dep_graph))
 
         # TODO Restrict recursively (cf. '_decompose' and #1165)
-
+        
         # Find the subgraph reachable from inputs, and then find its subgraph
         # reachable from outputs. (We could also flip the order.)
         if inputs:
@@ -255,10 +263,12 @@ class Block(HasTraits):
             outputs = map(Out, outputs)
             g = graph.reachable_graph(g, set(outputs).intersection(g.keys()))
 
-        # Create a new block from the remaining sub-blocks (ordered input to
-        # output, ignoring the variables at the ends) and give it our filename
-        b = Block(node for node in reversed(graph.topological_sort(g))
-                       if isinstance(node, Block))
+        # Create a new block from the remaining sub-blocks (ordered imports 
+        # first, then input to output, ignoring the variables at the ends) 
+        # and give it our filename
+        remaining_sub_blocks = [node for node in reversed(graph.topological_sort(g))
+                       if isinstance(node, Block)]
+        b = Block(import_sub_blocks + remaining_sub_blocks)
         b.filename = self.filename
 
         # Cache result
