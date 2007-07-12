@@ -279,11 +279,17 @@ class Block(HasTraits):
             # is an empty sub-block
             for intermediate in intermediates:
                 pruned_block = g[intermediate][0]
+
+                # its possible someone tried to restrict an import,
+                # which is not in the graph
+                if not g.has_key(pruned_block):
+                    intermediates.remove(intermediate)
+                    continue
+                
                 # if intermediate is not removed, the resulting graph will
                 # be cyclic
                 g.pop(intermediate)
-                
-                g.pop(pruned_block)
+                                    
                 pure_output = True
                 for v in g.values():
                     if pruned_block in v:
@@ -299,7 +305,10 @@ class Block(HasTraits):
                 
             
             inputs = map(In, inputs) + intermediates
-            g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))
+            
+            # if no inputs were valid, do not alter the graph
+            if len(inputs) > 0:
+                g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))
         if outputs:
             outputs = map(Out, outputs)
             g = graph.reachable_graph(g, set(outputs).intersection(g.keys()))

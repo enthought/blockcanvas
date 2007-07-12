@@ -755,7 +755,32 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(context['c'], 10)
         self.assertEqual(context['e'], 10)
         self.assertEqual(context['g'], 20)
+        
+    def test_inputs_are_imports(self):
+        code =  "from numpy import arange\n" \
+                "x = arange(0, 10, 0.1)\n" \
+                "c1 = a * a\n" \
+                "x1 = x * x\n" \
+                "t1 = c1 *x1\n" \
+                "t2 = b * x\n" \
+                "t3 = t1 + t2\n" \
+                "y = t3 + c\n"
+                
+        block = Block(code)
+        sub_block = block.restrict(inputs=['arange'])
+        self.assertEqual(sub_block.inputs, set(['a', 'b', 'c']))
+        self.assertEqual(sub_block.outputs, set(['arange', 'x', 'c1', 'x1', 't1',
+                                                 't2', 't3', 'y']))
 
+    def test_inputs_are_dependent_outputs(self):
+        code =  "t2 = b * 2\n" \
+                "t3 = t2 + 3\n"
+                
+        block = Block(code)
+        sub_block = block.restrict(inputs=['t2', 't3'])
+        
+        
+        
 class BlockPickleTestCase(unittest.TestCase):
 
     def test_pickle(self):
