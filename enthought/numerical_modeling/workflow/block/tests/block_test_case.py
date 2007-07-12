@@ -701,6 +701,60 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(sub_block.outputs, set([]))
         sub_block.execute(context)
         self.assertEqual(context['d'], 15)
+                
+    def test_intermediate_inputs_with_highly_connected_graph(self):
+        code =  "c = a + b\n" \
+                "d = c * 3\n" \
+                "e = a * c\n" \
+                "f = d + e\n" \
+                "g = e + c\n" \
+                "h = a * 3"
+        
+        block = Block(code)
+        sub_block = block.restrict(inputs=('c'))
+        self.assertEqual(sub_block.inputs, set(['a', 'c']))
+        self.assertEqual(sub_block.outputs, set(['d', 'e', 'f', 'g']))
+
+        context = {'a':1, 'b':2}
+        block.execute(context)
+        self.assertEqual(context['c'], 3)
+        self.assertEqual(context['d'], 9)
+        self.assertEqual(context['e'], 3)
+        self.assertEqual(context['f'], 12)
+        self.assertEqual(context['g'], 6)
+
+        context = {'a':1, 'c':10}
+        sub_block.execute(context)
+        self.assertEqual(context['c'], 10)
+        self.assertEqual(context['d'], 30)
+        self.assertEqual(context['e'], 10)
+        self.assertEqual(context['f'], 40)
+        self.assertEqual(context['g'], 20)
+
+    def test_intermediate_inputs_and_outputs(self):
+        code =  "c = a + b\n" \
+                "d = c * 3\n" \
+                "e = a * c\n" \
+                "f = d + e\n" \
+                "g = e + c\n" \
+                "h = a * 3"
+        
+        block = Block(code)
+        sub_block = block.restrict(inputs=('c'), outputs=('e', 'g'))
+        self.assertEqual(sub_block.inputs, set(['a', 'c']))
+        self.assertEqual(sub_block.outputs, set(['e', 'g']))
+
+        context = {'a':1, 'b':2}
+        block.execute(context)
+        self.assertEqual(context['c'], 3)
+        self.assertEqual(context['e'], 3)
+        self.assertEqual(context['g'], 6)
+
+        context = {'a':1, 'c':10}
+        sub_block.execute(context)
+        self.assertEqual(context['c'], 10)
+        self.assertEqual(context['e'], 10)
+        self.assertEqual(context['g'], 20)
 
 class BlockPickleTestCase(unittest.TestCase):
 
