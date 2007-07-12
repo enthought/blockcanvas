@@ -212,10 +212,14 @@ class Block(HasTraits):
         if cache_key in self.__restrictions:
             return self.__restrictions[cache_key]
 
+        # Validate the method arguments.
+        #
+        # 'inputs' are allowed to be in the block inputs or outputs to allow
+        # for restricting intermidiate inputs.
         if not (inputs or outputs):
             raise ValueError('Must provide inputs or outputs')
-        if not inputs.issubset(self.inputs):
-            raise ValueError('Unknown inputs: %s' % (inputs - self.inputs))
+        if not inputs.issubset(self.inputs) and not inputs.issubset(self.outputs):
+            raise ValueError('Unknown inputs: %s' % (inputs - self.inputs - self.outputs))
         if not outputs.issubset(self.all_outputs):
             raise ValueError('Unknown outputs: %s' %(outputs-self.all_outputs))
 
@@ -253,11 +257,48 @@ class Block(HasTraits):
                 map_values(lambda l: map(wrap_names(In), l), self._dep_graph))
 
         # TODO Restrict recursively (cf. '_decompose' and #1165)
+
+        pure_outputs = []
         
         # Find the subgraph reachable from inputs, and then find its subgraph
         # reachable from outputs. (We could also flip the order.)
         if inputs:
-            inputs = map(In, inputs)
+            # look in the outputs for intermediate inputs
+            intermediates = map(Out, self.outputs.intersection(inputs))
+            inputs = inputs - self.outputs.intersection(inputs)
+                        
+            # Find the intermediate's block node and replace it
+            # with the intermediate value. This effectively cuts
+            # the block's children off the tree. This means for
+            # the code "c = a * b; d = c * 3", we are removing c's
+            # dependency on "a" and "b"
+            #
+            # There is a special case which is handled here as well:
+            # for the code "c = a * b; d = c * 3", is the user wants
+            # to restrict the block with 'd' as an input, the result
+            # is an empty sub-block
+            for intermediate in intermediates:
+                pruned_block = g[intermediate][0]
+                # if intermediate is not removed, the resulting graph will
+                # be cyclic
+                g.pop(intermediate)
+                
+                g.pop(pruned_block)
+                pure_output = True
+                for v in g.values():
+                    if pruned_block in v:
+                        pure_output = False
+                        v.remove(pruned_block)
+                        v.append(intermediate)
+                if pure_output:
+                    # pure outputs must be kept on the graph or else
+                    # they will not be reachable
+                    g[intermediate] = [Block("%s = %s" % \
+                                        (intermediate[0], intermediate[0]))]
+                                        
+                
+            
+            inputs = map(In, inputs) + intermediates
             g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))
         if outputs:
             outputs = map(Out, outputs)

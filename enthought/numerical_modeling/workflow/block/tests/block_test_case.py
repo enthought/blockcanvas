@@ -635,9 +635,14 @@ class BlockRestrictionTestCase(unittest.TestCase):
     def test_errors(self):
         'Errors for block restriction'
 
+        # Note: 'a' can be passed as a input, which should return
+        # a trivial subblock. This is due to supporting intermediate
+        # inputs
+
         b = Block('a = b')
-        self.assertRaises(ValueError, b.restrict, inputs='a')
         self.assertRaises(ValueError, b.restrict, outputs='b')
+        self.assertRaises(ValueError, b.restrict, inputs='z')
+        self.assertRaises(ValueError, b.restrict, outputs='z')
         self.assertRaises(ValueError, b.restrict)
         
     def test_imports(self):
@@ -653,7 +658,7 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(sub_block.outputs, set(['b', 'sin', 'pi']))
         
         context = {'a':2, 'c':0.0}
-        b.execute(context)
+        sub_block.execute(context)
         self.assertTrue(context.has_key('b'))
         self.assertEqual(context['b'], 1.0)
         
@@ -667,11 +672,35 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(sub_block.outputs, set(['b', 'math']))
         
         context = {'a':2, 'c':0.0}
-        b.execute(context)
+        sub_block.execute(context)
         self.assertTrue(context.has_key('b'))
         self.assertEqual(context['b'], 1.0)
         
+    def test_intermediate_inputs(self):
+        b = Block('c = a + b\n'\
+                  'd = c * 3')
         
+        sub_block = b.restrict(inputs=('c'))
+        self.assertEqual(sub_block.inputs, set(['c']))
+        self.assertEqual(sub_block.outputs, set(['d']))
+        
+        context = {'a':1, 'b':2}
+        b.execute(context)
+        self.assertEqual(context['c'], 3)
+        self.assertEqual(context['d'], 9)
+        
+        context = {'c':10}
+        sub_block.execute(context)
+        self.assertEqual(context['c'], 10)
+        self.assertEqual(context['d'], 30)
+
+
+        context = {'d':15}
+        sub_block = b.restrict(inputs=('d'))
+        self.assertEqual(sub_block.inputs, set([]))
+        self.assertEqual(sub_block.outputs, set([]))
+        sub_block.execute(context)
+        self.assertEqual(context['d'], 15)
 
 class BlockPickleTestCase(unittest.TestCase):
 
