@@ -223,6 +223,10 @@ class Block(HasTraits):
         if not outputs.issubset(self.all_outputs):
             raise ValueError('Unknown outputs: %s' %(outputs-self.all_outputs))
 
+        # Validate the block to make sure it is safe for restriction
+        if self.validate_for_restriction() is not None:
+            raise RuntimeError("Block failed to validate")
+
         # If we don't decompose, then we are already as restricted as possible
         if self.sub_blocks is None:
             return self
@@ -325,6 +329,19 @@ class Block(HasTraits):
         self.__restrictions[cache_key] = b
 
         return b
+
+    def validate_for_restriction(self):
+        # Check to ensure that there is not sub_block that has the same
+        # variable as an input and an output. Returnt the offending
+        # sub_block if one exists, or return None if block is valid.
+        if self.sub_blocks is None:
+            if len(self.inputs.intersection(self.outputs)) > 0:
+                return self
+        else:
+            for sb in self.sub_blocks:
+                if len(sb.inputs.intersection(sb.outputs)) > 0:
+                    return sb
+        return None
 
     ###########################################################################
     # Block protected interface
