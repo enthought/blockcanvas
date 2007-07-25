@@ -512,12 +512,36 @@ class NameFinder:
     #def visitFor(self, node)
 
     ### Nested blocks #########################################################
+    
+    def visitKeyword(self, node):
+        # kwargs are not supported due to difficulty in managing these in the graph
+        raise ValueError('keyword args not supported')
+
+    def visitFunction(self, node):
+        # varargs are not supported due to difficulty in managing these in the graph
+        if node.varargs == 1:
+            raise TypeError("varargs not supported")
+
+        # kwargs are not supported due to difficulty in managing these in the graph
+        if node.kwargs == 1:
+            raise TypeError("keyword args not supported")
+        
+        # Find free vars nearby
+        walk(node.defaults, self)
+
+        globals      = self.globals - set(node.argnames)
+        locals       = self.locals | set(node.argnames)
+        conditionals = self.conditional_locals
+        v = walk(node.code,
+                 NameFinder(globals=globals, locals=locals, conditional_locals=conditionals))
+        
+        # fixme: the inputs/outputs of functions are not set. This may cause graph errors
+        #self._see_unbound(node.argnames)
+        #self._bind(v.locals - set(node.argnames))
 
     # Nothing needs nested blocks yet, so we punt because the global/local
     # scoping rules are complicated. (A partially correct implementation lives
     # in the source control history (with tests!).)
-    def visitFunction(self, node):
-        raise NotImplementedError('Nested block: %s' % node.name)
     def visitClass(self, node):
         raise NotImplementedError('Nested block: %s' % node.name)
 

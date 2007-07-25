@@ -1,13 +1,15 @@
 'Simple blocks of python code with dependency analysis.'
 
 import compiler
-from compiler.ast import Module, Node, Pass, Stmt
+from compiler.ast import Module, Node, Pass, Stmt, Function
 from compiler.visitor import ASTVisitor
 from copy import copy
 from cStringIO import StringIO
 
 from enthought.traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
                                   Instance, List, Property, Str, Trait)
+from enthought.traits.api import push_exception_handler, pop_exception_handler
+
 from enthought.util.dict import map_keys, map_values
 import enthought.util.graph as graph
 from enthought.util.sequence import is_sequence
@@ -129,7 +131,10 @@ class Block(HasTraits):
             # (BlockTransformer handles things like 'import *')
             self.ast = parse(x, mode='exec', transformer=BlockTransformer())
         elif isinstance(x, Node):
+            # push an exception handler onto the stack to ensure that the calling function gets the error
+            push_exception_handler(handler = lambda o,t,ov,nv: None, reraise_exceptions=True)
             self.ast = x
+            pop_exception_handler()
         elif is_sequence(x):
             self.sub_blocks = map(to_block, x)
         else:
@@ -403,7 +408,7 @@ class Block(HasTraits):
                 self.inputs = set(v.free)
                 self.outputs = set(v.locals)
                 self.conditional_outputs = set(v.conditional_locals)
-
+                
             finally:
                 self._updating_structure = False
 
