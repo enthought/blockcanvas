@@ -515,7 +515,12 @@ class NameFinder:
     
     def visitKeyword(self, node):
         # kwargs are not supported due to difficulty in managing these in the graph
-        raise ValueError('keyword args not supported')
+        if hasattr(node.expr, 'value'):
+            logger.warn("Keyword arguments may not be correctly identified in call graph: \"%s = %s\"" \
+                        % (node.name, node.expr.value))
+        else:
+            logger.warn("Keyword arguments may not be correctly identified in call graph: \"%s = %s\"" \
+                        % (node.name, node.expr.name))
 
     def visitFunction(self, node):
         # varargs are not supported due to difficulty in managing these in the graph
