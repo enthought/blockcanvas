@@ -34,7 +34,7 @@
 from enthought.traits.api \
     import Int, Any, Undefined, Bool
 
-from enthought.util.wx.do_later \
+from enthought.pyface.timer.api \
     import do_after
 
 from context_modified \

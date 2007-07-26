@@ -32,7 +32,7 @@
 from enthought.traits.api \
     import Any, Bool, Int, Property
 
-from enthought.util.wx.do_later \
+from enthought.pyface.timer.api \
     import do_after
 
 from context_modified \

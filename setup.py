@@ -15,6 +15,7 @@ setup(
         "enthought.io",
         "enthought.type_manager",
         "enthought.sweet_pickle",
+        "enthought.pyface",
     ],
     extras_require = {
         # All non-ets dependencies should be in this extra to ensure users can
