@@ -58,7 +58,7 @@ class Block(HasTraits):
     # The name of the file this block represents, if any. For blocks that
     # aren't files, the default value just shows repr(self). Annotates
     # tracebacks.
-    filename = Instance(str) # (Default 'None', allow 'None')
+    filename = Instance(basestring) # (Default 'None', allow 'None')
 
     # A unique identifier
     uuid = Instance(UUID)
