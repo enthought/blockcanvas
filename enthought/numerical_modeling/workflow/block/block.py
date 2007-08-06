@@ -167,7 +167,15 @@ class Block(HasTraits):
     ###########################################################################
     # Block public interface
     ###########################################################################
-
+    
+    def remove_sub_block(self, uuid):
+        if self.sub_blocks is None:
+            raise KeyError()
+        for sb in self.sub_blocks:
+            if sb.uuid == uuid:
+                self.sub_blocks.remove(sb)
+                break
+            
     def execute(self, context):
         # To get tracebacks to show the right filename for any line in any
         # sub-block, we need each sub-block to compile its own '_code' since a
