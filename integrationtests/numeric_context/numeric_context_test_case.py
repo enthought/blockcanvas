@@ -29,7 +29,7 @@ from enthought.numerical_modeling.numeric_context.api import (
 )
 from enthought.numerical_modeling.units.api import UnitArray
 
-from mapping_object_test_case import (
+from enthought.numerical_modeling.numeric_context.tests.mapping_object_test_case import (
     BasicMappingProtocolTest, HashMappingProtocolTest, MappingProtocolTest,
     adapt_keys,
 )

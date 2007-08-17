@@ -8,7 +8,7 @@ import numpy
 from numpy import all
 
 # Enthought Library imports
-from enthought import units
+import enthought.units as units
 from enthought.testing.api import skip
 from enthought.units.length import meters, feet
 from enthought.units.time import seconds
@@ -135,26 +135,26 @@ class UnitArrayTestCase(unittest.TestCase):
 
         # Also, make sure the units and family_name are correctly assigned.
         self.assertEqual(new_unit_ary.units, meters)
-        
+
     def test_concatenate(self):
         unit_ary_1 = UnitArray(numpy.array((1,2,3)), units=meters)
         unit_ary_2 = UnitArray(numpy.array((4,5,6)), units=meters)
-        
+
         new_unit_ary = UnitArray.concatenate([unit_ary_1, unit_ary_2])
         expected = UnitArray((1,2,3,4,5,6), units=meters)
         self.assertTrue(numpy.all(new_unit_ary == expected))
-        
+
     def test_concatenate_keeps_attribute(self):
         """ concatenating does not call __new__ on the result
             so the attribute must be set correctly in __array_finalize__
         """
         unit_ary_1 = UnitArray(numpy.array((1,2,3)), units=meters)
         unit_ary_2 = UnitArray(numpy.array((1,2,3)), units=meters)
-        
+
         new_unit_ary = UnitArray.concatenate([unit_ary_1, unit_ary_2])
 
         self.assertEqual(new_unit_ary.units, meters)
-        
+
     def test_concatenate_keeps_attribute_using_mixed_units(self):
         """ concatenating does not call __new__ on the result
             so the attribute must be set correctly in __array_finalize__.

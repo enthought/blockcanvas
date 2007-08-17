@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an abstract base class for accessing an item in a numeric context.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an abstract base class for accessing an item in a numeric context.
@@ -19,9 +19,11 @@
 
 from numpy import nan
 
+from enthought.enable2.traits.api import RGBAColor
+
 from enthought.traits.api \
-    import HasPrivateTraits, Instance, List, Any, Str, RGBAColor
-    
+    import HasPrivateTraits, Instance, List, Any, Str
+
 from a_numeric_context import ANumericContext
 
 #-------------------------------------------------------------------------------

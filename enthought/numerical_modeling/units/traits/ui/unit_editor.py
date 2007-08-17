@@ -139,8 +139,8 @@ class SimpleEditor ( UIEditor ):
 
     def _update(self):
         self.value = UnitArray(self.unit_view.magnitude, units=self.value.units)
-
                     
+
 #-------------------------------------------------------------------------------
 #  Create the editor factory object:
 #-------------------------------------------------------------------------------

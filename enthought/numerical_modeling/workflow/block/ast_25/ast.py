@@ -15,7 +15,10 @@ def eq(a,b):
 
 def to_tree(x):
     if isinstance(x, _ast.AST):
-        fields = x._fields if x._fields is not None else []
+        if x._fields is not None:
+            fields = x._fields
+        else:
+            fields = []
         return tuple([x.__class__.__name__] +
                      [ to_tuple(getattr(x,f)) for f in fields ])
     elif isinstance(x, list):

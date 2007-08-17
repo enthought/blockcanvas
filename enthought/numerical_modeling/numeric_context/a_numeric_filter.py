@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Abstract base class for all numeric context filters.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Abstract base class for all numeric context filters.
@@ -19,8 +19,10 @@
 
 from numpy import not_equal
 
+from enthought.enable2.traits.api import RGBAColor
+
 from enthought.traits.api \
-    import HasPrivateTraits, Event, Bool, Int, RGBAColor
+    import HasPrivateTraits, Event, Bool, Int
 
 #-------------------------------------------------------------------------------
 #  'ANumericFilter' class (abstract base class):

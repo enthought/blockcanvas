@@ -1,0 +1,4 @@
+* Remove imports from, or egg-ify the, geo repo.
+* Remove test reliance on nose.
+* Remove reliance on wx, or make it optional.
+

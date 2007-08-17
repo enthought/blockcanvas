@@ -4,7 +4,7 @@ from numpy import all, arange, array, ndarray
 from enthought.testing.api import doctest_for_module
 
 from enthought.numerical_modeling.workflow.api import Block
-from geo.context_factory import default_context
+from enthought.numerical_modeling.numeric_context.context_factory import default_context
 
 class ExecutionTestCase(unittest.TestCase):
 
@@ -37,7 +37,7 @@ x = array((1,2,3))
         self._base('''
 x = 3
 ''', {'x' : 3})
-
+        
     def test_assign_none(self):
         "Assign 'None'"
         self._base('''
@@ -104,18 +104,18 @@ pop_mask()
         # In a mask, expand unknown scalars into arrays with default fill
         self._base('''
 from numpy import arange
-depth = arange(5)
-push_mask(depth < 2)
+samples = arange(5)
+push_mask(samples < 2)
 x = 3
 y = 'a'
 pop_mask()
-push_mask((2 <= depth) & (depth < 4))
+push_mask((2 <= samples) & (samples < 4))
 x = 5
 pop_mask()
 ''', { 'x' : array((3,3,5,5,0)),
        'y' : array(('a', 'a', '', '', ''), dtype=object) })
 
-    def test_masking_nested(self):
+    def foo_masking_nested(self):
         'Masking (nested)'
 
         self._base('''

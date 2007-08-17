@@ -316,10 +316,16 @@ class DerivativeContext ( ANumericContext ):
     #---------------------------------------------------------------------------
 
     def _get_defer_events ( self ):
-        return self.context_base.defer_events
+        #FIXME: Sometimes context_base is None:
+        if self.context_base:
+            return self.context_base.defer_events
+        else:
+            return False
 
     def _set_defer_events ( self, x ):
-        self.context_base.defer_events = x
+        if self.context_base:
+            self.context_base.defer_events = x
+        return
 
     #-- Event Handlers ---------------------------------------------------------
 
