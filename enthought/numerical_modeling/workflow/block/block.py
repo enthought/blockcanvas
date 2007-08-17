@@ -299,8 +299,9 @@ class Block(HasTraits):
 
                 # its possible someone tried to restrict an import,
                 # which is not in the graph
-                if not g.has_key(pruned_block):
-                    intermediates.remove(intermediate)
+                #fixme: uncommenting these breaks pruning intermediates, why is this here?
+#                if not g.has_key(pruned_block):
+#                    intermediates.remove(intermediate)
 #                    continue
                 
                 # if intermediate is not removed, the resulting graph will
