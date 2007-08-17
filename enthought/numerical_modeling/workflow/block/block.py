@@ -282,7 +282,6 @@ class Block(HasTraits):
         if inputs:
             # look in the outputs for intermediate inputs
             intermediates = map(Out, self.outputs.intersection(inputs))
-            import pdb;pdb.set_trace()
             inputs = inputs - self.outputs.intersection(inputs)
                         
             # Find the intermediate's block node and replace it
