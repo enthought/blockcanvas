@@ -1,7 +1,7 @@
 'Simple blocks of python code with dependency analysis.'
 
 import compiler
-from compiler.ast import Module, Node, Pass, Stmt, Function
+from compiler.ast import Module, Node, Pass, Stmt, Function, Discard
 from compiler.visitor import ASTVisitor
 from copy import copy
 from cStringIO import StringIO
@@ -282,6 +282,7 @@ class Block(HasTraits):
         if inputs:
             # look in the outputs for intermediate inputs
             intermediates = map(Out, self.outputs.intersection(inputs))
+            import pdb;pdb.set_trace()
             inputs = inputs - self.outputs.intersection(inputs)
                         
             # Find the intermediate's block node and replace it
@@ -301,7 +302,7 @@ class Block(HasTraits):
                 # which is not in the graph
                 if not g.has_key(pruned_block):
                     intermediates.remove(intermediate)
-                    continue
+#                    continue
                 
                 # if intermediate is not removed, the resulting graph will
                 # be cyclic
