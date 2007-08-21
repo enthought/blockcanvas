@@ -69,3 +69,4 @@ setup(
     version = '3.0.0a1',
     zip_safe = False,
     )
+
