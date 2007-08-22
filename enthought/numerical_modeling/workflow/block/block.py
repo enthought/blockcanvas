@@ -2,7 +2,6 @@
 
 import compiler
 from compiler.ast import Module, Node, Pass, Stmt, Function, Discard
-from compiler.visitor import ASTVisitor
 from copy import copy
 from cStringIO import StringIO
 
@@ -49,8 +48,7 @@ class Block(HasTraits):
 
     # The sequence of sub-blocks that make up this block, if any. If we don't
     # decompose into sub-blocks, 'sub_blocks' is None.
-    #sub_blocks = Either(List(__this), None) # FIXME
-    sub_blocks = Either(List(Any), None)
+    sub_blocks = List(__this)
 
     # The AST that represents our behavior
     ast = Instance(Node)
@@ -133,12 +131,22 @@ class Block(HasTraits):
         elif isinstance(x, Node):
             # push an exception handler onto the stack to ensure that the calling function gets the error
             push_exception_handler(handler = lambda o,t,ov,nv: None, reraise_exceptions=True)
+            self._updating_structure = True
             self.ast = x
+            if isinstance(x, (Module, Stmt)):
+                sub_blocks = []
+                for node in x.getChildNodes():
+                    sub_blocks += self._decompose(node)
+                self.sub_blocks = sub_blocks
+            self._updating_structure = False
             pop_exception_handler()
         elif is_sequence(x):
             self.sub_blocks = map(to_block, x)
         else:
             raise ValueError('Expecting string, Node, or sequence. Got %r' % x)
+
+        # setup the inputs and outputs
+        self._set_inputs_and_outputs()
 
         # We really want to keep the filename for "pristine" blocks, and
         # _structure_changed nukes it most times
@@ -182,13 +190,13 @@ class Block(HasTraits):
         # code object only keeps one filename. This is slow, so we give the
         # user the option 'no_filenames_in_tracebacks' to gain speed but lose
         # readability of tracebacks.
-        if self.sub_blocks is None or self.no_filenames_in_tracebacks:
+        if len(self.sub_blocks) == 0 or self.no_filenames_in_tracebacks:
             if self.filename:
                 context['__file__'] = self.filename
             exec self._code in {}, context
         else:
-            for b in self.sub_blocks:
-                b.execute(context)
+            for block in self.sub_blocks:
+                block.execute(context)
 
     def restrict(self, inputs=(), outputs=()):
         ''' The minimal sub-block that computes 'outputs' from 'inputs'.
@@ -346,7 +354,7 @@ class Block(HasTraits):
 
     def validate_for_restriction(self):
         # Check to ensure that there is not sub_block that has the same
-        # variable as an input and an output. Returnt the offending
+        # variable as an input and an output. Return the offending
         # sub_block if one exists, or return None if block is valid.
         if self.sub_blocks is None:
             if len(self.inputs.intersection(self.outputs)) > 0:
@@ -391,19 +399,8 @@ class Block(HasTraits):
 
                 elif name in ('sub_blocks', 'sub_blocks_items'):
 
-                    if len(self.sub_blocks) > 1:
-                        self.ast = Stmt([ b.ast for b in self.sub_blocks ])
-                    # If our sub-blocks became too few, then we no longer
-                    # have sub-blocks because we are too simple to decompose
-                    elif len(self.sub_blocks) == 1:
-                        self.ast = self.sub_blocks[0].ast
-                        self.filename = self.sub_blocks[0].filename
-                        self.sub_blocks = None
-                    else:
-                        self.ast = Stmt([])
-                        self.filename = None
-                        self.sub_blocks = None
-
+                    self.ast = Stmt([ b.ast for b in self.sub_blocks ])
+                    
                 else:
                     assert False
 
@@ -412,15 +409,19 @@ class Block(HasTraits):
                 self.__code = None
                 self.__restrictions.clear()
 
-                # Find inputs and outputs
-                v = compiler.walk(self.ast, NameFinder())
-                self.inputs = set(v.free)
-                self.outputs = set(v.locals)
-                self.conditional_outputs = set(v.conditional_locals)
+                # update inputs and outputs
+                self._set_inputs_and_outputs()
                 
             finally:
                 self._updating_structure = False
 
+    def _set_inputs_and_outputs(self):
+        if self.ast is not None:
+            v = compiler.walk(self.ast, NameFinder())
+            self.inputs = set(v.free)
+            self.outputs = set(v.locals)
+            self.conditional_outputs = set(v.conditional_locals)
+        
     def _get__code(self):
 
         # Cache code objects
@@ -500,14 +501,14 @@ class Block(HasTraits):
             result = cls._decompose(ast.node)
         elif isinstance(ast, Stmt):
             if len(ast.nodes) == 0:
-                result = None
+                result = [Block(ast)]
             elif len(ast.nodes) == 1:
                 # Treat 'Stmt([node])' the same as 'node'
                 result = cls._decompose(ast.nodes[0])
             else:
                 result = map(Block, ast.nodes)
         else:
-            result = None
+            result = [Block(ast)]
 
         return result
 
