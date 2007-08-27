@@ -14,7 +14,7 @@ from enthought.traits.api import Instance, TraitFactory
 def UnitArrayTrait(value=None, units=None, **kwargs):
     args = ()
     kw = {}
-    if value and units:
+    if value is not None and units is not None:
         args = (value,)
         kwargs['args'] = args
         kw = {'units':units}
