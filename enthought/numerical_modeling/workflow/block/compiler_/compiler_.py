@@ -13,6 +13,11 @@ def parse(buf, mode="exec", transformer=None):
     if transformer is None:
         transformer = Transformer()
     if mode == "exec" or mode == "single":
+        # Since the parser gives a SyntaxError with the 'with' keyword,
+        # add the import alongwith the buffer
+        if buf.startswith('with '):
+            new_buf = 'from __future__ import with_statement\n' + buf
+            return transformer.parsesuite(new_buf)
         return transformer.parsesuite(buf)
     elif mode == "eval":
         return transformer.parseexpr(buf)
