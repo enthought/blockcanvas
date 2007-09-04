@@ -15,7 +15,9 @@ def parse(buf, mode="exec", transformer=None):
     if mode == "exec" or mode == "single":
         # Since the parser gives a SyntaxError with the 'with' keyword,
         # add the import alongwith the buffer
-        if buf.startswith('with '):
+        py_version = sys.version_info
+        py_version = int(py_version[0])+0.1*int(py_version[1])
+        if buf.startswith('with ') and py_version < 2.6:
             new_buf = 'from __future__ import with_statement\n' + buf
             return transformer.parsesuite(new_buf)
         return transformer.parsesuite(buf)
