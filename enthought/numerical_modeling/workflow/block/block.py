@@ -7,7 +7,7 @@ from cStringIO import StringIO
 
 from enthought.traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
                                   Instance, List, Property, Str, Trait)
-from enthought.traits.api import push_exception_handler, pop_exception_handler
+from enthought.traits.api import push_exception_handler, pop_exception_handler, on_trait_change
 
 from enthought.util.dict import map_keys, map_values
 import enthought.util.graph as graph
@@ -147,7 +147,7 @@ class Block(HasTraits):
 
         # setup the inputs and outputs
         self._set_inputs_and_outputs()
-
+        
         # We really want to keep the filename for "pristine" blocks, and
         # _structure_changed nukes it most times
         self.filename = saved_filename
@@ -183,6 +183,13 @@ class Block(HasTraits):
             if sb.uuid == uuid:
                 self.sub_blocks.remove(sb)
                 break
+            
+    def is_empty(self):
+        """ Return true if 'block' has an empty AST.
+        """
+
+        return isinstance(self.ast, Stmt) and len(self.ast.nodes) == 0
+            
             
     def execute(self, context):
         # To get tracebacks to show the right filename for any line in any
@@ -451,21 +458,19 @@ class Block(HasTraits):
         # Cache dep graphs
         if not self.__dep_graph_is_valid:
 
-            if self.sub_blocks is None:
-                # fixme: This is questionable.  Shouldn't it make a
-                #        graph with empty dependencies?
-                self.__dep_graph = None
-            else:
-                inputs, outputs, conditional_outputs, self.__dep_graph = \
-                    Block._compute_dependencies(self.sub_blocks)
-                assert inputs == self.inputs
-                assert outputs == self.outputs
-                assert conditional_outputs == self.conditional_outputs
+            inputs, outputs, conditional_outputs, self.__dep_graph = \
+                Block._compute_dependencies(self.sub_blocks)
+            
+            if inputs != self.inputs:
+                import pdb;pdb.set_trace()
+            assert inputs == self.inputs
+            assert outputs == self.outputs
+            assert conditional_outputs == self.conditional_outputs
 
             self.__dep_graph_is_valid = True
 
         return self.__dep_graph
-
+    
     ###########################################################################
     # Block class interface
     ###########################################################################
