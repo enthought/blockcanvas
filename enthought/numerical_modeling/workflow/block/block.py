@@ -171,6 +171,20 @@ class Block(HasTraits):
 
     def __str__(self):
         return repr(self) # TODO Unparse ast (2.5) (cf. #1167)
+    
+    def __print_debug_graph(self, graph):
+        """ Only to be used for debugging- prints each node of the graph
+            with its immediate dependents following
+        """
+        print "--------------------------------------"
+        for k in graph.keys():
+            if isinstance(k, Block):
+                print k.ast
+                for dep in graph[k]:
+                    if isinstance(dep, Block):
+                        print "    %s" % dep.ast
+                    else:
+                        print "    '%s'" % dep[0]
 
     ###########################################################################
     # Block public interface
@@ -231,7 +245,7 @@ class Block(HasTraits):
             Assumes 'inputs' and 'outputs' are subsets of 'self.inputs' and
             'self.outputs', respectively.
         '''
-
+        
         inputs = set(inputs)
         outputs = set(outputs)
 
@@ -239,7 +253,7 @@ class Block(HasTraits):
         cache_key = (frozenset(inputs), frozenset(outputs))
         if cache_key in self.__restrictions:
             return self.__restrictions[cache_key]
-
+        
         # Validate the method arguments.
         #
         # 'inputs' are allowed to be in the block inputs or outputs to allow
@@ -338,10 +352,10 @@ class Block(HasTraits):
                 
             
             inputs = map(In, inputs) + intermediates
-            
+
             # if no inputs were valid, do not alter the graph
             if len(inputs) > 0:
-                g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))
+                g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))                
         if outputs:
             outputs = map(Out, outputs)
             g = graph.reachable_graph(g, set(outputs).intersection(g.keys()))
