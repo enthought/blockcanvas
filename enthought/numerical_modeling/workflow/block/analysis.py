@@ -310,6 +310,8 @@ class NameFinder:
         self._see_unbound(v.free)
         if isinstance(node.node, Name):
             self._bind(v.free)
+        elif isinstance(node.node, Getattr):
+            self.visitAssAttr(node.node)
 
     def visitImport(self, node):
         for name, alias in node.names:
@@ -508,6 +510,14 @@ class NameFinder:
         # free vars
         walk([node.expr] + node.nodes, self)
 
+    def visitGetattr(self, node):
+        v = walk(node.expr, NameFinder())
+        self._see_unbound([v.free.pop() + "." + node.attrname])
+
+    def visitAssAttr(self, node):
+        v = walk(node.expr, NameFinder())
+        self._bind([v.free.pop() + "." + node.attrname])
+        
     # (Defined above)
     #def visitFor(self, node)
 
@@ -546,10 +556,6 @@ class NameFinder:
     def visitClass(self, node):
         raise NotImplementedError('Nested block: %s' % node.name)
     
-    def visitGetattr(self, node):
-        v = walk(node.expr, NameFinder())
-        self._see_unbound([v.free.pop() + "." + node.attrname])
-
 # A variation on the compiler module's visitor pattern
 class Transformer(object):
     r'''...
