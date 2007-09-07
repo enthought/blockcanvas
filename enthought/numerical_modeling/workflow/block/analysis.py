@@ -545,6 +545,10 @@ class NameFinder:
     # in the source control history (with tests!).)
     def visitClass(self, node):
         raise NotImplementedError('Nested block: %s' % node.name)
+    
+    def visitGetattr(self, node):
+        v = walk(node.expr, NameFinder())
+        self._see_unbound([v.free.pop() + "." + node.attrname])
 
 # A variation on the compiler module's visitor pattern
 class Transformer(object):
