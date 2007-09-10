@@ -172,7 +172,7 @@ class Block(HasTraits):
     def __str__(self):
         return repr(self) # TODO Unparse ast (2.5) (cf. #1167)
     
-    def __print_debug_graph(self, graph):
+    def _print_debug_graph(self, graph):
         """ Only to be used for debugging- prints each node of the graph
             with its immediate dependents following
         """
@@ -301,8 +301,6 @@ class Block(HasTraits):
         # `g` isn't cyclic
         g = map_keys(wrap_names(Out),
                 map_values(lambda l: map(wrap_names(In), l), self._dep_graph))
-
-        # TODO Restrict recursively (cf. '_decompose' and #1165)
 
         pure_outputs = []
         
@@ -475,8 +473,6 @@ class Block(HasTraits):
             inputs, outputs, conditional_outputs, self.__dep_graph = \
                 Block._compute_dependencies(self.sub_blocks)
             
-            if inputs != self.inputs:
-                import pdb;pdb.set_trace()
             assert inputs == self.inputs
             assert outputs == self.outputs
             assert conditional_outputs == self.conditional_outputs

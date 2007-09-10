@@ -313,6 +313,32 @@ class NameFinder:
         elif isinstance(node.node, Getattr):
             self.visitAssAttr(node.node)
 
+    def visitGetattr(self, node):
+        v = walk(node.expr, NameFinder())
+        self._see_unbound([v.free.pop() + "." + node.attrname])
+
+    def visitAssAttr(self, node):
+        v = walk(node.expr, NameFinder())
+        self._bind([v.free.pop() + "." + node.attrname])
+        
+    def visitCallFunc(self, node):
+        if isinstance(node.node, Name):
+            self._see_unbound([node.node.name])
+        elif isinstance(node.node, Getattr):
+            v = walk(node.node.expr, NameFinder())
+            self._see_unbound(v.free)
+        
+        for arg in node.args:
+            if isinstance(arg, Name):
+                self._see_unbound([arg.name])
+            elif isinstance(arg, Getattr):
+                v = walk(arg, NameFinder())
+                self._see_unbound([v.free.pop() + "." + arg.attrname])
+            else:
+                v = walk(arg, NameFinder())
+                self._see_unbound(v.free)
+                
+
     def visitImport(self, node):
         for name, alias in node.names:
 
@@ -509,14 +535,6 @@ class NameFinder:
         # Walk 'expr' before 'nodes' so that lhs bindings don't capture rhs
         # free vars
         walk([node.expr] + node.nodes, self)
-
-    def visitGetattr(self, node):
-        v = walk(node.expr, NameFinder())
-        self._see_unbound([v.free.pop() + "." + node.attrname])
-
-    def visitAssAttr(self, node):
-        v = walk(node.expr, NameFinder())
-        self._bind([v.free.pop() + "." + node.attrname])
         
     # (Defined above)
     #def visitFor(self, node)
