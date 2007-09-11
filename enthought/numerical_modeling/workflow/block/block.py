@@ -132,16 +132,17 @@ class Block(HasTraits):
             # push an exception handler onto the stack to ensure that the calling function gets the error
             push_exception_handler(handler = lambda o,t,ov,nv: None, reraise_exceptions=True)
             self._updating_structure = True
-            self.ast = x
-            if isinstance(x, (Module, Stmt)):
-                sub_blocks = []
-                for node in x.getChildNodes():
-                    sub_blocks += self._decompose(node)
-                self.sub_blocks = sub_blocks
+            
+            self.ast = x            
+            self._tidy_ast()
+            
             self._updating_structure = False
             pop_exception_handler()
         elif is_sequence(x):
+            if len(x) == 0:
+                self.ast = Stmt([])
             self.sub_blocks = map(to_block, x)
+            self._tidy_ast()
         else:
             raise ValueError('Expecting string, Node, or sequence. Got %r' % x)
 
@@ -395,18 +396,21 @@ class Block(HasTraits):
     #
     # We compute '_dep_graph' and '_code' only when necessary and avoid
     # redundant computation.
+    
+    def _tidy_ast(self):
+        if isinstance(self.ast, Module):
+            self.ast = self.ast.node
+        if isinstance(self.ast, Stmt) and len(self.ast.nodes) == 1:
+            [self.ast] = self.ast.nodes
 
     def _structure_changed(self, name, new):
         if not self._updating_structure:
             try:
                 self._updating_structure = True
-
+                
                 if name == 'ast':
                     # Policy: Keep our AST composable and tidy
-                    if isinstance(self.ast, Module):
-                        self.ast = self.ast.node
-                    if isinstance(self.ast, Stmt) and len(self.ast.nodes) == 1:
-                        [self.ast] = self.ast.nodes
+                    self._tidy_ast()
 
                     # Compute our new sub-blocks and give them our filename
                     self.sub_blocks = Block._decompose(self.ast)
@@ -469,14 +473,16 @@ class Block(HasTraits):
 
         # Cache dep graphs
         if not self.__dep_graph_is_valid:
-
-            inputs, outputs, conditional_outputs, self.__dep_graph = \
-                Block._compute_dependencies(self.sub_blocks)
             
-            assert inputs == self.inputs
-            assert outputs == self.outputs
-            assert conditional_outputs == self.conditional_outputs
-
+            if len(self.sub_blocks) > 0:    
+                inputs, outputs, conditional_outputs, self.__dep_graph = \
+                    Block._compute_dependencies(self.sub_blocks)
+    
+                if inputs != self.inputs: import pdb;pdb.set_trace()
+                assert inputs == self.inputs
+                assert outputs == self.outputs
+                assert conditional_outputs == self.conditional_outputs
+    
             self.__dep_graph_is_valid = True
 
         return self.__dep_graph
