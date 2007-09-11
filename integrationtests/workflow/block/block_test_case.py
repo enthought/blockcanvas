@@ -125,8 +125,6 @@ class BlockTestCase(unittest.TestCase):
     def test_ast_policy(self):
         'Policy: Keep tidy ASTs'
         
-        # fixme: changes to block decomposition broke sub-tests
-
         a = Discard(Name('a'))
         empty = Stmt([])
 
@@ -437,10 +435,7 @@ class BlockTestCase(unittest.TestCase):
 
         b,c = Block(''), {}
         b._code
-        # fixme: This was removed when empty strings began returning
-        #        sub_blocks = None instead of [].
-        #        Not sure this still tests what Dan wanted it to.
-        #b.sub_blocks.append(Block('a=3'))
+        b.sub_blocks.append(Block('a=3'))
         b.sub_blocks = [Block('a=3')]
         b.execute(c)
         assert 'a' in c
@@ -575,8 +570,6 @@ class BlockRestrictionTestCase(unittest.TestCase):
 
     def test_restrict_conditional(self):
         'Restricted blocks with conditional outputs'
-
-        #fixme: tests are broken because of tidyness broken tests
 
         code = 'if t: a = 0', 'b = a'
         self._base(code, (), 'a', code[0])
