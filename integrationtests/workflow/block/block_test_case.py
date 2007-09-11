@@ -485,6 +485,12 @@ class BlockRestrictionTestCase(unittest.TestCase):
 
     ### Support ###############################################################
 
+    def assertSimilar(self, a, b):
+        'Assert that two blocks are structurally equivalent.'
+        a._tidy_ast()
+        b._tidy_ast()
+        self.assertEqual(str(a.ast), str(b.ast))
+        
     def _base(self, code, inputs, outputs, *results):
 
         # Convert results to a string if necessary
@@ -500,11 +506,11 @@ class BlockRestrictionTestCase(unittest.TestCase):
 
         # Make sure code's sub-block is one of the given results (restrict
         # isn't deterministic on parallelizable code)
-        ast = Block(code).restrict(inputs=inputs, outputs=outputs).ast
+        restricted = Block(code).restrict(inputs=inputs, outputs=outputs)
         if results == ['']:
-            self.assertEqual(ast, None)
+            self.assertSimilar(restricted, Block(()))
         else:
-            self.assert_(ast in [Block(r).ast for r in results])
+            self.assert_(restricted.ast in [Block(r).ast for r in results])
 
     ### Tests #################################################################
 
@@ -638,6 +644,7 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(context['b'], 1.0)
         
     def test_intermediate_inputs(self):
+        """ restrict blocks with inputs which are intermediates """
         block = Block('c = a + b\n'\
                   'd = c * 3')
         
@@ -664,6 +671,8 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(context['d'], 15)
                 
     def test_intermediate_inputs_with_highly_connected_graph(self):
+        """ restrict blocks with inputs which are intermediates on a highly connected graph"""
+        
         code =  "c = a + b\n" \
                 "d = c * 3\n" \
                 "e = a * c\n" \
@@ -693,6 +702,8 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(context['g'], 20)
 
     def test_intermediate_inputs_and_outputs(self):
+        """ restrict blocks with inputs and outputs which are intermediates """
+        
         code =  "c = a + b\n" \
                 "d = c * 3\n" \
                 "e = a * c\n" \
@@ -718,6 +729,8 @@ class BlockRestrictionTestCase(unittest.TestCase):
         self.assertEqual(context['g'], 20)
         
     def test_inputs_are_imports(self):
+        """ restrict blocks with inputs which are imported """
+        
         code =  "from numpy import arange\n" \
                 "x = arange(0, 10, 0.1)\n" \
                 "c1 = a * a\n" \
@@ -734,11 +747,59 @@ class BlockRestrictionTestCase(unittest.TestCase):
                                                  't2', 't3', 'y']))
 
     def test_inputs_are_dependent_outputs(self):
+        """ restrict blocks with inputs which are intermediates and outputs"""
+
         code =  "t2 = b * 2\n" \
                 "t3 = t2 + 3\n"
                 
         block = Block(code)
         sub_block = block.restrict(inputs=['t2', 't3'])
+        
+    def test_heirarchical_inputs(self):
+        """ restrict blocks with inputs which are nested """
+        
+        code =  "from numpy import arange\n" \
+                "x = arange(0, 10, 0.1)\n" \
+                "c1 = inner.a * inner.a\n" \
+                "x1 = x * x\n" \
+                "t1 = c1 *x1\n" \
+                "t2 = inner.b * x\n" \
+                "t3 = t1 + t2\n" \
+                "y = t3 + inner.c\n"
+                
+        block = Block(code)
+        sub_block = block.restrict(inputs=['inner.a'])
+        self.assertEqual(sub_block.inputs, set(['inner.a', 'inner.c', 'x1', 't2']))
+        self.assertEqual(sub_block.outputs, set(['y', 'c1', 't3', 'arange', 't1']))
+
+        self.assertEqual(len(sub_block.sub_blocks), 5)
+        self.assertSimilar(sub_block.sub_blocks[0], Block('from numpy import arange'))
+        self.assertSimilar(sub_block.sub_blocks[1], Block('c1 = inner.a * inner.a'))
+        self.assertSimilar(sub_block.sub_blocks[2], Block('t1 = c1 *x1'))
+        self.assertSimilar(sub_block.sub_blocks[3], Block('t3 = t1 + t2'))
+        self.assertSimilar(sub_block.sub_blocks[4], Block('y = t3 + inner.c'))
+        
+
+        code =  "from numpy import arange\n" \
+                "x = arange(0, 10, 0.1)\n" \
+                "c1 = outter.a * outter.a\n" \
+                "x1 = x * x\n" \
+                "t1 = c1 *x1\n" \
+                "t2 = outter.inner.b * x\n" \
+                "t3 = t1 + t2\n" \
+                "y = t3 + outter.inner.c\n"
+                
+        block = Block(code)
+        sub_block = block.restrict(inputs=['outter.a'])
+        self.assertEqual(sub_block.inputs, set(['outter.a', 'outter.inner.c', 'x1', 't2']))
+        self.assertEqual(sub_block.outputs, set(['y', 'c1', 't3', 'arange', 't1']))
+
+        self.assertEqual(len(sub_block.sub_blocks), 5)
+        self.assertSimilar(sub_block.sub_blocks[0], Block('from numpy import arange'))
+        self.assertSimilar(sub_block.sub_blocks[1], Block('c1 = outter.a * outter.a'))
+        self.assertSimilar(sub_block.sub_blocks[2], Block('t1 = c1 *x1'))
+        self.assertSimilar(sub_block.sub_blocks[3], Block('t3 = t1 + t2'))
+        self.assertSimilar(sub_block.sub_blocks[4], Block('y = t3 + outter.inner.c'))
         
         
         
