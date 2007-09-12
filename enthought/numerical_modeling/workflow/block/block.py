@@ -206,7 +206,7 @@ class Block(HasTraits):
         return isinstance(self.ast, Stmt) and len(self.ast.nodes) == 0
             
             
-    def execute(self, context):
+    def execute(self, local_context, global_context = {}):
         # To get tracebacks to show the right filename for any line in any
         # sub-block, we need each sub-block to compile its own '_code' since a
         # code object only keeps one filename. This is slow, so we give the
@@ -214,11 +214,11 @@ class Block(HasTraits):
         # readability of tracebacks.
         if len(self.sub_blocks) == 0 or self.no_filenames_in_tracebacks:
             if self.filename:
-                context['__file__'] = self.filename
-            exec self._code in {}, context
+                local_context['__file__'] = self.filename
+            exec self._code in global_context, local_context
         else:
             for block in self.sub_blocks:
-                block.execute(context)
+                block.execute(local_context, global_context)
 
     def restrict(self, inputs=(), outputs=()):
         ''' The minimal sub-block that computes 'outputs' from 'inputs'.
