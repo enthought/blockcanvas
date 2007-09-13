@@ -561,10 +561,12 @@ class NameFinder:
         globals      = self.globals - set(node.argnames)
         locals       = self.locals | set(node.argnames)
         conditionals = self.conditional_locals
-        v = walk(node.code,
-                 NameFinder(globals=globals, locals=locals, conditional_locals=conditionals))
+        
+        self._bind([node.name])
         
         # fixme: the inputs/outputs of functions are not set. This may cause graph errors
+        #v = walk(node.code,
+        #         NameFinder(globals=globals, locals=locals, conditional_locals=conditionals))
         #self._see_unbound(node.argnames)
         #self._bind(v.locals - set(node.argnames))
 

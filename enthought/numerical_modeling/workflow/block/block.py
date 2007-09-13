@@ -354,7 +354,7 @@ class Block(HasTraits):
 
             # if no inputs were valid, do not alter the graph
             if len(inputs) > 0:
-                g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))                
+                g = graph.reverse(graph.reachable_graph(graph.reverse(g), inputs))
         if outputs:
             outputs = map(Out, outputs)
             g = graph.reachable_graph(g, set(outputs).intersection(g.keys()))
@@ -439,11 +439,13 @@ class Block(HasTraits):
                 self._updating_structure = False
 
     def _set_inputs_and_outputs(self):
-        if self.ast is not None:
-            v = compiler.walk(self.ast, NameFinder())
-            self.inputs = set(v.free)
-            self.outputs = set(v.locals)
-            self.conditional_outputs = set(v.conditional_locals)
+        if self.ast is None:
+            return
+        
+        v = compiler.walk(self.ast, NameFinder())
+        self.inputs = set(v.free)
+        self.outputs = set(v.locals)
+        self.conditional_outputs = set(v.conditional_locals)
         
     def _get__code(self):
 
@@ -478,7 +480,6 @@ class Block(HasTraits):
                 inputs, outputs, conditional_outputs, self.__dep_graph = \
                     Block._compute_dependencies(self.sub_blocks)
     
-                if inputs != self.inputs: import pdb;pdb.set_trace()
                 assert inputs == self.inputs
                 assert outputs == self.outputs
                 assert conditional_outputs == self.conditional_outputs
