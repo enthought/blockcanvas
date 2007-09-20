@@ -219,6 +219,13 @@ class Block(HasTraits):
         else:
             for block in self.sub_blocks:
                 block.execute(local_context, global_context)
+    
+    def invalidate_cache(self):
+        """ Someone modified the block's internal ast. This method provides and
+            explicit means to invalidating the cached __code object
+        """
+        self.__code = None
+        self._set_inputs_and_outputs()
 
     def restrict(self, inputs=(), outputs=()):
         ''' The minimal sub-block that computes 'outputs' from 'inputs'.
