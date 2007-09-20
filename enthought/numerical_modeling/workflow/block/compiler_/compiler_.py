@@ -14,13 +14,17 @@ def parse(buf, mode="exec", transformer=None):
         transformer = Transformer()
     if mode == "exec" or mode == "single":
         # Since the parser gives a SyntaxError with the 'with' keyword,
-        # add the import alongwith the buffer
+        # add the import along with the buffer, then remove it. The lineno
+        # on the ast nodes must also be adjusted
         py_version = sys.version_info
         py_version = int(py_version[0])+0.1*int(py_version[1])
         if py_version < 2.6:
             new_buf = 'from __future__ import with_statement\n' + buf
             ast = transformer.parsesuite(new_buf)
             ast.node.nodes = ast.node.nodes[1:]
+            for node in ast.node.nodes:
+                if node.lineno is not None:
+                    node.lineno -= 1
             return ast
         return transformer.parsesuite(buf)
     elif mode == "eval":
