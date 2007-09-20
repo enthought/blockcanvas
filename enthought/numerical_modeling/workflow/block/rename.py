@@ -10,7 +10,9 @@ def rename(ast, mode, old, new):
     if mode not in ['variable', 'function']:
         raise ValueError("mode '%s' not supported")
     
-    return RenameAst(ast, mode, old, new).tree
+    rename_ast = RenameAst(ast, mode, old, new)
+    
+    return rename_ast.tree, rename_ast.modifications
 
 class RenameAst:
     """ Methods in this class recursively traverse an AST and
@@ -31,6 +33,7 @@ class RenameAst:
         self.old = old
         self.new = new
         self.tree = tree
+        self.modifications = 0
         
         self._dispatch(self.tree)
 
@@ -96,7 +99,7 @@ class RenameAst:
         """
         if t.name == self.old:
             t.name = self.new
-            self.modified = True
+            self.modifications += 1
 
     def _AssTuple(self, t):
         """ Tuple on left hand side of an expression.
@@ -182,12 +185,14 @@ class RenameAst:
         if t.decorators is not None:
             self._dispatch(t.decorators)
             
-        if self.mode == 'function' and t.name == old:
-            t.name = new
+        if self.mode == 'function' and t.name == self.old:
+            t.name = self.new
+            self.modifications += 1
         
         for i, name in enumerate(t.argnames):
-            if self.mode == 'variable' and name == old:
-                t.argnames[i] = new
+            if self.mode == 'variable' and name == self.old:
+                t.argnames[i] = self.new
+                self.modifications += 1
                 
         self._dispatch(t.code)
 
@@ -208,23 +213,26 @@ class RenameAst:
             
     def _Import(self, t):
         for i, name in enumerate(t.names):
-            if self.mode == 'function' and name[0] == old:
+            if self.mode == 'function' and name[0] == self.old:
                 l = list(name[0])
-                l[0] = new
+                l[0] = self.new
                 t.names[i] = tuple(l)
+                self.modifications += 1
 
     def _Keyword(self, t):
         """ Keyword value assignment within function calls and definitions.
         """
         if self.mode == 'variable' and t.name == self.old:
-            t.name = new
+            t.name = self.new
+            self.modifications += 1
             
         self._dispatch(t.expr)
 
     def Lambda(self, t):
         for i, name in enumerate(t.argnames):
-            if self.mode == 'variable' and name == old:
-                t.argnames[i] = new
+            if self.mode == 'variable' and name == self.old:
+                t.argnames[i] = self.new
+                self.modifications += 1
                 
         self._dispatch(t.code)
 
@@ -260,6 +268,7 @@ class RenameAst:
     def _Name(self, t):
         if self.old == t.name:
             t.name = self.new
+            self.modifications += 1
         
     def _Or(self, t):
         for node in t.nodes:
@@ -342,8 +351,8 @@ class RenameAst:
 if __name__ == "__main__":
     from block import Block
     code = "with m as z:\n"\
-           "   if(a<3): print foo()\n"\
-           "   else: pass"
+           "   if(a<3): print foo(1)\n"\
+           "   else: print foo(2)"
            
     bl = Block(code)
     ast = bl.ast
