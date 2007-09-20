@@ -204,7 +204,7 @@ class Block(HasTraits):
         """
 
         return isinstance(self.ast, Stmt) and len(self.ast.nodes) == 0
-            
+
             
     def execute(self, local_context, global_context = {}):
         # To get tracebacks to show the right filename for any line in any
@@ -475,15 +475,14 @@ class Block(HasTraits):
 
         # Cache dep graphs
         if not self.__dep_graph_is_valid:
-            
-            if len(self.sub_blocks) > 0:    
-                inputs, outputs, conditional_outputs, self.__dep_graph = \
-                    Block._compute_dependencies(self.sub_blocks)
-    
-                assert inputs == self.inputs
-                assert outputs == self.outputs
-                assert conditional_outputs == self.conditional_outputs
-    
+        
+            inputs, outputs, conditional_outputs, self.__dep_graph = \
+                Block._compute_dependencies(self.sub_blocks)
+
+            assert inputs == self.inputs
+            assert outputs == self.outputs
+            assert conditional_outputs == self.conditional_outputs
+
             self.__dep_graph_is_valid = True
 
         return self.__dep_graph
