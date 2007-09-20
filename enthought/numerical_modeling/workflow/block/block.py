@@ -225,7 +225,6 @@ class Block(HasTraits):
             explicit means to invalidating the cached __code object
         """
         self.__code = None
-        self._set_inputs_and_outputs()
 
     def restrict(self, inputs=(), outputs=()):
         ''' The minimal sub-block that computes 'outputs' from 'inputs'.
