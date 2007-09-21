@@ -173,11 +173,11 @@ class RenameAst:
         if t.else_ is not None:
             self._dispatch(t.else_)
 
-    def _From(self, t):
-        """ Handle "from xyz import foo, bar as baz".
-        """
-        self._dispatch(t.modname)
-        self._Import(t)        
+#    def _From(self, t):
+#        """ Handle "from xyz import foo, bar as baz".
+#        """
+#        self._dispatch(t.modname)
+#        self._Import(t)        
                 
     def _Function(self, t):
         """ Handle function definitions
@@ -211,13 +211,13 @@ class RenameAst:
         if t.else_ is not None:
             self._dispatch(t.else_)
             
-    def _Import(self, t):
-        for i, name in enumerate(t.names):
-            if self.mode == 'function' and name[0] == self.old:
-                l = list(name[0])
-                l[0] = self.new
-                t.names[i] = tuple(l)
-                self.modifications += 1
+#    def _Import(self, t):
+#        for i, name in enumerate(t.names):
+#            if self.mode == 'function' and name[0] == self.old:
+#                l = list(name[0])
+#                l[0] = self.new
+#                t.names[i] = tuple(l)
+#                self.modifications += 1
 
     def _Keyword(self, t):
         """ Keyword value assignment within function calls and definitions.
