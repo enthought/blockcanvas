@@ -302,10 +302,10 @@ class NameAnalysisTestCase(unittest.TestCase, NameAnalysisTestMixin):
                 
         block = Block(code)
         self.assertEqual(len(block.sub_blocks), 3)
-        self.assertEqual(block.inputs, set(['b', 'test_func']))
-        self.assertEqual(block.all_outputs, set(['a', 'm']))
+        self.assertEqual(block.inputs, set(['b']))
+        self.assertEqual(block.all_outputs, set(['a', 'm', 'test_func']))
         self.assertEqual(block.conditional_outputs, set([]))
-        self.assertEqual(block.outputs, set(['a', 'm']))
+        self.assertEqual(block.outputs, set(['a', 'm', 'test_func']))
                          
     def test_function_varargs_args(self):
         code =  "a = 1.0\n" \
@@ -375,10 +375,10 @@ class NameAnalysisTestCase(unittest.TestCase, NameAnalysisTestMixin):
                 
         block = Block(code)
         self.assertEqual(len(block.sub_blocks), 3)
-        self.assertEqual(block.inputs, set(['b', 'test_func']))
-        self.assertEqual(block.all_outputs, set(['a', 'm']))
+        self.assertEqual(block.inputs, set(['b']))
+        self.assertEqual(block.all_outputs, set(['a', 'm', 'test_func']))
         self.assertEqual(block.conditional_outputs, set([]))
-        self.assertEqual(block.outputs, set(['a', 'm']))
+        self.assertEqual(block.outputs, set(['a', 'm', 'test_func']))
 
 class TransformTestCase(unittest.TestCase, AnalysisTestMixin):
 

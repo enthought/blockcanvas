@@ -485,6 +485,8 @@ class Block(HasTraits):
             inputs, outputs, conditional_outputs, self.__dep_graph = \
                 Block._compute_dependencies(self.sub_blocks)
 
+            if inputs != self.inputs:
+                import pdb; pdb.set_trace()
             assert inputs == self.inputs
             assert outputs == self.outputs
             assert conditional_outputs == self.conditional_outputs
@@ -603,11 +605,26 @@ class Block(HasTraits):
             # aggregate block). If a name is provided only conditionally, then
             # 'b' depends on both the provider and the input.
             for i in b.inputs:
-                if i in env:
-                    dep_graph.link(b, env[i])
-                if i not in env or i in conditional_outputs:
-                    inputs.add(i)
-                    dep_graph.link(b, i)
+                # We need to make sure that dotted names are not included if
+                # their parent module or object is already in env.
+                process_i, prefix, suffix = True, '', i
+                while '.' in suffix:
+                    if prefix == '':
+                        prefix = suffix[:suffix.find('.')]
+                    else:
+                        prefix += suffix[:suffix.find('.')]
+                    if prefix in env:
+                        dep_graph.link(b, env[prefix])
+                        process_i = False
+                        break
+                    suffix = suffix[suffix.find('.')+1:]
+                    
+                if process_i:
+                    if i in env:
+                        dep_graph.link(b, env[i])
+                    if i not in env or i in conditional_outputs:
+                        inputs.add(i)
+                        dep_graph.link(b, i)
 
             for c in b.conditional_outputs:
 

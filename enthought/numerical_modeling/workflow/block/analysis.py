@@ -240,9 +240,24 @@ class NameFinder:
         return self.locals | self.conditional_locals
 
     def _see_unbound(self, names): # TODO I dislike this name...
-        for n in set(names) - self.globals - self.locals:
+        for name in set(names) - self.globals - self.locals:
             # (Conditional locals don't bind free names)
-            self.free.add(n)
+
+            # We need to check if the name is a dotted name.
+            # If the name is a dotted name, it can be a free variable only if
+            # its parent module or parent object is not already a local variable.
+            prefix, suffix = '', name
+            while '.' in suffix:
+                if prefix == '':
+                    prefix = suffix[:suffix.find('.')]
+                else:
+                    prefix += suffix[:suffix.find('.')]
+
+                if prefix in self.locals:
+                    return
+                suffix = suffix[suffix.find('.')+1:]
+                
+            self.free.add(name)
 
     def _bind(self, names):
 

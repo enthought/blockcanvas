@@ -308,7 +308,7 @@ class BlockTestCase(unittest.TestCase):
         # regardless which block represents and executes the code.
 
         def test(tb, lineno, filename):
-            self.assertEqual(tb.tb_lineno, lineno)
+            self.assertEqual(tb.tb_lineno, lineno+1)
             self.assertEqual(tb.tb_frame.f_code.co_filename, filename)
 
         def tracebacks():
@@ -735,9 +735,9 @@ class BlockRestrictionTestCase(unittest.TestCase):
                 
         block = Block(code)
         sub_block = block.restrict(inputs=['arange'])
-        self.assertEqual(sub_block.inputs, set(['a', 'b', 'c']))
-        self.assertEqual(sub_block.outputs, set(['arange', 'x', 'c1', 'x1', 't1',
-                                                 't2', 't3', 'y']))
+        self.assertEqual(sub_block.inputs, set(['c1', 'b', 'c']))
+        self.assertEqual(sub_block.outputs, set(['x', 'x1', 't1',
+                                                 't2', 't3', 'y', 'arange']))
 
     def test_inputs_are_dependent_outputs(self):
         """ restrict blocks with inputs which are intermediates and outputs"""
