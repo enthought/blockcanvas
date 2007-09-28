@@ -14,7 +14,6 @@
 #
 # Licensed under Python Software Foundation License, v2
 
-import unittest
 from nose.tools import assert_equal, assert_raises
 import UserDict
 
@@ -58,7 +57,7 @@ def adapt_keys(mapping):
     return KeyAdapter(mapping)
 
 
-class BasicMappingProtocolTest(unittest.TestCase):
+class BasicMappingProtocolTest(object):
     # This base class can be used to check that an object conforms to the
     # mapping protocol
 
