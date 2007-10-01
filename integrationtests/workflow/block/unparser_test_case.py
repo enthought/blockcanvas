@@ -115,7 +115,7 @@ class UnparseCompilerAstTestCase(unittest.TestCase):
 
     def test_function_definition_no_indent(self):
         code = "x = foo(a, b)\n" \
-               "def bar(a, b): a = b+3; return a; \n\n" \
+               "def bar(a, b): a = b+3; return a; \n" \
                "y = bar(a, b)"
         self._check_round_trip_func_no_indent(code)
 

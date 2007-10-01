@@ -215,7 +215,7 @@ class UnparseCompilerAst:
     def _Discard(self, t):
         """ Node for when return value is ignored such as in "foo(a)".
         """
-        self._write('\n')
+        self._fill()
         self._dispatch(t.expr)
 
     def _Div(self, t):
