@@ -164,8 +164,23 @@ class Block(HasTraits):
         # Evaluate attributes with non-deterministic default values to force
         # their initialization (see #1023)
         self.uuid
+        
+        # get the state but remove the code object cache
+        state = super(Block, self).__getstate__()
+        if state.has_key('_Block__code'): del state['_Block__code']
+        return state
 
-        return super(Block, self).__getstate__()
+    def __setstate__(self, state):
+        super(Block, self).__setstate__(state)
+
+        # reset the dynamic trait change handlers
+        # fixme: Why not use static handlers for this?
+        self.on_trait_change(self._structure_changed, 'sub_blocks')
+        self.on_trait_change(self._structure_changed, 'sub_blocks_items')
+        self.on_trait_change(self._structure_changed, 'ast')
+
+        # regenerate the code object cache
+        self._code
 
     def __repr__(self):
         return '%s(uuid=%s)' % (self.__class__.__name__, self.uuid)
