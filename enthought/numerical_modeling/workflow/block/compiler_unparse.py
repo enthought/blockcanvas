@@ -358,11 +358,11 @@ class UnparseCompilerAst:
     def _Return(self, t):
         self._fill("return ")
         if t.value:
-            if isinstance(t.value, Name):
-                self._dispatch(t.value)
-            elif isinstance(t.value, Tuple):
+            if isinstance(t.value, Tuple):
                 text = ', '.join([ name.name for name in t.value.asList() ])
                 self._write(text)
+            else:
+                self._dispatch(t.value)
             if not self._do_indent:
                 self._write('; ')
 
