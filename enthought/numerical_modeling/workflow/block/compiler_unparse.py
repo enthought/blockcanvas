@@ -290,6 +290,18 @@ class UnparseCompilerAst:
             self._leave()
             self._write("\n")
 
+    def _Import(self, t):
+        """ Handle "import xyz.foo".
+        """
+        self._fill("import ")
+        
+        for i, (name,asname) in enumerate(t.names):
+            if i != 0:
+                self._write(", ")
+            self._write(name)
+            if asname is not None:
+                self._write(" as "+asname)
+
     def _Keyword(self, t):
         """ Keyword value assignment within function calls and definitions.
         """
