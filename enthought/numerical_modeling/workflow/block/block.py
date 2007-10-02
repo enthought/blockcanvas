@@ -130,14 +130,14 @@ class Block(HasTraits):
             self.ast = parse(x, mode='exec', transformer=BlockTransformer())
         elif isinstance(x, Node):
             # push an exception handler onto the stack to ensure that the calling function gets the error
-            push_exception_handler(handler = lambda o,t,ov,nv: None, reraise_exceptions=True)
+            #push_exception_handler(handler = lambda o,t,ov,nv: None, reraise_exceptions=True)
             self._updating_structure = True
             
             self.ast = x            
             self._tidy_ast()
             
             self._updating_structure = False
-            pop_exception_handler()
+            #pop_exception_handler()
         elif is_sequence(x):
             if len(x) == 0:
                 self.ast = Stmt([])
