@@ -21,7 +21,7 @@ from numpy \
     import ufunc
 
 from types \
-    import FunctionType, MethodType
+    import FunctionType, MethodType, ModuleType
 
 #-------------------------------------------------------------------------------
 #  Constants:
@@ -37,5 +37,5 @@ empty_group = ( ( 0, ), [] )
 
 # The set of unpickleable objects we filter from a NumericContext when
 # persisting it:
-NonPickleable = ( FunctionType, MethodType, ufunc )
+NonPickleable = ( FunctionType, MethodType, ModuleType, ufunc )
 
