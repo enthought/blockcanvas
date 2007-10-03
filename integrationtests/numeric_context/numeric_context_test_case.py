@@ -17,14 +17,22 @@ from enthought.numerical_modeling.numeric_context.tests.mapping_object_test_case
 from enthought.numerical_modeling.numeric_context.api import \
      NumericContext, DerivativeContext, PassThruContext, TraitsContext, CachedContext
 from enthought.numerical_modeling.units.api import UnitArray
-from enthought.traits.api import Int, __version__
+from enthought.traits.api import Int
+try:
+    from enthought.traits.api import __version__
+    traits_version = int(__version__[:__version__.find('.')])
+except:
+    traits_version = 2
 from enthought.util.functional import compose
 from enthought.util.sequence import union
 
 # Local imports
-from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor
+from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor, \
+     assert_similar_contexts
 
-## FIXME: Fix code and unit tests for pickling to work with Traits 3.0
+## FIXME: There is a single test (on derivative contexts) which is failing
+##        for NumericContext when used with Traits 3.0. Fix the test that
+##        does a version check.
 
 
 # Coverage (2007-04-24):
@@ -85,7 +93,6 @@ class MappingObjectTest(BasicMappingProtocolTest, object):
 class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     factory = NumericContext
-    traits_version = int(__version__[:__version__.find('.')])
     
     def test_equality(self):
         nc1 = NumericContext()
@@ -568,8 +575,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling(self):
         'Pickling'
-        if self.traits_version > 2:
-            return
         
         def checked_pickle(c):
             p = loads(dumps(c))
@@ -777,8 +782,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling_dynamic_binding(self):
         'Pickling: dynamic binding'
-        if self.traits_version > 2:
-            return
         
         p = self.factory()
         c = self.factory(context_name='c')
@@ -851,8 +854,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickled_parent_contexts_lose_new_names_in_children(self):
         "Regression: pickled parent contexts lose new names in children"
-        if self.traits_version > 2:
-            return
         
         a = self.factory()
         a.b = self.factory()
@@ -864,8 +865,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
     #@staticmethod # nose doesn't find static methods
     def test_pickling_subtypes_loses_fields(self):
         "Regression: pickling subtypes loses fields"
-        if self.traits_version > 2:
-            return
         
         c = FooContext()
         assert_equal(c.a, 3)
@@ -876,8 +875,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling_duplicates_sub_context_names(self):
         "Regression: pickling duplicates 'sub_context_names'"
-        if self.traits_version > 2:
-            return
         
         c = self.factory()
         c.d = self.factory()
@@ -918,8 +915,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
         # Construct a numeric context from the bottom up, pickle/unpickle it,
         # and look up using dotted notation.
-        if self.traits_version > 2:
-            return
         
         well = self.factory()
         raw_logs = self.factory()
@@ -942,8 +937,6 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
         # Construct a numeric context from the top down, pickle/unpickle it,
         # and look up using dotted notation.
-        if self.traits_version > 2:
-            return
         
         well = self.factory()
         raw_logs = self.factory()
@@ -989,16 +982,12 @@ class TestPerformance:
 # TODO Build and test various pipelines
 
 def numeric_context_cases():
-    traits_version = int(__version__[:__version__.find('.')])
-    if traits_version > 2:
-        return
     yield ('Basic', NumericContext)
 
     # TODO Bigger cross-section: push everything through compose(loads, dumps)
     yield ('BasicPickled', compose(loads, dumps, NumericContext))
 
 def derivative_context_cases():
-    traits_version = int(__version__[:__version__.find('.')])
     if traits_version > 2:
         return
     

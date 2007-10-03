@@ -21,7 +21,7 @@ import logging
 logger = logging.getLogger( __name__ )
 
 from numpy \
-    import ndarray, arange, array, empty, isnan, nan
+    import ndarray, arange, array, empty
 
 from enthought.traits.api \
     import HasTraits, Instance, Str, List, Property, Undefined, \
@@ -80,7 +80,7 @@ class NumericContext ( ANumericContext ):
     context_name = Str( 'Context' )
 
     # List of array descriptor items:
-    context_items = List( ANumericItem )
+    context_items = List( ANumericItem, transient = True )
 
     # List of available data item names in the current group:
     context_names = Property( transient = True )
@@ -105,8 +105,9 @@ class NumericContext ( ANumericContext ):
     sub_context_names = Property( transient = True )
 
     # Initializing private traits so as to help in unpickling.
-    _context_items    = Dict
+    _context_items    = Dict( transient = True )
     _context_groups   = Dict
+    _sub_contexts     = Dict
     
     # Map to keep track of dynamic bindings, indexed by name and value bound
     _dynamic_bindings = Dict
@@ -170,15 +171,9 @@ class NumericContext ( ANumericContext ):
                 if isinstance( v, NonPickleable ):
                     del state[ 'context_data' ][k]
 
-        # Replace nan values from the _context_items:
-        if '_context_items' in state:
-            for k in state[ '_context_items' ].keys():
-                if isnan( state[ '_context_items' ][k].value ):
-                    state[ '_context_items' ][k].value = 'numpy.nan'
-                    
         # Return the saveable state:
         state[ '__numeric_context_version__' ] = 1
-
+        
         return state
 
     def __setstate__ ( self, state ):
@@ -199,12 +194,7 @@ class NumericContext ( ANumericContext ):
             if isinstance( k, basestring ):
                 d[ 'value' ].on_trait_change( self._dynamic_binding_handler,
                                               d[ 'trait_name' ] )
-
-        # Replace nan's back into context items.
-        for k in self._context_items.keys():
-            if self._context_items[k].value == 'numpy.nan':
-                self._context_items[k].value = nan
-                
+               
         # We maintain various things like context items and event listeners
         # that don't survive a pickling. These get setup in response to the
         # dictionary changing, so let's reuse that mechanism to set them up

@@ -1,9 +1,11 @@
 # Standard imports
 from copy import copy
 from nose.tools import assert_equal
-import numpy
+from numpy import ndarray, all
 
 # ETS imports
+from enthought.numerical_modeling.numeric_context.api import ANumericContext
+from enthought.util.dict import dict_zip
 from enthought.util.sequence import union
 
 ###############################################################################
@@ -41,7 +43,7 @@ def replace_numpy_arrays(x):
         This is useful when you want to compare two containers for equality,
         but one or the other contains numpy arrays.
     '''
-    if isinstance(x, numpy.ndarray):
+    if isinstance(x, ndarray):
         return list(x)
     elif isinstance(x, basestring):
         return x
@@ -57,7 +59,7 @@ def replace_numpy_arrays(x):
 def assert_equal_up_to_reordering_with_numpy_arrays(a, b):
     ''' Assert that lists a and b have the same elements in some order.
 
-        Compares numpy arrays as 'numpy.all(x == y)'.
+        Compares numpy arrays as 'all(x == y)'.
     '''
     assert equal_up_to_reordering_with_numpy_arrays(a,b), (
         'Not equal (up to reordering)\n\n'
@@ -68,7 +70,7 @@ def assert_equal_up_to_reordering_with_numpy_arrays(a, b):
 def equal_up_to_reordering_with_numpy_arrays(a, b):
     ''' Whether lists a and b have the same elements in some order.
 
-        Compares numpy arrays as 'numpy.all(x == y)'.
+        Compares numpy arrays as 'all(x == y)'.
 
         'set(a) == set(b)' is similar, but we distinguish between sequences
         with repeated elements. For example:
