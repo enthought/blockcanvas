@@ -1,2 +1,2 @@
-The numerical_modeling package, a part othe Enthought Tool Suite.
+The numerical_modeling package, a part of the Enthought Tool Suite.
 
