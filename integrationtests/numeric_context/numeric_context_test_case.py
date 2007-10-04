@@ -9,6 +9,7 @@
 from cPickle import dumps, loads
 from nose.tools import assert_not_equal, assert_equal, assert_raises
 from numpy import arange, array
+from test import test_support
 import unittest
 
 # ETS imports
@@ -18,21 +19,12 @@ from enthought.numerical_modeling.numeric_context.api import \
      NumericContext, DerivativeContext, PassThruContext, TraitsContext, CachedContext
 from enthought.numerical_modeling.units.api import UnitArray
 from enthought.traits.api import Int
-try:
-    from enthought.traits.api import __version__
-    traits_version = int(__version__[:__version__.find('.')])
-except:
-    traits_version = 2
 from enthought.util.functional import compose
 from enthought.util.sequence import union
 
 # Local imports
 from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor, \
      assert_similar_contexts
-
-## FIXME: There is a single test (on derivative contexts) which is failing
-##        for NumericContext when used with Traits 3.0. Fix the test that
-##        does a version check.
 
 
 # Coverage (2007-04-24):
@@ -92,8 +84,6 @@ class MappingObjectTest(BasicMappingProtocolTest, object):
 
 class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
-    factory = NumericContext
-    
     def test_equality(self):
         nc1 = NumericContext()
         nc2 = NumericContext()
@@ -988,9 +978,6 @@ def numeric_context_cases():
     yield ('BasicPickled', compose(loads, dumps, NumericContext))
 
 def derivative_context_cases():
-    if traits_version > 2:
-        return
-    
     yield ('Derivative', compose(DerivativeContext, NumericContext))
     yield ('PassThru', compose(PassThruContext, NumericContext))
     yield ('Traits', compose(TraitsContext, NumericContext))
@@ -1019,28 +1006,33 @@ def selection_context_cases():
 
 # Meta-programming: Generate test case classes specified by *_cases methods.
 # (Does nose offer a better solution?)
-for base, cases in [
+def test_all():
+    for base, cases in [
         (NumericContextTest, numeric_context_cases()),
         (DerivativeContextTest, derivative_context_cases()),
         (ReductionContextTest, reduction_context_cases()),
         (MappingContextTest, mapping_context_cases()),
         (SelectionContextTest, selection_context_cases()),
-    ]:
-    for class_name, ctor in cases:
-        class_name = 'Test' + class_name
-
-        # Flag name collisions that clobber other test cases
-        try:
-            eval(class_name)
-            assert False, 'Test case name collision: ' + class_name
-        except NameError:
-            pass
-
-        # Create the test case
-        exec (
-            'class %s(base):\n'
-            '    factory = staticmethod(ctor)\n'
-        ) % class_name
+        ]:
+        global ctor
+        for class_name, ctor in cases:
+            class_name = 'Test' + class_name
+            
+            # Flag name collisions that clobber other test cases
+            try:
+                eval(class_name)
+                assert False, 'Test case name collision: ' + class_name
+            except NameError:
+                pass
+            
+            # Create the test case
+            exec (
+                'class %s(base):\n'
+                '    def setUp(self):\n'
+                '        self.factory = ctor\n'
+                ) % class_name
+            test_support.run_unittest(eval(class_name))
+            
 
 ###############################################################################
 # Support
@@ -1056,5 +1048,4 @@ class FooContext(NumericContext):
 
 
 if __name__ == '__main__':
-    import sys
-    unittest.main(argv=sys.argv)
+    test_all()

@@ -51,10 +51,10 @@ class DerivativeContext ( ANumericContext ):
     context = Instance( ANumericContext )
 
     # The name of the context:
-    context_name = Property
+    context_name = Property( transient = True )
 
     # List of array descriptor items:
-    context_items = Property
+    context_items = Property( transient = True )
 
     # List of available data item names in the current group:
     context_names = Property
@@ -64,7 +64,7 @@ class DerivativeContext ( ANumericContext ):
 
     # The 'name' of the current context group (may be a tuple representing
     # the shape of the group's contents:
-    context_group = Property
+    context_group = Property( transient = True )
 
     # The array indices:
     context_indices = Property
@@ -95,9 +95,11 @@ class DerivativeContext ( ANumericContext ):
         super( DerivativeContext, self ).__init__( **traits )
         if context is not None:
             self.context = context
-
+    
     def __setstate__ ( self, state ):
+        state.pop( '__traits_version__', None )
         self.set( **state )
+                    
 
     #-- 'DerivativeContext' Class Methods --------------------------------------
 
@@ -303,7 +305,7 @@ class DerivativeContext ( ANumericContext ):
         return self.context_base.context_indices
 
     def _get_context_delegate ( self ):
-        return self.context_base.context_delegate
+        return self.context_base.context_delegate 
 
     def _set_context_default_value ( self, delegate ):
         self.context_base.context_delegate = delegate
@@ -317,13 +319,13 @@ class DerivativeContext ( ANumericContext ):
 
     def _get_defer_events ( self ):
         #FIXME: Sometimes context_base is None:
-        if self.context_base:
+        if self.context_base != None:
             return self.context_base.defer_events
         else:
             return False
-
+            
     def _set_defer_events ( self, x ):
-        if self.context_base:
+        if self.context_base != None:
             self.context_base.defer_events = x
         return
 
