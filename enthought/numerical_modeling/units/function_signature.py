@@ -29,7 +29,7 @@ def function_arguments(func):
     defaults = func.func_defaults
 
     if defaults is not None:
-        # If their are keywords, then slice the variable list into
+        # If there are keywords, then slice the variable list into
         # positional and keyword arguments.
         kw_count = len(defaults)
         args = args_ordered[:-kw_count]
@@ -64,7 +64,8 @@ def def_signature(func, name=None):
     # Convert keyword args and their defaults into strings
     # fixme: This will go South in cases where the repr for
     # an object isn't an executable version of its constructor...
-    kw_strings = ['%s=%s' %(k,repr(v)) for (k,v) in kw.items()]
+    # Make sure we iterate in the original order.
+    kw_strings = ['%s=%r' % (k,kw[k]) for k in args_ordered[len(args):]]
 
     var_strings = list(args) + kw_strings
     var_string = ', '.join(var_strings)
