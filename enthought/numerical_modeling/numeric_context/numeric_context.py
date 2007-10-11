@@ -156,6 +156,25 @@ class NumericContext ( ANumericContext ):
     #---------------------------------------------------------------------------
     # FIXME Revisit this pickling policy when Traits 2.1 becomes available.
 
+    def correct_state_items( self, state ):
+        """ Correction on state saved in old pickles.
+
+            In some pickles, 'context_data' is saved as a dict, when now it is
+            expected to be a EventDict.
+            
+        """
+        
+        context_data = state.pop( 'context_data', None )
+        if context_data != None:
+            if not isinstance( context_data, EventDict ):
+                if isinstance( context_data, dict ):
+                    context_data = EventDict( context_data )
+                else:
+                    context_data  = EventDict()
+            state[ 'context_data' ] = context_data
+
+        return
+    
     def __getstate__ ( self ):
         state = super( NumericContext, self ).__getstate__()
 
@@ -180,6 +199,8 @@ class NumericContext ( ANumericContext ):
         version = state.pop( '__numeric_context_version__', 0)
 
         if version < 1:
+            self.correct_state_items( state )
+            
             k = '__numeric_context_saved_bindings__'
             if k in state:
                 state[ '_dynamic_bindings' ] = state.pop( k )
