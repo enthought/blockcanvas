@@ -69,6 +69,9 @@ class Block(HasTraits):
     # files.
     no_filenames_in_tracebacks = Bool(False)
 
+    # Is this block the result of merging other blocks?
+    grouped = Bool(False)
+
     ### Protected traits #####################################################
 
     # The dependency graph for 'sub_blocks', if they exist. If we don't
@@ -95,7 +98,7 @@ class Block(HasTraits):
     # object interface
     ###########################################################################
 
-    def __init__(self, x=(), file=None, **kw):
+    def __init__(self, x=(), file=None, grouped=False, **kw):
         super(Block, self).__init__(**kw)
 
         # fixme: Why not use static handlers for this?
@@ -152,6 +155,9 @@ class Block(HasTraits):
         # We really want to keep the filename for "pristine" blocks, and
         # _structure_changed nukes it most times
         self.filename = saved_filename
+
+        # Set flag whether this is a grouped block or not
+        self.grouped = grouped
 
     def __eq__(self, other):
         return type(self) == type(other) and self.uuid == other.uuid
@@ -500,11 +506,11 @@ class Block(HasTraits):
             inputs, outputs, conditional_outputs, self.__dep_graph = \
                 Block._compute_dependencies(self.sub_blocks)
 
-            if inputs != self.inputs:
-                import pdb; pdb.set_trace()
-            assert inputs == self.inputs
-            assert outputs == self.outputs
-            assert conditional_outputs == self.conditional_outputs
+            #if inputs != self.inputs:
+            #    import pdb; pdb.set_trace()
+            #assert inputs == self.inputs
+            #assert outputs == self.outputs
+            #assert conditional_outputs == self.conditional_outputs
 
             self.__dep_graph_is_valid = True
 
