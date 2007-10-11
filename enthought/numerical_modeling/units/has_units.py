@@ -127,6 +127,8 @@ def has_units(func=None, summary='', doc='', inputs=None, outputs=None):
 
         # Parse the lines using docutil parser to get a document-tree
         settings = OptionParser(components=(Parser,)).get_default_values()
+        # Silence warnings.
+        settings.report_level = 3
         document = new_document("Docstring", settings)
         Parser().parse("\n".join(stripped_lines), document)
 
