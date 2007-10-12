@@ -100,6 +100,32 @@ def set_units(units, *args):
     }
     return manipulate_units(units, converters, *args)
 
+def have_some_units(*args):
+    """ Returns True if any of the arguments have units attached to them.
+
+    This is a bit of a hack specifically for has_units and tied to the
+    conventions of convert_units().
+    """
+    for arg in args:
+        if isinstance(arg, UnitArray):
+            return True
+    return False
+
+def strip_units(*args):
+    """ Remove units from arguments.
+    """
+    ret = []
+    for arg in args:
+        if isinstance(arg, UnitArray):
+            # This also takes care of UnitScalars as a subclass.
+            ret.append(arg.view(ndarray))
+        else:
+            ret.append(arg)
+    if len(ret) == 1:
+        return ret[0]
+    else:
+        return tuple(ret)
+
 # Convert objects with units to the same type of object with new units.
 def unit_array_units_converter(unit_array, new_units):
     """ Convert a UnitArray from one set of units to another.

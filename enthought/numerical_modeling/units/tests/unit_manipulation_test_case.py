@@ -17,7 +17,7 @@ from enthought.units.time import second
 # Numerical modeling library imports
 from enthought.numerical_modeling.units.api import UnitArray, UnitScalar
 from enthought.numerical_modeling.units.unit_manipulation import \
-    convert_units, set_units
+    convert_units, set_units, have_some_units, strip_units
 
 class ConvertUnitsTestCase(unittest.TestCase):
     """ ConvertUnits should pretty much leave anything without units alone
@@ -25,16 +25,6 @@ class ConvertUnitsTestCase(unittest.TestCase):
         and so should scalars with units (although we haven't really dealt with
         those).
     """
-
-    ############################################################################
-    # TestCase interface.
-    ############################################################################
-
-    def setUp(self):
-        unittest.TestCase.setUp(self)
-
-    def tearDown(self):
-        unittest.TestCase.tearDown(self)
 
     ############################################################################
     # ConvertUnitsTestCase interface.
@@ -260,5 +250,92 @@ class SetUnitsTestCase(unittest.TestCase):
 #        self.assertTrue(allclose(b,bb))
 #        self.assertEqual(c,cc)
 
+
+class HaveSomeUnitsTestCase(unittest.TestCase):
+    """ have_some_units should check its arguments for any
+    UnitArrays/UnitScalars.
+    """
+
+    ############################################################################
+    # TestCase interface.
+    ############################################################################
+
+    def setUp(self):
+        # Make some useful data.
+        self.unit_array = UnitArray((1,2,3), units=meters)
+        self.unit_scalar = UnitScalar(1, units=meters)
+        self.plain_array = array([1, 2, 3])
+        self.plain_scalar = 1
+        unittest.TestCase.setUp(self)
+
+    def test_finds_one(self):
+        self.assertTrue(have_some_units(self.unit_array))
+        self.assertTrue(have_some_units(self.unit_scalar))
+
+    def test_finds_multiple(self):
+        self.assertTrue(have_some_units(self.unit_array, self.unit_array))
+        self.assertTrue(have_some_units(self.unit_scalar, self.unit_scalar))
+
+    def test_finds_mixed_scalar_array(self):
+        self.assertTrue(have_some_units(self.unit_array, self.unit_scalar))
+
+    def test_does_not_find_plain(self):
+        self.assertFalse(have_some_units(self.plain_array))
+        self.assertFalse(have_some_units(self.plain_scalar))
+
+    def test_does_not_find_mixed_plain(self):
+        self.assertFalse(have_some_units(self.plain_array, self.plain_scalar))
+
+    def test_finds_any_unitted(self):
+        self.assertTrue(have_some_units(self.unit_array, self.plain_array, self.plain_scalar))
+        self.assertTrue(have_some_units(self.plain_array, self.unit_array, self.plain_scalar))
+        self.assertTrue(have_some_units(self.unit_scalar, self.plain_array, self.plain_scalar))
+        self.assertTrue(have_some_units(self.plain_array, self.unit_scalar, self.plain_scalar))
+
+
+class StripUnitsTestCase(unittest.TestCase):
+    """ strip_units should remove units from UnitArrays/UnitScalars.
+    """
+
+    def setUp(self):
+        # Make some useful data.
+        self.unit_array = UnitArray((1,2,3), units=meters)
+        self.unit_scalar = UnitScalar(1, units=meters)
+        self.plain_array = array([1, 2, 3])
+        self.plain_scalar = 1
+        unittest.TestCase.setUp(self)
+
+    def test_strip_units_one_arg(self):
+        self.assertFalse(isinstance(strip_units(self.unit_array), 
+            (UnitArray, UnitScalar)))
+        self.assertFalse(isinstance(strip_units(self.unit_scalar), 
+            (UnitArray, UnitScalar)))
+        self.assertFalse(isinstance(strip_units(self.plain_array), 
+            (UnitArray, UnitScalar)))
+        self.assertFalse(isinstance(strip_units(self.plain_scalar), 
+            (UnitArray, UnitScalar)))
+
+        # Check for stupidity when returning only one argument.
+        self.assertFalse(isinstance(strip_units(self.unit_scalar), tuple))
+        self.assertFalse(isinstance(strip_units(self.plain_scalar), tuple))
+
+    def test_strip_units_multi_arg(self):
+        outs = strip_units(self.unit_array, self.unit_scalar)
+        self.assertEquals(len(outs), 2)
+        for x in outs:
+            self.assertFalse(isinstance(x, (UnitArray, UnitScalar)))
+
+        outs = strip_units(self.plain_array, self.plain_scalar)
+        self.assertEquals(len(outs), 2)
+        for x in outs:
+            self.assertFalse(isinstance(x, (UnitArray, UnitScalar)))
+
+        outs = strip_units(self.unit_array, self.unit_scalar, self.plain_array,
+            self.plain_scalar)
+        self.assertEquals(len(outs), 4)
+        for x in outs:
+            self.assertFalse(isinstance(x, (UnitArray, UnitScalar)))
+
+        
 if __name__ == '__main__':
     unittest.main()
