@@ -19,7 +19,7 @@
 
 from numpy import not_equal
 
-from enthought.enable2.traits.api import RGBAColor
+from enthought.enable2.api import ColorTrait
 
 from enthought.traits.api \
     import HasPrivateTraits, Event, Bool, Int
@@ -57,10 +57,10 @@ class ANumericFilter ( HasPrivateTraits ):
 #-- View related ---------------------------------------------------------------
 
     # Foreground color:
-    foreground_color = RGBAColor( 'black', event = 'modified' )
+    foreground_color = ColorTrait( 'black', event = 'modified' )
 
     # Background color:
-    background_color = RGBAColor( 'white', event = 'modified' )
+    background_color = ColorTrait( 'white', event = 'modified' )
 
     #---------------------------------------------------------------------------
     #  Handles the 'modified' pseudo-event being fired:

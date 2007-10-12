@@ -19,7 +19,7 @@
 
 from numpy import nan
 
-from enthought.enable2.traits.api import RGBAColor
+from enthought.enable2.api import ColorTrait
 
 from enthought.traits.api \
     import HasPrivateTraits, Instance, List, Any, Str
@@ -64,8 +64,8 @@ class ANumericItem ( HasPrivateTraits ):
     format = Str( '%.3f' )
 
     # Foreground color (intended use: text color, plot line color):
-    foreground_color = RGBAColor( 'black' )
+    foreground_color = ColorTrait( 'black' )
 
     # Background color (intended use: text background color, plot fill color):
-    background_color = RGBAColor( 'white' )
+    background_color = ColorTrait( 'white' )
 
