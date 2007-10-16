@@ -88,3 +88,6 @@ class HasUnitsTestCase(unittest.TestCase):
         self.assertEquals(z.units, meters/second)
         assert_array_almost_equal(z, 0.4064)
 
+
+if __name__ == '__main__':
+    unittest.main()

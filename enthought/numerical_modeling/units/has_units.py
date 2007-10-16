@@ -216,7 +216,14 @@ def _has_units(summary="", doc="", inputs=(), outputs=()): #@UnusedVariable
     outputs = list(outputs)
 
     def units_wrap(_func_):
-        name = _func_.func_name
+        try:
+            name = _func_.func_name
+        except AttributeError:
+            try:
+                name = _func_.__name__
+            except AttributeError:
+                name = _func_.__class__.__name__
+                
         define = def_signature(_func_) #@UnusedVariable
         call = call_signature(_func_, '_func_') #@UnusedVariable
         args, kw, args_ordered = function_arguments(_func_) #@UnusedVariable
