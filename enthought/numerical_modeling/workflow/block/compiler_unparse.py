@@ -245,7 +245,7 @@ class UnparseCompilerAst:
             self._fill("@")
             self._dispatch(t.decorators)
         self._fill("def "+t.name + "(")
-        defaults = [None] * (len(t.argnames) - len(t.defaults)) + t.defaults
+        defaults = [None] * (len(t.argnames) - len(t.defaults)) + list(t.defaults)
         for i, arg in enumerate(zip(t.argnames, defaults)):
             self._write(arg[0])
             if arg[1] is not None:
