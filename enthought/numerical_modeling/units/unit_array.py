@@ -14,7 +14,8 @@ _retain_units = [numpy.absolute, numpy.negative,
                  numpy.floor, numpy.ceil, numpy.rint, numpy.conjugate,
                  numpy.maximum, numpy.minimum]
 
-_retain_units0 = [numpy.add, numpy.subtract, numpy.remainder]
+_retain_units0 = [numpy.remainder]
+_retain_units_both = [numpy.add, numpy.subtract]
 
 
 class UnitArray(numpy.ndarray):
@@ -133,7 +134,9 @@ class UnitArray(numpy.ndarray):
 
     def __array_wrap__(self, obj, context=None):
         # Could do the right thing for certain
-        # units.
+        # units. Right now, we only retain units for
+        #  certain single-variable cases and if
+        #  both units are the same. 
         result = obj.view(self.__class__)
         if context is not None:
             func, args, iout = context
@@ -141,6 +144,14 @@ class UnitArray(numpy.ndarray):
                 try:
                     result.units = self.units
                 except AttributeError:
+                    pass
+            if func in _retain_units_both:
+                try:
+                    unit1 = args[0].units
+                    unit2 = args[1].units
+                    if unit1 == unit2:
+                        result.units = unit1
+                except:
                     pass
         return result
 
