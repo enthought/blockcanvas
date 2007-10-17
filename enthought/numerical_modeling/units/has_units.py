@@ -6,6 +6,8 @@ from docutils.utils import new_document
 import copy
 from string import Template
 
+import numpy
+
 # Local imports
 from variable import Variable
 from function_signature import (call_signature, def_signature,
@@ -216,17 +218,16 @@ def _has_units(summary="", doc="", inputs=(), outputs=()): #@UnusedVariable
     outputs = list(outputs)
 
     def units_wrap(_func_):
-        try:
-            name = _func_.func_name
-        except AttributeError:
-            try:
-                name = _func_.__name__
-            except AttributeError:
-                name = _func_.__class__.__name__
-                
-        define = def_signature(_func_) #@UnusedVariable
-        call = call_signature(_func_, '_func_') #@UnusedVariable
-        args, kw, args_ordered = function_arguments(_func_) #@UnusedVariable
+        # This special-cases the output of numpy.vectorize
+        if isinstance(_func_, numpy.vectorize):
+            thefunc = _func_.thefunc
+        else:
+            thefunc = _func_
+
+        name = thefunc.func_name                
+        define = def_signature(thefunc) #@UnusedVariable
+        call = call_signature(thefunc, '_func_') #@UnusedVariable
+        args, kw, args_ordered = function_arguments(thefunc) #@UnusedVariable
         args_string = ', '.join(args_ordered) #@UnusedVariable
 
         # build list of units for the arguments
@@ -269,9 +270,9 @@ def _has_units(summary="", doc="", inputs=(), outputs=()): #@UnusedVariable
             '        elif len(output_units) > 1:',
             '            results = set_units(output_units, *results)',
             '    return results',
-            '$name.func_name = _func_.func_name',
-            '$name.__doc__ = _func_.__doc__',
-            '$name.__module__ = _func_.__module__',
+            '$name.func_name = thefunc.func_name',
+            '$name.__doc__ = thefunc.__doc__',
+            '$name.__module__ = thefunc.__module__',
             '$name.inputs = input_list[:]',
             '$name.outputs = output_list[:]',
             '$name.summary = summary',
@@ -281,7 +282,8 @@ def _has_units(summary="", doc="", inputs=(), outputs=()): #@UnusedVariable
 
         # Create the namespace in which the code will be executed.
         # fixme: This might work fine if it were just locals()
-        vars = {'_func_':_func_,
+        vars = {'thefunc':thefunc,
+                '_func_': _func_,
                 'convert_units': convert_units,
                 'set_units': set_units,
                 'have_some_units': have_some_units,
