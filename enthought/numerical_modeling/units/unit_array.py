@@ -129,7 +129,7 @@ class UnitArray(numpy.ndarray):
         try:
             self.units = obj.units
         except AttributeError:
-            pass
+            self.units = None
 
     def __array_wrap__(self, obj, context=None):
         # Could do the right thing for certain
