@@ -5,7 +5,7 @@
 import unittest
 
 # Numeric library imports
-from numpy import array, all, allclose, ndarray #@UnresolvedImport
+from numpy import array, all, allclose, ndarray, sqrt #@UnresolvedImport
 
 # Enthought library imports
 from enthought.units.unit import InvalidConversion
@@ -26,22 +26,44 @@ class PassUnitsTestCase(unittest.TestCase):
     ############################################################################
 
     def test_add(self):
-        """ Does it pass a single value through correctly?
-        """
-        a = UnitArray([1,2,3],units='m/s')
-        b = UnitArray([1,2,3],units='m/s')
+        a = UnitArray([1,2,3],units=meters/second)
+        b = UnitArray([1,2,3],units=meters/second)
         result = a + b
-        self.assertEqual(result.units, 'm/s')
+        self.assertEqual(result.units, meters/second)
 
+    def test_add_nopass(self):
+        a = UnitArray([1,2,3],units=meters/second)
+        b = UnitArray([1,2,3],units=feet)
+        result = a + b
+        assert result.units is None
 
     def test_subtract(self):
-        """ Does it pass a single value through correctly?
-        """
-        a = UnitArray([1,2,3],units='m/s')
-        b = UnitArray([1,2,3],units='m/s')
+        a = UnitArray([1,2,3],units=meters/second)
+        b = UnitArray([1,2,3],units=meters/second)
         result = a - b
-        self.assertEqual(result.units, 'm/s')
+        self.assertEqual(result.units, meters/second)
 
+    def test_divide_pass(self):
+        a = UnitArray([1,2,3],units=meters/second)
+        result = a/3.0
+        self.assertEqual(result.units, meters/second)
+
+    def test_divide_no_pass(self):
+        a = UnitArray([1,2,3],units=meters/second)
+        result = 3.0/a
+        assert result.units is None
+
+    def test_multiply_pass(self):
+        a = UnitArray([1,2,3],units=meters/second)
+        result = a*3.0
+        self.assertEqual(result.units, meters/second)
+        result = 3.0*a
+        self.assertEqual(result.units, meters/second)
+        
+    def test_sqrt_no_pass(self):
+        a = UnitArray([1.0,2.0,3.0], units=meters/second)
+        result = sqrt(a)
+        assert result.units is None
 
 if __name__ == '__main__':
     unittest.main()

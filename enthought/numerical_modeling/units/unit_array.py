@@ -14,9 +14,11 @@ _retain_units = [numpy.absolute, numpy.negative,
                  numpy.floor, numpy.ceil, numpy.rint, numpy.conjugate,
                  numpy.maximum, numpy.minimum]
 
-_retain_units0 = [numpy.remainder]
-_retain_units_both = [numpy.add, numpy.subtract]
+_retain_units_if_same = [numpy.add, numpy.subtract]
 
+_retain_units_if_single = [numpy.multiply]
+
+_retain_units_if_only_first = [numpy.remainder, numpy.divide]
 
 class UnitArray(numpy.ndarray):
     """ Define a UnitArray that subclasses from a Numpy array
@@ -127,32 +129,58 @@ class UnitArray(numpy.ndarray):
 
         # Copy any values that were on the original UnitArray into the output
         # UnitArray.
-        try:
-            self.units = obj.units
-        except AttributeError:
-            self.units = None
+        self.units = getattr(obj, 'units', None)
 
     def __array_wrap__(self, obj, context=None):
-        # Could do the right thing for certain
-        # units. Right now, we only retain units for
-        #  certain single-variable cases and if
-        #  both units are the same. 
+        # Behavior of getting units is
+        #   to retain units if
+        #  1) the function is in _retain_units list
+        #  2) the function is in _retain_units_if_same list
+        #     and the arguments either have the same units
+        #     or no units.
+        #  3) the function is in _retain_units_if_single list
+        #     and all but one argument does not have units.
+        #  4) the function is in _retain_units_if_none_but_first
+        #     and all but the first argument does not have units
+        #
+        # FIXME: To do this "right" would require a ufunc
+        #      object that could tell how to do unit conversions
+        #      with its inputs to produce its outputs. 
         result = obj.view(self.__class__)
+        theunit = None
         if context is not None:
             func, args, iout = context
-            if func in _retain_units + _retain_units0:
-                try:
-                    result.units = self.units
-                except AttributeError:
-                    pass
-            if func in _retain_units_both:
-                try:
-                    unit1 = args[0].units
-                    unit2 = args[1].units
-                    if unit1 == unit2:
-                        result.units = unit1
-                except:
-                    pass
+            if func in _retain_units:
+                theunit = getattr(self, 'units', None)
+            elif func in _retain_units_if_same:
+                theunit = None
+                for arg in args:
+                    u = getattr(arg, 'units', None)
+                    if u is None:
+                        continue
+                    if theunit is None:
+                        theunit = u
+                    elif (theunit != u):
+                        theunit = None
+            elif func in _retain_units_if_single:
+                theunit = None
+                for arg in args:
+                    u = getattr(arg, 'units', None)
+                    if u is not None:
+                        if theunit is None:
+                            theunit = u
+                        else: # already a unit 
+                            theunit = None
+                            break
+            elif func in _retain_units_if_only_first:
+                theunit = getattr(args[0], 'units', None)
+                for arg in args[1:]:
+                    u = getattr(arg, 'units', None)
+                    if u is not None:
+                        theunit = None
+                        break
+
+        result.units = theunit
         return result
 
 
