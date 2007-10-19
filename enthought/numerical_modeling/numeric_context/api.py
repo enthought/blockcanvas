@@ -34,9 +34,6 @@ from context_delegate \
 from context_modified \
     import ContextModified
 
-from deferred_context \
-    import DeferredContext
-
 from derivative_context \
     import DerivativeContext
 
