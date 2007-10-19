@@ -19,7 +19,7 @@
 
 from numpy import nan
 
-from enthought.enable2.api import ColorTrait
+from enthought.enable2.colors import ColorTrait
 
 from enthought.traits.api \
     import HasPrivateTraits, Instance, List, Any, Str
