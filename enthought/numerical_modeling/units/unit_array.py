@@ -3,6 +3,7 @@ import numpy
 
 # Enthought library imports
 import enthought.units as units
+from enthought.units.unit import dimensionless
 
 def __newobj__ ( cls, *args ):
     """ Unpickles new-style objects.
@@ -139,13 +140,17 @@ class UnitArray(numpy.ndarray):
         #     and the arguments either have the same units
         #     or no units.
         #  3) the function is in _retain_units_if_single list
-        #     and all but one argument does not have units.
-        #  4) the function is in _retain_units_if_none_but_first
+        #     and all but one argument does not have units
+        #     (or is dimensionless)
+        #  4) the function is in _retain_units_if_only_first
         #     and all but the first argument does not have units
-        #
+        #     (or is dimensionless)
+        #  5) the function has a single argument which is dimensionless
+        #  
         # FIXME: To do this "right" would require a ufunc
         #      object that could tell how to do unit conversions
-        #      with its inputs to produce its outputs. 
+        #      with its inputs to produce its outputs.
+        #      or at the very least implementing over-rides of *,/,+,...
         result = obj.view(self.__class__)
         theunit = None
         if context is not None:
@@ -169,16 +174,20 @@ class UnitArray(numpy.ndarray):
                     if u is not None:
                         if theunit is None:
                             theunit = u
-                        else: # already a unit 
+                        elif u != dimensionless: # already a unit
                             theunit = None
                             break
             elif func in _retain_units_if_only_first:
                 theunit = getattr(args[0], 'units', None)
                 for arg in args[1:]:
                     u = getattr(arg, 'units', None)
-                    if u is not None:
+                    if u is not None and u != dimensionless:
                         theunit = None
                         break
+            elif len(args)==1:
+                theunit = getattr(self, 'units', None)
+                if theunit != dimensionless:
+                    theunit = None
 
         result.units = theunit
         return result

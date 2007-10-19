@@ -8,7 +8,7 @@ import unittest
 from numpy import array, all, allclose, ndarray, sqrt #@UnresolvedImport
 
 # Enthought library imports
-from enthought.units.unit import InvalidConversion
+from enthought.units.unit import InvalidConversion, dimensionless
 from enthought.units.length import feet, meters
 from enthought.units.time import second
 
@@ -64,6 +64,11 @@ class PassUnitsTestCase(unittest.TestCase):
         a = UnitArray([1.0,2.0,3.0], units=meters/second)
         result = sqrt(a)
         assert result.units is None
+
+    def test_sqrt_pass(self):
+        a = UnitArray([1.0,2.0,3], units=dimensionless)
+        result = sqrt(a)
+        assert result.units == dimensionless
 
 if __name__ == '__main__':
     unittest.main()
