@@ -13,7 +13,7 @@
 
 import sys
 import cStringIO
-from compiler.ast import Const, Name, Tuple
+from compiler.ast import Const, Name, Tuple, Div, Mul, Sub, Add
 
 def unparse(ast, single_line_functions=False):
     s = cStringIO.StringIO()
@@ -264,7 +264,13 @@ class UnparseCompilerAst:
     def _Getattr(self, t):
         """ Handle getting an attribute of an object
         """
-        self._dispatch(t.expr)
+        if isinstance(t.expr, (Div, Mul, Sub, Add)):
+            self._write('(')
+            self._dispatch(t.expr)
+            self._write(')')
+        else:
+            self._dispatch(t.expr)
+            
         self._write('.'+t.attrname)
         
     def _If(self, t):
@@ -338,7 +344,7 @@ class UnparseCompilerAst:
                 self._write(" or ")
                 
     def _Pass(self, t):
-        self._write("pass\n")
+        self._fill("pass\n")
 
     def _Printnl(self, t):
         self._fill("print ")
@@ -401,6 +407,28 @@ class UnparseCompilerAst:
                 self._write(",")
             self._dispatch(value)
         self._write("]")
+
+    def _TryExcept(self, t):
+        self._fill("try")
+        self._enter()
+        self._dispatch(t.body)
+        self._leave()
+
+        for handler in t.handlers:
+            self._fill('except ')
+            self._dispatch(handler[0])
+            if handler[1] is not None:
+                self._write(', ')
+                self._dispatch(handler[1])
+            self._enter()
+            self._dispatch(handler[2])
+            self._leave()
+            
+        if t.else_:
+            self._fill("else")
+            self._enter()
+            self._dispatch(t.else_)
+            self._leave()
 
     def _Tuple(self, t):
 
@@ -476,6 +504,9 @@ class UnparseCompilerAst:
 
     def _str(self, t):
         self._write(repr(t))
+        
+    def _tuple(self, t):
+        self._write(str(t))
 
     #########################################################################
     # These are the methods from the _ast modules unparse.
@@ -580,19 +611,6 @@ class UnparseCompilerAst:
 #            self._write(", ")
 #            self._dispatch(t.tback)
 #
-#    def _TryExcept(self, t):
-#        self._fill("try")
-#        self._enter()
-#        self._dispatch(t.body)
-#        self._leave()
-#
-#        for ex in t.handlers:
-#            self._dispatch(ex)
-#        if t.orelse:
-#            self._fill("else")
-#            self._enter()
-#            self._dispatch(t.orelse)
-#            self._leave()
 #
 #    def _TryFinally(self, t):
 #        self._fill("try")
