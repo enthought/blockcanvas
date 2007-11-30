@@ -213,10 +213,7 @@ def has_units(func=None, summary='', doc='', inputs=None, outputs=None):
 
         return _has_units(summary, doc, inputs_dict, outputs_list)
 
-def _has_units(summary="", doc="", inputs=(), outputs=()): #@UnusedVariable
-    inputs = dict(inputs)
-    outputs = list(outputs)
-
+def _has_units(summary, doc, inputs, outputs):
     def units_wrap(_func_):
         # This special-cases the output of numpy.vectorize
         if isinstance(_func_, numpy.vectorize):
