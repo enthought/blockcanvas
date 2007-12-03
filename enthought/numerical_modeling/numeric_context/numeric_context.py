@@ -152,6 +152,27 @@ class NumericContext ( ANumericContext ):
                                            'defer_events' )
 
     #---------------------------------------------------------------------------
+    #  Clears the internal state of the object:
+    #---------------------------------------------------------------------------
+
+    def dispose ( self ):
+    	""" Clears the interal state of the object to ensure all memory is
+	    released. If this is not called, circular references can confuse
+	    pythons garbage collection and memory will be 'leaked'
+	"""
+
+	# FIXME: should this call dispose on sub_contexts?
+	#  maybe, if the refcount is low enough, otherwise other uses
+	#  of the subcontext would lose its data
+
+	self.context_data.clear()
+	self._dynamic_bindings.clear()
+	if self._dist is not None:
+	    self._dict.clear()
+	self._sub_contexts.clear()
+	self.context_delegate = None
+
+    #---------------------------------------------------------------------------
     #  Handle saving/restoring the object's state:
     #---------------------------------------------------------------------------
     # FIXME Revisit this pickling policy when Traits 2.1 becomes available.
