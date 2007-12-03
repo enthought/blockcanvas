@@ -167,7 +167,7 @@ class NumericContext ( ANumericContext ):
 
 	self.context_data.clear()
 	self._dynamic_bindings.clear()
-	if self._dist is not None:
+	if self._dict is not None:
 	    self._dict.clear()
 	self._sub_contexts.clear()
 	self.context_delegate = None
