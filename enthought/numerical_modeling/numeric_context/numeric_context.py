@@ -156,19 +156,20 @@ class NumericContext ( ANumericContext ):
     #---------------------------------------------------------------------------
 
     def dispose ( self ):
-    	""" Clears the interal state of the object to ensure all memory is
-	    released. If this is not called, circular references can confuse
-	    pythons garbage collection and memory will be 'leaked'
-	"""
+        """ Clears the interal state of the object to ensure all memory is
+    	    released. If this is not called, circular references can confuse
+    	    pythons garbage collection and memory will be 'leaked'
+    	"""
 
-	# FIXME: should this call dispose on sub_contexts?
-	#  maybe, if the refcount is low enough, otherwise other uses
-	#  of the subcontext would lose its data
-
-	self.context_data.clear()
-	self._dynamic_bindings.clear()
-	self._sub_contexts.clear()
-	self.context_delegate = None
+        # FIXME: should this call dispose on sub_contexts?
+        #  maybe, if the refcount is low enough, otherwise other uses
+        #  of the subcontext would lose its data
+        
+        self.defer_events = True 
+        for item in self.context_items:
+            item.context = None
+        self.clear()
+        self.defer_events = False
 
     #---------------------------------------------------------------------------
     #  Handle saving/restoring the object's state:
@@ -740,7 +741,7 @@ class NumericContext ( ANumericContext ):
         added   = sub_dict( new, new_keys - old_keys )
         removed = sub_dict( old, old_keys - new_keys )
         changed = sub_dict( old, new_keys & old_keys )
-
+        
         self._dict_is_modified(
             TraitDictEvent( added=added, changed=changed, removed=removed )
         )
