@@ -74,7 +74,7 @@ setup(
         # decide whether to require them or not.
         'nonets': [
             "docutils",
-            "geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
+            "Geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
             'PIL',
             "numpy >=1.0.2",
             ],
