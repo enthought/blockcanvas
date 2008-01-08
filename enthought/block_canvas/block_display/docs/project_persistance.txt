@@ -1,0 +1,89 @@
+Project Persistance
+--------------------
+
+Saving a project:
+-----------------
+    General:
+    --------
+    * Project is saved in the user-directory; and the key is the project-name.
+        <user-directory> : ETSConfig.user_data
+                            C:\\Documents and Settings\\John Doe\\Enthought or
+                            /home/JohnDoe/Enthought
+
+    * Project is saved in 2 phases:
+        Project file: <user-directory>/<project-name>.prj
+        Project directory: <user-directory>/<project-name>_files
+                            should contain the following:
+                            1. <project_name>.pickle  : Context
+                            2. <project_name>.py      : Script
+                            3. OPTIONALLY, .txt files storing the interactor-ranges:
+                                a. <project_name>_shadow_interactor_range_file.txt
+                                    File-format:
+                                    ------------
+                                    Each line contains 3 entries :
+                                    a string, and 2 floats
+                                    eg: a <low_of_a> <high_of_a>
+
+                                b. <project_name>_parametric_interactor_range_file.txt
+                                    File-format:
+                                    ------------
+                                    Each line contains 4 entries :
+                                    a string, and 3 floats
+                                    eg: a <low_of_a> <high_of_a> <step_of_a>
+                                c. **Stochastic ranges persistance yet to be done **
+
+
+    Different use-cases:
+    --------------------
+    * Save a project afresh (MenuAction: Save Project As)
+    * Save a project back where it was loaded from (MenuAction: Save Project)
+
+    Comments:
+    ---------------
+    * The range-preferences get saved automatically every time the UI for the
+      configurable-interactor is closed. Is this desirable ?
+    * The user should be able to edit the script and the interactor range-files.
+
+
+Loading a project:
+------------------
+    General:
+    --------
+    * Project should be loaded using the .prj file
+    * It should load the following:
+        1. Context
+        2. Script (and hence the block)
+        3. If present, the interactor range-files
+
+
+Loading interactor-range preferences:
+-------------------------------------
+Interactor range-preferences can be loaded from 3 different locations:
+1. Units DB: units_ranges.txt
+2. Users' global preferences: Should be a file in the Application-Data or
+                                User/ directory
+                                * should be a .txt file
+                                * user should be able to edit it
+                                * should contain lines of ranges in the format
+                                  of a variable-name and 2 or 3 floats
+                                  <name> <low> <high> <step>
+                                  ** low, high will be used for shadow interactors
+                                  ** low, high, step will be used for parametric
+                                     interactors.
+                                * This is assuming, values for the Imperial unit
+                                  system, if applicable.
+3. Project preferences: This will be whatever is set during the project session,
+                        as explained, in 'Saving a Project'
+
+    Comments
+    --------
+    The precedence for ranges will be: Units < Global < Project
+
+
+TODO:
+-----
+1. When opening a new project, prompt the user to save the current project.
+2. Setup for users to save out global preferences for interactor ranges.
+3. Set the project preferences for a global-preferences file for interactor ranges.
+4. Add support for saving out preferences for other interactors apart from
+   shadow and parametric.

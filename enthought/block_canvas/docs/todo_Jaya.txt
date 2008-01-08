@@ -1,0 +1,65 @@
+Feature: Adding new function:
+-----------------------------
+
+DONE 1.  [TESTING] Unit tests for NewFunctionCall
+2.  [FEATURE] Save preferences for path for saving functions
+3.  [REFACTOR/low] Should be an entry in the list of packages at the top 
+    instead of a button
+4.  [FEATURE] Double-click on a function to add it to canvas
+        -should be handled by ISelectionContainerController/SelectionManager
+5.  [REFACTOR/low] Move the add-function-button from the search-interface to 
+        the main-interface ?
+6.
+
+
+Function-Search:
+----------------
+1.  [TESTING] Write more unit-tests on the packages populated by the    
+        search function.
+        Resolved a case where it was walking into a class, and retrieving class
+        methods. Should check rigorously for such exceptions.
+2.  [BUG] The green arrow button takes a long time to work. 
+3.  [BUG] I added 'geophysics' in the modules column: it doesn't seem to    
+            populate any of the cp.geophysics methods. 
+4.  [FEATURE] Should be able to sort by packages. Currently it is sorted by name 
+            only.
+DONE 5.  [BUG] If there is no __init__.py file, the drag and drop fails as the 
+            function cannot be imported. In such a case, it should not be 
+            present in the function-list.
+6.
+
+
+Blocks:
+-------
+1.  [TESTING] Error checking for block execution.
+        *   Drag function 'biotc' to the graph view when running main.py, it 
+            throws a NameError. seems like there should be a check if all the 
+            input parameters have mappings in the context before the block 
+            executes.
+        *
+
+
+Graph-view:
+-----------
+1.  [BUG] Fix Cancel function on FunctionBox
+2.  
+
+
+Function-Call:
+--------------
+DONE 1.  [TESTING] Unit tests for UnittedFunctionCall
+2.
+
+Bug-report from testing the app:
+-----------------------------
+1.  Data resource-tree gives AttributeError on clicking on any variable.
+2.  Resource-tree allows renames, which should be updated in the code and   
+    variables list.
+3.  Loading empty file at the 'File' tab gives an IOError.
+4.
+
+General from code-browsing:
+---------------------------
+    [Look-out for FIXME's and clean up most of the code]
+    [Start reorganizing code to different sub-packages]
+    [Put in tickets on Traits2.1 (on event-handling etc.) to Dave M.]

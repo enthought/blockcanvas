@@ -1,0 +1,53 @@
+# This file describes the ConfigObj format for a saved project file.
+# See http://www.voidspace.org.uk/python/configobj.html#configspec
+# for more details.
+
+
+# Note: All the paths in this file are treated as being relative to the project 
+# root.  They can be absolute paths, however, 
+
+
+# The project section consists of direct Project attributes.
+[Project]
+
+    # Name of the experiment that is currently active
+    active_experiment = string()
+
+
+# The experiments section consists of multiple entries
+[Experiments]
+
+    [[__many__]]
+
+    # Name of the experiment 
+    name = string()
+
+    # Path to the subdirectory holding all of the subsequent files comprising
+    # the experiment.  (Their paths are all relative to this directory.)
+    save_dir = string()
+
+    # canvas layout file name
+    layout_file = string()
+
+    # saved code file name.  This is used to initialize the execution model.
+    code_file = string()
+
+    # File name of shadow context's stored data
+    local_context = string()
+    
+    # Name of the shared context in the project
+    shared_context = string()
+
+
+# The contexts section consists of multiple entries specifying the location
+# of each context and its name.
+[Contexts]
+
+    [[__many__]]
+
+    # The context's name
+    name = string()
+
+    # Path to the file storing the context's data
+    file = string()
+

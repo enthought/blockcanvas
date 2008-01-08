@@ -1,6 +1,11 @@
 from setuptools import setup, Extension, find_packages
 
 
+cobyla = Extension('enthought.block_canvas.cobyla2c.moduleCobyla',
+                   sources=['enthought/block_canvas/cobyla2c/cobyla.c',
+                            'enthought/block_canvas/cobyla2c/moduleCobyla.c'])
+
+
 greenlet = Extension(
     'enthought.greenlet.greenlet',
     sources = [
@@ -39,6 +44,7 @@ def etsdep(p, min, max=None, literal=False):
 
 
 # Declare our ETS project dependencies.
+CHACO = etsdep('Chaco', '3.0.0b1')
 DEVTOOLS = etsdep('DevTools', '3.0.0b1')
 ENABLE_WX = etsdep('Enable[wx]', '3.0.0b1')
 ENTHOUGHTBASE = etsdep('EnthoughtBase', '3.0.0b1')
@@ -69,12 +75,14 @@ setup(
         'nonets': [
             "docutils",
             "geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
+            'PIL',
             "numpy >=1.0.2",
             ],
         },
-    ext_modules = [greenlet],
+    ext_modules = [cobyla, greenlet],
     include_package_data = True,
     install_requires = [
+        CHACO,
         ENABLE_WX,
         ENTHOUGHTBASE,
         SCIMATH,

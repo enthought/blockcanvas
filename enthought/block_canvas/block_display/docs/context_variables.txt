@@ -1,0 +1,17 @@
+Adding context variables through the context-table
+---------------------------------------------------
+
+One can add variables to the context, of type int/float/array, through the 
+context-table; by selecting one of the variables in the table and either 
+clicking the 'Page Down' or 'Insert' keys. (These are the keys used in the 
+TabularEditor for 'append' and 'insert' operations, respectively.) Since the 
+index is not very important in the context-table, the new variable is added 
+directly to the context, and appended to the current list of block-variables.
+
+A UI pops up to add 'Name' and 'Value'. 'Name' should be a valid string; and 
+'Value' can be of the following formats:
+1. float
+2. int
+3. Using numpy functions:
+    a. numpy.ndarray(...) or numpy.arange(...) or numpy.array(...)
+    b. ndarray(...) or arange(...) or array(...); without package name.
