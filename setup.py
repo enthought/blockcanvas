@@ -1,4 +1,26 @@
-from setuptools import setup, find_packages
+from setuptools import setup, Extension, find_packages
+
+
+greenlet = Extension(
+    'enthought.greenlet.greenlet',
+    sources = [
+        'enthought/greenlet/greenlet.c',
+        ],
+    include_dirs = [
+        'enthought/greenlet',
+        ],
+    depends=[
+        'enthought/greenlet/greenlet.h',
+        'enthought/greenlet/slp_platformselect.h',
+        'enthought/greenlet/switch_amd64_unix.h',
+        'enthought/greenlet/switch_ppc_macosx.h',
+        'enthought/greenlet/switch_ppc_unix.h',
+        'enthought/greenlet/switch_s390_unix.h',
+        'enthought/greenlet/switch_sparc_sun_gcc.h',
+        'enthought/greenlet/switch_x86_msvc.h',
+        'enthought/greenlet/switch_x86_unix.h',
+        ]
+    )
 
 
 # Function to convert simple ETS project names and versions to a requirements
@@ -17,13 +39,14 @@ def etsdep(p, min, max=None, literal=False):
 
 
 # Declare our ETS project dependencies.
-ENABLE2_WX = etsdep('enthought.enable2[wx]', '2.0b1')
-PYFACE = etsdep('enthought.pyface', '2.0b1')
-TESTING = etsdep('enthought.testing', '2.0b1')
-TRAITS_UI = etsdep('enthought.traits[ui]', '2.0b1')
-TRAITSUIWX = etsdep('enthought.traits.ui.wx', '2.0b1')
-UNITS = etsdep('enthought.units', '2.0b1')
-UTIL_DISTRIBUTION = etsdep('enthought.util[distribution]', '2.0b1')
+DEVTOOLS = etsdep('DevTools', '3.0.0b1')
+ENABLE_WX = etsdep('Enable[wx]', '3.0.0b1')
+ENTHOUGHTBASE = etsdep('EnthoughtBase', '3.0.0b1')
+SCIMATH = etsdep('SciMath', '3.0.0b1')
+TRAITSBACKENDQT = etsdep('TraitsBackendQt', '3.0.0b1')
+TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
+TRAITSGUI = etsdep('TraitsGUI', '3.0.0b1')
+TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
 
 
 # Configure our setup.
@@ -32,41 +55,45 @@ setup(
     author_email = 'info@enthought.com',
     dependency_links = [
         'http://code.enthought.com/enstaller/eggs/source',
-        'http://code.enthought.com/enstaller/eggs/source/unstable',
         ],
     description = 'Numerical Modeling',
     extras_require = {
+        'qt': [
+            TRAITSBACKENDQT,
+            ],
+        'wx': [
+            TRAITSBACKENDWX,
+            ],
         # All non-ets dependencies should be in this extra to ensure users can
         # decide whether to require them or not.
         'nonets': [
             "docutils",
             "geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
-            "nose",
             "numpy >=1.0.2",
             ],
         },
+    ext_modules = [greenlet],
     include_package_data = True,
     install_requires = [
-        ENABLE2_WX,
-        PYFACE,
+        ENABLE_WX,
+        ENTHOUGHTBASE,
+        SCIMATH,
+        TRAITSGUI,
         TRAITS_UI,
-        TRAITSUIWX,
-        UNITS,
-        UTIL_DISTRIBUTION
         ],
     license = 'BSD',
-    name = 'enthought.numerical_modeling',
+    name = 'BlockCanvas',
     namespace_packages = [
         "enthought",
         ],
     packages = find_packages(exclude=['integrationtests']),
     tests_require = [
+        DEVTOOLS,
         'nose >= 0.9',
-        TESTING,
         ],
     test_suite = 'nose.collector',
     url = 'http://code.enthought.com/ets',
-    version = '3.0.0a1',
+    version = '3.0.0b1',
     zip_safe = False,
     )
 
