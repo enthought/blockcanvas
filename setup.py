@@ -1,10 +1,13 @@
 from setuptools import setup, Extension, find_packages
 
 
-cobyla = Extension('enthought.block_canvas.cobyla2c.moduleCobyla',
-                   sources=['enthought/block_canvas/cobyla2c/cobyla.c',
-                            'enthought/block_canvas/cobyla2c/moduleCobyla.c'])
-
+cobyla = Extension(
+    'enthought.block_canvas.cobyla2c.moduleCobyla',
+    sources=[
+        'enthought/block_canvas/cobyla2c/cobyla.c',
+        'enthought/block_canvas/cobyla2c/moduleCobyla.c'
+        ],
+    )
 
 greenlet = Extension(
     'enthought.greenlet.greenlet',
@@ -24,7 +27,7 @@ greenlet = Extension(
         'enthought/greenlet/switch_sparc_sun_gcc.h',
         'enthought/greenlet/switch_x86_msvc.h',
         'enthought/greenlet/switch_x86_unix.h',
-        ]
+        ],
     )
 
 
@@ -44,15 +47,16 @@ def etsdep(p, min, max=None, literal=False):
 
 
 # Declare our ETS project dependencies.
+APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.undo
 CHACO = etsdep('Chaco', '3.0.0b1')
-DEVTOOLS = etsdep('DevTools', '3.0.0b1')
-ENABLE_WX = etsdep('Enable[wx]', '3.0.0b1')
-ENTHOUGHTBASE = etsdep('EnthoughtBase', '3.0.0b1')
+DEVTOOLS = etsdep('DevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
+ENABLE = etsdep('Enable', '3.0.0b1')
+ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
+ENTHOUGHTBASE_DISTRIBUTION = etsdep('EnthoughtBase[distribution]', '3.0.0b1')
 SCIMATH = etsdep('SciMath', '3.0.0b1')
-TRAITSBACKENDQT = etsdep('TraitsBackendQt', '3.0.0b1')
+TRAITS = etsdep('Traits', '3.0.0b1')
 TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
 TRAITSGUI = etsdep('TraitsGUI', '3.0.0b1')
-TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
 
 
 # Configure our setup.
@@ -64,12 +68,12 @@ setup(
         ],
     description = 'Numerical Modeling',
     extras_require = {
-        'qt': [
-            TRAITSBACKENDQT,
+        'block_canvas': [
+            APPTOOLS,
+            DEVTOOLS,
+            ENABLE_TRAITS,
             ],
-        'wx': [
-            TRAITSBACKENDWX,
-            ],
+
         # All non-ets dependencies should be in this extra to ensure users can
         # decide whether to require them or not.
         'nonets': [
@@ -83,18 +87,22 @@ setup(
     include_package_data = True,
     install_requires = [
         CHACO,
-        ENABLE_WX,
-        ENTHOUGHTBASE,
+        ENABLE,
+        ENTHOUGHTBASE_DISTRIBUTION,
         SCIMATH,
+        TRAITS,
+        TRAITSBACKENDWX,
         TRAITSGUI,
-        TRAITS_UI,
         ],
     license = 'BSD',
     name = 'BlockCanvas',
     namespace_packages = [
         "enthought",
         ],
-    packages = find_packages(exclude=['integrationtests']),
+    packages = find_packages(exclude=[
+        'integrationtests',
+        'integrationtests.*',
+        ]),
     tests_require = [
         DEVTOOLS,
         'nose >= 0.9',
