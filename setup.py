@@ -50,7 +50,6 @@ def etsdep(p, min, max=None, literal=False):
 APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.undo
 CHACO = etsdep('Chaco', '3.0.0b1')
 DEVTOOLS = etsdep('DevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
-ENABLE = etsdep('Enable', '3.0.0b1')
 ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
 ENTHOUGHTBASE_DISTRIBUTION = etsdep('EnthoughtBase[distribution]', '3.0.0b1')
 SCIMATH = etsdep('SciMath', '3.0.0b1')
@@ -68,12 +67,6 @@ setup(
         ],
     description = 'Numerical Modeling',
     extras_require = {
-        'block_canvas': [
-            APPTOOLS,
-            DEVTOOLS,
-            ENABLE_TRAITS,
-            ],
-
         # All non-ets dependencies should be in this extra to ensure users can
         # decide whether to require them or not.
         'nonets': [
@@ -86,8 +79,10 @@ setup(
     ext_modules = [cobyla, greenlet],
     include_package_data = True,
     install_requires = [
+        APPTOOLS,
         CHACO,
-        ENABLE,
+        DEVTOOLS,
+        ENABLE_TRAITS,
         ENTHOUGHTBASE_DISTRIBUTION,
         SCIMATH,
         TRAITS,
