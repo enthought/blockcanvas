@@ -51,9 +51,9 @@ APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' 
 CHACO = etsdep('Chaco', '3.0.0b1')
 DEVTOOLS = etsdep('DevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
 ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
-ENTHOUGHTBASE_DISTRIBUTION = etsdep('EnthoughtBase[distribution]', '3.0.0b1')
-SCIMATH = etsdep('SciMath', '3.0.0b1')
-TRAITS = etsdep('Traits', '3.0.0b1')
+ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b1')
+SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b1')
+TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
 TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
 TRAITSGUI = etsdep('TraitsGUI', '3.0.0b1')
 
@@ -83,11 +83,11 @@ setup(
         CHACO,
         DEVTOOLS,
         ENABLE_TRAITS,
-        ENTHOUGHTBASE_DISTRIBUTION,
-        SCIMATH,
-        TRAITS,
+        ENTHOUGHTBASE_DISTRIBUTION_UI,
+        SCIMATH_TRAITS,
         TRAITSBACKENDWX,
         TRAITSGUI,
+        TRAITS_UI,
         ],
     license = 'BSD',
     name = 'BlockCanvas',
