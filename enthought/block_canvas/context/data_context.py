@@ -14,6 +14,15 @@ from i_context import (IContext, ICheckpointable, IListenableContext,
     IPersistableContext, IRestrictedContext)
 from items_modified_event import ItemsModifiedEvent, ItemsModified
 
+# This is copied from numerical_modeling.numeric_context.constants
+from numpy import ufunc
+from types import FunctionType, MethodType, ModuleType
+NonPickleable = [FunctionType, MethodType, ModuleType, ufunc]
+
+def cannot_pickle(type):
+    global NonPickleable
+    if type not in NonPickleable:
+        NonPickleable.append(type)
 
 class ListenableMixin(HasTraits):
     """ Mixin to provide much of the standard IListenableContext implementation.
@@ -186,9 +195,13 @@ class PersistableMixin(HasTraits):
             file_object = file_or_path
         else:
             should_close = True
-            file_object = file(file_or_path, 'wb')
+            file_object = open(file_or_path, 'wb')
 
         try:
+            # Filter out nonpickleable data from the context dictionary
+            for item in self.keys():
+                if isinstance(self[item], tuple(NonPickleable)):
+                    del self[item]
             sweet_pickle.dump(self, file_object, 1)
         finally:
             if should_close:
