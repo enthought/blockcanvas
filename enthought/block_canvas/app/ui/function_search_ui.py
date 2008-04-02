@@ -18,12 +18,10 @@
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, \
                                  List, Instance, cached_property
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
-                                    Handler, Label, Group, InstanceEditor
+                            Handler, Label, Group, InstanceEditor, TabularEditor
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 from enthought.pyface.api import error
 
-
-from enthought.traits.ui.wx.extra.tabular_editor import TabularEditor
 from enthought.pyface.image_resource import ImageResource
 
 # Block Canvas imports

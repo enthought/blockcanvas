@@ -6,8 +6,7 @@ from numpy import delete, typeDict
 
 # ETS imports
 from enthought.traits.api import TraitError, Any
-from enthought.traits.ui.api import TextEditor
-from enthought.traits.ui.wx.extra.tabular_editor import TabularAdapter, TabularEditor
+from enthought.traits.ui.api import TextEditor, TabularAdapter, TabularEditor
 
 
 #-------------------------------------------------------------------------------
