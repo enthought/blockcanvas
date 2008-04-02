@@ -8,7 +8,8 @@
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool
                                  
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
-                           Handler, Label, Group, TabularEditor, TabularAdapter
+                           Handler, Label, Group, TabularEditor
+from enthought.traits.ui.tabular_adapter import TabularAdapter
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 
 from enthought.pyface.image_resource import ImageResource
