@@ -9,9 +9,8 @@
 # Enthought library imports.
 from enthought.traits.api import List, Str
 from enthought.traits.ui.api import View, VGroup, HGroup, Item, \
-                                    Handler, Label, Group
+                                    Handler, Label, Group, ListStrEditor
 from enthought.traits.ui.menu import OKCancelButtons
-from enthought.traits.ui.wx.extra.list_str_editor import ListStrEditor
 
 # Local imports
 from enthought.block_canvas.app import scripting
