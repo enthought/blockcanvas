@@ -6,8 +6,8 @@ import re
 
 # Enthought library imports
 from enthought.pyface.message_dialog import MessageDialog
-from enthought.traits.api import (Instance, Str, on_trait_change)
-from enthought.undo.api import ScriptableObject, scriptable
+from enthought.traits.api import Instance, Str, HasTraits, on_trait_change
+from enthought.appscripting.api import scriptable
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
 
@@ -51,7 +51,7 @@ NEW_EXPR_ENTRY = MinimalFunctionInfo(name="Add New Expressions",
                                      module="Create a new expression block")
 
 
-class Application(ScriptableObject):
+class Application(HasTraits):
     """
     The Application object that ties together an
     execution model, the canvas, the function search window,
