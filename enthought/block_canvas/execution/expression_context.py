@@ -9,6 +9,7 @@ from enthought.numerical_modeling.workflow.block.api import Block
 from enthought.block_canvas.context.data_context import ListenableMixin, PersistableMixin, DataContext
 from enthought.block_canvas.context.i_context import IContext, IListenableContext, ICheckpointable, \
                                                      IPersistableContext
+from enthought.block_canvas.context.items_modified_event import ItemsModified
 
 class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
     """Provide a context wrapper that adds the ability to request expressions on variables
@@ -39,6 +40,8 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
         # to underlying
         if key in self._expressions:
             self._expressions.remove(key)
+            for dep in list(Block(key).inputs):
+                self._dependencies[dep].remove(key)
         else:
             del self.underlying_context[key]
 
@@ -67,7 +70,9 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
 
                 result = eval(key, eval_globals, self.underlying_context)
                 self._expressions[key] = result
-                self._dependencies[key] = list(Block(key).inputs)
+                for dep in Block(key).inputs:
+                    self._dependencies.setdefault(dep, list())
+                    self._dependencies[dep].append(key)
                 return result
             except:
                 return None
@@ -90,7 +95,11 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
 
     @on_trait_change('underlying_context:items_modified')
     def _underlying_context_items_modifed(self, event):
-        for event_list in (event.added, event.modified, event.removed):
+        new_event = ItemsModified(context=self,
+                                  added=[x for x in event.added],
+                                  removed=[x for x in event.removed],
+                                  modified=[x for x in event.modified])
+        for event_list in (new_event.added, new_event.modified, new_event.removed):
             for item in event_list:
                 if item in self._dependencies.keys():
                     for dep_item in self._dependencies[item]:
@@ -98,7 +107,7 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
                             event_list.append(dep_item)
                         # Remove the cached value for the item
                         self._expressions[dep_item] = None
-        self.items_modified = event
+        self.items_modified = new_event
         return
 
     def _underlying_context_changed(self):
