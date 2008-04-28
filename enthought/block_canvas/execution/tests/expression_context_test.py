@@ -13,6 +13,7 @@ class ExpressionContextTest(unittest.TestCase):
 
     def test_events(self):
         self.last_event = None
+        self.event_count = 0
         d = DataContext()
         d['a'] = 10
         d['b'] = 20
@@ -24,6 +25,7 @@ class ExpressionContextTest(unittest.TestCase):
         assert 'a*b' in self.last_event.modified
 
     def _event_handler(self, event):
+        self.event_count += 1
         self.last_event = event
                          
                          

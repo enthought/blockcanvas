@@ -22,7 +22,7 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
 
     # The underlying context which contains variables
     # From which the expressions are calculated.
-    underlying_context = Instance(IListenableContext, factory=DataContext, adapt='yes')
+    underlying_context = Instance(IListenableContext)
 
     # The currently evaluated expressions, mapped to their last cached value.  None means
     # that the value is not cached.
@@ -106,7 +106,7 @@ class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
                         if dep_item not in event_list:
                             event_list.append(dep_item)
                         # Remove the cached value for the item
-                        self._expressions[dep_item] = None
+                self._expressions[item] = None
         self.items_modified = new_event
         return
 
