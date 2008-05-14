@@ -5,7 +5,7 @@
 from enthought.traits.api import (HasTraits, Instance, Str, on_trait_change)
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
-from enthought.undo.api import scriptable, ScriptableObject
+from enthought.undo.api import scriptable
 
 # Block Canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
@@ -19,7 +19,7 @@ from enthought.block_canvas.app import scripting
 from enthought.block_canvas.app.project import Project
 from enthought.block_canvas.app.experiment import Experiment
 
-class Application(ScriptableObject):
+class Application(HasTraits):
     """ The Application object that ties together an execution model, 
         the canvas, the function search window, and the shell.
     """
