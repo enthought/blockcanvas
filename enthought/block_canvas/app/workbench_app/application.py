@@ -5,7 +5,7 @@
 from enthought.traits.api import (HasTraits, Instance, Str, on_trait_change)
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
-from enthought.undo.api import scriptable
+from enthought.appscripting.api import scriptable
 
 # Block Canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
