@@ -28,6 +28,11 @@ from enthought.numerical_modeling.util.uuid import UUID, uuid4
 #  - Expose functions that blocks use? (e.g. simply by name)
 ###############################################################################
 
+class CompositeException(Exception):
+    """A container to consolidate multiple exceptions"""
+    def __init__(self, exceptions):
+        self.exceptions = exceptions
+
 class Block(HasTraits):
     'A block of code that can be inspected, manipulated, and executed.'
 
@@ -227,19 +232,41 @@ class Block(HasTraits):
         return isinstance(self.ast, Stmt) and len(self.ast.nodes) == 0
 
             
-    def execute(self, local_context, global_context = {}):
+    def execute(self, local_context, global_context = {}, continue_on_errors=False):
+        """Execute the block in local_context, optionally specifying a global
+        context.  If continue_on_errors is specified, continue executing code after
+        an exception is thrown and throw the exceptions at the end of execution.
+        if more than one exception was thrown, combine them in a CompositeException"""
         # To get tracebacks to show the right filename for any line in any
         # sub-block, we need each sub-block to compile its own '_code' since a
         # code object only keeps one filename. This is slow, so we give the
         # user the option 'no_filenames_in_tracebacks' to gain speed but lose
         # readability of tracebacks.
-        if len(self.sub_blocks) == 0 or self.no_filenames_in_tracebacks:
+
+        
+        if (len(self.sub_blocks) == 0 or self.no_filenames_in_tracebacks) and \
+               not continue_on_errors:
             if self.filename:
                 local_context['__file__'] = self.filename
             exec self._code in global_context, local_context
         else:
-            for block in self.sub_blocks:
-                block.execute(local_context, global_context)
+            if continue_on_errors:
+                exceptions = []
+                for block in self.sub_blocks:
+                    try:
+                        block.execute(local_context, global_context)
+                    except Exception, e:
+                        exceptions.append(e)
+                if exceptions:
+                    if len(exceptions)>1:
+                        raise CompositeException(exceptions)
+                    else:
+                        raise exceptions[0]
+
+            else:
+                for block in self.sub_blocks:
+                    block.execute(local_context, global_context)
+        return
     
     def invalidate_cache(self):
         """ Someone modified the block's internal ast. This method provides and
