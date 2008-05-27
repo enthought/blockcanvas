@@ -4,6 +4,7 @@ import compiler
 from compiler.ast import Module, Node, Pass, Stmt, Function, Discard
 from copy import copy
 from cStringIO import StringIO
+from traceback import format_exc
 
 from enthought.traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
                                   Instance, List, Property, Str, Trait)
@@ -256,6 +257,8 @@ class Block(HasTraits):
                     try:
                         block.execute(local_context, global_context)
                     except Exception, e:
+                        # save the current traceback
+                        e.traceback = format_exc()
                         exceptions.append(e)
                 if exceptions:
                     if len(exceptions)>1:
