@@ -337,6 +337,10 @@ class UnparseCompilerAst:
     def _NoneType(self, t):
         self._write("None")
         
+    def _Not(self, t):
+        self._write('not ')
+        self._dispatch(t.expr)
+        
     def _Or(self, t):
         for i, node in enumerate(t.nodes):
             self._dispatch(node)
