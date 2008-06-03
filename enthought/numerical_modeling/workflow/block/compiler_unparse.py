@@ -198,7 +198,7 @@ class UnparseCompilerAst:
     def _Compare(self, t):
         self._dispatch(t.expr)
         for op, expr in t.ops:
-            self._write(op)
+            self._write(" " + op + " ")
             self._dispatch(expr)
 
     def _Const(self, t):
@@ -295,6 +295,16 @@ class UnparseCompilerAst:
             self._dispatch(t.else_)
             self._leave()
             self._write("\n")
+            
+    def _IfExp(self, t):
+        self._dispatch(t.then)
+        self._write(" if ")
+        self._dispatch(t.test)
+
+        if t.else_ is not None:
+            self._write(" else (")
+            self._dispatch(t.else_)
+            self._write(")")
 
     def _Import(self, t):
         """ Handle "import xyz.foo".
