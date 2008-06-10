@@ -1,6 +1,6 @@
-from wx import SearchCtrl, EVT_TEXT
+from wx import SearchCtrl, EVT_TEXT, EVT_SEARCHCTRL_CANCEL_BTN
 
-from enthought.traits.api import Str
+from enthought.traits.api import Str, Bool
 from enthought.traits.ui.wx.editor import Editor
 from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
 
@@ -13,9 +13,10 @@ class _SearchEditor(Editor):
 
         self.control = SearchCtrl(parent, -1, value=self.value)
         self.control.SetDescriptiveText(self.factory.text)
-        self.control.ShowSearchButton(True)
-        self.control.ShowCancelButton(False)
+        self.control.ShowSearchButton(self.factory.searchButton)
+        self.control.ShowCancelButton(self.factory.cancelButton)
         EVT_TEXT(parent, self.control.GetId(), self.update_object)
+        EVT_SEARCHCTRL_CANCEL_BTN(parent, self.control.GetId(), self.clear_text)
 
     #---------------------------------------------------------------------------
     #  Handles the user entering input data in the edit control:
@@ -27,6 +28,14 @@ class _SearchEditor(Editor):
 
         if not self._no_update:
             self.value = self.control.GetValue()
+
+    def clear_text(self, event):
+        """ Handles the user pressing the cancel search button.
+        """
+        
+        if not self._no_update:
+            self.control.SetValue("")
+            self.value = ""
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
@@ -52,3 +61,9 @@ class SearchEditor(BasicEditorFactory):
 
     # The descriptive text for the widget
     text = Str("Search")
+
+    # Whether to show a search button on the widget
+    searchButton = Bool(True)
+
+    # Whether to show a cancel button on the widget
+    cancelButton = Bool(False)
