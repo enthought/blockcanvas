@@ -2,7 +2,8 @@
 # Standard library imports.
 import logging
 import unittest
-from enthought.util.numerix import arange
+
+from numpy import arange
 
 from enthought.traits.api import Array, HasTraits
 
