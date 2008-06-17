@@ -16,7 +16,7 @@
 
 import scipy as scipy_base
 
-from enthought.enable.traits.api import RGBAColor
+from enthought.enable2.traits.api import RGBAColor
 
 from enthought.traits.api \
     import HasTraits, HasPrivateTraits, Event, List, Str, Instance, Property, \
