@@ -212,16 +212,14 @@ class BlockApplicationViewHandler(Controller):
 
     def _on_open(self, info):
         """ Menu action to load a script from file.  """
-        print '_on_open(%r)' % info
         file_dialog = FileDialog(action='open',
                                  default_directory=info.object.file_directory,
                                  wildcard='All files (*.*)|*.*')
-        print 'file_dialog'
         file_dialog.open()
-        print 'open'
 
         if file_dialog.path != '':
             info.object.load_code_from_file(file_dialog.path)
+            
         return
 
     def _on_save(self, info):

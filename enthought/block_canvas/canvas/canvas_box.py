@@ -12,6 +12,7 @@ from enable_button_group import EnableButtonGroup, EnableTopRightButtonGroup
 from enable_glyph_button import EnableGlyphButton
 from io_field import IOField
 from selectable_component_mixin import SelectableComponentMixin
+from helper import get_scale
 
 class CanvasBox(Container, SelectableComponentMixin):
     """ Implements behavior for a selectable, movable box on
@@ -528,23 +529,12 @@ class CanvasBox(Container, SelectableComponentMixin):
         gc.set_font(self._style.title_font)
 
         # Show text at the same scale as graphics context
-        scale = self._get_scale(gc)
+        scale = get_scale(gc)
         pos = (scale * (self.x + self._style.corner_radius + self._style.title_x_offset),
                scale * (self.y2 - self._style.sash_height + self._style.title_y_offset))
         gc.show_text(self.label, pos)
 
         gc.restore_state()
-
-    def _get_scale(self, gc):
-        """  Get the scaling from the ctm.
-        """
-        ctm = gc.get_ctm()
-        if hasattr(ctm, "scale"):
-            return gc.get_ctm().scale()
-        elif hasattr(gc, "get_ctm_scale"):
-            return gc.get_ctm_scale()
-        else:
-            raise RuntimeError("Unable to get scale from GC.")
 
     #--- Private methods -------------------------------------------------
 

@@ -1,3 +1,6 @@
+# Local imports
+from helper import get_scale
+
 # Enthought Library Imports
 from enthought.enable2.api import Component
 from enthought.enable2.colors import ColorTrait
@@ -150,7 +153,7 @@ class EditField(Component):
         gc.save_state()
         
         self.set_font(gc)
-        scale = self.get_scale(gc)
+        scale = get_scale(gc)
         x = scale * (self.x + self.offset)
         y = scale * self.y
         gc.show_text_at_point(self.text, x, y)
@@ -171,19 +174,6 @@ class EditField(Component):
     def set_font(self, gc):
         gc.set_font(self.font)
         gc.set_fill_color(self.text_color)
-
-
-    def get_scale(self, gc):
-        """ Return the scale on the ctm if exists.  
-            Otherwise, raise RuntimeError.
-        """
-        ctm = gc.get_ctm()
-        if hasattr(ctm, "scale"):
-            return gc.get_ctm().scale()
-        elif hasattr(gc, "get_ctm_scale"):
-            return gc.get_ctm_scale()
-        else:
-            raise RuntimeError("Unable to get scale from GC.")
 
     #---------------------------------------------------------------------
     # TextField interface

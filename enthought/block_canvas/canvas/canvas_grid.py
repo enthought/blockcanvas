@@ -75,20 +75,25 @@ class CanvasGrid(AbstractOverlay):
                    that it is always behind everything else.
         """
 
-        gc.save_state()
-
-        # Style setup.
-        gc.set_line_dash(self.style.line_dash)
-        gc.set_stroke_color(self.style.line_color)
-        gc.set_line_width(self.style.line_width)
-        gc.set_antialias(self.style.antialias)
-
-        # Draw lines.
-        gc.line_set(self._vertical_start,self._vertical_end)
-        gc.line_set(self._horizontal_start,self._horizontal_end)
-        gc.stroke_path()
-
-        gc.restore_state()
+        nv = len(self._vertical_start)
+        nh = len(self._horizontal_start)
+        if (nv > 0) or (nh > 0):
+            gc.save_state()
+    
+            # Style setup.
+            gc.set_line_dash(self.style.line_dash)
+            gc.set_stroke_color(self.style.line_color)
+            gc.set_line_width(self.style.line_width)
+            gc.set_antialias(self.style.antialias)
+    
+            # Draw lines.
+            if nv > 0:
+                gc.line_set(self._vertical_start,self._vertical_end)
+            if nh > 0:
+                gc.line_set(self._horizontal_start,self._horizontal_end)
+            gc.stroke_path()
+    
+            gc.restore_state()
 
 
     ### trait handlers #######################################################

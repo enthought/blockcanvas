@@ -13,6 +13,7 @@ from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
 
 # Block canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
+from enthought.block_canvas.block_display.execution_model import ExecutionModel
 from enthought.block_canvas.context.api import DataContext, MultiContext
 from enthought.block_canvas.context.ui.context_variable import ContextVariableList
 from enthought.block_canvas.execution.executing_context import ExecutingContext
@@ -197,10 +198,11 @@ class Application(HasTraits):
     
     ### load/save python scripts #########################################    
 
-    def load_script(self, filename):
-        pass
+    def load_code_from_file(self, filename):
+        self.project.active_experiment.exec_model = \
+            ExecutionModel.from_file(filename)
 
-    def save_script(self, filename=""):
+    def save_code_to_file(self, filename=""):
         pass
 
     def run_custom_ui(self, filename, live=True):
@@ -437,7 +439,7 @@ class Application(HasTraits):
         canvas_box = controller._nodes[item]        
         controller.canvas.selection_manager.select_item(canvas_box)
 
-    @on_trait_change('context_viewer:execute_for_names')
+    @on_trait_change('context_viewer:execute_for_names', post_init=True)
     def execute_for_names(self, names=None):
         """ When the user clicks the "Execute" menu item on the context UI,
         actually execute the code.
@@ -483,15 +485,15 @@ class Application(HasTraits):
         """
         self.execute_for_names()
 
-    @on_trait_change('project.active_experiment.exec_model.statements',
-                     'project.active_experiment.exec_model.statements_items')
-    def execute_for_statements(self, object, name, old, new):
+    @on_trait_change('project.active_experiment.exec_model.statements[]',
+                     post_init=True)
+    def execute_for_statements(self):
         """ When the list of statements changes, re-execute all of the code.
         """
         self.execute_for_names()
 
-    @on_trait_change('context_viewer:delete_names')
-    def delete_names(self, object, name, old, new):
+    @on_trait_change('context_viewer:delete_names', post_init=True)
+    def delete_names(self, new):
         """ When the user clicks the "Delete" menu item on the context UI,
         actually perform the deletion.
         """
@@ -533,7 +535,8 @@ class Application(HasTraits):
     ### Trait handlers ###################################################    
 
     # fixme: This should go away as the API becomes well defined.
-    @on_trait_change('function_search', 'function_library.functions+')
+    @on_trait_change('function_search, function_library.functions+', 
+                     post_init=True)
     def _update_search_functions_from_library(self):
         """ Ensure that the functions searched in function search object
             are always in sync with the functions available in the function
@@ -551,7 +554,7 @@ class Application(HasTraits):
         """
         self.context_viewer.update_variables()
 
-    @on_trait_change('project.active_experiment')
+    @on_trait_change('project.active_experiment', post_init=True)
     def experiment_changed(self, object, name, old, new):
         if self.context_viewer is None:
             return
