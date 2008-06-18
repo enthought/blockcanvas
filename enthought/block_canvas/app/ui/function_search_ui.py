@@ -50,7 +50,7 @@ from enthought.block_canvas.app import scripting
 # A global object to represent a new function.  We're cheating
 # here a bit and putting labels in the correct "columns" (name,
 # module) to get the UI that we want.  The UI classes below have
-# some code to special cases this class.
+# some code to special case this class.
 NEW_FUNCTION_ENTRY = MinimalFunctionInfo(name="Add New Function",
                                          module="Create a new function")
 

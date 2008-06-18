@@ -31,7 +31,7 @@ class AppFunctionSearchPreferencesUIHandler(Handler):
     ##########################################################################
 
     # List of modules to be searched.
-    # We don't actually want the searh to update its library until we've
+    # We don't actually want the search to update its library until we've
     # hit "OK", so we keep a shadow list here to prevent that from 
     # happening.
     modules = List(Str)

@@ -599,6 +599,7 @@ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.DEBUG)  
 
     library = FunctionLibrary(modules=['os'])
+    search = FunctionSearch(all_functions=library.functions)
     app = Application(code=code, data_context=DataContext(name='data'),
-        function_library=library)
+        function_library=library, function_search=search)
     app.configure_traits()
