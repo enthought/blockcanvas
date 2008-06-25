@@ -7,8 +7,8 @@ from copy import copy
 import logging, numpy
 
 # Enthought imports
-from enthought.numerical_modeling.workflow.block.api import Block
-from enthought.numerical_modeling.workflow.block.analysis import walk
+from enthought.blocks.api import Block
+from enthought.blocks.analysis import walk
 
 # Global logger
 logger = logging.getLogger(__name__)

@@ -5,7 +5,7 @@ raise nose.SkipTest("CodeBlock is deprecated")
 import unittest
 
 from enthought.block_canvas.block_display.code_block import CodeBlock
-from enthought.numerical_modeling.workflow.block.api import Block, unparse
+from enthought.blocks.api import Block, unparse
 
 class CodeBlockTestCase(unittest.TestCase):
     

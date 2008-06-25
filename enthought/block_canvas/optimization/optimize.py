@@ -3,7 +3,7 @@ from numpy import zeros, arange
 # Enthought library imports
 from enthought.traits.api import HasTraits, Instance, Str, Int, Float, List
 from enthought.traits.ui.api import View, Item, TableEditor
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 from enthought.block_canvas.context.parametric_context import ShadowContext
 from enthought.block_canvas.context.parametric_context import ParametricContext
 

@@ -11,8 +11,8 @@ from enthought.block_canvas.function_tools.python_function_info import PythonFun
 from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
 from enthought.block_canvas.function_tools.function_call import FunctionCall
 from enthought.block_canvas.function_tools.general_expression import GeneralExpression
-from enthought.numerical_modeling.workflow.block.analysis import walk, is_const
-from enthought.numerical_modeling.workflow.block.api import (Block, unparse)
+from enthought.blocks.analysis import walk, is_const
+from enthought.blocks.api import (Block, unparse)
 from enthought.traits.api import (Any, cached_property, HasTraits, List, Property, implements)
 from enthought.util import graph
 

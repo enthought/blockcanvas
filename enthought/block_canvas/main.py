@@ -14,7 +14,7 @@ except ImportError:
 import os
 
 # Enthought library imports
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 from enthought.etsconfig.api import ETSConfig
 from enthought.logger.api import add_log_queue_handler, create_log_file_handler
 

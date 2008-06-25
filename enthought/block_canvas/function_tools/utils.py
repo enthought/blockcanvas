@@ -6,7 +6,7 @@ import os, sys
 
 # Enthought library imports
 from enthought.etsconfig.api import ETSConfig
-from enthought.numerical_modeling.workflow.block.analysis import walk
+from enthought.blocks.analysis import walk
 
 # Global assignment
 USER_MODULE_NAME = 'user_functions'

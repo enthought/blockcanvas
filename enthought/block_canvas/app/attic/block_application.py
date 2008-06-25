@@ -22,7 +22,7 @@ from enthought.traits.ui.api \
 from enthought.pyface.api \
     import DirectoryDialog
 
-from enthought.numerical_modeling.workflow.block.api \
+from enthought.blocks.api \
     import Block, unparse
         
 from enthought.block_canvas.block_display.block_unit \

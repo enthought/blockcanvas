@@ -1,7 +1,7 @@
 from nose.tools import assert_raises
 
-from enthought.numerical_modeling.workflow.block.analysis import walk
-from enthought.numerical_modeling.workflow.block.api import parse, unparse
+from enthought.blocks.analysis import walk
+from enthought.blocks.api import parse, unparse
 from enthought.traits.api import push_exception_handler, pop_exception_handler
 
 # Module-level setup and teardown.

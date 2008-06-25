@@ -9,7 +9,7 @@ raise nose.SkipTest("BlockApplication is deprecated")
 import os, unittest, tempfile
 
 # ETS library imports
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 
 # Local imports
 from enthought.block_canvas.app.utils import create_unique_project_name

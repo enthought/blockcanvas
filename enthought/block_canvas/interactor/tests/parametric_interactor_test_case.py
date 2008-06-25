@@ -10,7 +10,7 @@ import nose
 raise nose.SkipTest("ParametricInteractor not implemented")
 
 # ETS imports
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 
 # Local imports
 from enthought.block_canvas.context.api import DataContext, MultiContext

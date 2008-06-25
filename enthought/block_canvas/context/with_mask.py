@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
     # 2. Usage with block and context:
     from numpy import arange, zeros
-    from enthought.numerical_modeling.workflow.block.api import Block
+    from enthought.blocks.api import Block
     dc = DataContext(name='dc')
     context = ParametricContext(dc)
     dc['depth'] = arange(0.,10000., 1000.)

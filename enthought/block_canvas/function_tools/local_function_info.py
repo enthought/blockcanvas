@@ -4,7 +4,7 @@ import traceback
 import compiler
 
 # Enthought library imports
-from enthought.numerical_modeling.workflow.block.api import unparse
+from enthought.blocks.api import unparse
 from enthought.traits.api import Str
 
 

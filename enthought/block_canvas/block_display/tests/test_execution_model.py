@@ -3,7 +3,7 @@ import unittest
 
 # ETS imports
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
-from enthought.numerical_modeling.workflow.block.api import Block, unparse
+from enthought.blocks.api import Block, unparse
 from enthought.block_canvas.function_tools.function_call import FunctionCall
 from enthought.block_canvas.function_tools.function_info import find_functions
 

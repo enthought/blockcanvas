@@ -10,7 +10,7 @@ from numpy import arange, zeros
 # ETS imports
 from enthought.block_canvas.context.with_mask import Mask
 from enthought.block_canvas.context.data_context import DataContext
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 
 
 class WithMaskTestCase(unittest.TestCase):

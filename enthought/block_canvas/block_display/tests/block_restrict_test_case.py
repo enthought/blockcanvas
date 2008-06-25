@@ -1,7 +1,7 @@
 import unittest
 
 # ETS imports
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 
 # application imports
 from enthought.block_canvas.context.api import DataContext

@@ -4,8 +4,8 @@
 import warnings
 
 # Enthought Library imports
-from enthought.numerical_modeling.workflow.block.analysis import walk
-from enthought.numerical_modeling.workflow.block.api import unparse
+from enthought.blocks.analysis import walk
+from enthought.blocks.api import unparse
 
 # Local imports
 import _pkgutil

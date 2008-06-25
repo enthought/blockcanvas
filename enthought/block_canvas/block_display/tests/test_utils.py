@@ -2,7 +2,7 @@
 import unittest
 
 # Enthought imports
-from enthought.numerical_modeling.workflow.block.api import Block, unparse
+from enthought.blocks.api import Block, unparse
 
 # Local imports
 from enthought.block_canvas.block_display.utils import *

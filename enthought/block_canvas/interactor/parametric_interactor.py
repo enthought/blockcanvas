@@ -179,7 +179,7 @@ class ParametricInteractor(SimpleInteractor):
 
 # Test
 if __name__ == '__main__':
-    from enthought.numerical_modeling.workflow.block.api import Block
+    from enthought.blocks.api import Block
     from enthought.block_canvas.context.api import DataContext, MultiContext
 #    from context.api import GeoContext
 #    from enthought.numerical_modeling.units.api import UnitArray

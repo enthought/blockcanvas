@@ -5,7 +5,7 @@ from UserDict import DictMixin
 from enthought.traits.api import implements, Str, Dict, Any, List, Instance, on_trait_change
 
 # Block Canvas imports
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 from enthought.block_canvas.context.data_context import ListenableMixin, PersistableMixin, DataContext
 from enthought.block_canvas.context.i_context import IContext, IListenableContext, ICheckpointable, \
                                                      IPersistableContext

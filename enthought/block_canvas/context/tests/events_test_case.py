@@ -102,7 +102,7 @@ class Events2TestCase(unittest.TestCase):
         
     def test_block_events(self):
         import numpy
-        from enthought.numerical_modeling.workflow.block.api import Block
+        from enthought.blocks.api import Block
         
         context = DataContext(name="data")
         context.on_trait_change(self.event_listener, 'items_modified')
