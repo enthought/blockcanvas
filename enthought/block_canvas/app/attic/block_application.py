@@ -31,7 +31,7 @@ from enthought.block_canvas.block_display.block_unit \
 from enthought.contexts.data_context \
     import DataContext
     
-from enthought.contexts.editors.context_shell_editor \
+from enthought.block_canvas.context.editors.context_shell_editor \
     import ContextShellEditor
     
 from enthought.block_canvas.function_tools.handled_function_search \

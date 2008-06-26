@@ -21,7 +21,7 @@ from enthought.traits.ui.wx.editor import Editor
 from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
 
 # App imports
-from enthought.contexts.shell.context_shell import ContextPythonShell
+from enthought.block_canvas.context.shell.context_shell import ContextPythonShell
 
 #-------------------------------------------------------------------------------
 #  '_ContextShellEditor' class:
