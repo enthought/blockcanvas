@@ -36,7 +36,7 @@ def set_var_value(value):
 
     Examples
     --------
-    >>> from enthought.contexts.ui.context_variable import set_var_value
+    >>> from enthought.block_canvas.context.ui.context_variable import set_var_value
     >>> set_var_value('') is None
     True
     >>> set_var_value('None') is None

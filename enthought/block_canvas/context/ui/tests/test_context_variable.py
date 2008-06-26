@@ -2,7 +2,7 @@ from nose.tools import assert_raises
 
 from enthought.traits.api import TraitError, Undefined
 
-from enthought.contexts.ui.context_variable import ContextVariable
+from enthought.block_canvas.context.ui.context_variable import ContextVariable
 
 
 def test_context_variable_getitem():
