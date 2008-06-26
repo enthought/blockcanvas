@@ -9,8 +9,8 @@ from enthought.appscripting.api import scriptable
 
 # Block Canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
-from enthought.contexts.ui.context_variable import ContextVariableList
-from enthought.contexts.ui.context_variable_ui import context_variables_view
+from enthought.block_canvas.context.ui.context_variable import ContextVariableList
+from enthought.block_canvas.context.ui.context_variable_ui import context_variables_view
 from enthought.block_canvas.function_tools.function_search import FunctionSearch
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
 from enthought.block_canvas.ui.source_editor import MarkableSourceEditor

@@ -15,7 +15,7 @@ from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
 from enthought.block_canvas.block_display.block_editor import BlockEditor
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
 from enthought.contexts.api import DataContext, MultiContext
-from enthought.contexts.ui.context_variable import ContextVariableList
+from enthought.block_canvas.context.ui.context_variable import ContextVariableList
 from enthought.block_canvas.execution.executing_context import ExecutingContext
 from enthought.block_canvas.function_tools.function_search import FunctionSearch
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
