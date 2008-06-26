@@ -7,10 +7,10 @@ from enthought.units import convert
 from enthought.units.length import feet, fathom, meters, yard
 
 # Geo imports
-from enthought.block_canvas.context.adapted_data_context import AdaptedDataContext
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.api import MaskingAdapter
-from enthought.block_canvas.context.adapter.unit_conversion_adapter import UnitConversionAdapter
+from enthought.contexts.adapted_data_context import AdaptedDataContext
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.api import MaskingAdapter
+from enthought.contexts.adapter.unit_conversion_adapter import UnitConversionAdapter
 
 from enthought.numerical_modeling.units.api import UnitArray
 

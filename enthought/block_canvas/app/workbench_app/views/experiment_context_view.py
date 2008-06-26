@@ -6,7 +6,7 @@ from enthought.pyface.workbench.api import View as WorkbenchView
 
 # Block Canvas imports
 from enthought.block_canvas.app.project import Project
-from enthought.block_canvas.context.ui.context_variable import ContextVariableList
+from enthought.contexts.ui.context_variable import ContextVariableList
 
 # Local imports
 from traits_ui_view import TraitsUIView

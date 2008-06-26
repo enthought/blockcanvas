@@ -2,8 +2,8 @@
 import unittest
 
 # Geo library imports
-from enthought.block_canvas.context.api import MultiContext, DataContext
-from enthought.block_canvas.context.shell.global_and_local_interpreter import \
+from enthought.contexts.api import MultiContext, DataContext
+from enthought.contexts.shell.global_and_local_interpreter import \
                                         GlobalAndLocalInterpreter
 
 class GlobalAndLocalInterpreterTestCase(unittest.TestCase):

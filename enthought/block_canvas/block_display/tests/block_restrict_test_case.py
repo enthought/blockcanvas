@@ -4,7 +4,7 @@ import unittest
 from enthought.blocks.api import Block
 
 # application imports
-from enthought.block_canvas.context.api import DataContext
+from enthought.contexts.api import DataContext
 
 class BlockRestrictestCase(unittest.TestCase):
     """ Block restriction is tested in the numerical_modeling code, these

@@ -105,10 +105,10 @@ from numpy import ndarray
 import sys
 
 # Enthought lib imports
-from enthought.block_canvas.context.i_context import ICheckpointable
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.multi_context import MultiContext
-from enthought.block_canvas.context.adapted_data_context import AdaptedDataContext
+from enthought.contexts.i_context import ICheckpointable
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.multi_context import MultiContext
+from enthought.contexts.adapted_data_context import AdaptedDataContext
 from enthought.traits.protocols.api import adapt
 
 # Local imports
@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
     code =  'from __future__ import with_statement\n'\
            'from numpy import zeros\n'\
-           'from enthought.block_canvas.context.with_mask import Mask\n'\
+           'from enthought.contexts.with_mask import Mask\n'\
            'with Mask((depth < 4000.0) & (depth > 1000.0)):vp=1.5 ; vs=1.0'
 
 ##     # Expanded form of with statement taken from PEP 343. This is just for testing
@@ -209,7 +209,7 @@ if __name__ == '__main__':
 ##              'array_len = depth.shape\n'\
 ##              'vp = zeros(array_len)\n'\
 ##              'vs = zeros(array_len)\n'\
-##              'from enthought.block_canvas.context.with_mask import Mask\n'\
+##              'from enthought.contexts.with_mask import Mask\n'\
 ##              'mgr = Mask((depth < 4000.0) & (depth > 1000.0))\n'\
 ##              'exit_code = mgr.__exit__\n'\
 ##              'mgr.__enter__()\n'\

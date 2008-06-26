@@ -2,7 +2,7 @@
     primary purpose is to set up/call actions for menu items.
 
 """
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 
 # Standard imports
 import os, logging

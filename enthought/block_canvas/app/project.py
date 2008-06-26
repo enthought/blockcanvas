@@ -11,9 +11,9 @@ from enthought.traits.api import (Directory, HasTraits, Instance, Int, List,
         on_trait_change, Property, Trait)
 
 # Block canvas imports
-from enthought.block_canvas.context.api import IListenableContext
+from enthought.contexts.api import IListenableContext
 from enthought.block_canvas.app import scripting
-from enthought.block_canvas.context.api import DataContext
+from enthought.contexts.api import DataContext
 
 # Local relative imports
 from experiment import Experiment

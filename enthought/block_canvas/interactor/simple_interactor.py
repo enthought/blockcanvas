@@ -10,7 +10,7 @@ from enthought.traits.api import (Any, Dict, HasTraits, Instance, List,
 from enthought.traits.ui.api import View, Item, Group, TextEditor
 
 # Block Canvas imports
-from enthought.block_canvas.context.api import IListenableContext
+from enthought.contexts.api import IListenableContext
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
 
 # Local imports
@@ -101,7 +101,7 @@ if __name__ == "__main__":
            "f = add(d,e)"
 
     # Experiment setup.
-    from enthought.block_canvas.context.api import DataContext
+    from enthought.contexts.api import DataContext
     from enthought.block_canvas.app.experiment import Experiment
     context = DataContext(name='Data')
     context['a'] = 1

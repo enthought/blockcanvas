@@ -6,10 +6,10 @@ from enthought.traits.api import implements, Str, Dict, Any, List, Instance, on_
 
 # Block Canvas imports
 from enthought.blocks.api import Block
-from enthought.block_canvas.context.data_context import ListenableMixin, PersistableMixin, DataContext
-from enthought.block_canvas.context.i_context import IContext, IListenableContext, ICheckpointable, \
+from enthought.contexts.data_context import ListenableMixin, PersistableMixin, DataContext
+from enthought.contexts.i_context import IContext, IListenableContext, ICheckpointable, \
                                                      IPersistableContext
-from enthought.block_canvas.context.items_modified_event import ItemsModified
+from enthought.contexts.items_modified_event import ItemsModified
 
 class ExpressionContext(ListenableMixin, PersistableMixin, DictMixin):
     """Provide a context wrapper that adds the ability to request expressions on variables

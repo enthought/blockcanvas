@@ -10,7 +10,7 @@ import enthought.traits.ui.api as tui
 from enthought.traits.protocols.api import AdaptationFailure, adapt
 from enthought.traits.ui.menu import OKCancelButtons
 
-from enthought.block_canvas.context.api import (DataContext, IContext,
+from enthought.contexts.api import (DataContext, IContext,
     IListenableContext)
 from enthought.block_canvas.interactor.editors import array_eval_editor
 from enthought.block_canvas.app.utils import regex_from_str
@@ -36,7 +36,7 @@ def set_var_value(value):
 
     Examples
     --------
-    >>> from enthought.block_canvas.context.ui.context_variable import set_var_value
+    >>> from enthought.contexts.ui.context_variable import set_var_value
     >>> set_var_value('') is None
     True
     >>> set_var_value('None') is None
@@ -407,7 +407,7 @@ class ContextVariableList(HasTraits):
 
 if __name__ == '__main__':
     import pprint
-    from enthought.block_canvas.context.api import DataContext
+    from enthought.contexts.api import DataContext
     from context_variable_ui import context_variables_view
 
     dc = DataContext()

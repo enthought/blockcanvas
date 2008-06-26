@@ -1,7 +1,7 @@
 from enthought.traits.api import Int, Float
 
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.traitslike_context_wrapper import TraitslikeContextWrapper
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.traitslike_context_wrapper import TraitslikeContextWrapper
 
 
 def remove_known_traits(trait_names):

@@ -8,7 +8,7 @@ from enthought.chaco2.api import PlotComponent, VPlotContainer
 from enthought.chaco2.plot import Plot
 
 from enthought.block_canvas.execution.api import ExpressionContext
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 from enthought.block_canvas.plot.plot_data_context_adapter import \
      PlotDataContextAdapter
 

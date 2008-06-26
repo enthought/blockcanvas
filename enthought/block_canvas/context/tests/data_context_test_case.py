@@ -8,8 +8,8 @@ import nose
 from enthought.testing.api import performance
 
 # Local library imports
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.tests.abstract_context_test_case import AbstractContextTestCase
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.tests.abstract_context_test_case import AbstractContextTestCase
 
 
 class DataContextTestCase(AbstractContextTestCase):
@@ -62,7 +62,7 @@ class DataContextTestCase(AbstractContextTestCase):
         eval_res = eval_timer.timeit(N)
 
         ### DataContext execution #############################################
-        this_setup = "from enthought.block_canvas.context.data_context import DataContext\n" \
+        this_setup = "from enthought.contexts.data_context import DataContext\n" \
                      "context=DataContext()\n" \
                      "context['vp'] = vp\n"
         context_setup = setup + this_setup + compiled_setup

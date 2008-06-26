@@ -1,7 +1,7 @@
 import unittest
 
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.multi_context import MultiContext
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.multi_context import MultiContext
 
 
 class Events2TestCase(unittest.TestCase):

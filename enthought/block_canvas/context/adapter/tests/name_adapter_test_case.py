@@ -2,7 +2,7 @@
 import unittest
 
 # Geo Library imports
-from enthought.block_canvas.context.api import (AdaptedDataContext, DataContext,
+from enthought.contexts.api import (AdaptedDataContext, DataContext,
                                                 NameAdapter)
 
 

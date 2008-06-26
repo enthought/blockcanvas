@@ -21,7 +21,7 @@ from enthought.traits.ui.wx.editor import Editor
 from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
 
 # App imports
-from enthought.block_canvas.context.shell.context_shell import ContextPythonShell
+from enthought.contexts.shell.context_shell import ContextPythonShell
 
 #-------------------------------------------------------------------------------
 #  '_ContextShellEditor' class:
@@ -106,7 +106,7 @@ class ContextShellEditor ( BasicEditorFactory ):
 if __name__ == "__main__":
     from enthought.traits.api import HasTraits
     from enthought.traits.ui.api import View, Item, Group
-    from enthought.block_canvas.context.multi_context import MultiContext
+    from enthought.contexts.multi_context import MultiContext
 
     class ContextWrapper(HasTraits):
         context = MultiContext({"a":100, "b":200, "c":50})

@@ -1,7 +1,7 @@
 import unittest
 
-from enthought.block_canvas.context.adapter.adapter_manager_mixin import AdapterManagerMixin
-from enthought.block_canvas.context.adapter.unit_conversion_adapter import UnitConversionAdapter
+from enthought.contexts.adapter.adapter_manager_mixin import AdapterManagerMixin
+from enthought.contexts.adapter.unit_conversion_adapter import UnitConversionAdapter
 
 
 class AdapterManagerMixinTestCase(unittest.TestCase):

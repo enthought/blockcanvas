@@ -14,11 +14,11 @@ from enthought.units.time import second
 from enthought.numerical_modeling.units.api import UnitArray
 
 # Geo Library imports
-from enthought.block_canvas.context.api import DataContext, AdaptedDataContext
-from enthought.block_canvas.context.adapter.unit_conversion_adapter import UnitConversionAdapter
+from enthought.contexts.api import DataContext, AdaptedDataContext
+from enthought.contexts.adapter.unit_conversion_adapter import UnitConversionAdapter
 
 # Test imports
-from enthought.block_canvas.context.tests.data_context_test_case import DataContextTestCase
+from enthought.contexts.tests.data_context_test_case import DataContextTestCase
 
 class ContextWithUnitConversionAdapterLogTestCase(DataContextTestCase):
     """ Test whether context still works with an adapter attached.
@@ -153,9 +153,9 @@ class UnitConversionContextAdapterTestCase(unittest.TestCase):
         # depth2 feet->meters
         setup = "from numpy import arange\n" \
                 "from enthought.units.length import meters, feet\n" \
-                "from enthought.block_canvas.context.api import DataContext, AdaptedDataContext\n" \
+                "from enthought.contexts.api import DataContext, AdaptedDataContext\n" \
                 "from enthought.numerical_modeling.units.api import UnitArray\n" \
-                "from enthought.block_canvas.context.api import UnitConversionAdapter\n" \
+                "from enthought.contexts.api import UnitConversionAdapter\n" \
                 "data_context = DataContext()\n" \
                 "context = AdaptedDataContext(context=data_context)\n" \
                 "adapter = UnitConversionAdapter(getitem_units={'depth':feet, 'depth2':meters})\n" \

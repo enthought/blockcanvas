@@ -5,8 +5,8 @@ import timeit
 from numpy import array
 
 # Geo Library imports
-from enthought.block_canvas.context.tests.multi_context_test_case import MultiContextTestCase
-from enthought.block_canvas.context.api import MultiContext, GeoContext
+from enthought.contexts.tests.multi_context_test_case import MultiContextTestCase
+from enthought.contexts.api import MultiContext, GeoContext
 
 class MultiContextWithGeoContextTestCase(MultiContextTestCase):
     """ Test a MultiContext with a GeoContext at the top.

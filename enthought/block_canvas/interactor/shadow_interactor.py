@@ -130,7 +130,7 @@ def round_two_places(value):
     return scale*(round(value/scale, 2))
 
 def new_main():
-    from enthought.block_canvas.context.api import DataContext
+    from enthought.contexts.api import DataContext
     from enthought.block_canvas.app.experiment import Experiment
     
     code2 = "from enthought.block_canvas.debug.my_operator import add, mul\n" \

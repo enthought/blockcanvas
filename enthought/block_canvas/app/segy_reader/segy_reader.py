@@ -6,7 +6,7 @@ from numpy import array
 import logging, os, struct, string
 
 # Enthought lib imports
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 from enthought.pyface.api import ProgressDialog
 from enthought.traits.api import HasTraits, File, Int, Enum, Float, Property, \
      Any, Instance, on_trait_change

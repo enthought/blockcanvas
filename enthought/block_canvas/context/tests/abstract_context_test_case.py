@@ -8,7 +8,7 @@ from UserDict import DictMixin
 from numpy import all
 
 # Geo library imports
-from enthought.block_canvas.context.tests.mapping_test_case import BasicTestMappingProtocol
+from enthought.contexts.tests.mapping_test_case import BasicTestMappingProtocol
 
 def adapt_keys(context):
     ''' Wrap a context so that it accepts all key types used by

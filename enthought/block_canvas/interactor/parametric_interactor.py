@@ -16,7 +16,7 @@ from enthought.traits.ui.api import (Item, InstanceEditor, View, HGroup, Group,
                                      spring)
 
 # Application imports
-from enthought.block_canvas.context.i_context import IListenableContext
+from enthought.contexts.i_context import IListenableContext
 
 # Local imports
 from parametric_item import ParametricItem
@@ -180,7 +180,7 @@ class ParametricInteractor(SimpleInteractor):
 # Test
 if __name__ == '__main__':
     from enthought.blocks.api import Block
-    from enthought.block_canvas.context.api import DataContext, MultiContext
+    from enthought.contexts.api import DataContext, MultiContext
 #    from context.api import GeoContext
 #    from enthought.numerical_modeling.units.api import UnitArray
 #    from enthought.units.length import meter

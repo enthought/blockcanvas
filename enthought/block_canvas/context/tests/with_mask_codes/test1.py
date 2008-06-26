@@ -1,6 +1,6 @@
 from __future__ import with_statement
 from numpy import zeros
-from enthought.block_canvas.context.with_mask import Mask
+from enthought.contexts.with_mask import Mask
 
 dep_len = depth.shape
 vp = zeros(dep_len)

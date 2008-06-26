@@ -21,7 +21,7 @@ from enthought.block_canvas.block_display.block_unit import BlockUnit
 from enthought.block_canvas.function_tools.handled_function_search import HandledFunctionSearch
 from enthought.block_canvas.function_tools.function_library import Module
 
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 
 
 def main():

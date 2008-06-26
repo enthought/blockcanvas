@@ -11,9 +11,9 @@ from enthought.testing.api import performance
 from enthought.traits.api import Any
 
 # Geo library imports
-from enthought.block_canvas.context.tests.abstract_context_test_case import AbstractContextTestCase
-from enthought.block_canvas.context.data_context import DataContext
-from enthought.block_canvas.context.multi_context import MultiContext
+from enthought.contexts.tests.abstract_context_test_case import AbstractContextTestCase
+from enthought.contexts.data_context import DataContext
+from enthought.contexts.multi_context import MultiContext
 
 
 class MultiContextTestCase(AbstractContextTestCase):
@@ -148,7 +148,7 @@ class MultiContextTestCase(AbstractContextTestCase):
         eval_res = eval_timer.timeit(N)
 
         ### DataContext execution ##############################################
-        this_setup = "from enthought.block_canvas.context.api import MultiContext\n" \
+        this_setup = "from enthought.contexts.api import MultiContext\n" \
                      "context=MultiContext()\n" \
                      "context['vp'] = vp\n"
         context_setup = setup + this_setup + compiled_setup

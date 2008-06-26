@@ -13,7 +13,7 @@ raise nose.SkipTest("ParametricInteractor not implemented")
 from enthought.blocks.api import Block
 
 # Local imports
-from enthought.block_canvas.context.api import DataContext, MultiContext
+from enthought.contexts.api import DataContext, MultiContext
 from enthought.block_canvas.interactor.parametric_interactor import ParametricInteractor
 
 

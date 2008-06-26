@@ -8,8 +8,8 @@
 
     >>> from enthought.units.length import meters, feet
     >>> from enthought.numerical_modeling.units.api import UnitArray
-    >>> from enthought.block_canvas.context.api import AdaptedDataContext, DataContext
-    >>> from enthought.block_canvas.context.api import UnitConversionAdapter
+    >>> from enthought.contexts.api import AdaptedDataContext, DataContext
+    >>> from enthought.contexts.api import UnitConversionAdapter
     >>> old_log = UnitArray((1,2,3),units=meters)
     >>> context=AdaptedDataContext(context=DataContext())
     >>> context['depth'] = old_log

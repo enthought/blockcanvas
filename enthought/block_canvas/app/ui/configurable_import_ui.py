@@ -6,7 +6,7 @@ import os
 
 # Enthought library imports
 from enthought.block_canvas.app.utils import create_geo_context
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 from enthought.pyface.api import FileDialog
 from enthought.traits.api import HasTraits, Any, Str, Instance, Trait
 from enthought.traits.ui.api import View, Item, Tabbed, Group, HGroup, VGrid, \

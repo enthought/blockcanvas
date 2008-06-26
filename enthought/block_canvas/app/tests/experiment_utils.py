@@ -4,7 +4,7 @@
 
 from enthought.block_canvas.app.experiment import Experiment
 from enthought.block_canvas.app.project import Project
-from enthought.block_canvas.context.api import DataContext
+from enthought.contexts.api import DataContext
 
 
 #-------------------------------------------------------------------------------

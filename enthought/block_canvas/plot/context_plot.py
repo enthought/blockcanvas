@@ -15,7 +15,7 @@ from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
 from enthought.traits.ui.wx.editor import Editor
 
 # Application imports
-from enthought.block_canvas.context.i_context import IListenableContext
+from enthought.contexts.i_context import IListenableContext
 from enthought.block_canvas.interactor.interactor_config import PlotConfig
 
 
@@ -218,7 +218,7 @@ class ContextPlot(HasTraits):
 
 
 if __name__ == '__main__':
-    from enthought.block_canvas.context.geo_context import GeoContext
+    from enthought.contexts.geo_context import GeoContext
 
     context = GeoContext()
     context['a'] = array([5, 2, 1, 7, 10])

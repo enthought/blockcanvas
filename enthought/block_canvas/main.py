@@ -20,7 +20,7 @@ from enthought.logger.api import add_log_queue_handler, create_log_file_handler
 
 # Local imports
 from enthought.block_canvas.app.block_application import BlockApplication
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 
 def initialize_logger():
     import logging

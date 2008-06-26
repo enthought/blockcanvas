@@ -8,7 +8,7 @@ import os, tempfile, unittest
 from enthought.blocks.api import Block
 
 # Local imports
-from enthought.block_canvas.context.api import DataContext, MultiContext
+from enthought.contexts.api import DataContext, MultiContext
 from enthought.block_canvas.interactor.configurable_interactor import \
     ConfigurableInteractor
 from enthought.block_canvas.interactor.interactor_config import \

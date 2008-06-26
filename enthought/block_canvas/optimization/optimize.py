@@ -4,10 +4,10 @@ from numpy import zeros, arange
 from enthought.traits.api import HasTraits, Instance, Str, Int, Float, List
 from enthought.traits.ui.api import View, Item, TableEditor
 from enthought.blocks.api import Block
-from enthought.block_canvas.context.parametric_context import ShadowContext
-from enthought.block_canvas.context.parametric_context import ParametricContext
+from enthought.contexts.parametric_context import ShadowContext
+from enthought.contexts.parametric_context import ParametricContext
 
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.data_context import DataContext
 from enthought.block_canvas.cobyla2c.cobyla import minimize
 from enthought.greenlet import greenlet
 from enthought.block_canvas.plot.configurable_context_plot import ConfigurableContextPlot

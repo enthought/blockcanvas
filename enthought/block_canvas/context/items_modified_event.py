@@ -5,7 +5,7 @@ class ItemsModified ( Vetoable ):
     """ Type of event fired when a DataContext has values added or removed.
     """
 
-    context = Instance('enthought.block_canvas.context.i_context.IContext')
+    context = Instance('enthought.contexts.i_context.IContext')
     added = List(Str)
     removed = List(Str)
     modified = List(Str)

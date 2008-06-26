@@ -8,8 +8,8 @@ import os, unittest
 from numpy import arange, zeros
 
 # ETS imports
-from enthought.block_canvas.context.with_mask import Mask
-from enthought.block_canvas.context.data_context import DataContext
+from enthought.contexts.with_mask import Mask
+from enthought.contexts.data_context import DataContext
 from enthought.blocks.api import Block
 
 

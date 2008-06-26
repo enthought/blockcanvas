@@ -2,8 +2,8 @@ from nose.tools import assert_equal
 import numpy as np
 from numpy.testing import assert_array_equal
 
-from enthought.block_canvas.context.api import DataContext
-from enthought.block_canvas.context.ui.context_variable import (ContextVariable,
+from enthought.contexts.api import DataContext
+from enthought.contexts.ui.context_variable import (ContextVariable,
     ContextVariableList)
 
 

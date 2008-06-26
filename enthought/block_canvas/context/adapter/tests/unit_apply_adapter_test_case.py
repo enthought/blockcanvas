@@ -8,7 +8,7 @@ from numpy import array
 from enthought.units.length import meters
 
 # Geo library imports
-from enthought.block_canvas.context.api import UnitApplyAdapter
+from enthought.contexts.api import UnitApplyAdapter
 
 class UnitApplyAdapterTestCase(unittest.TestCase):
 

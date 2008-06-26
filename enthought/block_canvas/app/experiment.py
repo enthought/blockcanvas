@@ -11,7 +11,7 @@ from enthought.traits.api import HasTraits, Instance, on_trait_change, Property,
 from enthought.block_canvas.block_display.block_graph_controller import BlockGraphController
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
 from enthought.block_canvas.canvas.block_canvas import BlockCanvas
-from enthought.block_canvas.context.api import (DataContext,
+from enthought.contexts.api import (DataContext,
     FunctionFilterContext, IListenableContext, MultiContext)
 from enthought.block_canvas.execution.executing_context import ExecutingContext
 from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo

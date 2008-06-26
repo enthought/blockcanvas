@@ -130,9 +130,9 @@ class InteractorConfig(HasTraits):
 
 if __name__ == "__main__":
     import numpy as np
-    from enthought.block_canvas.context.api import DataContext
+    from enthought.contexts.api import DataContext
     from enthought.block_canvas.block_display.block_unit_variables import BlockUnitVariableList
-    from enthought.block_canvas.context.api import DataContext
+    from enthought.contexts.api import DataContext
     from enthought.block_canvas.app.experiment import Experiment
 
     code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \

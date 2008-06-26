@@ -5,7 +5,7 @@
 import logging, os, re, string
 
 # ETS imports
-from enthought.block_canvas.context.geo_context import GeoContext
+from enthought.contexts.geo_context import GeoContext
 
 # Global logger
 logger = logging.getLogger(__name__)

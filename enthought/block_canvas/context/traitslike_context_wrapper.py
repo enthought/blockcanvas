@@ -39,7 +39,7 @@ class TraitslikeContextWrapper(HasTraits):
         Example
         -------
         >>> from enthought.traits.api import Int
-        >>> from enthought.block_canvas.context.traitslike_context_wrapper import TraitsLikeContextWrapper
+        >>> from enthought.contexts.traitslike_context_wrapper import TraitsLikeContextWrapper
         >>> tcw = TraitsLikeContextWrapper(_context={})
         >>> tcw.add_traits('a', 'b', c=Int)
         """

@@ -15,7 +15,7 @@ from enthought.blocks.api import Block
 from enthought.block_canvas.app.utils import create_unique_project_name
 from enthought.block_canvas.app.block_application import BlockApplication
 from enthought.block_canvas.block_display.block_unit import BlockUnit
-from enthought.block_canvas.context.api import DataContext
+from enthought.contexts.api import DataContext
 
 #-------------------------------------------------------------------------------
 #   ProjectTestCase
