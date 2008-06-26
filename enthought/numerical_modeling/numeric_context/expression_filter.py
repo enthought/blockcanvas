@@ -27,7 +27,7 @@ from enthought.traits.api \
 from enthought.traits.ui.api \
     import View
 
-from enthought.numerical_modeling.workflow.block.api \
+from enthought.blocks.api \
     import Expression as ExpressionBlock
 
 from a_numeric_filter \

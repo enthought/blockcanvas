@@ -1,7 +1,7 @@
 from numpy import alltrue
 from enthought.util.sequence import all
 
-from enthought.numerical_modeling.workflow.block.api import Block
+from enthought.blocks.api import Block
 
 # Possible future direction: Respond to changes in 'block 'and 'context', i.e.
 # a dataflow object "links" a block and a context such that changes to the
