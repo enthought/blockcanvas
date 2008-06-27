@@ -10,13 +10,15 @@ from enthought.traits.api import Instance, Str, HasTraits, on_trait_change
 from enthought.appscripting.api import scriptable
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
+# CodeTools Imports
+from enthought.execution.executing_context import ExecutingContext
+from enthought.contexts.api import DataContext, MultiContext
+
 
 # Block canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
-from enthought.contexts.api import DataContext, MultiContext
 from enthought.block_canvas.context.ui.context_variable import ContextVariableList
-from enthought.block_canvas.execution.executing_context import ExecutingContext
 from enthought.block_canvas.function_tools.function_search import FunctionSearch
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
 from enthought.block_canvas.ui.source_editor import MarkableSourceEditor

@@ -5,7 +5,7 @@ import re
 import traceback
 
 # ETS imports
-from enthought.block_canvas.execution.interfaces import IExecutable
+from enthought.execution.execution.interfaces import IExecutable
 from enthought.block_canvas.function_tools.function_info import find_functions
 from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
 from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo

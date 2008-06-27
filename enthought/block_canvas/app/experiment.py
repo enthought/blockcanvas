@@ -7,6 +7,10 @@ from os.path import join
 # Enthought library imports
 from enthought.traits.api import HasTraits, Instance, on_trait_change, Property, String
 
+# CodeTools imports
+from enthought.execution.executing_context import ExecutingContext
+
+
 # Block canvas imports
 from enthought.block_canvas.block_display.block_graph_controller import BlockGraphController
 from enthought.block_canvas.block_display.execution_model import ExecutionModel
