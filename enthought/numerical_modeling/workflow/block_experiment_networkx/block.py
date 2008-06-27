@@ -17,7 +17,7 @@ from enthought.blocks.analysis import NameFinder
 from enthought.blocks.compiler_.api \
     import compile_ast, parse
 from enthought.blocks.parser_ import BlockTransformer
-from enthought.numerical_modeling.util.uuid import UUID, uuid4
+from uuid import UUID, uuid4
 
 ###############################################################################
 # FIXME Blocks should listen to changes in each sub-block

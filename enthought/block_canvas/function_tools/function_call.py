@@ -16,7 +16,7 @@
 import warnings
 
 # enthought library imports
-from enthought.numerical_modeling.util.uuid import UUID, uuid4
+from uuid import UUID, uuid4
 from enthought.traits.api import (Any, Delegate, Event, HasTraits, Instance, 
         List, on_trait_change, Property, Str)
 from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor, 
