@@ -200,10 +200,25 @@ class UnitArray(numpy.ndarray):
     def __convert_other(self, other):
         su = getattr(self, 'units', dimensionless)
         ou = getattr(other, 'units', dimensionless)
+
         if su == None and ou == None:
             u = None
         else:
-            other = units.convert(numpy.array(other), ou, su)
+            if isinstance(other, units.unit.unit):
+                # Handles 5 * liters
+                ou = units.unit.unit(1, other.derivation)
+                other = units.convert(other.value, ou, su)
+            elif isinstance(other, UnitArray):
+                # Handles UnitArray or UnitScalar
+                other = units.convert(numpy.array(other), ou, su)                
+            elif isinstance(other, numpy.ndarray):
+                if len(other.shape) > 0 and hasattr(other.item(0), 'derivation'):
+                    # Handles array([1,2,3] * liters)
+                    ou = units.unit.unit(1, other.item(0).derivation)
+                    other = units.convert(other/ou, ou, su)
+            else:
+                #Everything else
+                other = units.convert(numpy.array(other), ou, su)                
             u = su
         return other, u
 
@@ -307,27 +322,37 @@ class UnitArray(numpy.ndarray):
     def __le__(self, other):
         other, u = self.__convert_other(other)
         result = super(UnitArray, self).__le__(other)
+        if isinstance(result, numpy.ndarray):
+            return result.all()
         return result
 
     def __lt__(self, other):
         other, u = self.__convert_other(other)
         result = super(UnitArray, self).__lt__(other)
+        if isinstance(result, numpy.ndarray):
+            return result.all()
         return result
 
     def __ge__(self, other):
         other, u = self.__convert_other(other)
         result = super(UnitArray, self).__ge__(other)
+        if isinstance(result, numpy.ndarray):
+            return result.all()
         return result
 
     def __gt__(self, other):
         other, u = self.__convert_other(other)
         result = super(UnitArray, self).__gt__(other)
+        if isinstance(result, numpy.ndarray):
+            return result.all()
         return result
 
     def __eq__(self, other):
         try:
             other, u = self.__convert_other(other)
             result = super(UnitArray, self).__eq__(other)
+            if isinstance(result, numpy.ndarray):
+                return result.all()
             return result
         except:
             return False
@@ -336,6 +361,8 @@ class UnitArray(numpy.ndarray):
         try:
             other, u = self.__convert_other(other)
             result = super(UnitArray, self).__ne__(other)
+            if isinstance(result, numpy.ndarray):
+                return result.all()
             return result
         except:
             return True
