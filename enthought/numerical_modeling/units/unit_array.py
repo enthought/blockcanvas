@@ -15,19 +15,25 @@ _retain_units = [numpy.absolute, numpy.negative,
                  numpy.floor, numpy.ceil, numpy.rint, numpy.conjugate,
                  numpy.maximum, numpy.minimum]
 
-_retain_units_if_same = [numpy.add, numpy.subtract]
+_retain_units_if_same = [] #[numpy.add, numpy.subtract]
 
-_retain_units_if_single = [numpy.multiply]
+_retain_units_if_single = [] #[numpy.multiply]
 
-_retain_units_if_only_first = [numpy.remainder, numpy.divide]
+_retain_units_if_only_first = [numpy.remainder] #, numpy.divide]
 
 class UnitArray(numpy.ndarray):
     """ Define a UnitArray that subclasses from a Numpy array
 
-        This class simply adds a "units" object to a numpy array.  Is *does
-        not* try to do any automatic unit conversion or calculation during
-        binary operations.  It is simply there as information for other
-        application objects to use and manipulate.
+        This class simply adds a "units" object to a numpy array.  It deals
+        with unit adjustments involving basic arithmetic and comparison
+        operations between arrays with units.  If incompatible units are
+        used, an error will be raised.
+
+        Note that the "units" may hold some amount of the magnitude, which can
+        be particularly significant for dimensionless quantities.
+
+        You should always convert a UnitArray to the required units before
+        extracting the numerical value.
 
         This code is shamelessly copied from the numpy matrix class.  It is
         of course modified to suite our purposes.
@@ -150,7 +156,6 @@ class UnitArray(numpy.ndarray):
         # FIXME: To do this "right" would require a ufunc
         #      object that could tell how to do unit conversions
         #      with its inputs to produce its outputs.
-        #      or at the very least implementing over-rides of *,/,+,...
         result = obj.view(self.__class__)
         theunit = None
         if context is not None:
@@ -192,6 +197,149 @@ class UnitArray(numpy.ndarray):
         result.units = theunit
         return result
 
+    def __convert_other(self, other):
+        su = getattr(self, 'units', dimensionless)
+        ou = getattr(other, 'units', dimensionless)
+        if su == None and ou == None:
+            u = None
+        else:
+            other = units.convert(numpy.array(other), ou, su)
+            u = su
+        return other, u
+
+    def __add__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__add__(other)
+        result.units = u
+        return result
+
+
+    def __radd__(self, other):
+        return self.__add__(other)
+    
+    def __sub__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__sub__(other)
+        result.units = u
+        return result
+    
+    def __rsub__(self, other):
+        su = getattr(self, 'units', dimensionless)
+        ou = getattr(other, 'units', dimensionless)
+        if su == None and ou == None:
+            u = None
+        else:
+            s = self.as_units(ou)
+            u = ou
+        result = super(UnitArray, s).__sub__(other)
+        result.units = u
+        return result
+
+    def __mul__(self, other):
+        result = super(UnitArray, self).__mul__(other)
+        su = getattr(self, 'units', None)
+        ou = getattr(other, 'units', None)
+        if su and ou:
+            # note that there may be a scale factor in the units.
+            # This may be confusing for otherwise dimensionless
+            # quantities
+            result.units = su*ou
+        elif su:
+            result.units = su
+        else:
+            result.units = ou
+        return result
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __div__(self, other):
+        result = super(UnitArray, self).__div__(other)
+        su = getattr(self, 'units', None)
+        ou = getattr(other, 'units', None)
+        if su and ou:
+            # note that there may be a scale factor in the units.
+            # This may be confusing for otherwise dimensionless
+            # quantities, but the alternative is losing units like
+            # 'percent'
+            result.units = su/ou
+        elif su:
+            result.units = su
+        else:
+            result.units = 1/ou
+        return result
+
+    def __rdiv__(self, other):
+        result = super(UnitArray, self).__rdiv__(other)
+        su = getattr(self, 'units', None)
+        ou = getattr(other, 'units', None)
+        if su and ou:
+            # note that there may be a scale factor in the units.
+            # This may be confusing for otherwise dimensionless
+            # quantities
+            result.units = ou/su
+        elif su:
+            result.units = 1/su
+        else:
+            result.units = ou
+        return result
+
+    def __pow__(self, other):
+        if isinstance(other, (int, long, float)) or \
+                (isinstance(other, numpy.ndarray) and other.shape == ()):
+            if isinstance(other, UnitArray):
+                if getattr(other, "units", dimensionless) == dimensionless:
+                    other = float(other)
+                else:
+                    raise units.IncompatibleUnits, "exponent must be dimensionless"
+            result = super(UnitArray, self).__pow__(other)
+            su = getattr(self, 'units', None)
+            if su:
+                units = su**other
+            result.units = units
+            return result
+        else:
+            raise TypeError, "exponent must be an integer, float or 0-d array"
+
+    def __rpow__(self, other):
+        return NotImplemented
+
+    def __le__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__le__(other)
+        return result
+
+    def __lt__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__lt__(other)
+        return result
+
+    def __ge__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__ge__(other)
+        return result
+
+    def __gt__(self, other):
+        other, u = self.__convert_other(other)
+        result = super(UnitArray, self).__gt__(other)
+        return result
+
+    def __eq__(self, other):
+        try:
+            other, u = self.__convert_other(other)
+            result = super(UnitArray, self).__eq__(other)
+            return result
+        except:
+            return False
+
+    def __ne__(self, other):
+        try:
+            other, u = self.__convert_other(other)
+            result = super(UnitArray, self).__ne__(other)
+            return result
+        except:
+            return True
+        
 
     ############################################################################
     # UnitArray interface
@@ -203,7 +351,8 @@ class UnitArray(numpy.ndarray):
         """ Convert UnitArray from its current units to a new set of units.
 
         """
-        result = units.convert(self, self.units, new_units)
+        result = UnitArray(units.convert(self.view(numpy.ndarray), self.units,
+                                         new_units))
         result.units = new_units
 
         return result
