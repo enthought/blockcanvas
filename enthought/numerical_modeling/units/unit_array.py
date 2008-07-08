@@ -66,6 +66,10 @@ class UnitArray(numpy.ndarray):
     ############################################################################
     # object interface
     ############################################################################
+    def __repr__(self):
+        return "%s(%s, units=%s)" % (self.__class__.__name__,
+                super(UnitArray, self).__repr__(), repr(self.units))
+
     def __reduce_ex__(self, protocol):
         """
         pickling function for classes which inherit from tuple.
