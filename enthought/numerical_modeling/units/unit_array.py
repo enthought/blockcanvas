@@ -4,6 +4,7 @@ import numpy
 # Enthought library imports
 import enthought.units as units
 from enthought.units.unit import dimensionless
+from enthought.units.unit_parser import unit_parser
 
 def __newobj__ ( cls, *args ):
     """ Unpickles new-style objects.
@@ -67,8 +68,7 @@ class UnitArray(numpy.ndarray):
     # object interface
     ############################################################################
     def __repr__(self):
-        return "%s(%s, units=%s)" % (self.__class__.__name__,
-                super(UnitArray, self).__repr__(), repr(self.units))
+        return "UnitArray(%s, units='%s')" % (numpy.ndarray.__repr__(self), repr(self.units))
 
     def __reduce_ex__(self, protocol):
         """
@@ -132,6 +132,8 @@ class UnitArray(numpy.ndarray):
                                         buffer=arr)
 
         ### Configure Other Attributes #########################################
+        if isinstance(units, basestring):
+            units = unit_parser.parse_unit(units)
         res.units = units
 
         return res

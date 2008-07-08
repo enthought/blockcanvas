@@ -16,4 +16,5 @@ class UnitScalar(UnitArray):
         >>> x**2, (x**2).units
         (UnitScalar(25), 0.01*m)
     '''
-    pass
+    def __repr__(self):
+        return "UnitScalar(%s, units='%s')" % (str(self), repr(self.units))
