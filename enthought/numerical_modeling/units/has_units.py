@@ -1,10 +1,12 @@
 # Standard library imports
+import copy
+from string import Template
+
+# Standard third party library imports
 from docutils.frontend import OptionParser
 import docutils.nodes as nodes
 from docutils.parsers.rst import Parser
 from docutils.utils import new_document
-import copy
-from string import Template
 
 import numpy
 
