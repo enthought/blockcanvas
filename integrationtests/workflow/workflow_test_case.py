@@ -1,6 +1,6 @@
 import unittest
 
-from enthought.testing.doctest_tools import doctest_for_module
+from enthought.testing.api import doctest_for_module
 
 import enthought.numerical_modeling.workflow.dataflow as dataflow
 from enthought.blocks.api import Block
