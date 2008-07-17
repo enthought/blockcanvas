@@ -161,7 +161,8 @@ def scalar_to_unit_scalar_converter(x, units):
 def array_to_unit_array_converter(array, units):
     """ Create a UnitArray with units='units' from the given 'array'.
     """
-
+    if array.shape == ():
+        return UnitScalar(array, units=units)
     return UnitArray(array, units=units)
 
 

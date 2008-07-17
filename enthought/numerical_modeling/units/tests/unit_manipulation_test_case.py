@@ -209,6 +209,18 @@ class SetUnitsTestCase(unittest.TestCase):
         self.assertTrue(all(a==aa))
         self.assertEqual(aa.units, feet)
 
+    def test_set_zero_dim_array_with_units(self):
+        """ Does it add units to an array with shape () correctly?
+
+            fixme: This may be exactly what we don't want to happen!
+        """
+        units = [feet]
+        a = array(2)
+        aa = set_units(units, a)
+        self.assertTrue(all(a==aa))
+        self.assertEqual(aa.units, feet)
+        assert isinstance(aa, UnitScalar)
+
     def test_set_unit_overwrite_unit_scalar(self):
         """ Does it overwrite units on a UnitScalar correctly?
         """
