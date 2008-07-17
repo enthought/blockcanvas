@@ -102,7 +102,7 @@ setup(
         DEVTOOLS,
         'nose >= 0.9',
         ],
-    test_suite = 'nose.collector',
+    test_suite = 'test_all',
     url = 'http://code.enthought.com/ets',
     version = '3.0.0b1',
     zip_safe = False,
