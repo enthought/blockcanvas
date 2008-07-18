@@ -27,7 +27,7 @@ import logging
 import _pkgutil # local copy of Python 2.5 pkgutil.py
 
 # Globals
-logger = logging.getLogger(__file__)
+logger = logging.getLogger(__name__)
 
 
 ##############################################################################
