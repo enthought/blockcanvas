@@ -3,7 +3,7 @@ from numpy import all, arange, array, ndarray
 
 from enthought.testing.api import doctest_for_module
 
-from enthought.numerical_modeling.workflow.api import Block
+from enthought.blocks.api import Block
 from enthought.numerical_modeling.numeric_context.context_factory import default_context
 
 class ExecutionTestCase(unittest.TestCase):
