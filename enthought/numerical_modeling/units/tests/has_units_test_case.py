@@ -138,8 +138,7 @@ class HasUnitsTestCase(unittest.TestCase):
 
     def test_v_no_internal_units_scalar(self):
         z = vec_bar_with_units( self.meter_scalar, self.second_scalar)
-        # FIXME: test fails
-        #self.assertTrue(isinstance(z, UnitScalar))
+        self.assertTrue(isinstance(z, UnitScalar))
         self.assertEquals(z.units, meters)
 
     def test_v_feet(self):
@@ -148,8 +147,7 @@ class HasUnitsTestCase(unittest.TestCase):
         self.assertEquals(z.units, meters)
         assert_array_almost_equal(z, np.array([ 0.0,  0.0 ,  3.6576]))
         z = vec_bar_with_units( self.feet_scalar, self.second_scalar)
-        # FIXME: test fails
-        #self.assertTrue(isinstance(z, UnitScalar))
+        self.assertTrue(isinstance(z, UnitScalar))
         self.assertEquals(z.units, meters)
         assert_array_almost_equal(z, 0.0)
 
