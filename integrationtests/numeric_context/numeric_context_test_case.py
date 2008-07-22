@@ -79,10 +79,12 @@ from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor, \
 # we wrap NumericContexts with the 'adapt_keys' mapping adapter that injects
 # keys into strings.
 class MappingObjectTest(BasicMappingProtocolTest, object):
+    __test__ = False
     def type2test(self, *args, **kw):
         return adapt_keys(self.factory(*args, **kw))
 
 class NumericContextTest(MappingObjectTest, unittest.TestCase):
+    __test__ = True
 
     def test_equality(self):
         nc1 = NumericContext()
