@@ -17,7 +17,7 @@ from enthought.block_canvas.block_display.execution_model import ExecutionModel
 from enthought.block_canvas.canvas.block_canvas import BlockCanvas
 from enthought.contexts.api import (DataContext,
     FunctionFilterContext, IListenableContext, MultiContext)
-from enthought.block_canvas.execution.executing_context import ExecutingContext
+from enthought.execution.executing_context import ExecutingContext
 from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
 from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
 
