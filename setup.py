@@ -5,6 +5,7 @@ from distutils.command.build import build as distbuild
 from distutils import log
 from pkg_resources import require, DistributionNotFound
 
+from setup_data import INFO
 from make_docs import HtmlBuild 
 
 cobyla = Extension(
@@ -89,6 +90,8 @@ def generate_docs():
                 'target': target,
                 'verbose': True,
                 'versioned': False,
+                'version': INFO['version'],
+                'release': INFO['version']
                 }, [])
             del build
         except:
@@ -184,7 +187,7 @@ setup(
         ],
     test_suite = 'nose.collector',
     url = 'http://code.enthought.com/ets',
-    version = '3.0.0b1',
+    version = INFO['version'],
     zip_safe = False,
     )
 
