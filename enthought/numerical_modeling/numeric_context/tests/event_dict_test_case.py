@@ -1,6 +1,7 @@
 from copy import copy
 from cPickle import dumps, loads
 from nose.tools import assert_equal, assert_not_equal, assert_raises
+import nose
 
 from enthought.util.sequence import union
 
@@ -221,8 +222,8 @@ class DictModifiedEventMonitor(EventMonitor):
             raise ValueError('Unknown attributes: %s' % list(unknown_attrs))
 
         # FIXME:  Skipping this test, for now.
-        return
-        
+        raise nose.SkipTest
+
         # (Make tidy dicts for descriptive errors)
         assert_equal_up_to_reordering(
             [ dict([ (k, e[k]) for k in attrs if k in e ])

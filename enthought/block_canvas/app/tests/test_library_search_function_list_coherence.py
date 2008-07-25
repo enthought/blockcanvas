@@ -1,6 +1,7 @@
 # Note: I put this in the same directory so that I didn't have to mess around with the path.
 
 # General library imports
+import nose
 from nose.tools import assert_equal
 
 # ETS Imports
@@ -32,13 +33,15 @@ def test_initializing_with_library_initializes_function_searh():
     library = FunctionLibrary(modules=['os'])
 
     b = Application(function_library=library)
+    
+    raise nose.SkipTest
     # FIXME:
     #   The assertion below is failing because in
     #   enthought/block_canvas/app/app.py line 541
     #   post_init is set to True, which means that function_library
     #   is not updated upon initialization.  The post_init change
     #   was made in a number of locations in this file at changeset 19002.
-    #assert_equal(b.function_search.all_functions, library.functions)
+    assert_equal(b.function_search.all_functions, library.functions)
 
 def test_changing_library_initializes_function_searh():
         
