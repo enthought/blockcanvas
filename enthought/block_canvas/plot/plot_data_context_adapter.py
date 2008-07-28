@@ -12,7 +12,7 @@ from enthought.block_canvas.plot.data_context_datasource import DataContextDataS
 
 
 class PlotDataContextAdapter(AbstractPlotData):
-    """ Makes a DataContext behave like a Chaco2 AbstractPlotData class.
+    """ Makes a DataContext behave like a Chaco AbstractPlotData class.
 
         This makes it easy to use a context as a source for chaco plots.
     """
