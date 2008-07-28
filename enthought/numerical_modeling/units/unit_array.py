@@ -384,8 +384,8 @@ class UnitArray(numpy.ndarray):
         """ Convert UnitArray from its current units to a new set of units.
 
         """
-        result = UnitArray(units.convert(self.view(numpy.ndarray), self.units,
-                                         new_units))
+        result = self.__class__(units.convert(self.view(numpy.ndarray),
+                                              self.units, new_units))
         result.units = new_units
 
         return result
