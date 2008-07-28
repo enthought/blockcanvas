@@ -10,7 +10,7 @@ setup(name             = "block_canvas_deps",
       zip_safe         = True,
       install_requires = [
         "enthought.block_canvas",
-        "enthought.chaco2>=3.0a1",
+        "enthought.chaco>=3.0a1",
         "enthought.debug",
         "enthought.enable>=3.0a1",
         "enthought.etsconfig",

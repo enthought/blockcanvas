@@ -1,10 +1,10 @@
 """ Adapt a data context and as a PlotData object so that it behaves as a
-    source for chaco2 plots.
+    source for chaco plots.
 """
 from numpy import arange
 
 # Enthought library imports
-from enthought.chaco2.abstract_plot_data import AbstractPlotData
+from enthought.chaco.abstract_plot_data import AbstractPlotData
 from enthought.contexts.data_context import DataContext
 from enthought.traits.has_traits import on_trait_change, Instance
 from enthought.contexts.i_context import IListenableContext
@@ -107,12 +107,12 @@ class PlotDataContextAdapter(AbstractPlotData):
     ##########################################################################
 
     def get_datasource(self, name):
-        """Gets a chaco2 DataSource for the named object."""
+        """Gets a chaco DataSource for the named object."""
         return DataContextDataSource(context=self.context, context_name=name)
         
     @on_trait_change('context:items_modified')
     def _fire_data_changed(self, obj, name, old, value):
-        """ Translate 'items_modified' event to a chaco2 'data_changed' event.
+        """ Translate 'items_modified' event to a chaco 'data_changed' event.
         """
         event = {}
         event['added'] = value.added
