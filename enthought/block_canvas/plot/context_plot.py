@@ -7,7 +7,7 @@ from enthought.chaco2.plot import Plot
 from enthought.chaco2.tools.pan_tool import PanTool
 from enthought.chaco2.tools.simple_zoom import SimpleZoom
 from enthought.chaco2.plot_containers import OverlayPlotContainer
-from enthought.enable2.wx_backend.api import Window
+from enthought.enable.wx_backend.api import Window
 from enthought.traits.api import HasTraits, Instance, Bool, List
 from enthought.traits.trait_types import Enum
 from enthought.traits.ui.api import View, Item

@@ -9,7 +9,7 @@ from numpy import arange, empty
 
 # Enthought library imports
 from enthought.traits.api import Array, Instance, Bool, Any, on_trait_change
-from enthought.enable2.api import AbstractOverlay
+from enthought.enable.api import AbstractOverlay
 from enthought.kiva.backend_image import GraphicsContext
 
 # Local imports

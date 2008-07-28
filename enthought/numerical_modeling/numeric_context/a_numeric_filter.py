@@ -19,7 +19,7 @@
 
 from numpy import not_equal
 
-from enthought.enable2.colors import ColorTrait
+from enthought.enable.colors import ColorTrait
 
 from enthought.traits.api \
     import HasPrivateTraits, Event, Bool, Int

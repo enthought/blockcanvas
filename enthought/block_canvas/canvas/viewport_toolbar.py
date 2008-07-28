@@ -1,7 +1,7 @@
 # Library imports
 
 # Enthought Library imports
-from enthought.enable2.api import AbstractOverlay, Container, ColorTrait
+from enthought.enable.api import AbstractOverlay, Container, ColorTrait
 from enthought.kiva import font_metrics_provider
 from enthought.traits.api import Enum, Bool, Float, Int
 

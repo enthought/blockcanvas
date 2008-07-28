@@ -1,7 +1,7 @@
 
 # Enthought library imports
-from enthought.enable2.api import BaseTool
-from enthought.enable2.tools.api import DragTool
+from enthought.enable.api import BaseTool
+from enthought.enable.tools.api import DragTool
 from enthought.traits.api import Any, Event, Bool, Float, Int, List, Tuple
 
 

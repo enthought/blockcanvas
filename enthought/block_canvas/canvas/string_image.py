@@ -1,7 +1,7 @@
 from enthought.traits.api import Str
 from enthought.pyface.image_resource import ImageResource
 
-from enthought.enable2.base import gc_image_for
+from enthought.enable.base import gc_image_for
 
 class StringImage(Str):
 

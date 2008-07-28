@@ -1,7 +1,7 @@
 from numpy import array, dot
 
 from enthought.traits.api import Bool, Float, Instance, Tuple
-from enthought.enable2.tools.api import DragTool
+from enthought.enable.tools.api import DragTool
 
 from enable_select_box import EnableSelectBox
 from canvas_box import CanvasBox

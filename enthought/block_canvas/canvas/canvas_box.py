@@ -1,7 +1,7 @@
 """ Basic movable and labeled box for a Canvas.
 """
 # Enthought library imports
-from enthought.enable2.api import Container
+from enthought.enable.api import Container
 from enthought.kiva import font_metrics_provider
 from enthought.traits.api import Any, Bool, Float, Instance, List, on_trait_change, Property, Str
 

@@ -1,5 +1,5 @@
 # Enthought library imports
-from enthought.enable2.api import TextFieldStyle
+from enthought.enable.api import TextFieldStyle
 from enthought.traits.api import Float, HasTraits, Instance, Tuple
 
 # Local imports

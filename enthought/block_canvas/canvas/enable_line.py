@@ -5,7 +5,7 @@
 
 # Enthought library imports
 from enthought.traits.api import Enum, Float, Instance, on_trait_change
-from enthought.enable2.api import Component, ColorTrait
+from enthought.enable.api import Component, ColorTrait
 
 # Local imports
 from canvas_box import CanvasBox

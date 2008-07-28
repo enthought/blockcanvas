@@ -118,7 +118,7 @@ CloseButton               Extends button to anchor it the top right corner
 
 EnableBox                 Generic labeled box that participate in selection
                           on a canvas.  Something like this guy should go in
-                          a generic object canvas in Enable2.
+                          a generic object canvas in Enable.
 
 EnableFunctionBox         A specialized version of EnableBox for drawing
                           functions on the canvas.  It also adds the

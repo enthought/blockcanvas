@@ -1,6 +1,6 @@
 # Enthought library imports
-from enthought.enable2.api import ColorTrait, Component, Pointer
-from enthought.enable2.tools.api import DragTool
+from enthought.enable.api import ColorTrait, Component, Pointer
+from enthought.enable.tools.api import DragTool
 from enthought.traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 
 # Local imports

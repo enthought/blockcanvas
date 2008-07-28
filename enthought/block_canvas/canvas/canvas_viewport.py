@@ -1,7 +1,7 @@
 
 # Enthought library imports
-from enthought.enable2.api import Viewport
-from enthought.enable2.tools.hover_tool import HoverTool
+from enthought.enable.api import Viewport
+from enthought.enable.tools.hover_tool import HoverTool
 from enthought.traits.api import Bool, Instance
 
 # Local imports

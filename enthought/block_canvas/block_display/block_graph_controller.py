@@ -10,7 +10,7 @@ from enthought.traits.api import (Any, Bool, Dict, HasTraits,
                                   Instance, List, on_trait_change, TraitListEvent)
 from enthought.traits.protocols.api import adapt
 
-from enthought.enable2.api import Component, Container
+from enthought.enable.api import Component, Container
 from enthought.block_canvas.app import scripting
 from enthought.block_canvas.canvas.enable_line import EnableLine
 from enthought.block_canvas.function_tools.i_minimal_function_info import \

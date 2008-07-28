@@ -3,9 +3,9 @@ import copy
 
 # Enthought Library imports
 from enthought.traits.api import Any, Bool, Instance, Int, List, Tuple
-from enthought.enable2.api import AbstractOverlay
-from enthought.enable2.tools.api import DragTool
-from enthought.enable2.traits.api import RGBAColor
+from enthought.enable.api import AbstractOverlay
+from enthought.enable.tools.api import DragTool
+from enthought.enable.traits.api import RGBAColor
 from enthought.pyface.action.api import Group, MenuManager
 
 # Local imports

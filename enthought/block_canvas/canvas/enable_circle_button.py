@@ -6,8 +6,8 @@
 # Enthought library imports
 from enthought.traits.api import Str
 from enthought.kiva.traits.api import KivaFont
-from enthought.enable2.api import Component
-from enthought.enable2.traits.api import RGBAColor
+from enthought.enable.api import Component
+from enthought.enable.traits.api import RGBAColor
 
 
 class EnableCircleButton(Component):

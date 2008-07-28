@@ -1,5 +1,5 @@
 from enthought.traits.api import Event, Str, Enum, Property
-from enthought.enable2.api import Component
+from enthought.enable.api import Component
 
 from string_image import StringImage
 import enable_glyph_lib
