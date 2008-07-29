@@ -90,6 +90,12 @@ class UnitArray(numpy.ndarray):
         super(UnitArray, self).__setstate__(state[1][2])
         self.units = state[0]
 
+    def __deepcopy__(self, memo={}):
+        copy = self.__class__(self.view(numpy.ndarray), copy=True,
+                             units=self.units)
+        memo[id(self)] = copy
+        return copy
+
     ############################################################################
     # numpy.ndarray interface
     ############################################################################
