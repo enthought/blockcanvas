@@ -173,7 +173,7 @@ class my_build(distbuild):
 setup(
     author = 'Enthought, Inc',
     author_email = 'info@enthought.com',
-    classifiers = """\
+    classifiers = [c.strip() for c in """\
         Development Status :: 4 - Beta
         Intended Audience :: Developers
         Intended Audience :: Science/Research
@@ -188,7 +188,7 @@ setup(
         Topic :: Scientific/Engineering
         Topic :: Software Development
         Topic :: Software Development :: Libraries
-        """.splitlines(),
+        """.splitlines()],
     cmdclass = {
         'develop': my_develop,
         'build': my_build
@@ -196,7 +196,7 @@ setup(
     dependency_links = [
         'http://code.enthought.com/enstaller/eggs/source',
         ],
-    description = DOCLINES[0],
+    description = DOCLINES[1],
     extras_require = {
         # All non-ets dependencies should be in this extra to ensure users can
         # decide whether to require them or not.
@@ -221,7 +221,7 @@ setup(
         TRAITS_UI,
         ],
     license = 'BSD',
-    long_description = '\n'.join(DOCLINES[2:]),
+    long_description = '\n'.join(DOCLINES[3:]),
     maintainer = 'ETS Developers',
     maintainer_email = 'enthought-dev@enthought.com',
     name = 'BlockCanvas',
