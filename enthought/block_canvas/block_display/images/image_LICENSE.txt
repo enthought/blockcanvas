@@ -1,0 +1,16 @@
+The icons are mostly derived work from other icons. As such they are
+licensed accordingly to the original license:
+
+    Enthought: BSD-like
+    Nuvola: LGPL
+
+Unless stated in this file, icons are work of enthought, and are released
+under BSD-like license.
+Files and orginal authors:
+----------------------------------------------------------------
+enthought/block_canvas/block_display/images:
+          bound_input_variable.png | Enthought
+         bound_output_variable.png | Enthought
+			 function_variable.png | Nuvola
+        unbound_input_variable.png | Enthought
+       unbound_output_variable.png | Enthought

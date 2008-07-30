@@ -1,0 +1,20 @@
+The icons are mostly derived work from other icons. As such they are
+licensed accordingly to the original license:
+
+    GV: Gael Varoquaux: BSD-like 
+    Crystal: LPGL
+    Nuvola: LGPL
+
+Unless stated in this file, icons are work of enthought, and are released
+under BSD-like license.
+Files and orginal authors:
+----------------------------------------------------------------
+enthought/block_canvas/canvas/images:
+                    bluebullet.png | Nuvola
+                bluebulletover.png | Nuvola
+           close_button_normal.png | GV
+             close_button_over.png | GV
+          expand_button_normal.png | Nuvola
+           expand_button_ovrer.png | Nuvola
+                    input_icon.png | Crystal
+                   output_icon.png | Crystal
