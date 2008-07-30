@@ -10,7 +10,7 @@ Numerical Modeling
 The BlockCanvas project provides a visual environment for creating simulation
 experiments, where function and data are separated. Thus, you can define your
 simulation algorithm by visually connecting function blocks into a data flow
-network, and then run it with various data sets (known as "contexts"); 
+network, and then run it with various data sets (known as "contexts");
 likewise, you can use the same context in a different functional simulation.
 
 The project provides support for plotting, function searching and inspection,
@@ -19,8 +19,8 @@ block-canvas environment, but the same functionality can be incorporated into
 other applications.
 
 The BlockCanvas project relies on included libraries that allow multiple data
-sets using Numeric arrays to be incorporated in a Traits-based model in a 
-way that is simple, fast, efficient, and consistent. 
+sets using Numeric arrays to be incorporated in a Traits-based model in a
+way that is simple, fast, efficient, and consistent.
 """
 
 
@@ -29,7 +29,7 @@ from distutils.command.build import build as distbuild
 from make_docs import HtmlBuild
 from pkg_resources import DistributionNotFound, parse_version, require, \
     VersionConflict
-from setup_data import INFO
+from setup_data import DEVTOOLS, INFO
 from setuptools import setup, Extension, find_packages
 from setuptools.command.develop import develop
 import os
@@ -69,33 +69,6 @@ greenlet = Extension(
         'enthought/greenlet/switch_x86_unix.h',
         ],
     )
-
-
-# Function to convert simple ETS project names and versions to a requirements
-# spec that works for both development builds and stable builds.  Allows
-# a caller to specify a max version, which is intended to work along with
-# Enthought's standard versioning scheme -- see the following write up:
-#    https://svn.enthought.com/enthought/wiki/EnthoughtVersionNumbers
-def etsdep(p, min, max=None, literal=False):
-    require = '%s >=%s.dev' % (p, min)
-    if max is not None:
-        if literal is False:
-            require = '%s, <%s.a' % (require, max)
-        else:
-            require = '%s, <%s' % (require, max)
-    return require
-
-
-# Declare our ETS project dependencies.
-APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.undo
-CHACO = etsdep('Chaco', '3.0.0b1')
-DEVTOOLS = etsdep('DevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
-ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
-ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b1')
-SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b1')
-TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
-TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
-TRAITSGUI = etsdep('TraitsGUI', '3.0.0b1')
 
 
 # Functions to generate docs from sources during builds
@@ -210,29 +183,10 @@ setup(
         'http://code.enthought.com/enstaller/eggs/source',
         ],
     description = DOCLINES[1],
-    extras_require = {
-        # All non-ets dependencies should be in this extra to ensure users can
-        # decide whether to require them or not.
-        'nonets': [
-            "docutils",
-            "Geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
-            'PIL',
-            "numpy >=1.0.2",
-            ],
-        },
+    extras_require = INFO['extras_require'],
     ext_modules = [cobyla, greenlet],
     include_package_data = True,
-    install_requires = [
-        APPTOOLS,
-        CHACO,
-        DEVTOOLS,
-        ENABLE_TRAITS,
-        ENTHOUGHTBASE_DISTRIBUTION_UI,
-        SCIMATH_TRAITS,
-        TRAITSBACKENDWX,
-        TRAITSGUI,
-        TRAITS_UI,
-        ],
+    install_requires = INFO['install_requires'],
     license = 'BSD',
     long_description = '\n'.join(DOCLINES[3:]),
     maintainer = 'ETS Developers',
