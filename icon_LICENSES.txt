@@ -1,0 +1,37 @@
+The icons are mostly derived work from other icons. As such they are
+licensed accordingly to the original license:
+
+    GV: Gael Varoquaux: BSD-like 
+    Enthought: BSD-like
+    Crystal: LPGL
+    Nuvola: LGPL
+
+
+Unless stated in this file, icons are work of enthought, and are released
+under BSD-like license.
+Files and orginal authors:
+----------------------------------------------------------------
+enthought/block_canvas/block_display/images:
+          bound_input_variable.png | Enthought
+         bound_output_variable.png | Enthought
+			 function_variable.png | Nuvola
+        unbound_input_variable.png | Enthought
+       unbound_output_variable.png | Enthought
+
+enthought/block_canvas/canvas/images:
+                    bluebullet.png | Nuvola
+                bluebulletover.png | Nuvola
+           close_button_normal.png | GV
+             close_button_over.png | GV
+          expand_button_normal.png | Nuvola
+           expand_button_ovrer.png | Nuvola
+                    input_icon.png | Crystal
+                   output_icon.png | Crystal
+
+enthought/block_canvas/function_tools/images:
+             function_variable.png | Nuvola
+            preferences_button.png | Crystal
+
+enthought/model/images:
+             filter_expression.png | Crystal
+                  filter_group.png | GV
