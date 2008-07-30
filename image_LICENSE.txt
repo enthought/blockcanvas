@@ -1,37 +1,39 @@
 The icons are mostly derived work from other icons. As such they are
 licensed accordingly to the original license:
 
-    GV: Gael Varoquaux: BSD-like 
-    Enthought: BSD-like
-    Crystal: LPGL
-    Nuvola: LGPL
+Project                 License                   File
+----------------------------------------------------------------------------
+CP (Crystal Project)    LGPL                      image_LICENSE_CP.txt
+Enthought               BSD 3-Clause              LICENSE.txt
+GV (Gael Varoquaux)     Public Domain             N/A
+Nuvola                  LGPL                      image_LICENSE_Nuvola.txt
 
+Unless stated in this file, icons are the work of Enthought, and are
+released under a 3 clause BSD license.
 
-Unless stated in this file, icons are work of enthought, and are released
-under BSD-like license.
 Files and orginal authors:
-----------------------------------------------------------------
+----------------------------------------------------------------------------
 enthought/block_canvas/block_display/images:
-          bound_input_variable.png | Enthought
-         bound_output_variable.png | Enthought
-			 function_variable.png | Nuvola
-        unbound_input_variable.png | Enthought
-       unbound_output_variable.png | Enthought
+           bound_input_variable.png | Enthought
+          bound_output_variable.png | Enthought
+              function_variable.png | Nuvola
+         unbound_input_variable.png | Enthought
+        unbound_output_variable.png | Enthought
 
 enthought/block_canvas/canvas/images:
-                    bluebullet.png | Nuvola
-                bluebulletover.png | Nuvola
-           close_button_normal.png | GV
-             close_button_over.png | GV
-          expand_button_normal.png | Nuvola
-           expand_button_ovrer.png | Nuvola
-                    input_icon.png | Crystal
-                   output_icon.png | Crystal
+                     bluebullet.png | Nuvola
+                 bluebulletover.png | Nuvola
+            close_button_normal.png | GV
+              close_button_over.png | GV
+           expand_button_normal.png | Nuvola
+            expand_button_ovrer.png | Nuvola
+                     input_icon.png | CP
+                    output_icon.png | CP
 
 enthought/block_canvas/function_tools/images:
-             function_variable.png | Nuvola
-            preferences_button.png | Crystal
+              function_variable.png | Nuvola
+             preferences_button.png | CP
 
 enthought/model/images:
-             filter_expression.png | Crystal
-                  filter_group.png | GV
+              filter_expression.png | CP
+                   filter_group.png | GV
