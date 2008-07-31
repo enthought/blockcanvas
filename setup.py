@@ -29,7 +29,7 @@ from distutils.command.build import build as distbuild
 from make_docs import HtmlBuild
 from pkg_resources import DistributionNotFound, parse_version, require, \
     VersionConflict
-from setup_data import DEVTOOLS, INFO
+from setup_data import ETSDEVTOOLS, INFO
 from setuptools import setup, Extension, find_packages
 from setuptools.command.develop import develop
 import os
@@ -201,7 +201,7 @@ setup(
         ]),
     platforms = ["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
     tests_require = [
-        DEVTOOLS,
+        ETSDEVTOOLS,
         'nose >= 0.10.3',
         ],
     test_suite = 'nose.collector',
