@@ -16,9 +16,9 @@ def etsdep(p, min, max=None, literal=False):
 # Declare our ETS project dependencies.
 APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.undo
 CHACO = etsdep('Chaco', '3.0.0b1')
-DEVTOOLS = etsdep('DevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
 ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
 ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b1')
+ETSDEVTOOLS = etsdep('ETSDevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
 SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b1')
 TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
 TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
@@ -40,7 +40,7 @@ INFO = {
     'install_requires' : [
         APPTOOLS,
         CHACO,
-        DEVTOOLS,
+        ETSDEVTOOLS,
         ENABLE_TRAITS,
         ENTHOUGHTBASE_DISTRIBUTION_UI,
         SCIMATH_TRAITS,
