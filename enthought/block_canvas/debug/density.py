@@ -74,53 +74,53 @@ def rhob_from_ggg(vp, cons=.23, expn=.25):
 
 def fix_density_log(density_log, index, water_depth, kb, td, density_fill_value):
     """
-        Fixes the density log
+        Fixes the density log.
 
-           Parameters
-           ----------
-           density_log : array : units=g/cc
-               The Density
-           index : array : units=ft
-               The index for the density
-           water_depth : scalar : units=ft
-               How much water are we in?
-           kb : scalar : units=ft
-               The Kelly Bushing
-           td : scalar : units=ft
-               Total Depth
-           density_fill_value : scalar : units=g/cc
-               Value for missing densities
+        Parameters
+        ----------
+        density_log : array : units=g/cc
+            The Density
+        index : array : units=ft
+            The index for the density
+        water_depth : scalar : units=ft
+            How much water are we in?
+        kb : scalar : units=ft
+            The Kelly Bushing
+        td : scalar : units=ft
+            Total Depth
+        density_fill_value : scalar : units=g/cc
+            Value for missing densities
 
-           Returns
-           -------
-           density_log : array : units=g/cc
-               The new density log
-           index : array : units=ft
-               The new index
+        Returns
+        -------
+        density_log : array : units=g/cc
+            The new density log
+        index : array : units=ft
+            The new index
     """
     return
 
 def integrate_ob(density_array, density_index, water_depth, kb, sea_water_grad):
     """
-        Integrates the density log
+        Integrates the density log.
 
-           Parameters
-           ----------
-           density_array : array : units=g/cc
-               The Density
-           density_index : array : units=m
-               The index for the density
-           water_depth : scalar : units=m
-               How much water are we in?
-           kb : scalar : units=m
-               The Kelly Bushing
-           sea_water_grad : scalar : units=psi/m
-               Density of sea water
-
-           Returns
-           -------
-           overburden_log : array : units=psi
-               The new density log
+        Parameters
+        ----------
+        density_array : array : units=g/cc
+           The Density
+        density_index : array : units=m
+           The index for the density
+        water_depth : scalar : units=m
+           How much water are we in?
+        kb : scalar : units=m
+           The Kelly Bushing
+        sea_water_grad : scalar : units=psi/m
+           Density of sea water
+        
+        Returns
+        -------
+        overburden_log : array : units=psi
+           The new density log
     """
     return
 
@@ -128,22 +128,21 @@ def dt_to_rhob(dt, method, a, b):
     """
         Integrates the density log
 
-           Parameters
-           ----------
-           dt : array : units=us/foot
-               The dt
-           method : scalar
-               Which method should we use (Linear or Power)
-           a : scalar
-               Parameter A to the equation
-           b : scalar
-               Parameter B to the equation
+        Parameters
+        ----------
+        dt : array : units=us/foot
+            The dt
+        method : scalar
+            Which method should we use (Linear or Power)
+        a : scalar
+            Parameter A to the equation
+        b : scalar
+            Parameter B to the equation
 
-
-           Returns
-           -------
-           density_log : array : units=gram/cc
-               The new density log
+        Returns
+        -------
+        density_log : array : units=gram/cc
+            The new density log
     """
     return
 
@@ -151,21 +150,21 @@ def change_salt_velocities(dt, density, salt_density, salt_speed):
     """
         Integrates the density log
 
-           Parameters
-           ----------
-           dt : array : units=us/foot
-               The dt
-           density : array : units=gram/cc
-               The current density log
-           salt_density : scalar  : units=gram/cc
-               the replacement density
-           salt_speed : scalar: units= us/foot
-               speed to replace at
+        Parameters
+        ----------
+        dt : array : units=us/foot
+            The dt
+        density : array : units=gram/cc
+            The current density log
+        salt_density : scalar  : units=gram/cc
+            the replacement density
+        salt_speed : scalar: units= us/foot
+            speed to replace at
 
 
-           Returns
-           -------
-           density_log : array : units=gram/cc
-               The new density log
+        Returns
+        -------
+        density_log : array : units=gram/cc
+            The new density log
     """
     return

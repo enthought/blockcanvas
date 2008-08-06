@@ -25,33 +25,36 @@ from enthought.numerical_modeling.units.unit_array import UnitArray
 from enthought.numerical_modeling.units.unit_scalar import UnitScalar
 
 def manipulate_units(units, converters, *args):
-    """ Convert the *args to the specified units using the converters.
+    """ Convert the \*args to the specified units using the converters.
 
-        '*args' is the list of variables to have their units converted. 'units'
-        is the same length of '*args'. units[0] is the new units for args[0].
-        converters is a dictionary of conversion functions that are used to
-        do the unit conversion.  The function is general purpose in that
-        it could do a unit conversion.  It could overwrite the objects units
-        or whatever.  The behavior is up to the converter functions.
+        This function is general purpose in that it could do a unit conversion, 
+        it could overwrite the objects' units, or whatever. The behavior is up
+        to the converter functions.
 
-        inputs:
-            units      A sequence of unit objects the same length as *args.
-            converters A dictionary of conversion functions with
-                       (type, func(val, unit)).
-            *args      List of values to be converted.
+        Parameters
+        ----------
+        units      
+            A sequence of unit objects the same length as \*args, where 
+            ``units[n]`` is the new units for ``args[n]``.
+        converters 
+            A dictionary of conversion functions with (type, func(val, unit)).
+        \*args      
+            List of variables to be converted.
 
-        returns:
-            results    List cooresponding to *args of converted values.
+        Returns
+        -------
+        results    
+            List cooresponding to \*args of converted values.
 
-        fixme:  I haven't thought about flexibility much yet.
-                We might want to be able to change this method out during
-                execution.  We also might want to be able to swap out
-                converters.  Further, a specific method might want to have its
-                own conversion method?
-
-        fixme: We likely want some logging options here so that we can report
-               to users what unit conversions are happening.
     """
+        #fixme:  I haven't thought about flexibility much yet.
+        #        We might want to be able to change this method out during
+        #        execution.  We also might want to be able to swap out
+        #        converters.  Further, a specific method might want to have its
+        #        own conversion method?
+
+        #fixme: We likely want some logging options here so that we can report
+        #       to users what unit conversions are happening.
 
     # Ensure there are units for each argument.
     if len(units)!=len(args):

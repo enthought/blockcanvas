@@ -13,24 +13,25 @@ class FunctionLibrary(HasTraits):
     """ Keep track of a list of modules/packages to search for functions.
     
         The typical tree cases for a module are:
-            1. The module is a pure python module, and we can search its code.
-            2. The module is an extension module, so it has a file, but it is
-               not python code we can parse.  We have to import this 
-               type of module to find its functions.
-            3. The module is a builtin module (like sys), and it doesn't have
-               a file.  Like an extension module, this must be imported
-               and searched.
-            4. The module is a package name.  In this case, we search all the
-               modules the package contains.   
-            5. [don't handle currently] The specified value is a file or a 
-               directory name.   
             
-        fixme: I'm not sure this will handle zip files imports correctly.
-        fixme: We do not do anything to try and update a cache if a module
-               on disk changes.
-        fixme: If we cached module file names, their time stamp, and 
-               the functions included in them, startup would be much faster.
+        1. The module is a pure python module, and we can search its code.
+        2. The module is an extension module, so it has a file, but it is
+           not python code we can parse.  We have to import this 
+           type of module to find its functions.
+        3. The module is a builtin module (like sys), and it doesn't have
+           a file.  Like an extension module, this must be imported
+           and searched.
+        4. The module is a package name.  In this case, we search all the
+           modules the package contains.   
+        5. [don't handle currently] The specified value is a file or a 
+           directory name.   
     """
+            
+        #fixme: I'm not sure this will handle zip files imports correctly.
+        #fixme: We do not do anything to try and update a cache if a module
+        #       on disk changes.
+        #fixme: If we cached module file names, their time stamp, and 
+        #       the functions included in them, startup would be much faster.
     
     ##########################################################################
     # FunctionLibrary traits

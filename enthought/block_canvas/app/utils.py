@@ -51,16 +51,17 @@ def create_unique_project_name( dir_name, project_name ):
 def create_geo_context( context, c_name = None ):
     """ Create a data context from the NumericContext
 
-        Parameters:
+        Parameters
         ----------
         context : NumericContext
+            The source for the new context.
         c_name  : Str
             Name to be given to the geo-context.
 
         Returns:
         --------
         geo_context : GeoContext
-            which has the same context items as the context.
+            Has the same context items as the context.
 
     """
 

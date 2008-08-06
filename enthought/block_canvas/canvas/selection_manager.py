@@ -53,9 +53,12 @@ class SelectionManager(HasTraits):
             is already in the selection list, it is (usually) removed from the
             list.
 
-            item -- An object implements ISelectable
-            allow_remove -- Is the manager allowed to remove the item from the
-                            selection? 
+            Parameters
+            ----------
+            item : ISelectable
+                An object to be selected or deselected.
+            allow_remove : Boolean
+                Is the manager allowed to remove the item from the selection? 
         """
 
         if item in self.selection:

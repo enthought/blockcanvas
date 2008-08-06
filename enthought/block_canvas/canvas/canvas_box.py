@@ -45,19 +45,26 @@ class CanvasBox(Container, SelectableComponentMixin):
 
     # TextField cells for the inputs and outputs
     input_fields = List(Any)
+    # TextField cells for the outputs
     output_fields = List(Any)
 
-    # Height and padding for each TextField cell being laid out
+    # Height for each TextField cell being laid out.
     # Width is determined later by measuring the extents of the text.
     cell_height = Float(12.0)
+
+    # Padding for each TextField cell being laid out
+    # Width is determined later by measuring the extents of the text.
     cell_padding = Float(1.0)
 
-    # Location of certain useful points in the box
-    # fixme: These would be more generic if they were "named" connection points,
-    #        and a Box had a list (or dict) of connection points that indicated
-    #        locations on the box.  There would be a default set ("upper-left",
-    #        "center", etc.), but users could add new ones.
+    
+    # FIXME: These would be more generic if they were "named" connection points,
+    # and a Box had a list (or dict) of connection points that indicated
+    # locations on the box.  There would be a default set ("upper-left",
+    # "center", etc.), but users could add new ones.
+    
+    # Location of the top center point of the box
     top_center = Property(depends_on=['position', 'bounds'])
+    # Location of the bottom center point of the box.
     bottom_center = Property(depends_on=['position', 'bounds'])
 
     # Displayed label

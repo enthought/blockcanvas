@@ -125,8 +125,9 @@ class SearchTableAdapter(TabularAdapter):
     ##########################################################################
 
     # Font used for rendering text in each row.
-    # fixme: Although Arial 10 is the default wx font, we really should
-    #       querying something and adding a bold 'style' to it.
+    #
+    # FIXME: Although Arial 10 is the default wx font, we really should
+    # querying something and adding a bold 'style' to it.
     normal_font = Font("Arial 9")
 
 

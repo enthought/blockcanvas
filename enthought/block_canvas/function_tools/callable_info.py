@@ -76,8 +76,10 @@ class CallableInfo(HasTraits):
     ##########################################################################
     
     # The package and module that this callable comes from.  The canonical 
-    # import statementthat would import this object is:
-    #     "from %(module) import %(name)
+    # import statementthat would import this object is::
+    #
+    #     from %(module) import %(name)
+    #
     # If the function does not have a module, the string is empty.
     module = Str
 

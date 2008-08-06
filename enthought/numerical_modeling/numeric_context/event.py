@@ -8,7 +8,7 @@ from enthought.util.sequence import disjoint
 def merge_trait_dict_events(a, b, dict_):
     ''' Merge TraitDictEvent 'b' into TraitDictEvent 'a'.
 
-        'dict_' should be a mapping object that gives the current value of
+        ``dict_`` should be a mapping object that gives the current value of
         'changed' items in the events.
 
         Assumes that 'b' is an event generated immediately after event 'a'.

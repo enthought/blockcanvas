@@ -1,10 +1,10 @@
 """ Application specific preferences Dialog.
-
-    fixme: Perhaps sub-class from the orginal preferences handler?
-    fixme: We need the modules list to be a table or tabular editor.
-    fixme: Half of this dialog is live (filters, etc.) and half is 
-           modal (modules).  That seems a little goofy.
 """
+
+    #fixme: Perhaps sub-class from the orginal preferences handler?
+    #fixme: We need the modules list to be a table or tabular editor.
+    #fixme: Half of this dialog is live (filters, etc.) and half is 
+    #       modal (modules).  That seems a little goofy.
 
 # Enthought library imports.
 from enthought.traits.api import List, Str

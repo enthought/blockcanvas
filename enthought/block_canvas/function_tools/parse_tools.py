@@ -53,23 +53,29 @@ def find_local_defs(ast):
 def function_arguments_from_function(func):
     """ Given a function, return its args, keywords, and full argument list.
 
-        func is a function object.
+        Parameters
+        ----------
+        func
+            a function object.
 
-        returns:
-           args          List of (name, default) argument pairs.  name is
-                         always a string.  default is None if it is not 
-                         present.  Otherwise, it is a string. version of the
-                         default. 
-           var_args      Name of the *args argument.  Empty if it missing.            
-           kw_args       Name of the **kw argument.  Empty if it missing.
-           
-        fixme: This is duplicated from:
-            enthought\numerical_modeling\units\function_signature.py
-        fixme: Rework this methods so that it returns 
-            args, var_args, kw_args 
-            args should be a list of (name, default) strings.  If default
-            is not set, it should be None.
+        Returns
+        -------
+        args          
+            List of (name, default) argument pairs.  `name` is always a string.
+            `default` is None if it is not present.  Otherwise, it is a string
+            version of the default. 
+        var_args      
+            Name of the \*args argument.  Empty if it missing.            
+        kw_args       
+            Name of the \*\*kw argument.  Empty if it missing.
     """
+           
+        #fixme: This is duplicated from:
+        #    enthought\numerical_modeling\units\function_signature.py
+        #fixme: Rework this methods so that it returns 
+        #    args, var_args, kw_args 
+        #    args should be a list of (name, default) strings.  If default
+        #    is not set, it should be None.
 
     # Number of arguments to the function.
     arg_count = func.func_code.co_argcount
@@ -232,7 +238,7 @@ def function_arguments_from_ast(ast):
         This handles finding the keyword arguments and trying to convert
         them from their AST representation into something that is useful
         as a default argument.  We also track whether the input arguments
-        include a varargs (*args) and kwargs (**kw) style argument.  If
+        include a varargs (``*args``) and kwargs (``**kw``) style argument.  If
         they do, we assign the names to the varargs and kwargs traits on
         the class.
     """

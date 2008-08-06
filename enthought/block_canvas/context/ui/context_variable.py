@@ -140,11 +140,10 @@ class ContextVariable(HasTraits):
         """ Fake a length-3 sequence interface to implement our desired sort
         order.
 
-            object[0] = name
-            object[1] = None;   instead of value; in order to avoid sorting by
-                                value; which gives errors when arrays are
-                                sorted.
-            object[2] = None;   instead of type
+        - object[0] = name
+        - object[1] = None; instead of value; in order to avoid sorting by
+          value; which gives errors when arrays are sorted.
+        - object[2] = None; instead of type
         """
         if index == 0:
             return self.name

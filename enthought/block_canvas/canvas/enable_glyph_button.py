@@ -6,12 +6,12 @@ import enable_glyph_lib
 
 class EnableGlyphButton(Component):
     """ Clickable glyph button for an Enable Canvas.
-
-        fixme: We don't handle a different image for clicked and we don't
-               offset the image or anything like that.  We need to do this.
-               Does it require a timer?
-        fixme: We may want an image alpha set up for this.
     """
+
+        #fixme: We don't handle a different image for clicked and we don't
+        #       offset the image or anything like that.  We need to do this.
+        #       Does it require a timer?
+        #fixme: We may want an image alpha set up for this.
 
     # Active glyph to render
     active_glyph = Property

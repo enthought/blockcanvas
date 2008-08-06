@@ -36,9 +36,10 @@ class Application(HasTraits):
     function_library = Instance(FunctionLibrary, args=())
     
     # Window for displaying HTML help for functions.
-    # fixme: This should not live here...
-    #        It would be better to re-factor this into an active_help_item
-    #        trait with an HTML Editor...
+    #
+    # FIXME: This should not live here.
+    # It would be better to re-factor this into an active_help_item
+    # trait with an HTML Editor.
     html_window = Instance(HtmlInfoUI, args=())
 
     # Status bar text
@@ -155,11 +156,11 @@ class Application(HasTraits):
         
             Currently selected items are unselected.
             
-            fixme: We really should have an execution_view_model that
-                   keeps track of selection, etc. so that views other
-                   than the canvas can react to and control changes in
-                   a more coherent way.
         """
+            #fixme: We really should have an execution_view_model that
+            #       keeps track of selection, etc. so that views other
+            #       than the canvas can react to and control changes in
+            #       a more coherent way.
         controller = self.project.active_experiment.controller
         
         # Clear out current selection so that we don't end up trying
@@ -194,9 +195,9 @@ class Application(HasTraits):
     
     def new_project(self):
         """ Set the active project on the application.
-            fixme: This is no different than setting the actual trait.
-                   perhaps get rid of it.
         """        
+            #fixme: This is no different than setting the actual trait.
+            #       perhaps get rid of it.
         self.project = Project()
             
             

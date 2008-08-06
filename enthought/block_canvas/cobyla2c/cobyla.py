@@ -34,7 +34,8 @@ the values of the constraints (as a list of values); or None, to abort the
 minimization.
 
 COBYLA will try to make all the values of the constraints positive.
-So if you want to input a constraint j such as x[i] <= MAX, set:
+So if you want to input a constraint j such as x[i] <= MAX, set::
+    
   con[j] = MAX - x[i]
 """
 
@@ -108,36 +109,47 @@ def minimize(function, x, low = None, up = None, m = None,
 	
 	returns (rc, nfeval, x).
 
-	Inputs:
-	function  : the function to minimize. Must take one argument, x and return
-	            f and con, where f is the value of the function and con is
-	            the value of the constraints (a list of m floats)
-	            if the function returns None, the minimization is aborted.
-	x         : initial estimate (a list of floats)
-	low, up   : the bounds (lists of floats)
-	            set low[i] to None to remove the lower bound
-	            set up[i] to None to remove the upper bound
-	            if low == None, the lower bounds are removed.
-	            if up == None, the upper bounds are removed.
-	            low and up defaults to None
-	m         : the number of constraints.
-	            if None, the correct value will be selected by calling the
-	            function once.
-	rhobeg    : a reasonable initial change to the variables
-	            defaults to 0.5
-	rhoend    : the required accuracy for the variables
-	            defaults to 1.0e-6
-	messages  : value to select messages display during minimization
-	            values defined in the MSGS dict.
-	            defaults to MGS_NONE
-	maxfun    : max. number of function evaluation
-	            if None, maxnfeval is set to max(1000, 100*len(x0))
-	            defaults to None
+	Parameters
+    ----------
+	function  
+        The function to minimize. Signature must be::
+            
+            f, con = function(x)
+            
+        where *f* is the value of the function and *con* is
+	    the value of the constraints (a list of m floats).
+	    If the function returns None, the minimization is aborted.
+	x         
+        initial estimate (a list of floats)
+	low : list of floats
+        The lower bounds. Set low[i] to None to remove the lower bound.
+        If None (the default), the lower bounds are removed.
+    up : list of floats
+        The upper bounds. Set up[i] to None to remove the upper bound.
+	    If None (the default), the upper bounds are removed.
+	m         
+        The number of constraints. If None, the correct value will be selected
+        by calling the function once.
+	rhobeg    
+        A reasonable initial change to the variables. Defaults to 0.5.
+	rhoend    
+        The required accuracy for the variables. Defaults to 1.0e-6.
+	messages  
+        Value to select messages display during minimization. Values are 
+        defined in the MSGS dict. Defaults to MGS_NONE.
+	maxfun 
+        Maximum number of function evaluations. If None (the default), 
+        maxnfeval is set to max(1000, 100*len(x0)).
 
-	Outputs:
-	rc        : return code as defined in the RCSTRINGS dict
-	nfeval    : the number of function evaluations
-	x         : the solution (a list of floats)"""
+	Returns
+    -------
+	rc        
+        Return code as defined in the RCSTRINGS dict
+	nfeval    
+        The number of function evaluations
+	x         
+        the solution (a list of floats)
+    """
 	
 	if m == None:
 		res = function(x)

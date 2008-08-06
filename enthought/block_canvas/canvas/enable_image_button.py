@@ -7,11 +7,11 @@ from string_image import StringImage
 class EnableImageButton(Component):
     """ Clickable image for an Enable Canvas.
 
-        fixme: We don't handle a different image for clicked and we don't
-               offset the image or anything like that.  We need to do this.
-               Does it require a timer?
-        fixme: We may want an image alpha set up for this.
     """
+        #fixme: We don't handle a different image for clicked and we don't
+        #       offset the image or anything like that.  We need to do this.
+        #       Does it require a timer?
+        #fixme: We may want an image alpha set up for this.
 
     # Image used to draw button normally
     normal_image = StringImage

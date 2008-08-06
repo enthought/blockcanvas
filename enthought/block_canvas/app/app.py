@@ -86,8 +86,8 @@ class Application(HasTraits):
     file_directory = Str()
    
     # Window for displaying HTML help for functions.
-    # fixme: It would be better to re-factor this into an active_help_item
-    #        trait with an HTML Editor...
+    # FIXME: It would be better to re-factor this into an active_help_item
+    # trait with an HTML Editor.
     html_window = Instance(HtmlInfoUI, args=())
 
     # Status bar text
@@ -265,6 +265,7 @@ class Application(HasTraits):
         Parameters
         ----------
         context : IContext
+            The context to be loaded.
         mode : str, optional
             If 'add', add all of the data to the current context. If 'new',
             simply add to the list of contexts. If 'substitute', replace the

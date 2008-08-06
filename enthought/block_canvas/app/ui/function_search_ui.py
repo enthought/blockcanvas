@@ -8,11 +8,11 @@
     
     GUI code for instrument search.
 
-    fixme: Need to split out Add New Function stuff into a different class
-           so that it is more easily tested.
-    fixme: Get drag/drop and double click working.
-    fixme: Not been tested against a library with extension functions in it.
 """
+#    fixme: Need to split out Add New Function stuff into a different class
+#           so that it is more easily tested.
+#    fixme: Get drag/drop and double click working.
+#    fixme: Not been tested against a library with extension functions in it.
 
 # Enthought library imports.
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, \
@@ -104,9 +104,9 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
 
     def handler_preferences_changed(self, info):
         """ Display the Search preference settings as modal dialog.
-            fixme: Shouldn't have to override this function.  Instead set
-                   preferences_view trait.
         """
+            #fixme: Shouldn't have to override this function.  Instead set
+            #       preferences_view trait.
         info.object.edit_traits(function_search_preferences_view,
                                 kind='livemodal')
 

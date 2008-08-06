@@ -234,8 +234,10 @@ def get_module_path(module_name):
     """ Given a module, get an absolute path to it.
 
         pkgutil, instead of imp, is used for 2 reasons:
+            
           * pkgutil works with dotted names
           * pkgutil works with eggs
+          
         There are a couple of downsides, the methods we use are not
         documented and the method was added in python 2.5. For convenience,
         _pkgutil is used instread, which is copied from Python 2.5 to support

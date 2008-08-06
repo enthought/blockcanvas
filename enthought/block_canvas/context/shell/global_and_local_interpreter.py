@@ -14,7 +14,7 @@ from enthought.numerical_modeling.numeric_context.api import NumericContext, \
     EventDict
 
 
-# regular expression to find "from xyz import *"
+# regular expression to find "from xyz import \*"
 import_all = re.compile(r"^from\s\s*.*\s\s*import\s\s*\*")
 
 class GlobalAndLocalInterpreter(Interpreter):
@@ -38,7 +38,7 @@ class GlobalAndLocalInterpreter(Interpreter):
         the code is executed; it defaults to a newly created
         NumericContext.  The optional globals argument is the global namespace
         for function evaluation.  Note that, unlike locals, this *must* be
-        dictionary.  This is so that 'from xyz import *' will work.
+        dictionary.  This is so that 'from xyz import \*' will work.
 
         The variable "__name__" is set to "__console__" and "__doc__"
         is set to None.
@@ -154,7 +154,7 @@ class GlobalAndLocalInterpreter(Interpreter):
     def runcode_global(self, code):
         """ Execute a code object in *only* the global context.
 
-            This method makes it possible to run "from xyz import *" from
+            This method makes it possible to run "from xyz import \*" from
             the command line.  This isn't allowed if a non-dictionary local
             namespace is used.  Note that this method will not work if
             the global dictionary

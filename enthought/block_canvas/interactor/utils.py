@@ -15,14 +15,17 @@ from enthought.units.unit_manager import unit_manager
 
 def load_range_files( file_dict ):
     """ Load the files for determining ranges of interactors, plots, etc. for
-        the block_unit
+        the block_unit.
 
         file_dict should give the following information:
-        file_dict['global'] gives path of file containing users' global
-        preferences; file_dict['project'] contains the preferences set for
-        the project
+            
+        - file_dict['global'] gives path of file containing users' global
+          preferences.
+        - file_dict['project'] contains the preferences set for the project
+        
         The file-formats for these files should be as shown; and the values
-        used should be in the imperial unit-system, if required:
+        used should be in the imperial unit-system, if required::
+            
             <variable_name1>   <low_value> <high_value>
 
         Parameters:
@@ -34,8 +37,9 @@ def load_range_files( file_dict ):
         --------
         range_dict : Dict
             The dictionary contains names for lookup and tuples as values,
-            where the tuple gives (low, high) value
-            eg: range_dict['psonic'] = (psonic_low_value, psonic_high_value)
+            where the tuple gives (low, high) value, for example::
+                
+                range_dict['psonic'] = (psonic_low_value, psonic_high_value)
     """
 
     # Global units preferences.

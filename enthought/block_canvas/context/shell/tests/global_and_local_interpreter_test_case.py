@@ -81,7 +81,7 @@ class GlobalAndLocalInterpreterTestCase(unittest.TestCase):
         self.assertFalse(self.globals.has_key(self.input_name))
 
     def test_wildcard_style_imports(self):
-        """ Can we use 'from xyz import *'?
+        """ Can we use 'from xyz import \*'?
         """
         self.interpreter.push("from sys import *")
         self.assertTrue(self.globals.has_key('exc_info'))

@@ -199,10 +199,13 @@ class ExecutionModel(HasTraits):
         globals : dict, optional
             The global namespace for the code.
         inputs : list of str, optional
+            Names that can be used to restrict the execution to portions of the
+            code. Ideally, only code that is affected by these inputs variables
+            is executed.
         outputs : list of str, optional
-            Names which may be used to restrict the execution to portions of the
-            code. Ideally, only code that is affected by the inputs variables
-            and affects the outputs variables will be executed.
+            Names that can be used to restrict the execution to portions of the
+            code. Ideally, only code that affects these outputs variables is 
+            executed.
         """
         if globals is None:
             globals = {}

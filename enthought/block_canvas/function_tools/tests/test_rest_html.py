@@ -88,26 +88,26 @@ def proper_func2():
     """
     Fixes the density log
 
-       Parameters
-       ----------
-       density_log : array : units=g/cc
-           The Density
-       index : array : units=ft
-           The index for the density
-       water_depth : scalar : units=ft
-           How much water are we in?
-       kb : scalar : units=ft
-           The Kelly Bushing
-       td : scalar : units=ft
-           Total Depth
-       density_fill_value : scalar : units=g/cc
-           Value for missing densities
-
-       Returns
-       -------
-       density_log : array : units=g/cc
-           The new density log
-       index : array : units=ft
-           The new index
+    Parameters
+    ----------
+    density_log : array : units=g/cc
+       The Density
+    index : array : units=ft
+       The index for the density
+    water_depth : scalar : units=ft
+       How much water are we in?
+    kb : scalar : units=ft
+       The Kelly Bushing
+    td : scalar : units=ft
+       Total Depth
+    density_fill_value : scalar : units=g/cc
+       Value for missing densities
+    
+    Returns
+    -------
+    density_log : array : units=g/cc
+       The new density log
+    index : array : units=ft
+       The new index
     """
     pass
