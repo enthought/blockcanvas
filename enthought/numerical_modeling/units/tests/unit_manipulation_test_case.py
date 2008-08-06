@@ -7,7 +7,7 @@
 import unittest
 
 # Numeric library imports
-from numpy import array, all, allclose, ndarray #@UnresolvedImport
+from numpy import array, all, allclose, ndarray
 
 # Enthought library imports
 from enthought.units.unit import InvalidConversion

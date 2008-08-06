@@ -9,7 +9,7 @@ import operator
 from nose import SkipTest
 
 # Numeric library imports
-from numpy import array, all, allclose, ndarray, sqrt #@UnresolvedImport
+from numpy import array, all, allclose, ndarray, sqrt
 
 # Enthought library imports
 from enthought.units.unit import InvalidConversion, dimensionless

@@ -15,7 +15,7 @@
 """
 
 # Numeric library imports
-from numpy import ndarray #@UnresolvedImport
+from numpy import ndarray
 
 # Enthought library imports
 import enthought.units as units
