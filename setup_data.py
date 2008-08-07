@@ -20,9 +20,9 @@ ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b2')  # -- all from enthought.blo
 ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b2')
 ETSDEVTOOLS = etsdep('ETSDevTools', '3.0.0b2')  # -- all from enthought.block_canvas' use of enthought.testing.api
 SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b2')
-TRAITS_UI = etsdep('Traits[ui]', '3.0.0')
-TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0')
-TRAITSGUI = etsdep('TraitsGUI', '3.0.0')
+TRAITS_UI = etsdep('Traits[ui]', '3.0.1b1')
+TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.1b1')
+TRAITSGUI = etsdep('TraitsGUI', '3.0.1b1')
 
 
 # A dictionary of the setup data information.
