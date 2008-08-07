@@ -49,5 +49,5 @@ INFO = {
         TRAITS_UI,
         ],
     'name': 'BlockCanvas',
-    'version': '3.0.0b2',
+    'version': '3.0.0',
     }
