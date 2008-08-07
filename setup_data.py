@@ -14,15 +14,15 @@ def etsdep(p, min, max=None, literal=False):
 
 
 # Declare our ETS project dependencies.
-APPTOOLS = etsdep('AppTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.undo
-CHACO = etsdep('Chaco', '3.0.0b1')
-ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
-ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b1')
-ETSDEVTOOLS = etsdep('ETSDevTools', '3.0.0b1')  # -- all from enthought.block_canvas' use of enthought.testing.api
-SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b1')
-TRAITS_UI = etsdep('Traits[ui]', '3.0.0b1')
-TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0b1')
-TRAITSGUI = etsdep('TraitsGUI', '3.0.0b1')
+APPTOOLS = etsdep('AppTools', '3.0.0b2')  # -- all from enthought.block_canvas' use of enthought.undo
+CHACO = etsdep('Chaco', '3.0.0b2')
+ENABLE_TRAITS = etsdep('Enable[traits]', '3.0.0b2')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
+ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.0b2')
+ETSDEVTOOLS = etsdep('ETSDevTools', '3.0.0b2')  # -- all from enthought.block_canvas' use of enthought.testing.api
+SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.0b2')
+TRAITS_UI = etsdep('Traits[ui]', '3.0.0')
+TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.0.0')
+TRAITSGUI = etsdep('TraitsGUI', '3.0.0')
 
 
 # A dictionary of the setup data information.
