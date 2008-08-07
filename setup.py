@@ -21,6 +21,12 @@ other applications.
 The BlockCanvas project relies on included libraries that allow multiple data
 sets using Numeric arrays to be incorporated in a Traits-based model in a
 way that is simple, fast, efficient, and consistent.
+
+Prerequisites
+-------------
+If you want to build BlockCanvas from source, you must first install 
+`setuptools <http://pypi.python.org/pypi/setuptools/0.6c8>`_.
+
 """
 
 
