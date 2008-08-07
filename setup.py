@@ -29,7 +29,7 @@ from distutils.command.build import build as distbuild
 from make_docs import HtmlBuild
 from pkg_resources import DistributionNotFound, parse_version, require, \
     VersionConflict
-from setup_data import ETSDEVTOOLS
+#from setup_data import ETSDEVTOOLS
 from setuptools import setup, Extension, find_packages
 from setuptools.command.develop import develop
 import os
@@ -41,6 +41,8 @@ import zipfile
 setup_data = dict(__name__='', __file__='setup_data.py')
 execfile('setup_data.py', setup_data)
 INFO = setup_data['INFO']
+# FIXME: Same thing as above. Uncomment import on line 32 when fixed.
+ETSDEVTOOLS = setup_data['ETSDEVTOOLS']
 
 # Pull the description values for the setup keywords from our file docstring.
 DOCLINES = __doc__.split("\n")
