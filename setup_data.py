@@ -31,6 +31,7 @@ INFO = {
         # All non-ets dependencies should be in this extra to ensure users can
         # decide whether to require them or not.
         'nonets': [
+            "configobj",
             "docutils",
             "Geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
             'PIL',
