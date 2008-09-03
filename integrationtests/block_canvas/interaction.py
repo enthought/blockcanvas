@@ -7,7 +7,7 @@
 
 # Enable the trace() function that is handy as a replacement for print
 try:
-    from enthought.block_canvas.debug.injectrace import trace
+    from enthought.debug.injectrace import trace
 except ImportError:
     pass
 import os
