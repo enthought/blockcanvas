@@ -33,7 +33,7 @@ INFO = {
         'nonets': [
             "configobj",
             "docutils",
-            "Geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py
+            #"Geo",    # we use geo.cow (a different enthought repo) in /ui/interactor.py but commenting this out since Geo isn't available on PyPi
             'PIL',
             "numpy >= 1.1.0",
             ],
