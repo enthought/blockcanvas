@@ -61,7 +61,8 @@ class BlockCanvas(Canvas):
         # FIXME: Removing selection tool until we have better handle on
         #        events on canvas.
         #self.tools.append(CanvasSelectionTool(self))
-        self.wiring_tool = WiringTool(self)
+        self.wiring_tool = WiringTool(component=self)
+        self.wiring_tool.component = self
         self.underlays.append(CanvasGrid(component=self))
 
     def get_bounding_box(self):
