@@ -254,11 +254,12 @@ class UnitArray(numpy.ndarray):
         su = getattr(self, 'units', dimensionless)
         ou = getattr(other, 'units', dimensionless)
         if su == None and ou == None:
+            s = self
             u = None
         else:
             s = self.as_units(ou)
             u = ou
-        result = super(UnitArray, s).__sub__(other)
+        result = super(UnitArray, s).__rsub__(other)
         result.units = u
         return result
 
