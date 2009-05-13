@@ -68,8 +68,10 @@ class PassUnitsTestCase(unittest.TestCase):
         b = 1
         result = a - b
         self.assertEqual(result.units, dimensionless)
+        self.assertEqual(result, UnitArray([0,1,2], units=dimensionless))
         result = b - a
         self.assertEqual(result.units, dimensionless)
+        self.assertEqual(result, UnitArray([0,-1,-2], units=dimensionless))
         c = array([3,2,1])
         result = a - c
         self.assertEqual(result.units, dimensionless)
