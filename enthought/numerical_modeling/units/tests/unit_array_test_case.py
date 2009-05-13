@@ -75,8 +75,10 @@ class PassUnitsTestCase(unittest.TestCase):
         c = array([3,2,1])
         result = a - c
         self.assertEqual(result.units, dimensionless)
+        self.assertEqual(result, UnitArray([-2,0,2], units=dimensionless))
         result = c - a
         self.assertEqual(result.units, dimensionless)
+        self.assertEqual(result, UnitArray([2,0,-2], units=dimensionless))
 
     def test_divide_pass(self):
         a = UnitArray([1,2,3],units=meters/second)
