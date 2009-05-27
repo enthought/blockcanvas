@@ -1,12 +1,13 @@
 # Standard library imports
 import copy
 from string import Template
+import re
 
 # Standard third party library imports
-from docutils.frontend import OptionParser
-import docutils.nodes as nodes
-from docutils.parsers.rst import Parser
-from docutils.utils import new_document
+#from docutils.frontend import OptionParser
+#import docutils.nodes as nodes
+#from docutils.parsers.rst import Parser
+#from docutils.utils import new_document
 
 import numpy
 
@@ -16,6 +17,57 @@ from function_signature import (call_signature, def_signature,
                                 function_arguments)
 from unit_manipulation import (convert_units, set_units, have_some_units,
     strip_units)
+
+## Parse the lines using docutil parser to get a document-tree
+#settings = OptionParser(components=(Parser,)).get_default_values()
+## Silence warnings.
+#settings.report_level = 3
+
+section_marker = re.compile(r'[!-/:-@[-`{-~]+ *$')
+
+def simple_parser(lines):
+    """ Parse a docstring for parameters and returns with unit notation
+    
+    Parameters
+    ----------
+    
+    lines : list of str
+        The lines of the text with the whitespace stripped.
+        
+    Returns
+    -------
+    
+    input_lines : list of str
+    output_lines : list of str
+        The lines of the 'parameters' and 'returns' sections which contain ':'
+    
+    Notes
+    -----
+    
+    This is a fast alternative to using docutils to parse restructured text in
+    docstrings, which is a comparatively expensive operation.  This version is
+    about 15 times faster.  This passes the same unit tests as the original.
+    """
+    last_line = ''
+    section = ''
+    input_lines = []
+    output_lines = []
+    for line in lines:
+        section_match = section_marker.match(line)
+        if section_match is not None:
+            if section_match.end() - section_match.start() >= len(last_line):
+                section = last_line.lower()
+        elif ':' in line:
+            if section == 'parameters':
+                input_lines.append(line)
+            elif section == 'returns':
+                output_lines.append(line)
+        last_line = line
+    print input_lines, output_lines
+    return input_lines, output_lines
+        
+    
+
 
 def has_units(func=None, summary='', doc='', inputs=None, outputs=None):
     r"""Function decorator: Wrap a standard python function for unit conversion.
@@ -138,50 +190,11 @@ def has_units(func=None, summary='', doc='', inputs=None, outputs=None):
 
     if func is not None:
 
-        # Strip indentation/whitespace before and after each line of docstring
+        ## Strip indentation/whitespace before and after each line of docstring
         stripped_lines = [line.strip()
                           for line in func.__doc__.expandtabs().splitlines()]
 
-        # Parse the lines using docutil parser to get a document-tree
-        settings = OptionParser(components=(Parser,)).get_default_values()
-        # Silence warnings.
-        settings.report_level = 3
-        document = new_document("Docstring", settings)
-        Parser().parse("\n".join(stripped_lines), document)
-
-        # Filter out children of the root of the document-tree which are tagged
-        # as "sections". Usually section has "title" and "paragraph" as
-        # children. The inputs and outputs we are looking for are in the
-        # "paragraph" section of the "section".
-
-        sections = [child for child in document.children
-                    if child.tagname.lower() == "section"]
-
-        # Inputs are in the section with title "Parameters" and outputs are in
-        # the section with title "Returns".
-
-        inputtext = [
-            section.children[1].children[0].data for section in sections
-            if 'parameters' in section['names']
-        ]
-        outputtext = [
-            section.children[1].children[0].data for section in sections
-            if 'returns' in section['names']
-        ]
-
-        # Data in a paragraph comprises of variables in separate lines.
-        # However each line for a variable is a combination of multiple lines,
-        # and we are interested in retrieving only the first line for each
-        # variable (in both inputs and outputs). Hence we join the separated
-        # lines and then split all of them
-
-        inputlines = "\n".join(inputtext).splitlines()
-        outputlines = "\n".join(outputtext).splitlines()
-
-        # Look for lines which give us the variable data with units
-
-        unitted_inputlines = [line for line in inputlines if ":" in line]
-        unitted_outputlines = [line for line in outputlines if ":" in line]
+        unitted_inputlines, unitted_outputlines = simple_parser(stripped_lines)
 
         # Process inputs and outputs to pass as parameters to _has_units
         # function
