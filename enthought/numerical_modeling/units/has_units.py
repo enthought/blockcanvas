@@ -3,12 +3,6 @@ import copy
 from string import Template
 import re
 
-# Standard third party library imports
-#from docutils.frontend import OptionParser
-#import docutils.nodes as nodes
-#from docutils.parsers.rst import Parser
-#from docutils.utils import new_document
-
 import numpy
 
 # Local imports
@@ -17,11 +11,6 @@ from function_signature import (call_signature, def_signature,
                                 function_arguments)
 from unit_manipulation import (convert_units, set_units, have_some_units,
     strip_units)
-
-## Parse the lines using docutil parser to get a document-tree
-#settings = OptionParser(components=(Parser,)).get_default_values()
-## Silence warnings.
-#settings.report_level = 3
 
 section_marker = re.compile(r'[!-/:-@[-`{-~]+ *$')
 
@@ -63,7 +52,6 @@ def simple_parser(lines):
             elif section == 'returns':
                 output_lines.append(line)
         last_line = line
-    print input_lines, output_lines
     return input_lines, output_lines
         
     
