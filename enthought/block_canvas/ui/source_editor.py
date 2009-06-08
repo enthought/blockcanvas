@@ -2,8 +2,10 @@
 import wx.stc as stc
 
 # Enthought library imports
-from enthought.traits.api import Int, Str, List, TraitError, Event
-from enthought.traits.ui.wx.code_editor import ToolkitEditorFactory, SourceEditor
+from enthought.traits.api import Int, Str, List, TraitError, Event, \
+    on_trait_change
+from enthought.traits.ui.wx.code_editor import ToolkitEditorFactory, \
+    SourceEditor, OKColor
 from enthought.pyface.util.python_stc import faces
 
 
@@ -13,6 +15,9 @@ class MarkableSourceEditor(ToolkitEditorFactory):
     # Trait definitions
     #---------------------------------------------------------------------------
 
+    # The lexer to use. Default is 'python'; 'null' indicates no lexing.
+    lexer = Str('python')
+
     # Object trait containing the list of line numbers to dim
     dim_lines = Str
 
@@ -20,7 +25,11 @@ class MarkableSourceEditor(ToolkitEditorFactory):
     # not specified, dark grey is used.
     dim_color = Str
 
+    # Object trait containing the list of line numbers to put squiggles under
     squiggle_lines = Str
+
+    # Object trait for the color of squiggles. If not specified, red is used.
+    squiggle_color = Str
     
     #---------------------------------------------------------------------------
     #  'Editor' factory methods:
@@ -54,89 +63,58 @@ class MarkableSourceEditor(ToolkitEditorFactory):
 
 class _MarkableSourceEditor(SourceEditor):
 
+    lexer = Int
+
     dim_lines = List(Int)
     dim_color = Str
+    _dim_style_number = Int(16) # 0-15 are reserved for the python lexer
     
     squiggle_lines = List(Int)
-
-    # Styles numbers 0-15 are reserved for the python lexer
-    _dim_style_number = Int(16)
-
+    squiggle_color = Str
      
     #---------------------------------------------------------------------------
-    # SourceEditor interace
+    # Editor interface
     #---------------------------------------------------------------------------
 
     def init(self, parent):
         """ Initialize and sync values.
         """
         super(_MarkableSourceEditor, self).init(parent)
+
+        self.control.SetLexer(stc.STC_LEX_CONTAINER)
+        self.control.Bind(stc.EVT_STC_STYLENEEDED, self._style_needed)
+
+        try:
+            self.lexer = getattr(stc, 'STC_LEX_' + self.factory.lexer.upper())
+        except AttributeError:
+            self.lexer = stc.STC_LEX_NULL
+
         self.sync_value(self.factory.dim_lines, 'dim_lines', 'from',
                         is_list=True)
-        self.sync_value(self.factory.squiggle_lines, 'squiggle_lines', 'from',
-                        is_list=True)
         if self.factory.dim_color == '':
-            self.dim_color = "dark grey"
+            self.dim_color = 'dark grey'
         else:
             self.sync_value(self.factory.dim_color, 'dim_color', 'from')
 
-        
-        
-    def update_object(self):
-        """ Handles user entering text in editor
+        self.sync_value(self.factory.squiggle_lines, 'squiggle_lines', 'from',
+                        is_list=True)
+        if self.factory.squiggle_color == '':
+            self.squiggle_color = 'red'
+        else:
+            self.sync_value(self.factory.squiggle_color, 'squiggle_color', 
+                            'from')
+
+    def update_editor(self):
+        """ Updates the editor when the object trait changes externally to the 
+            editor.
         """
-        if not self._locked:
-            try:
-                self.control.CallTipCancel()
-                self.value = self.control.GetText()
-
-                # Set the margin to show markers for error messages.
-                self.control.SetFoldFlags(16)
-                self.control.SetMarginType(2, stc.STC_MARGIN_SYMBOL)
-                self.control.SetMarginMask(2, stc.STC_MASK_FOLDERS)
-                self.control.SetMarginSensitive(2, True)
-                self.control.Bind(stc.EVT_STC_MARGINCLICK, self.on_margin_click)
-                                  
-                self.control.SetMarginWidth(2, 16)
-                #self.control.MarkerDefine(stc.STC_MARKNUM_FOLDER,
-                #                          stc.STC_MARK_CIRCLEPLUS,
-                #                          'red', 'black')
-                self.control.MarkerDefine(stc.STC_MARKNUM_FOLDEROPEN,
-                                          stc.STC_MARK_CIRCLEMINUS,
-                                          'red', 'black')
-
-                prev_pos = self.control.GetCurrentPos()
-                self._dim_color_changed()
-                self._dim_lines_changed()
-                self._refresh_squiggle_lines()
-                
-               # Ensure that the cursor ends up where the user had it before
-                # the styling
-                self.control.GotoPos(prev_pos)
-
-                self.control.Refresh()
-            except TraitError: pass
-
-    #---------------------------------------------------------------------------
-    # Static trait listeners
-    #---------------------------------------------------------------------------
-
-    def _dim_lines_changed(self):
-        self.control.SetLexer(stc.STC_LEX_PYTHON)
-        self.control.Colourise(0,-1)
-
-        # Set the lexer to custom mode so our manual style changes
-        # won't get nuked.
-        self.control.SetLexer(stc.STC_LEX_CONTAINER)
-                
-        for line in self.dim_lines:
-            self.control.GotoLine(line-1)
-            current_pos = self.control.GetCurrentPos()
-            line_length = self.control.GetLineEndPosition(line-1) - current_pos
-            # Set styling mask to only style text bits, not indicator bits
-            self.control.StartStyling(current_pos, 0x1f)
-            self.control.SetStyling(line_length, self._dim_style_number)
+        super(_MarkableSourceEditor, self).update_editor()
+        self.control.Colourise(0, -1)
         self.control.Refresh()
+
+    #---------------------------------------------------------------------------
+    # MarkableSourceEditor interface
+    #-------------------------------------------------------------------------
 
     def _dim_color_changed(self):
         self.control.StyleSetForeground(self._dim_style_number, self.dim_color)
@@ -144,79 +122,70 @@ class _MarkableSourceEditor(SourceEditor):
         self.control.StyleSetSize(self._dim_style_number, faces['size'])
         self.control.Refresh()
 
-    def _squiggle_lines_changed ( self ):
-        """ Set the marker margin and the squiggle lines
-        """
-        
-        marker_num = stc.STC_MARKNUM_FOLDEROPEN
-        for i in range(0, self.control.GetLineCount()):
-            self.control.MarkerDelete(i, marker_num)
-            
-        if len(self.squiggle_lines) == 0:
-            # reset the style
-            self.control.StartStyling(0, stc.STC_INDIC2_MASK)
-            self.control.SetStyling(self.control.GetLength(), stc.STC_INDIC0_MASK)
-            #self.control.CallTipCancel()
-        
-        else:
-            prev_pos = self.control.GetCurrentPos()
-            
-            self.control.MarkerAdd(self.squiggle_lines[0]-1, marker_num)            
-            self._refresh_squiggle_lines()
-            self.control.GotoPos(prev_pos)
-
+    def _squiggle_color_changed(self):
+        self.control.IndicatorSetStyle(2, stc.STC_INDIC_SQUIGGLE)
+        self.control.IndicatorSetForeground(2, self.squiggle_color)
         self.control.Refresh()
-                       
-    def _refresh_squiggle_lines(self):
-        """ Refreshing squiggle lines involves showing the tooltip for
-            traceback, as well as the squiggle lines for the code being
-            added.
-            
+
+    @on_trait_change('dim_lines, squiggle_lines')
+    def _style_document(self):
+        """ Force the STC to fire an STC_STYLENEEDED event for the entire 
+            document.
         """
+        self.control.ClearDocumentStyle()
+        self.control.Refresh()
+
+    def _style_needed(self, event):
+        position = self.control.GetEndStyled()
+        start_line = self.control.LineFromPosition(position)
+        end = event.GetPosition()
+        end_line = self.control.LineFromPosition(end)
+
+        # Fixes a strange a bug with the STC widget where creating a new line
+        # after a dimmed line causes it to mysteriously lose its styling
+        if start_line in self.dim_lines:
+            start_line -= 1
         
-        self.squiggle_lines.sort()
-        if len(self.squiggle_lines) and \
-               self.squiggle_lines[-1] > self.control.GetLineCount():
-            return
+        # Trying to Colourise only the lines that we want does not seem to work
+        # so we do the whole area and then override the styling on certain lines
+        if self.lexer != stc.STC_LEX_NULL:
+            self.control.SetLexer(self.lexer)
+            self.control.Colourise(position, end)
+            self.control.SetLexer(stc.STC_LEX_CONTAINER)
 
-        lines = [l.strip() for l in self.object.code.splitlines()]
-        final_squiggle_lines = self.squiggle_lines[:]
+        for line in xrange(start_line, end_line+1):
+            # We don't use LineLength here because it includes newline 
+            # characters. Styling these leads to strange behavior.
+            position = self.control.PositionFromLine(line)
+            style_length = self.control.GetLineEndPosition(line) - position
 
-        for line in self.squiggle_lines:
-            opened_paren = 0
-            for ll in range(line-1, len(lines)-1):
-                opened_paren += lines[ll].count('(')-lines[ll].count(')')
-                if lines[ll].endswith('\\') or opened_paren > 0:
-                    final_squiggle_lines.append(ll+2)
-                else:
-                    break
+            if line+1 in self.dim_lines:
+                # Set styling mask to only style text bits, not indicator bits
+                self.control.StartStyling(position, 0x1f)
+                self.control.SetStyling(style_length, self._dim_style_number)
+            elif self.lexer == stc.STC_LEX_NULL:
+                self.control.StartStyling(position, 0x1f)
+                self.control.SetStyling(style_length, stc.STC_STYLE_DEFAULT)
+                
+            if line+1 in self.squiggle_lines:
+                self.control.StartStyling(position, stc.STC_INDIC2_MASK)
+                self.control.SetStyling(style_length, stc.STC_INDIC2_MASK)
+            else:
+                self.control.StartStyling(position, stc.STC_INDIC2_MASK)
+                self.control.SetStyling(style_length, stc.STC_STYLE_DEFAULT)
 
-        for line in final_squiggle_lines:
-            self.control.GotoLine(line-1)
-            start = self.control.GetCurrentPos()
-            end = self.control.GetLineEndPosition(line-1)
-            
-            self.control.StartStyling(start, stc.STC_INDIC2_MASK)
-            self.control.SetStyling(end-start, stc.STC_INDIC2_MASK)
-            self.control.IndicatorSetStyle(2, stc.STC_INDIC_SQUIGGLE)
-            self.control.IndicatorSetForeground(2, 'red')
-
-
-    def on_margin_click(self, event):
-        if self.object.error:
-            print event.GetPosition()
-            #self.object.error.edit_traits()
-            self.control.CallTipShow(self.squiggle_lines[0],
-                                     self.object.error.traceback)
-            
+         
 # Test
 if __name__ == '__main__':
     from enthought.traits.api import HasTraits
-    from enthought.traits.ui.api import View, VSplit, Item
+    from enthought.traits.ui.api import View, Group, Item
 
     class Foo(HasTraits):
         code = Str
-        lines = List
+        dim_lines = List
+        dim_color = Str("dark grey")
+        squiggle_lines = List
+
     foo = Foo()
     foo.code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
                "from numpy import arange\n" \
@@ -227,10 +196,15 @@ if __name__ == '__main__':
                "t2 = mul(b, x)\n" \
                "t3 = add(t1,t2)\n" \
                "y = add(t3,c)\n"
-    foo.lines = [3, 4, 7, 8]
+    foo.dim_lines = [3, 8, 9]
+    foo.squiggle_lines = [1, 3, 5]
 
-    editor = MarkableSourceEditor(dim_lines='lines')
-    view = View(VSplit(Item('lines', show_label=False),
-                       Item('code', editor=editor, show_label=False)),
-                resizable=True)
+    editor = MarkableSourceEditor(dim_lines='dim_lines',
+                                  dim_color='dim_color',
+                                  squiggle_lines='squiggle_lines')
+    view = View(Group(Item('dim_lines'),
+                      Item('dim_color'),
+                      Item('squiggle_lines'),
+                      Item('code', editor=editor, show_label=False)),
+                width=800, height=600, resizable=True)
     foo.configure_traits(view=view)
