@@ -5,8 +5,7 @@
 """
 
 # Enthought library imports.
-from enthought.traits.api import Any, Property, Event, Str, Font, Bool
-                                 
+from enthought.traits.api import Any, Property, Event, Str, Font, Bool, Dict
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
                            Handler, Label, Group, TabularEditor
 from enthought.traits.ui.tabular_adapter import TabularAdapter
@@ -143,6 +142,7 @@ class SearchTableAdapter(TabularAdapter):
 
     # Image displayed next to search item.
     image = Property
+    icon_mapping = Dict({ 'function' : ImageResource('function_variable') })
 
 
     ##########################################################################
@@ -178,7 +178,7 @@ class SearchTableAdapter(TabularAdapter):
     ##########################################################################
 
     def get_font(self, object, trait, row):
-        """ The default font is to tall for the table rows.  sigh...             
+        """ The default font is to tall for the table rows. sigh...
         """
         return self.normal_font
 
@@ -205,7 +205,7 @@ class SearchTableAdapter(TabularAdapter):
         """
 
         if self.column == 0:
-            result = 'function_variable'
+            result = self.icon_mapping['function']
         else:
             result = None
         return result
