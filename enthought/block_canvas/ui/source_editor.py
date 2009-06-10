@@ -80,6 +80,10 @@ class _MarkableSourceEditor(SourceEditor):
         """ Initialize and sync values.
         """
         super(_MarkableSourceEditor, self).init(parent)
+        
+        # Clear out the goofy hotkeys for zooming text
+        self.control.CmdKeyClear(ord('B'), stc.STC_SCMOD_CTRL)
+        self.control.CmdKeyClear(ord('N'), stc.STC_SCMOD_CTRL)
 
         self.control.SetLexer(stc.STC_LEX_CONTAINER)
         self.control.Bind(stc.EVT_STC_STYLENEEDED, self._style_needed)
