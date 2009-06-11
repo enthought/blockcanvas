@@ -113,8 +113,7 @@ class _MarkableSourceEditor(SourceEditor):
             editor.
         """
         super(_MarkableSourceEditor, self).update_editor()
-        self.control.Colourise(0, -1)
-        self.control.Refresh()
+        self._style_document()
 
     #---------------------------------------------------------------------------
     # MarkableSourceEditor interface
@@ -133,10 +132,11 @@ class _MarkableSourceEditor(SourceEditor):
 
     @on_trait_change('dim_lines, squiggle_lines')
     def _style_document(self):
-        """ Force the STC to fire an STC_STYLENEEDED event for the entire 
+        """ Force the STC to fire a STC_STYLENEEDED event for the entire 
             document.
         """
         self.control.ClearDocumentStyle()
+        self.control.Colourise(0, -1)
         self.control.Refresh()
 
     def _style_needed(self, event):
