@@ -1,6 +1,5 @@
 # Enthought Library imports
-from enthought.traits.ui.api import View, Item, InstanceEditor
-from enthought.block_canvas.ui.source_editor import MarkableSourceEditor
+from enthought.traits.ui.api import View, Item, InstanceEditor, CodeEditor
 
 # Local imports
 from traits_ui_view import TraitsUIView
@@ -25,10 +24,9 @@ class ExperimentCodeView(TraitsUIView):
                     Item( 'object.exec_model.code',
                           label      = 'Code',
                           id         = 'code',
-                          editor     = MarkableSourceEditor( dim_lines = 'dim_lines',
-                                                dim_color = 'dim_color',
-                                                squiggle_lines = 'squiggle_lines',
-                                                             ),
+                          editor     = CodeEditor(dim_lines = 'dim_lines',
+                                                  dim_color = 'dim_color',
+                                                  squiggle_lines = 'squiggle_lines'),
                           dock       = 'horizontal',
                           show_label = False
                     ),

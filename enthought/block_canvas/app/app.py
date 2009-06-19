@@ -9,11 +9,10 @@ from enthought.pyface.message_dialog import MessageDialog
 from enthought.traits.api import Instance, Str, HasTraits, on_trait_change
 from enthought.appscripting.api import scriptable
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
-                                    InstanceEditor
+                                    InstanceEditor, CodeEditor
 # CodeTools Imports
 from enthought.execution.executing_context import ExecutingContext
 from enthought.contexts.api import DataContext, MultiContext
-
 
 # Block canvas imports
 from enthought.block_canvas.block_display.block_editor import BlockEditor
@@ -21,7 +20,6 @@ from enthought.block_canvas.block_display.execution_model import ExecutionModel
 from enthought.block_canvas.context.ui.context_variable import ContextVariableList
 from enthought.block_canvas.function_tools.function_search import FunctionSearch
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-from enthought.block_canvas.ui.source_editor import MarkableSourceEditor
 from enthought.block_canvas.function_tools.html_info_ui import HtmlInfoUI
 from enthought.block_canvas.app.ui.function_search_ui import function_search_view
 from enthought.block_canvas.app import scripting
@@ -160,10 +158,9 @@ class Application(HasTraits):
                     Item( 'object.project.active_experiment.exec_model.code',
                           label      = 'Code',
                           id         = 'code',
-                          editor     = MarkableSourceEditor( dim_lines = 'dim_lines',
-                                                dim_color = 'dim_color',
-                                                squiggle_lines = 'squiggle_lines',
-                                                             ),
+                          editor     = CodeEditor(dim_lines = 'dim_lines',
+                                                  dim_color = 'dim_color',
+                                                  squiggle_lines = 'squiggle_lines'),
                           dock       = 'horizontal',
                           show_label = False
                     ),

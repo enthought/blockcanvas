@@ -13,7 +13,6 @@ from enthought.block_canvas.context.ui.context_variable import ContextVariableLi
 from enthought.block_canvas.context.ui.context_variable_ui import context_variables_view
 from enthought.block_canvas.function_tools.function_search import FunctionSearch
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-from enthought.block_canvas.ui.source_editor import MarkableSourceEditor
 from enthought.block_canvas.function_tools.html_info_ui import HtmlInfoUI
 from enthought.block_canvas.app import scripting
 from enthought.block_canvas.app.project import Project
