@@ -73,12 +73,12 @@ class UnitArray(numpy.ndarray):
     def __reduce_ex__(self, protocol):
         """
         pickling function for classes which inherit from tuple.
-        
+
         __reduce_ex__ must be overloaded for pickling to work. Refer to the docs
         in the pickle source code for details as to why.
-        
+
         """
-        
+
         state = (self.units, super(UnitArray, self).__reduce_ex__(protocol))
         return ( __newobj__, ( self.__class__, ()), state )
 
@@ -86,7 +86,7 @@ class UnitArray(numpy.ndarray):
         """
         unpickling function
         """
-        
+
         super(UnitArray, self).__setstate__(state[1][2])
         self.units = state[0]
 
@@ -164,7 +164,7 @@ class UnitArray(numpy.ndarray):
         #     and all but the first argument does not have units
         #     (or is dimensionless)
         #  5) the function has a single argument which is dimensionless
-        #  
+        #
         # FIXME: To do this "right" would require a ufunc
         #      object that could tell how to do unit conversions
         #      with its inputs to produce its outputs.
@@ -222,7 +222,7 @@ class UnitArray(numpy.ndarray):
                 other = units.convert(other.value, ou, su)
             elif isinstance(other, UnitArray):
                 # Handles UnitArray or UnitScalar
-                other = units.convert(numpy.array(other), ou, su)                
+                other = units.convert(numpy.array(other), ou, su)
             elif isinstance(other, numpy.ndarray):
                 if len(other.shape) > 0 and hasattr(other.item(0), 'derivation'):
                     # Handles array([1,2,3] * liters)
@@ -230,7 +230,7 @@ class UnitArray(numpy.ndarray):
                     other = units.convert(other/ou, ou, su)
             else:
                 #Everything else
-                other = units.convert(numpy.array(other), ou, su)                
+                other = units.convert(numpy.array(other), ou, su)
             u = su
         return other, u
 
@@ -243,13 +243,13 @@ class UnitArray(numpy.ndarray):
 
     def __radd__(self, other):
         return self.__add__(other)
-    
+
     def __sub__(self, other):
         other, u = self.__convert_other(other)
         result = super(UnitArray, self).__sub__(other)
         result.units = u
         return result
-    
+
     def __rsub__(self, other):
         su = getattr(self, 'units', dimensionless)
         ou = getattr(other, 'units', dimensionless)
@@ -291,10 +291,10 @@ class UnitArray(numpy.ndarray):
             # quantities, but the alternative is losing units like
             # 'percent'
             result.units = su/ou
-        elif su:
-            result.units = su
-        else:
+        elif ou:
             result.units = 1/ou
+        else:
+            result.units = su
         return result
 
     def __rdiv__(self, other):
@@ -379,7 +379,7 @@ class UnitArray(numpy.ndarray):
             return result
         except:
             return True
-        
+
 
     ############################################################################
     # UnitArray interface
@@ -396,14 +396,14 @@ class UnitArray(numpy.ndarray):
         result.units = new_units
 
         return result
-    
+
     ############################################################################
     # static methods which wrap numpy builtin functions
     ############################################################################
-    
+
     @staticmethod
     def concatenate(sequences, axis=0):
         result = numpy.concatenate(sequences, axis)
         result.units = sequences[0].units
         return result
-    
+
