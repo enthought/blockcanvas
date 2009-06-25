@@ -18,7 +18,7 @@
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, \
                                  List, Instance, cached_property
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
-                            Handler, Label, Group, InstanceEditor, TabularEditor
+    Handler, Label, Group, InstanceEditor, TabularEditor, SearchEditor
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 from enthought.pyface.api import error
 
@@ -37,7 +37,6 @@ from enthought.block_canvas.function_tools.general_expression import GeneralExpr
 
 # App imports
 # fixme: These should become pyface controls.
-from enthought.block_canvas.ui.search_editor import SearchEditor
 from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
 
 # Local imports

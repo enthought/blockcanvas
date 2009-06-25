@@ -6,7 +6,6 @@ from enthought.traits.ui.extras.api import EditColumn, CheckboxColumn
 from enthought.traits.ui import menu
 from enthought.traits.ui.wx.constants import WindowColor
 
-from enthought.block_canvas.ui.search_editor import SearchEditor
 from enthought.block_canvas.interactor.interactor_config import (InteractorConfig,
         VariableConfig)
 from enthought.block_canvas.interactor.configurable_interactor import ConfigurableInteractor
@@ -131,7 +130,7 @@ def context_variables_view(model):
     view = tui.View(
         tui.Item( 'search_term',
             show_label = False,
-            editor     = SearchEditor( text = "Search for variables" ),
+            editor     = tui.SearchEditor( text = "Search for variables" ),
         ),
         tui.Item( 'search_results',
             id         = 'search_results',

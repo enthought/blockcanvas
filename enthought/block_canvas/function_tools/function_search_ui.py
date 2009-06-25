@@ -7,7 +7,7 @@
 # Enthought library imports.
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, Dict
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
-                           Handler, Label, Group, TabularEditor
+                           Handler, Label, Group, TabularEditor, SearchEditor
 from enthought.traits.ui.tabular_adapter import TabularAdapter
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 
@@ -16,7 +16,6 @@ from enthought.etsconfig.api import ETSConfig
 
 # App imports
 # fixme: These should become pyface controls.
-from enthought.block_canvas.ui.search_editor import SearchEditor
 from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
 
 # Local imports
