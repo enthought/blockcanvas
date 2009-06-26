@@ -45,7 +45,7 @@ from enthought.traits.ui.table_column \
 from enthought.pyface.timer.api \
     import do_later
 
-from enthought.pyface.grid.api \
+from enthought.pyface.ui.wx.grid.api \
     import Grid
 
 from enthought.pyface.sizers.flow \

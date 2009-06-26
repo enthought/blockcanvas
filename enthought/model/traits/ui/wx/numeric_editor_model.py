@@ -37,10 +37,10 @@ from enthought.traits.ui.ui_traits \
 from enthought.model.api \
     import ANumericModel, SortFilter
 
-from enthought.pyface.grid.api \
+from enthought.pyface.ui.wx.grid.api \
     import GridModel, GridSortEvent
 
-from enthought.pyface.grid.trait_grid_cell_adapter \
+from enthought.pyface.ui.wx.grid.trait_grid_cell_adapter \
     import TraitGridCellAdapter
 
 #-------------------------------------------------------------------------------
