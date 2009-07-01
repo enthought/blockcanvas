@@ -15,13 +15,13 @@
 #    fixme: Not been tested against a library with extension functions in it.
 
 # Enthought library imports.
+from enthought.etsconfig.api import ETSConfig
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, \
                                  List, Instance, cached_property
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
     Handler, Label, Group, InstanceEditor, TabularEditor, SearchEditor
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 from enthought.pyface.api import error
-
 from enthought.pyface.image_resource import ImageResource
 
 # Block Canvas imports
@@ -34,10 +34,11 @@ from enthought.block_canvas.function_tools.function_search_ui import \
     FunctionSearchUIHandler, SearchTableAdapter
 from enthought.block_canvas.function_tools.general_expression import GeneralExpression
 
-
 # App imports
-# fixme: These should become pyface controls.
-from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+if ETSConfig.toolkit == 'wx':
+    from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+else:
+    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor 
 
 # Local imports
 from function_search_preferences_ui import function_search_preferences_view
@@ -244,8 +245,8 @@ function_search_view = \
                                     ),
                                     Item('handler.preferences',
                                          show_label=False,
-                                         editor=HyperlinkEditor(text="Search\nSettings",
-                                                tooltip="Advanced search settings")
+                                         tooltip="Advanced search settings",
+                                         editor=HyperlinkEditor(label="Search\nSettings"),
                                     ),
                              ),
                              Item('handler.search_results',

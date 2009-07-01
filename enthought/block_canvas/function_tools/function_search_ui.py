@@ -5,18 +5,19 @@
 """
 
 # Enthought library imports.
+from enthought.etsconfig.api import ETSConfig
+from enthought.pyface.image_resource import ImageResource
 from enthought.traits.api import Any, Property, Event, Str, Font, Bool, Dict
 from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
                            Handler, Label, Group, TabularEditor, SearchEditor
 from enthought.traits.ui.tabular_adapter import TabularAdapter
 from enthought.traits.ui.menu import NoButtons, OKCancelButtons
 
-from enthought.pyface.image_resource import ImageResource
-from enthought.etsconfig.api import ETSConfig
-
 # App imports
-# fixme: These should become pyface controls.
-from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+if ETSConfig.toolkit == 'wx':
+    from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+else:
+    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor
 
 # Local imports
 from python_function_info import PythonFunctionInfo
@@ -229,8 +230,8 @@ function_search_view = \
                                 ),
                                 Item('handler.preferences',
                                      show_label=False,
-                                     editor=HyperlinkEditor(text="Search\nSettings",
-                                            tooltip="Advanced search settings")
+                                     tooltip="Advanced search settings",
+                                     editor=HyperlinkEditor(label="Search\nSettings"),
                                 ),
                          ),
                          Item('search_results',
