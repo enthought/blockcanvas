@@ -14,7 +14,7 @@ def etsdep(p, min, max=None, literal=False):
 
 
 # Declare our ETS project dependencies.
-APPTOOLS = etsdep('AppTools', '3.2.1')  # -- all from enthought.block_canvas' use of enthought.undo
+APPTOOLS = etsdep('AppTools', '3.3.0')  # -- all from enthought.block_canvas' use of enthought.undo
 CHACO = etsdep('Chaco', '3.1.1')
 ENABLE_TRAITS = etsdep('Enable[traits]', '3.1.1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
 ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.3')
@@ -50,6 +50,6 @@ INFO = {
         TRAITS_UI,
         ],
     'name': 'BlockCanvas',
-    'version': '3.0.3',
+    'version': '3.1.0',
     }
 
