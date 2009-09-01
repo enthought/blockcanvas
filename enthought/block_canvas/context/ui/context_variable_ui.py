@@ -2,7 +2,8 @@ import numpy
 
 from enthought.traits.ui.table_column import ObjectColumn
 from enthought.traits.ui import api as tui
-from enthought.traits.ui.extras.api import EditColumn, CheckboxColumn
+from enthought.traits.ui.extras.api import CheckboxColumn
+from enthought.traits.ui.extras.edit_column import EditColumn
 from enthought.traits.ui import menu
 from enthought.traits.ui.wx.constants import WindowColor
 
