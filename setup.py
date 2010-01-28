@@ -129,7 +129,10 @@ setup(
     },
     description = DOCLINES[1],
     extras_require = INFO['extras_require'],
-    ext_modules = [cobyla, greenlet],
+    # Note: The greenlet package is very old and has not been ported to
+    #       Windows amd64.  Since it is very deprecated, we keep the code
+    #       around, but exclude it form being build as an extension module.
+    ext_modules = [cobyla], # greenlet],
     include_package_data = True,
     install_requires = INFO['install_requires'],
     license = 'BSD',
