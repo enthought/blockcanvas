@@ -11,7 +11,7 @@ Nuvola                  LGPL                      image_LICENSE_Nuvola.txt
 Unless stated in this file, icons are the work of Enthought, and are
 released under a 3 clause BSD license.
 
-Files and orginal authors:
+Files and original authors:
 ----------------------------------------------------------------------------
 enthought/block_canvas/block_display/images:
            bound_input_variable.png | Enthought

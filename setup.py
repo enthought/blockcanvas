@@ -24,7 +24,7 @@ way that is simple, fast, efficient, and consistent.
 
 Prerequisites
 -------------
-If you want to build BlockCanvas from source, you must first install 
+If you want to build BlockCanvas from source, you must first install
 `setuptools <http://pypi.python.org/pypi/setuptools/0.6c8>`_.
 
 """
