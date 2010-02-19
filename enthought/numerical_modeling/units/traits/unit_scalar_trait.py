@@ -4,8 +4,8 @@
 # Major library imports
 
 # Enthought library imports
-from enthought.numerical_modeling.units.api import UnitScalar as US
-from enthought.numerical_modeling.units.traits.ui.unit_editor \
+from enthought.units.api import UnitScalar as US
+from enthought.units.traits.ui.unit_editor \
     import UnitEditor
 from enthought.traits.api import Instance, TraitFactory
 

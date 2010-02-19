@@ -8,7 +8,7 @@
 import numpy
 
 # ETS imports
-from enthought.numerical_modeling.units.unit_scalar import UnitScalar
+from enthought.units.unit_scalar import UnitScalar
 from enthought.traits.api import HasTraits, Str, Any, List
 from enthought.traits.ui.api import View, Item, HGroup
 

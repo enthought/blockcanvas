@@ -1,13 +1,11 @@
 # Standard library imports
-from cPickle import dump, load
 from math import log10, ceil
 import numpy
 
 # ETS imports
-from enthought.traits.api import Any, Enum, Float, HasTraits, Int, Str, Trait
-from enthought.traits.ui.api import (View, Item, Group, HGroup, TextEditor,
-    RangeEditor, InstanceEditor, ViewHandler)
-from enthought.numerical_modeling.units.unit_scalar import UnitScalar
+from enthought.traits.api import Float, Int
+from enthought.traits.ui.api import Item, HGroup, TextEditor, RangeEditor
+from enthought.units.unit_scalar import UnitScalar
 
 # Local imports
 from editors import array_eval_editor

@@ -182,7 +182,7 @@ if __name__ == '__main__':
     from enthought.blocks.api import Block
     from enthought.contexts.api import DataContext, MultiContext
 #    from context.api import GeoContext
-#    from enthought.numerical_modeling.units.api import UnitArray
+#    from enthought.units.api import UnitArray
 #    from enthought.units.length import meter
 
     code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
