@@ -29,10 +29,10 @@ from enthought.traits.ui.api \
 from enthought.traits.ui.table_column \
     import NumericColumn
 
-from enthought.traits.ui.wx.editor \
+from enthought.traits.ui.api \
     import Editor
 
-from enthought.traits.ui.wx.basic_editor_factory \
+from enthought.traits.ui.api \
     import BasicEditorFactory
 
 from enthought.model.traits.ui.wx.numeric_editor \
@@ -57,7 +57,7 @@ from enthought.chaco.plot_axis \
 from enthought.chaco.plot_component \
     import PlotComponent
 
-from enthought.enable.wx \
+from enthought.enable.api \
     import Window
 
 

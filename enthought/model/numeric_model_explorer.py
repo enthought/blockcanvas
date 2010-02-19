@@ -70,7 +70,7 @@ from enthought.chaco.plot_data \
 from enthought.chaco.plot_interaction \
     import PlotInteraction
 
-from enthought.enable.wx \
+from enthought.enable.api \
     import Window
 
 from enthought.kiva \

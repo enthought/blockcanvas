@@ -6,7 +6,7 @@ from enthought.traits.api import HasTraits, Instance, List, Any, Str, Int
 from enthought.traits.ui.api import View, Item, TableEditor, Group, HGroup, \
      spring, RangeEditor
 from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui.wx.constants import WindowColor
+from enthought.traits.ui.api import WindowColor
 
 # Geo imports
 from geo.io.segy.trace_header import TraceHeader

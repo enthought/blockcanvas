@@ -6,7 +6,7 @@
 from enthought.traits.api import List, Int
 from enthought.traits.ui.api import Handler
 from enthought.traits.ui.menu import Action, Menu
-from enthought.traits.ui.wx.table_editor import TableEditor as _TableEditor
+from enthought.traits.ui.api import TableEditor as _TableEditor
 
 
 new_delete_menu = Menu(Action(name="New", action="new_in_table"),

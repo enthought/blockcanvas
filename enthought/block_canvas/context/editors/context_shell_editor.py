@@ -17,8 +17,8 @@
 
 # ETS imports
 from enthought.traits.api import Str, Any
-from enthought.traits.ui.wx.editor import Editor
-from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
+from enthought.traits.ui.api import Editor
+from enthought.traits.ui.api import BasicEditorFactory
 
 # App imports
 from enthought.block_canvas.context.shell.context_shell import ContextPythonShell

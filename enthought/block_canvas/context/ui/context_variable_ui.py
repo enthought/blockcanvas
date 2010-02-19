@@ -5,7 +5,7 @@ from enthought.traits.ui import api as tui
 from enthought.traits.ui.extras.api import CheckboxColumn
 from enthought.traits.ui.extras.edit_column import EditColumn
 from enthought.traits.ui import menu
-from enthought.traits.ui.wx.constants import WindowColor
+from enthought.traits.ui.api import WindowColor
 
 from enthought.block_canvas.interactor.interactor_config import (InteractorConfig,
         VariableConfig)

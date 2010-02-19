@@ -15,7 +15,7 @@ from enthought.traits.ui.api import (View, Group, HGroup, VGroup, VSplit, Item,
                                      Label, TableEditor, CodeEditor)
 from enthought.traits.ui import menu
 from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui.wx.constants import WindowColor
+from enthought.traits.ui.api import WindowColor
 
 
 input_columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),

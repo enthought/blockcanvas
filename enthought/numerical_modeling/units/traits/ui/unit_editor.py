@@ -8,18 +8,16 @@
 #
 #-------------------------------------------------------------------------------
 
-import wx
-
 from enthought.traits.api \
     import CFloat, false, HasPrivateTraits, Instance, Str
     
 from enthought.traits.ui.api \
     import View, HGroup, Item, Label
     
-from enthought.traits.ui.wx.ui_editor \
+from enthought.traits.ui.ui_editor \
     import UIEditor
     
-from enthought.traits.ui.wx.basic_editor_factory \
+from enthought.traits.ui.api \
     import EditorFactory
     
 from enthought.units.convert \

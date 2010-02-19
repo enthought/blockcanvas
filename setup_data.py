@@ -45,7 +45,6 @@ INFO = {
         ENABLE_TRAITS,
         ENTHOUGHTBASE_DISTRIBUTION_UI,
         SCIMATH_TRAITS,
-        TRAITSBACKENDWX,
         TRAITSGUI,
         TRAITS_UI,
         ],

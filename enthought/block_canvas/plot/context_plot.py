@@ -7,12 +7,10 @@ from enthought.chaco.plot import Plot
 from enthought.chaco.tools.pan_tool import PanTool
 from enthought.chaco.tools.simple_zoom import SimpleZoom
 from enthought.chaco.plot_containers import OverlayPlotContainer
-from enthought.enable.wx_backend.api import Window
+from enthought.enable.api import Window
 from enthought.traits.api import HasTraits, Instance, Bool, List
 from enthought.traits.trait_types import Enum
-from enthought.traits.ui.api import View, Item
-from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
-from enthought.traits.ui.wx.editor import Editor
+from enthought.traits.ui.api import BasicEditorFactory, Editor, Item, View
 
 # Application imports
 from enthought.contexts.i_context import IListenableContext

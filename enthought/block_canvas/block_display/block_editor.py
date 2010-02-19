@@ -3,11 +3,10 @@
 
 # Enthought library imports
 from enthought.traits.api import Instance
-from enthought.traits.ui.wx.editor import Editor
-from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
+from enthought.traits.ui.api import BasicEditorFactory, Editor
 from enthought.enable.api import Scrolled
 from enthought.enable.tools.api import ViewportPanTool
-from enthought.enable.wx_backend import Window
+from enthought.enable.api import Window
 
 # Block canvas imports
 from enthought.block_canvas.canvas.canvas_viewport import CanvasViewport

@@ -3,8 +3,8 @@ from wx.lib.hyperlink import (HyperLinkCtrl, EVT_HYPERLINK_LEFT,
                               EVT_HYPERLINK_MIDDLE, EVT_HYPERLINK_RIGHT)
 
 from enthought.traits.api import Str
-from enthought.traits.ui.wx.editor import Editor
-from enthought.traits.ui.wx.basic_editor_factory import BasicEditorFactory
+from enthought.traits.ui.api import Editor
+from enthought.traits.ui.api import BasicEditorFactory
 
 class _HyperlinkEditor(Editor):
 

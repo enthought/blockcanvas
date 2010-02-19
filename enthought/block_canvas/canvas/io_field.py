@@ -198,7 +198,7 @@ class IOField(Container):
 
 
 if (__name__=='__main__'):
-    from enthought.enable.wx_backend.api import Window
+    from enthought.enable.api import Window
     from enthought.enable.api import Container
     from enthought.enable.example_support import DemoFrame, demo_main
     from enthought.block_canvas.function_tools.function_variables import InputVariable

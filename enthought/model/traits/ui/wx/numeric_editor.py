@@ -64,10 +64,10 @@ from enthought.model.numeric_editor \
 from numeric_editor_model \
     import NumericEditorModel
 
-from enthought.traits.ui.wx.constants \
+from enthought.traits.ui.api \
     import WindowColor
 
-from enthought.traits.ui.wx.editor \
+from enthought.traits.ui.api \
     import Editor
 
 from enthought.traits.ui.wx.basic_editor_factory \
