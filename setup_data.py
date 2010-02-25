@@ -15,14 +15,14 @@ def etsdep(p, min, max=None, literal=False):
 
 # Declare our ETS project dependencies.
 APPTOOLS = etsdep('AppTools', '3.3.1')  # -- all from enthought.block_canvas' use of enthought.undo
-CHACO = etsdep('Chaco', '3.2.1')
-ENABLE_TRAITS = etsdep('Enable[traits]', '3.2.1')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
+CHACO = etsdep('Chaco', '3.3.0')
+ENABLE_TRAITS = etsdep('Enable[traits]', '3.3.0')  # -- all from enthought.block_canvas' use of enthought.kiva.traits
 ENTHOUGHTBASE_DISTRIBUTION_UI = etsdep('EnthoughtBase[distribution,ui]', '3.0.4')
 ETSDEVTOOLS = etsdep('ETSDevTools', '3.0.4')  # -- all from enthought.block_canvas' use of enthought.testing.api
 SCIMATH_TRAITS = etsdep('SciMath[traits]', '3.0.5')
 TRAITS_UI = etsdep('Traits[ui]', '3.2.1')
 TRAITSBACKENDWX = etsdep('TraitsBackendWX', '3.2.1')
-TRAITSGUI = etsdep('TraitsGUI', '3.1.1')
+TRAITSGUI = etsdep('TraitsGUI', '3.3.0')
 
 
 # A dictionary of the setup data information.
@@ -51,4 +51,3 @@ INFO = {
     'name': 'BlockCanvas',
     'version': '3.1.1',
     }
-
