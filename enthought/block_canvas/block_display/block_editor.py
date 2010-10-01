@@ -33,6 +33,10 @@ class _BlockEditor(Editor):
 
     # Hold onto the window so that we get resize events.
     _window = Instance(Window)
+    
+    # these are required by some backends 
+    border_size = 0
+    layout_style = 0
 
     #########################################################################
     # Editor interface
