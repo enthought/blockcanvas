@@ -146,7 +146,7 @@ def create_alternate_view():
                 ),
 
             # Allow for a user specified view of the inputs
-            Item('object.inputs_view_class', editor=InstanceEditor(view='genView'), show_label=False, style='custom')
+            Item('object.inputs_view_class', editor=InstanceEditor(view='traits_view'), show_label=False, style='custom')
             ),
                   
             width=720, # about 80 columns wide on code view.
