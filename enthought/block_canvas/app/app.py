@@ -30,6 +30,8 @@ from enthought.block_canvas.function_tools.python_function_info import PythonFun
 from enthought.block_canvas.function_tools.function_call import FunctionCall
 from enthought.block_canvas.function_tools.general_expression import GeneralExpression
 
+from enthought.block_canvas.class_tools.class_library import ClassLibrary
+
 # Local, relative imports
 from experiment import Experiment
 from project import Project
@@ -331,12 +333,14 @@ class Application(HasTraits):
             # fixme: Short term for testing.  Remove imports in future and 
             #        replace with FunctionCall UI.
             function = LocalFunctionInfo(code=code)
-            node = FunctionCall.from_callable_object(function)
+            traits_class = self.match_function_to_traits_class(item.name)
+            node = FunctionCall.from_callable_object(function, traits_class)
 
         else:
             function = PythonFunctionInfo(name=item.name,
                                           module=item.module)
-            node = FunctionCall.from_callable_object(function)
+            traits_class = self.match_function_to_traits_class(item.name)
+            node = FunctionCall.from_callable_object(function, traits_class)
         
         # Bring up the dialog box to edit it
         node.edit_traits(kind="modal")
@@ -358,6 +362,36 @@ class Application(HasTraits):
         # fixme: Can the project ever be None?
         self.project.active_experiment.exec_model.add_function(function_call)
         return
+
+    def match_function_to_traits_class(self, function_name):
+        """Finds a class whose name matches '_{function_name}_view'. 
+        Returns this class's traits_view attribute, if present.
+        Returns None otherwise."""
+
+        # Search the class library for a matching name
+        for a_class in self.class_library.classes:
+            if a_class.name == '_{0}_view'.format(function_name):
+                traits_class = self.get_traits_class(a_class)
+                return traits_class
+
+        # Couldn't find a class to match the function.
+        return None
+
+    def get_traits_class(self, a_class):
+        """Imports a class from its module and name and returns it, as long as it is a subclass of HasTraits.
+        """
+        # Import the class from the module
+        _module = __import__(a_class.module, globals(), locals(), [a_class.name], -1)
+        traits_class = getattr(_module, a_class.name)
+
+        # Make sure the class has traits at all
+        if issubclass(traits_class, HasTraits):
+            # Get new instance of this class
+            tc = traits_class()
+            return tc
+
+        # Class does not have traits!
+        return None
 
     def remove_function_from_execution_model(self, function_call):
         """Remove a function from the execution model"""
@@ -598,8 +632,18 @@ if __name__ == '__main__':
     logging.getLogger().addHandler(logging.StreamHandler())
     logging.getLogger().setLevel(logging.DEBUG)  
 
-    library = FunctionLibrary(modules=['os'])
-    search = FunctionSearch(all_functions=library.functions)
-    app = Application(code=code, data_context=DataContext(name='data'),
-        function_library=library, function_search=search)
+    modules = ['os']
+
+    class_library = ClassLibrary(modules=modules)
+    func_library = FunctionLibrary(modules=modules)
+    func_search = FunctionSearch(all_functions=func_library.functions)
+    
+    app = Application(
+        code=code, 
+        data_context=DataContext(name='data'),
+        class_library=class_library, 
+        function_library=func_library, 
+        function_search=func_search,
+        )
+
     app.configure_traits()

@@ -25,7 +25,7 @@ from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor,
 # Local imports
 from callable_info import CallableInfo
 from function_call_tools import localify_func_code
-from function_call_ui import create_view
+from function_call_ui import create_view, create_alternate_view
 from function_variables import InputVariable, OutputVariable
 from local_function_info import LocalFunctionInfo
 from parse_tools import function_inputs_from_call_ast
@@ -58,6 +58,8 @@ class FunctionCall(HasTraits):
     # Read-only string of python code that calls the function.
     call_signature = Property(depends_on=['outputs.binding','function'])
 
+    # Specify an alternate view
+    inputs_view_class = Any()
 
     # A unique identifier
     uuid = Instance(UUID)
@@ -70,7 +72,10 @@ class FunctionCall(HasTraits):
     # Traits View and related handlers
     ##########################################################################
     def trait_view(self, view):
-        return create_view()
+        if self.inputs_view_class == None:
+            return create_view()
+        else:
+            return create_alternate_view()
     
     def _convert_to_local_fired(self, event):
         new_name = 'local_' + self.function.library_name
@@ -141,7 +146,7 @@ class FunctionCall(HasTraits):
         return result
 
     @classmethod
-    def from_callable_object(cls, function):
+    def from_callable_object(cls, function, inputs_view_class=None):
         """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
@@ -157,11 +162,12 @@ class FunctionCall(HasTraits):
 
         # fixme: Outputs should just be a list of strings...
         outputs = [OutputVariable(name=output.name) for output in function.outputs]
-        result = cls(inputs=inputs, outputs=outputs, function=function)
+        result = cls(inputs=inputs, outputs=outputs, function=function, inputs_view_class=inputs_view_class)
+
         return result
 
     @classmethod
-    def from_function(cls, function):
+    def from_function(cls, function, inputs_view_class=None):
         """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
@@ -173,7 +179,7 @@ class FunctionCall(HasTraits):
         """
     
         callable_object = PythonFunctionInfo.from_function(function)
-        return cls.from_callable_object(callable_object)
+        return cls.from_callable_object(callable_object, inputs_view_class)
 
     @classmethod
     def create_empty_function(cls, code=None):
@@ -263,7 +269,6 @@ class FunctionCall(HasTraits):
                 var.binding = output_bindings[output.name]
             outputs.append(var)
         self.outputs = outputs
-
 
 
 def foo(a,b=3):

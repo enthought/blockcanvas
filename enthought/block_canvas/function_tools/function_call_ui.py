@@ -1,5 +1,5 @@
 from enthought.traits.ui.api import (View, Group, HGroup, VGroup, VSplit, Item,
-                                     Label, TableEditor, CodeEditor)
+                                     Label, TableEditor, CodeEditor, InstanceEditor)
 from enthought.traits.ui import menu
 from enthought.traits.ui.table_column import ObjectColumn
 from enthought.traits.ui.api import WindowColor
@@ -91,6 +91,74 @@ def create_view(readonly = False, show_units = False):
     
     return view
 
+def create_alternate_view():
+    columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),
+               ObjectColumn(name='binding', label='Binding', editable=True, width=0.6),
+               ]
+
+    view = View(
+        VSplit(                      
+            VGroup(
+                Item('object.function.name'),
+                Item('object.function.module'),
+                ),
+
+            HGroup(
+                VGroup(
+                    Label("Inputs"),
+                    Item('inputs',
+                        # minimum settings to get rid of
+                        # toolbar at top of table.
+                        editor=TableEditor(
+                            columns=columns,
+                            editable=True,
+                            configurable=False,
+                            sortable=False,
+                            sort_model = True,
+                            selection_bg_color = 'white',
+                            selection_color = 'black',
+                            label_bg_color = WindowColor,
+                            cell_bg_color = 'white',
+                            ),
+                        show_label=False,
+                        ),
+                    ),
+
+                VGroup(
+                    Label("Outputs"),
+                    Item('outputs',
+                        # minimum settings to get rid of
+                        # toolbar at top of table.
+                        editor=TableEditor(
+                            columns=columns,
+                            editable=True,
+                            configurable=False,
+                            sortable=False,
+                            sort_model = True,
+                            selection_bg_color = 'white',
+                            selection_color = 'black',
+                            label_bg_color = WindowColor,
+                            cell_bg_color = 'white',
+                            ),
+                        show_label=False,
+                        ),
+                    ),
+                ),
+
+            # Allow for a user specified view of the inputs
+            Item('object.inputs_view_class', editor=InstanceEditor(view='genView'), show_label=False, style='custom')
+            ),
+                  
+            width=720, # about 80 columns wide on code view.
+            height=700,
+            resizable=True,
+            buttons=menu.OKCancelButtons,
+            close_result=False,
+         )
+    
+    return view
+    
+
 if __name__ == "__main__":
     from python_function_info import PythonFunctionInfo
     from function_call import FunctionCall
@@ -98,4 +166,3 @@ if __name__ == "__main__":
                           name='brine_properties')
     func_call = FunctionCall.from_callable_object(func)
     func_call.configure_traits(view=create_view())
-                                          
