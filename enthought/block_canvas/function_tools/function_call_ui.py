@@ -1,5 +1,5 @@
 from enthought.traits.ui.api import (View, Group, HGroup, VGroup, VSplit, Item,
-                                     Label, TableEditor, CodeEditor, InstanceEditor)
+                                     Label, TableEditor, CodeEditor, InstanceEditor, spring, Tabbed)
 from enthought.traits.ui import menu
 from enthought.traits.ui.table_column import ObjectColumn
 from enthought.traits.ui.api import WindowColor
@@ -97,7 +97,16 @@ def create_alternate_view():
                ]
 
     view = View(
-        VSplit(                      
+        Tabbed(                      
+            # Allow for a user specified view of the inputs
+            Item('function_view_instance', 
+                editor=InstanceEditor(view='traits_view'), 
+                label = "Properties",
+                show_label=False, 
+                style='custom', 
+                resizable=True,
+                ),
+
             VGroup(
                 Item('object.function.name'),
                 Item('object.function.module'),
@@ -120,6 +129,7 @@ def create_alternate_view():
                                 cell_bg_color = 'white',
                                 ),
                             show_label=False,
+                            resizable=True,
                             ),
                         ),
 
@@ -140,21 +150,12 @@ def create_alternate_view():
                                 cell_bg_color = 'white',
                                 ),
                             show_label=False,
+                            resizable=True,
                             ),
                         ),
                     ),
+                label="Context Info",
                 ),
-
-            # Allow for a user specified view of the inputs
-            Item('function_view_instance', 
-                editor=InstanceEditor(view='traits_view'), 
-                show_label=False, 
-                style='custom', 
-                resizable=True,
-                height=0.75,
-                springy = True,
-                ),
-            springy = True,
             ),
                   
 #            width=720, # about 80 columns wide on code view.
