@@ -87,6 +87,11 @@ SetToolbarHideAction = Action(
     action = "_on_toggle_hide",
 )
 
+ExecuteAction = Action(
+    name = "Execute F5",
+    action = "_on_execute",
+)
+
 PlotAction = Action(
     name='Plot',
     action = '_on_plot',
@@ -116,6 +121,10 @@ BlockApplicationMenuBar = \
                         CloseAction,
                   ),
                   name = 'File' ),
+            Menu( Group(
+                        ExecuteAction,
+                        ),
+                  name='Run'),
             Menu( Group(
                         PlotAction,
                         ),
@@ -345,6 +354,11 @@ class BlockApplicationViewHandler(Controller):
         else:
             viewport.auto_hide = True
             SetToolbarHideAction.name = "Show Toolbar"
+
+    def _on_execute(self, info):
+        """Explicitly executes the current workflow."""
+        app = info.object
+        app.execute_for_names()
 
     #------------------------------------------------------------------------
     # Deprecated actions

@@ -10,6 +10,8 @@ from enthought.traits.api import Instance, Str, HasTraits, on_trait_change
 from enthought.appscripting.api import scriptable
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor, CodeEditor
+from enthought.traits.ui.key_bindings import KeyBinding, KeyBindings
+
 # CodeTools Imports
 from enthought.execution.executing_context import ExecutingContext
 from enthought.contexts.api import DataContext, MultiContext
@@ -190,6 +192,9 @@ class Application(HasTraits):
           id        = 'enthought.block_canvas.app.application',
           resizable = True,
           handler   = BlockApplicationViewHandler(model=self),
+          key_bindings = KeyBindings(
+            KeyBinding(binding1='F5', method_name='_on_execute'),
+            ),
         )
         
         
@@ -626,6 +631,13 @@ class Application(HasTraits):
     def _file_directory_default(self):
         cwd = os.getcwd()
         return cwd
+
+    ### Key Bindings ##########################################################
+
+    def _on_execute(self, info):
+        """Explicitly executes the current workflow."""
+        app = info.object
+        app.execute_for_names()
 
 
     
