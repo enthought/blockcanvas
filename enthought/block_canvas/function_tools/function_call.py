@@ -85,7 +85,14 @@ class FunctionCall(HasTraits):
         if self.function_view_class == None:
             return create_view()
         else:
-            self.function_view_instance = self.function_view_class()
+            # Grab values from an existing context, if able
+            trait_kw = {}
+            if self.active_experiment != None:
+                context = self.active_experiment.context
+                trait_kw = dict([(input.name, context[input.binding]) for input in self.inputs if input.binding in context.keys()])
+
+            # Generate the new view
+            self.function_view_instance = self.function_view_class(**trait_kw)
             return create_alternate_view()
     
     def _convert_to_local_fired(self, event):
@@ -172,7 +179,6 @@ class FunctionCall(HasTraits):
                       for input in function.inputs]
 
         # add bindings, taking into account existing context
-        import pdb; pdb.set_trace()
         if (active_experiment != None) and (function_view_class != None):
             function_view_instance = function_view_class()
             for input in inputs:

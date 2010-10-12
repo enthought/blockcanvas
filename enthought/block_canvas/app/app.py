@@ -361,6 +361,20 @@ class Application(HasTraits):
         """
         # fixme: Can the project ever be None?
         self.project.active_experiment.exec_model.add_function(function_call)
+        self.update_context_from_function_ui(function_call)
+        return
+
+    def update_context_from_function_ui(self, function_call):
+        # If a custom UI was not used, return imemeadiately  
+        if function_call.function_view_instance == None:
+            return
+
+        # If a custom UI was used, update the context 
+        context = self.project.active_experiment.context
+        for input in function_call.inputs:
+            context[input.binding] = getattr(function_call.function_view_instance, input.name)
+
+        del function_call.function_view_instance # Cleans up function_call
         return
 
     def match_function_to_has_traits_class(self, function_name):
@@ -418,6 +432,7 @@ class Application(HasTraits):
         """ Update the UI for the given node.
         """
         self.project.active_experiment.controller.update_nodes([], [], [node.uuid])
+        self.update_context_from_function_ui(node)
 
     def expand_all_boxes(self):
         """Expand all of the boxes on the canvas"""
