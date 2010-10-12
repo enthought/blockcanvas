@@ -229,44 +229,44 @@ class ExecutionModel(HasTraits):
         try:
             # Uncomment to execute the whole block in one go.
             # Does not allow for traits-based definition
-###            exec restricted.code in globals, context
+            exec restricted.code in globals, context
 
-            # Generate a running context for code as a whole.
-            # This is based off of the given context.
-            running_context = {}
-            running_context.update(context)
-
-            # Grab the required imports and definitions
-            exec restricted.imports_and_locals in globals, running_context
-            running_context.update(running_context)
-
-            # Run each statement individually, adding it to the 
-            # running context.
-            # This allows each statement to to be executed in it own
-            # context! If default values are specified by the user
-            # via and associated HasTraits class, we add this class's
-            # context to just that statement
-            for stmt in restricted.sorted_statements:
-                # Make sure the statment is a function_call
-                if hasattr(stmt, 'inputs_view_class'):
-                    # Check if there are UI valuese to apply.
-                    if stmt.inputs_view_class == None:
-                        exec stmt.call_signature in globals, running_context
-                        running_context.update(running_context)            
-                    else:
-                        # Create a context for just this statement based on the 
-                        # User interface.
-                        stmt_context = {}
-                        stmt_context.update(running_context)
-                        stmt_context.update(stmt.inputs_view_class.__dict__)
-                        exec stmt.call_signature in globals, stmt_context
-                        running_context.update(stmt_context)   
-                else:
-                    exec stmt.call_signature in globals, running_context
-                    running_context.update(running_context)
-
-            # Add the running context back to the original context
-            context.update(running_context)
+#            # Generate a running context for code as a whole.
+#            # This is based off of the given context.
+#            running_context = {}
+#            running_context.update(context)
+#
+#            # Grab the required imports and definitions
+#            exec restricted.imports_and_locals in globals, running_context
+#            running_context.update(running_context)
+#
+#            # Run each statement individually, adding it to the 
+#            # running context.
+#            # This allows each statement to to be executed in it own
+#            # context! If default values are specified by the user
+#            # via and associated HasTraits class, we add this class's
+#            # context to just that statement
+#            for stmt in restricted.sorted_statements:
+#                # Make sure the statment is a function_call
+#                if hasattr(stmt, 'inputs_view_class'):
+#                    # Check if there are UI valuese to apply.
+#                    if stmt.inputs_view_class == None:
+#                        exec stmt.call_signature in globals, running_context
+#                        running_context.update(running_context)            
+#                    else:
+#                        # Create a context for just this statement based on the 
+#                        # User interface.
+#                        stmt_context = {}
+#                        stmt_context.update(running_context)
+#                        stmt_context.update(stmt.inputs_view_class.__dict__)
+#                        exec stmt.call_signature in globals, stmt_context
+#                        running_context.update(stmt_context)   
+#                else:
+#                    exec stmt.call_signature in globals, running_context
+#                    running_context.update(running_context)
+#
+#            # Add the running context back to the original context
+#            context.update(running_context)
 
         except Exception, e:
             print 'Got exception from code:'
@@ -400,12 +400,13 @@ class ExecutionModel(HasTraits):
             for ov in stmt.outputs:
                 available_names.add(ov.binding)
 
-            if hasattr(stmt, 'inputs_view_class'): 
-                # Might want to do some more checking here
-                ivc = getattr(stmt, 'inputs_view_class')
-                if ivc != None:
-                    for key in ivc.__dict__:
-                        available_names.add(key)
+# Uncomment to add the class names
+#            if hasattr(stmt, 'inputs_view_class'): 
+#                # Might want to do some more checking here
+#                ivc = getattr(stmt, 'inputs_view_class')
+#                if ivc != None:
+#                    for key in ivc.__dict__:
+#                        available_names.add(key)
         # Add the builtins, too.
         available_names.update(builtin_names)
 

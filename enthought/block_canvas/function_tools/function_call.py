@@ -22,6 +22,9 @@ from enthought.traits.api import (Any, Delegate, Event, HasTraits, Instance,
 from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor, 
         ButtonEditor, VGroup, spring)
 
+# CodeTools imports
+#from enthought.block_canvas.app.experiment import Experiment
+
 # Local imports
 from callable_info import CallableInfo
 from function_call_tools import localify_func_code
@@ -59,7 +62,14 @@ class FunctionCall(HasTraits):
     call_signature = Property(depends_on=['outputs.binding','function'])
 
     # Specify an alternate view
-    inputs_view_class = Any()
+    function_view_class = Any()
+    function_view_instance = Any() # An instance of function_view_class
+
+    # The execution context
+    # For custom UI, the function needs to be context aware
+    # FIXME: Probably all functions should be context aware
+#    active_experiment = Instance(Experiment)
+    active_experiment = Any()
 
     # A unique identifier
     uuid = Instance(UUID)
@@ -72,9 +82,10 @@ class FunctionCall(HasTraits):
     # Traits View and related handlers
     ##########################################################################
     def trait_view(self, view):
-        if self.inputs_view_class == None:
+        if self.function_view_class == None:
             return create_view()
         else:
+            self.function_view_instance = self.function_view_class()
             return create_alternate_view()
     
     def _convert_to_local_fired(self, event):
@@ -146,7 +157,7 @@ class FunctionCall(HasTraits):
         return result
 
     @classmethod
-    def from_callable_object(cls, function, inputs_view_class=None):
+    def from_callable_object(cls, function, function_view_class=None, active_experiment=None):
         """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
@@ -160,14 +171,35 @@ class FunctionCall(HasTraits):
         inputs = [InputVariable(name=input.name, default=input.default)
                       for input in function.inputs]
 
+        # add bindings, taking into account existing context
+        import pdb; pdb.set_trace()
+        if (active_experiment != None) and (function_view_class != None):
+            function_view_instance = function_view_class()
+            for input in inputs:
+                if hasattr(function_view_instance, input.name):
+                    binding_prefix = "{0}_".format(input.name)
+
+                    bps = set([key for key in active_experiment.context.keys() if binding_prefix in key])
+
+                    for stmt in active_experiment.exec_model.statements:
+                        for stmt_input in stmt.inputs:
+                            if binding_prefix in stmt_input.binding:
+                                bps.add(stmt_input.binding)
+
+                    num = len(bps) + 1
+                    while (binding_prefix + str(num)) in bps:
+                        num += 1
+                    input.binding = binding_prefix + str(num)
+    
         # fixme: Outputs should just be a list of strings...
         outputs = [OutputVariable(name=output.name) for output in function.outputs]
-        result = cls(inputs=inputs, outputs=outputs, function=function, inputs_view_class=inputs_view_class)
+        result = cls(inputs=inputs, outputs=outputs, function=function, 
+                    function_view_class=function_view_class, active_experiment=active_experiment)
 
         return result
 
     @classmethod
-    def from_function(cls, function, inputs_view_class=None):
+    def from_function(cls, function, function_view_class=None, active_experiment=None):
         """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
@@ -179,7 +211,7 @@ class FunctionCall(HasTraits):
         """
     
         callable_object = PythonFunctionInfo.from_function(function)
-        return cls.from_callable_object(callable_object, inputs_view_class)
+        return cls.from_callable_object(callable_object, function_view_class, active_experiment)
 
     @classmethod
     def create_empty_function(cls, code=None):

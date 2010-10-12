@@ -101,56 +101,64 @@ def create_alternate_view():
             VGroup(
                 Item('object.function.name'),
                 Item('object.function.module'),
-                ),
 
-            HGroup(
-                VGroup(
-                    Label("Inputs"),
-                    Item('inputs',
-                        # minimum settings to get rid of
-                        # toolbar at top of table.
-                        editor=TableEditor(
-                            columns=columns,
-                            editable=True,
-                            configurable=False,
-                            sortable=False,
-                            sort_model = True,
-                            selection_bg_color = 'white',
-                            selection_color = 'black',
-                            label_bg_color = WindowColor,
-                            cell_bg_color = 'white',
+                HGroup(
+                    VGroup(
+                        Label("Inputs"),
+                        Item('inputs',
+                            # minimum settings to get rid of
+                            # toolbar at top of table.
+                            editor=TableEditor(
+                                columns=columns,
+                                editable=True,
+                                configurable=False,
+                                sortable=False,
+                                sort_model = True,
+                                selection_bg_color = 'white',
+                                selection_color = 'black',
+                                label_bg_color = WindowColor,
+                                cell_bg_color = 'white',
+                                ),
+                            show_label=False,
                             ),
-                        show_label=False,
                         ),
-                    ),
 
-                VGroup(
-                    Label("Outputs"),
-                    Item('outputs',
-                        # minimum settings to get rid of
-                        # toolbar at top of table.
-                        editor=TableEditor(
-                            columns=columns,
-                            editable=True,
-                            configurable=False,
-                            sortable=False,
-                            sort_model = True,
-                            selection_bg_color = 'white',
-                            selection_color = 'black',
-                            label_bg_color = WindowColor,
-                            cell_bg_color = 'white',
+                    VGroup(
+                        Label("Outputs"),
+                        Item('outputs',
+                            # minimum settings to get rid of
+                            # toolbar at top of table.
+                            editor=TableEditor(
+                                columns=columns,
+                                editable=True,
+                                configurable=False,
+                                sortable=False,
+                                sort_model = True,
+                                selection_bg_color = 'white',
+                                selection_color = 'black',
+                                label_bg_color = WindowColor,
+                                cell_bg_color = 'white',
+                                ),
+                            show_label=False,
                             ),
-                        show_label=False,
                         ),
                     ),
                 ),
 
             # Allow for a user specified view of the inputs
-            Item('object.inputs_view_class', editor=InstanceEditor(view='traits_view'), show_label=False, style='custom')
+            Item('function_view_instance', 
+                editor=InstanceEditor(view='traits_view'), 
+                show_label=False, 
+                style='custom', 
+                resizable=True,
+                height=0.75,
+                springy = True,
+                ),
+            springy = True,
             ),
                   
-            width=720, # about 80 columns wide on code view.
-            height=700,
+#            width=720, # about 80 columns wide on code view.
+#            height=700,
             resizable=True,
             buttons=menu.OKCancelButtons,
             close_result=False,

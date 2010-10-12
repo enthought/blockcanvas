@@ -333,14 +333,14 @@ class Application(HasTraits):
             # fixme: Short term for testing.  Remove imports in future and 
             #        replace with FunctionCall UI.
             function = LocalFunctionInfo(code=code)
-            traits_class = self.match_function_to_traits_class(item.name)
-            node = FunctionCall.from_callable_object(function, traits_class)
+            traits_class = self.match_function_to_has_traits_class(item.name)
+            node = FunctionCall.from_callable_object(function, traits_class, self.project.active_experiment)
 
         else:
             function = PythonFunctionInfo(name=item.name,
                                           module=item.module)
-            traits_class = self.match_function_to_traits_class(item.name)
-            node = FunctionCall.from_callable_object(function, traits_class)
+            traits_class = self.match_function_to_has_traits_class(item.name)
+            node = FunctionCall.from_callable_object(function, traits_class, self.project.active_experiment)
         
         # Bring up the dialog box to edit it
         node.edit_traits(kind="modal")
@@ -363,7 +363,7 @@ class Application(HasTraits):
         self.project.active_experiment.exec_model.add_function(function_call)
         return
 
-    def match_function_to_traits_class(self, function_name):
+    def match_function_to_has_traits_class(self, function_name):
         """Finds a class whose name matches '_{function_name}_view'. 
         Returns this class's traits_view attribute, if present.
         Returns None otherwise."""
@@ -371,13 +371,13 @@ class Application(HasTraits):
         # Search the class library for a matching name
         for a_class in self.class_library.classes:
             if a_class.name == '_{0}_view'.format(function_name):
-                traits_class = self.get_traits_class(a_class)
-                return traits_class
+                has_traits_class = self.get_has_traits_class(a_class)
+                return has_traits_class
 
         # Couldn't find a class to match the function.
         return None
 
-    def get_traits_class(self, a_class):
+    def get_has_traits_class(self, a_class):
         """Imports a class from its module and name and returns it, as long as it is a subclass of HasTraits.
         """
         # Import the class from the module
@@ -387,7 +387,7 @@ class Application(HasTraits):
         # Make sure the class has traits at all
         if issubclass(traits_class, HasTraits):
             # Get new instance of this class
-            tc = traits_class()
+            tc = traits_class
             return tc
 
         # Class does not have traits!
