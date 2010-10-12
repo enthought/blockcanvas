@@ -372,7 +372,8 @@ class Application(HasTraits):
         # If a custom UI was used, update the context 
         context = self.project.active_experiment.context
         for input in function_call.inputs:
-            context[input.binding] = getattr(function_call.function_view_instance, input.name)
+            if hasattr(function_call.function_view_instance, input.name):
+                context[input.binding] = getattr(function_call.function_view_instance, input.name)
 
         del function_call.function_view_instance # Cleans up function_call
         return

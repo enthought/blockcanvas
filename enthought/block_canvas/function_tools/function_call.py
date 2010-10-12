@@ -34,6 +34,40 @@ from local_function_info import LocalFunctionInfo
 from parse_tools import function_inputs_from_call_ast
 from python_function_info import PythonFunctionInfo
 
+def find_next_binding(var, active_experiment):
+    """Determines the next open binding for input and output variables based on the 
+    current experiment's context and the binding of other statements.
+
+    If no active experiment is give, simply the variable name plus an '_' is returned."""
+    # Set the binding prefix we are looking for once
+    binding_prefix = "{0}_".format(var.name)
+
+    if active_experiment != None:
+        # Initialize binding prefix set with context
+        bps = set([key for key in active_experiment.context.keys() if binding_prefix in key])
+
+        # Add in bindings from statement prefixes.  
+        # This ensures unique bindings even when the code + context has not been executed
+        for stmt in active_experiment.exec_model.statements:
+            # Add binding from other inputs
+            for stmt_input in stmt.inputs:
+                if binding_prefix in stmt_input.binding:
+                    bps.add(stmt_input.binding)
+
+            # Add binding from other outputs
+            for stmt_output in stmt.outputs:
+                if binding_prefix in stmt_output.binding:
+                    bps.add(stmt_output.binding)
+
+        num = len(bps) + 1
+        while (binding_prefix + str(num)) in bps:
+            num += 1
+        next_binding = binding_prefix + str(num)
+        return next_binding
+    else:
+        return binding_prefix
+
+
 class FunctionCall(HasTraits):
     """ Class that holds information about how a function is to be called.
     """
@@ -175,30 +209,22 @@ class FunctionCall(HasTraits):
             LocalPythonFunctionInfo objects.
         """
 
+        # Specify the inputs 
         inputs = [InputVariable(name=input.name, default=input.default)
                       for input in function.inputs]
 
-        # add bindings, taking into account existing context
-        if (active_experiment != None) and (function_view_class != None):
-            function_view_instance = function_view_class()
-            for input in inputs:
-                if hasattr(function_view_instance, input.name):
-                    binding_prefix = "{0}_".format(input.name)
-
-                    bps = set([key for key in active_experiment.context.keys() if binding_prefix in key])
-
-                    for stmt in active_experiment.exec_model.statements:
-                        for stmt_input in stmt.inputs:
-                            if binding_prefix in stmt_input.binding:
-                                bps.add(stmt_input.binding)
-
-                    num = len(bps) + 1
-                    while (binding_prefix + str(num)) in bps:
-                        num += 1
-                    input.binding = binding_prefix + str(num)
+        # Add input bindings, taking into account existing context if possible
+        for input in inputs:
+            input.binding = find_next_binding(input, active_experiment)
     
-        # fixme: Outputs should just be a list of strings...
+        # Specify the outputs
         outputs = [OutputVariable(name=output.name) for output in function.outputs]
+
+        # Add input bindings, taking into account existing context if possible
+        for output in outputs:
+            output.binding = find_next_binding(output, active_experiment)
+
+        # Make the new FunctionCall
         result = cls(inputs=inputs, outputs=outputs, function=function, 
                     function_view_class=function_view_class, active_experiment=active_experiment)
 
