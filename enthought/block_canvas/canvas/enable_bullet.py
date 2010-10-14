@@ -32,18 +32,31 @@ class Bullet(Component):
         pass
 
     def _draw_mainlayer(self, gc, view_bounds, mode="default"):
+#        if self.event_state == "selected":
+#            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+#        elif self.bullet_state == "up":
+#            enable_glyph_lib.io_bullet_up(gc, self.x, self.y, self.width, self.height)
+#        elif self.bullet_state == "dragging":
+#            enable_glyph_lib.io_bullet_drag(gc, self.x, self.y, self.width, self.height)
+#        elif self.bullet_state == "over":
+#            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+#        elif self.bullet_state == "dropping":
+#            enable_glyph_lib.io_bullet_drop_target(gc, self.x, self.y, self.width, self.height)
+#        else:
+#            enable_glyph_lib.io_bullet_down(gc, self.x, self.y, self.width, self.height)
+
         if self.event_state == "selected":
-            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.gray_close_button_over(gc, self.x, self.y, self.width, self.height)
         elif self.bullet_state == "up":
             enable_glyph_lib.io_bullet_up(gc, self.x, self.y, self.width, self.height)
         elif self.bullet_state == "dragging":
             enable_glyph_lib.io_bullet_drag(gc, self.x, self.y, self.width, self.height)
         elif self.bullet_state == "over":
-            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.gray_close_button_over(gc, self.x, self.y, self.width, self.height)
         elif self.bullet_state == "dropping":
             enable_glyph_lib.io_bullet_drop_target(gc, self.x, self.y, self.width, self.height)
         else:
-            enable_glyph_lib.io_bullet_down(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.gray_close_button_down(gc, self.x, self.y, self.width, self.height)
         return
     
     def normal_left_down(self, event):

@@ -13,6 +13,7 @@
 # arguments to each function
 #
 ####################################################################
+from __future__ import with_statement
 
 # Standard lib imports
 from math import acos
@@ -23,9 +24,7 @@ def default_glyph(gc, x, y, height, width):
         glyph library when no other button is found or specified
     """
 
-    gc.save_state()
-
-    try:
+    with gc:
         # Draw a filled circle as the default image
 
         gc.set_fill_color((0.2, 0.2, 0.8, 0.8))
@@ -34,16 +33,11 @@ def default_glyph(gc, x, y, height, width):
         gc.arc(x + width*0.5, y + width*0.5, width*0.5, 0, 2*3.14159)
         gc.draw_path()
 
-    finally:
-            gc.restore_state()
     return
 
 def gray_close_button(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         # Transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
@@ -71,23 +65,17 @@ def gray_close_button(gc, x, y, height, width):
         gc.line_to(x2, y1)
         gc.draw_path()
 
-    finally:
-            gc.restore_state()
     return
 
 def gray_close_button_over(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
         gc.begin_path()
         gc.arc(x + width*0.5, y + width*0.5, width*0.5, 0, 2*3.14159)
         gc.draw_path()
-
 
         # Draw 'x'
         radius = width * 0.2
@@ -107,17 +95,11 @@ def gray_close_button_over(gc, x, y, height, width):
         gc.line_to(x2, y1)
         gc.draw_path()
         
-
-    finally:
-            gc.restore_state()
     return
 
 def gray_close_button_down(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         gc.set_fill_color((0.4, 0.4, 0.4, 0.8))
         gc.set_stroke_color((0.1, 0.1, 0.1, 0.8))
@@ -144,16 +126,11 @@ def gray_close_button_down(gc, x, y, height, width):
         gc.line_to(x2, y1)
         gc.draw_path()
        
-    finally:
-            gc.restore_state()
     return
 
 def gray_chevron_right_button(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         # Transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
@@ -180,16 +157,11 @@ def gray_chevron_right_button(gc, x, y, height, width):
         gc.line_to(x1, y1)
         gc.draw_path()
 
-    finally:
-            gc.restore_state()
     return
 
 def gray_chevron_right_button_over(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
@@ -215,16 +187,11 @@ def gray_chevron_right_button_over(gc, x, y, height, width):
         gc.line_to(x1, y1)
         gc.draw_path()
         
-    finally:
-            gc.restore_state()
     return
 
 def gray_chevron_down_button(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         # this is transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
@@ -251,17 +218,11 @@ def gray_chevron_down_button(gc, x, y, height, width):
         gc.line_to(x1, y2)
         gc.draw_path()
         
-
-    finally:
-            gc.restore_state()
     return
 
 def gray_chevron_down_button_over(gc, x, y, height, width):
 
-    gc.save_state()
-
-    try:
-        
+    with gc:        
         # Draw a filled circle 
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
@@ -287,15 +248,11 @@ def gray_chevron_down_button_over(gc, x, y, height, width):
         gc.line_to(x1, y2)
         gc.draw_path()
         
-
-    finally:
-            gc.restore_state()
     return
 
 def close_button(gc, x, y, height, width):
         
-    gc.save_state()
-    try:
+    with gc:
         # Draw button background
         radius = width/4.0
         gc.set_fill_color((1.0, 0.0, 0.0, 1.0))
@@ -333,14 +290,11 @@ def close_button(gc, x, y, height, width):
         gc.line_to(x2, y1)
         gc.draw_path()
 
-    finally:
-        gc.restore_state()
     return
 
 def close_button_over(gc, x, y, height, width):
 
-    gc.save_state()
-    try:
+    with gc:
         # Draw button background
         radius = width/4.0
         gc.set_fill_color((1.0, 0.3, 0.3, 1.0))
@@ -378,8 +332,6 @@ def close_button_over(gc, x, y, height, width):
         gc.line_to(x2, y1)
         gc.draw_path()
 
-    finally:
-        gc.restore_state()
     return
 
 def io_bullet_up(gc, x, y, height, width):
@@ -412,8 +364,7 @@ def io_bullet_drop_target(gc, x, y, height, width):
 def _io_bullet_draw(gc, x, y, height, width, fill_color, 
                     border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
     
-    gc.save_state()
-    try:
+    with gc:
         # Draw bounding circle for selection and offset
         radius = width * 0.5
         
@@ -447,14 +398,11 @@ def _io_bullet_draw(gc, x, y, height, width, fill_color,
         gc.line_to(x1, y1)
         gc.draw_path()
 
-    finally:
-        gc.restore_state()
     return
 
 def _io_pie_draw(gc, x, y, height, width, fill_color, border_color):
     
-    gc.save_state()
-    try:
+    with gc:
         # Draw vanguard glyph
         gc.set_fill_color(fill_color)
         gc.set_stroke_color(border_color)
@@ -472,8 +420,6 @@ def _io_pie_draw(gc, x, y, height, width, fill_color, border_color):
         gc.close_path()
         gc.draw_path()
 
-    finally:
-        gc.restore_state()
     return
 
 
