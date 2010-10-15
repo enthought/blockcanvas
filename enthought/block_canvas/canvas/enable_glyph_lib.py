@@ -380,25 +380,76 @@ def _io_bullet_draw(gc, x, y, height, width, fill_color,
             radius,
             0, 2 * 3.14159)
         gc.draw_path()
+
+        # Draw connector glyph
+
+        #draw_triangle_glyph(gc, x, y, height, width, 
+        #                    fill_color, border_color, highlight_color)
+
+        draw_circle_glyph(gc, x, y, height, width, 
+                            fill_color, border_color, highlight_color)
+
+        #draw_square_glyph(gc, x, y, height, width, 
+        #                    fill_color, border_color, highlight_color)
         
-        # Draw triangle glyph
-        gc.set_fill_color(fill_color)
-        gc.set_stroke_color(border_color)
-
-
-        gc.begin_path()
-        x1 = x + width * 0.2
-        x2 = x + width * 0.8
-        y1 = y + height * 0.2
-        y2 = y + height * 0.8
-
-        gc.move_to(x1, y1)
-        gc.line_to(x2, (y1 + y2) * 0.5)
-        gc.line_to(x1, y2)
-        gc.line_to(x1, y1)
-        gc.draw_path()
-
     return
+
+def draw_triangle_glyph(gc, x, y, height, width, fill_color,
+                    border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
+    # Draw triangle glyph
+    gc.set_fill_color(fill_color)
+    gc.set_stroke_color(border_color)
+
+    gc.begin_path()
+    x1 = x + width * 0.2
+    x2 = x + width * 0.8
+    y1 = y + height * 0.2
+    y2 = y + height * 0.8
+
+    gc.move_to(x1, y1)
+    gc.line_to(x2, (y1 + y2) * 0.5)
+    gc.line_to(x1, y2)
+    gc.line_to(x1, y1)
+    gc.draw_path()
+
+    return 
+
+def draw_circle_glyph(gc, x, y, height, width, fill_color,
+                    border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
+    # Draw circle glyph
+    gc.set_fill_color(fill_color)
+    gc.set_stroke_color(border_color)
+
+    radius = width * 0.4
+
+    gc.begin_path()
+    gc.arc(x + width * 0.5,
+           y + height * 0.5,
+           radius,
+           0, 2 * 3.14159)
+    gc.draw_path()
+
+    return 
+
+def draw_square_glyph(gc, x, y, height, width, fill_color,
+                    border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
+    # Draw square glyph
+    gc.set_fill_color(fill_color)
+    gc.set_stroke_color(border_color)
+
+    gc.begin_path()
+    x1 = x + width * 0.2
+    x2 = x + width * 0.8
+    y1 = y + height * 0.2
+    y2 = y + height * 0.8
+
+    gc.move_to(x1, y1)
+    gc.line_to(x2, y1)
+    gc.line_to(x2, y2)
+    gc.line_to(x1, y2)
+    gc.draw_path()
+
+    return 
 
 def _io_pie_draw(gc, x, y, height, width, fill_color, border_color):
     
