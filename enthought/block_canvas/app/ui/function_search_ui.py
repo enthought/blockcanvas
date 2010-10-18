@@ -57,6 +57,8 @@ NEW_FUNCTION_ENTRY = MinimalFunctionInfo(name="Add New Function",
 NEW_EXPR_ENTRY = MinimalFunctionInfo(name="Add New Expressions",
                                      module="Create a new expression block")
 
+NEW_LOOP_ENTRY = MinimalFunctionInfo(name="Add New Loop",
+                                     module="Create a new loop block.")
 
 ##############################################################################
 # AppFunctionSearchUIHandler
@@ -132,6 +134,9 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         elif value == NEW_EXPR_ENTRY:
             msg = "Create a block of expressions."
             self.app.html_window_set_text(msg)
+        elif value == NEW_LOOP_ENTRY:
+            msg = "Create a loop that may contain a block of expressions."
+            self.app.html_window_set_text(msg)
         else:
             self.app.html_window_set_function_help(value.name, value.module)
 
@@ -155,8 +160,10 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         values = event.editor.value
         values.remove(NEW_FUNCTION_ENTRY)
         values.remove(NEW_EXPR_ENTRY)
+        values.remove(NEW_LOOP_ENTRY)
         values.insert(0, NEW_FUNCTION_ENTRY)
         values.insert(1, NEW_EXPR_ENTRY)
+        values.insert(2, NEW_LOOP_ENTRY)
 
 
     ### property get/set methods #############################################        
@@ -165,7 +172,7 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         """ Append the "new function" place holder function onto the results.
         """
         function_results = info.object.search_results
-        self.search_results = ([NEW_FUNCTION_ENTRY, NEW_EXPR_ENTRY]
+        self.search_results = ([NEW_FUNCTION_ENTRY, NEW_EXPR_ENTRY, NEW_LOOP_ENTRY]
             + function_results)
         
 
@@ -193,7 +200,7 @@ class AppSearchTableAdapter(SearchTableAdapter):
             "Add new function" is always in the first row, so we can simply
             make that row bold.             
         """
-        if row <= 1:
+        if row <= 2:
             font = self.bold_font
         else:
             font = self.normal_font
@@ -214,6 +221,8 @@ class AppSearchTableAdapter(SearchTableAdapter):
             short_description = "Create an editable user defined function."
         elif self.item is NEW_EXPR_ENTRY:
             short_description = "Create a block of expressions."
+        elif self.item is NEW_LOOP_ENTRY:
+            short_description = "Create a loop over a block of expressions."
         else:
             short_description = super(AppSearchTableAdapter, self)._get_tooltip()
             

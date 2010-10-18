@@ -55,6 +55,9 @@ NEW_FUNCTION_ENTRY = MinimalFunctionInfo(name="Add New Function",
 NEW_EXPR_ENTRY = MinimalFunctionInfo(name="Add New Expressions",
                                      module="Create a new expression block")
 
+NEW_LOOP_ENTRY = MinimalFunctionInfo(name="Add New Loop",
+                                     module="Create a new loop block.")
+
 
 class Application(HasTraits):
     """
