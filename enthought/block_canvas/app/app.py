@@ -6,7 +6,7 @@ import re
 
 # Enthought library imports
 from enthought.pyface.message_dialog import MessageDialog
-from enthought.traits.api import Instance, Str, HasTraits, on_trait_change
+from enthought.traits.api import Instance, Str, Bool, HasTraits, on_trait_change
 from enthought.appscripting.api import scriptable
 from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor, CodeEditor
@@ -97,6 +97,9 @@ class Application(HasTraits):
 
     # Status bar text
     status = Str
+
+    # Exectue automatically whenever the nodes, bindings, etc. are changed
+    auto_execute = Bool(False)
     
     ######################################################################
     # object interface
@@ -379,9 +382,19 @@ class Application(HasTraits):
 
         # If a custom UI was used, update the context 
         context = self.project.active_experiment.context
+        # Prevent execution while loading in values to the ui
+        prev_defer_execution = context.defer_execution
+        context.defer_execution = True 
+
+        # Load values into context from ui
         for input in function_call.inputs:
             if hasattr(function_call.function_view_instance, input.name):
                 context[input.binding] = getattr(function_call.function_view_instance, input.name)
+
+        # Clear the deffered names to skip execution & Restore defer_execution
+        if not self.auto_execute:
+            context._deferred_execution_names = []
+        context.defer_execution = prev_defer_execution
 
         del function_call.function_view_instance # Cleans up function_call
         return
@@ -517,6 +530,9 @@ class Application(HasTraits):
     #def execute_for_input_binding(self, object, name, old, new):
     #    """ When bindings change, execute the code for the new binding. 
     #    """
+    #    if not self.auto_execute:
+    #        return 
+    #
     #    if name == 'binding':
     #        self.execute_for_names([new])
     #    elif name == 'inputs':
@@ -531,7 +547,8 @@ class Application(HasTraits):
     #    # XXX: not enough time. Just re-executing the whole thing for now.
     #    # This means that every time we add a new function, the whole thing gets
     #    # executed since this fires the first time a function gets added.
-    #     self.execute_for_names()
+    #    if self.auto_execute:
+    #        self.execute_for_names()
 
     def execute_for_binding(self, variable, old, new):
         """ This is a HACK.
@@ -541,14 +558,16 @@ class Application(HasTraits):
             functions above this one after you double click to edit a
             canvas box.
         """
-        self.execute_for_names()
+        if self.auto_execute:
+            self.execute_for_names()
 
     @on_trait_change('project.active_experiment.exec_model.statements[]',
                      post_init=True)
     def execute_for_statements(self):
         """ When the list of statements changes, re-execute all of the code.
         """
-        self.execute_for_names()
+        if self.auto_execute:
+            self.execute_for_names()
 
     @on_trait_change('context_viewer:delete_names', post_init=True)
     def delete_names(self, new):
@@ -639,8 +658,7 @@ class Application(HasTraits):
 
     def _on_execute(self, info):
         """Explicitly executes the current workflow."""
-        app = info.object
-        app.execute_for_names()
+        self.execute_for_names()
 
 
     

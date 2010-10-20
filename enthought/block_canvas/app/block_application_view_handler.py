@@ -50,7 +50,6 @@ ClearContextAction = Action(
 )
 
 
-
 OpenAction = Action(
     name   = 'Open Script',
     action = '_on_open',
@@ -87,10 +86,20 @@ SetToolbarHideAction = Action(
     action = "_on_toggle_hide",
 )
 
+# Execute group actions
+
 ExecuteAction = Action(
     name = "Execute F5",
     action = "_on_execute",
 )
+
+ToggleAutoExecuteAction = Action(
+    name = "Turn Auto-Execute On",  # Change this if app.auto_execute default changes
+    action = "_toggle_auto_execute",
+)
+
+
+# Plot group actions
 
 PlotAction = Action(
     name='Plot',
@@ -123,6 +132,7 @@ BlockApplicationMenuBar = \
                   name = 'File' ),
             Menu( Group(
                         ExecuteAction,
+                        ToggleAutoExecuteAction,
                         ),
                   name='Run'),
             Menu( Group(
@@ -341,6 +351,26 @@ class BlockApplicationViewHandler(Controller):
         return
 
     #------------------------------------------------------------------------
+    # Execution actions
+    #------------------------------------------------------------------------    
+
+    def _on_execute(self, info):
+        """Explicitly executes the current workflow."""
+        app = info.object
+        app.execute_for_names()
+
+    def _toggle_auto_execute(self, info):
+        """Turns on/off auto-execution on node changes, bindings, etc"""
+        app = info.object
+        app.auto_execute = not app.auto_execute
+
+        if app.auto_execute:
+            ToggleAutoExecuteAction.name = "Turn Auto-Execute Off"
+        else:
+            ToggleAutoExecuteAction.name = "Turn Auto-Execute On"
+
+
+    #------------------------------------------------------------------------
     # Misc actions
     #------------------------------------------------------------------------
 
@@ -354,11 +384,6 @@ class BlockApplicationViewHandler(Controller):
         else:
             viewport.auto_hide = True
             SetToolbarHideAction.name = "Show Toolbar"
-
-    def _on_execute(self, info):
-        """Explicitly executes the current workflow."""
-        app = info.object
-        app.execute_for_names()
 
     #------------------------------------------------------------------------
     # Deprecated actions
