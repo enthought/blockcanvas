@@ -391,6 +391,10 @@ class Application(HasTraits):
             if hasattr(function_call.function_view_instance, input.name):
                 context[input.binding] = getattr(function_call.function_view_instance, input.name)
 
+        for output in function_call.outputs:
+            if hasattr(function_call.function_view_instance, output.name):
+                context[output.binding] = getattr(function_call.function_view_instance, output.name)
+
         # Clear the deffered names to skip execution & Restore defer_execution
         if not self.auto_execute:
             context._deferred_execution_names = []

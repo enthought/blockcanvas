@@ -124,6 +124,8 @@ class FunctionCall(HasTraits):
             if self.active_experiment != None:
                 context = self.active_experiment.context
                 trait_kw = dict([(input.name, context[input.binding]) for input in self.inputs if input.binding in context.keys()])
+                out_kw = dict([(output.name, context[output.binding]) for output in self.outputs if output.binding in context.keys()])
+                trait_kw.update(out_kw)
 
             # Generate the new view
             self.function_view_instance = self.function_view_class(**trait_kw)
