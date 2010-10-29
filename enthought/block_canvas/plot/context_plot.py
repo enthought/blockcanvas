@@ -5,7 +5,6 @@ from colorsys import hsv_to_rgb
 from enthought.chaco.api import PlotComponent, VPlotContainer, HPlotContainer, hsv
 from enthought.chaco.plot import Plot
 from enthought.chaco.tools.pan_tool import PanTool
-from enthought.chaco.tools.simple_zoom import SimpleZoom
 from enthought.chaco.plot_containers import OverlayPlotContainer
 from enthought.enable.api import Window
 from enthought.traits.api import HasTraits, Instance, Bool, List
