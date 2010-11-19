@@ -27,7 +27,7 @@ class ContextPythonShell ( PythonShell ):
     block_unit = Any
 
     # An evaluation_context that is used as the locals namespace for evaluation.
-    context = Any # Instance(ANumericContext, ())
+    context = Any(comparison_mode=1) # Instance(ANumericContext, ())
 
 
     ############################################################################
