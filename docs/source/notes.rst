@@ -53,19 +53,6 @@ that generated them.  Blocks can't currently generate their code (though it
 shouldn't be hard to add according to Dan -- and easier still in 2.5).  They
 do however have a UUID that hopefully will allow us to do what we need.
 
-UUID
-====
-
-1. Does the UUID of a block change when its sub_blocks are manipulated?
-
-
-Duplicating Blocks
-==================
-
-When cutting and pasting a function (block) from one canvas to another, the
-block shoulg get a new UUID.  I believe a block contained in a single other
-block safely.
-
 ExecutionGraph Options
 ======================
 
@@ -120,45 +107,6 @@ comment information.  It also doesn't contain blank line information.
 
 Note that strings do make it into the AST, even if they don't do anything, so
 one option is to use strings as comments.
-
-
-
-Selection
----------
-
-Rules
-=====
-
-    | item selected | multi-select | ctrl-down | alt-down | shift-down |
-
-    * If an item is selected when
-
-        a) no modifier keys are down
-        b) the item is not currently selected.
-
-      then the current selection is cleared, and the item becomes the
-      only selected thing.
-
-    * If an item is selected when
-
-        a) no modifier keys are down
-        b) the same item *is* currently selected.
-
-      the current selection is cleared.
-
-    * If an item is selected when
-
-        a) no modifier keys are down
-        b) the same item *is* currently selected.
-
-      the current selection is cleared.
-
-    * If an item is selected and the Ctrl key is down, it is added to the
-      current selection.
-
-    * If
-
-
 
 
 Containers

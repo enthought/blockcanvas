@@ -27,8 +27,6 @@ Contents
 .. toctree::
    
    readme.rst
-   philosophy.rst
-   future.rst
    notes.rst
 
 
