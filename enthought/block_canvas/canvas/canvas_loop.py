@@ -2,7 +2,7 @@
 """
 # Enthought library imports
 from enthought.enable.api import Container
-from enthought.kiva import font_metrics_provider
+from enthought.enable.font_metrics_provider import font_metrics_provider
 from enthought.traits.api import Any, Bool, Float, Instance, List, on_trait_change, Property, Str
 
 # Local library imports

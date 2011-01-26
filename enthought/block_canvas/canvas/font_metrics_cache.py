@@ -1,5 +1,5 @@
 # Enthought Library Imports
-from enthought.kiva import font_metrics_provider
+from enthought.enable.font_metrics_provider import font_metrics_provider
 from enthought.kiva.traits.api import KivaFont
 from enthought.traits.api import Any, Dict, HasTraits
 

@@ -73,7 +73,7 @@ from enthought.chaco.plot_interaction \
 from enthought.enable.api \
     import Window
 
-from enthought.kiva \
+from enthought.kiva.constants \
     import STROKE
 
 
