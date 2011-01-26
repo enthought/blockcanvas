@@ -3,7 +3,6 @@
 # Copyright (c) 2008-2011 by Enthought, Inc.
 # All rights reserved.
 
-
 """
 Numerical Modeling
 
@@ -37,8 +36,6 @@ from setuptools import setup, Extension, find_packages
 setup_data = dict(__name__='', __file__='setup_data.py')
 execfile('setup_data.py', setup_data)
 INFO = setup_data['INFO']
-# FIXME: Same thing as above. Uncomment import on line 32 when fixed.
-ETSDEVTOOLS = setup_data['ETSDEVTOOLS']
 
 
 # Pull the description values for the setup keywords from our file docstring.
@@ -100,7 +97,6 @@ setup(
         Topic :: Software Development :: Libraries
         """.splitlines() if len(c.strip()) > 0],
     description = DOCLINES[1],
-    extras_require = INFO['extras_require'],
     # Note: The greenlet package is very old and has not been ported to
     #       Windows amd64.  Since it is very deprecated, we keep the code
     #       around, but exclude it form being build as an extension module.
@@ -120,10 +116,6 @@ setup(
         'integrationtests.*',
         ]),
     platforms = ["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
-    tests_require = [
-        ETSDEVTOOLS,
-        'nose >= 0.10.3',
-        ],
     test_suite = 'nose.collector',
     url = 'http://code.enthought.com/projects/block_canvas.php',
     version = INFO['version'],
