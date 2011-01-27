@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>General Comments &mdash; BlockCanvas v3.2.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '3.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/et.ico"/>
+    <link rel="top" title="BlockCanvas v3.2.2 documentation" href="index.html" />
+    <link rel="prev" title="Application Overview" href="readme.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="readme.html" title="Application Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">BlockCanvas v3.2.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="general-comments">
+<h1>General Comments<a class="headerlink" href="#general-comments" title="Permalink to this headline">¶</a></h1>
+<p>Editing: The idea is to have a &#8220;canvas&#8221; where users place data flow functions
+(any python function actually), connect them together,</p>
+<div class="section" id="blocks-a-the-model-for-graphs">
+<h2>Blocks a the model for graphs<a class="headerlink" href="#blocks-a-the-model-for-graphs" title="Permalink to this headline">¶</a></h2>
+<p>Here was the question I posed to Dan:</p>
+<p>Imagine we have the canvas:</p>
+<div class="highlight-python"><pre>  foo
+ /   \
+bar  baz
+ \   /
+  zoo</pre>
+</div>
+<p>We want to be able to add and remove functions from the canvas (For example,
+delete baz).  This brings up the question of what the &#8220;primary&#8221; model is for
+the dependency graph.  Is it the Block?  If so, is there an easy way to remove
+a sub-block from a Block?  At first blush, this seemed hairy, but it seems a
+little strange to have a different model keep track of the same stuff and then
+generate a Block for execution every time that it changes...</p>
+<p>So,</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Would it be hard to remove a sub-block from a Block instance?</li>
+<li>Is that the correct model, or should we have another manage to structure,
+and just use the block for execution?</li>
+</ol>
+</blockquote>
+<p>Dan informed me that blocks are designed so that their sub-blocks can be
+manipulated.  For example, you can do the following:</p>
+<blockquote>
+<p>b1 = Block(&#8220;a=foo(b)&#8221;)
+b2 = Block(&#8220;c=bar(b)&#8221;)</p>
+<p>main_block = Block()
+main_block.sub_blocks = [b1,b2]
+function_graph(main_block)
+{&#8216;foo&#8217;: [], &#8216;bar&#8217;: [&#8216;foo&#8217;]}</p>
+</blockquote>
+<p>Similarly, deleting a block from the sub_blocks list removes the code from the
+main_block.  I believe this means this behavior makes Blocks suitable for the
+model that can sit under our &#8220;BlockCanvas&#8221; for displaying/creating/manipulating
+a Block in a visual programming window.</p>
+<p>The problem I haven&#8217;t analyzed yet is, how do we match blocks with code snippets
+that generated them.  Blocks can&#8217;t currently generate their code (though it
+shouldn&#8217;t be hard to add according to Dan &#8211; and easier still in 2.5).  They
+do however have a UUID that hopefully will allow us to do what we need.</p>
+<div class="section" id="executiongraph-options">
+<h3>ExecutionGraph Options<a class="headerlink" href="#executiongraph-options" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="section" id="functions-without-imports">
+<h1>Functions without imports...<a class="headerlink" href="#functions-without-imports" title="Permalink to this headline">¶</a></h1>
+<p>We want to be able to go back and forth between edited code and blocks.
+Currently, blocks only track the dependencies in code.  However, it is
+important for us to also know the function that will execute for each block
+in code.  This is so that, when people edit the block diagram, we can bring
+up information about the code that will execute form that block.</p>
+<p>I think we should also support people just editing code, but without having
+the actual functions imported or even known.  For example, the following code
+can be analyzed as a block:</p>
+<blockquote>
+c = foo(a,b)
+d = foo(c,a)</blockquote>
+<p>and it should be valid for someone to enter it in the code window.  I&#8217;m not
+sure what we do about executing this.  Perhaps we put a &#8216;!&#8217; icon on the
+function block.  Then, when people click on it, it&#8217;ll show the available
+functions that best match the name for them to choose from.</p>
+<p>More thought on this...</p>
+</div>
+<div class="section" id="code-edits-updating-the-block">
+<h1>Code edits updating the Block<a class="headerlink" href="#code-edits-updating-the-block" title="Permalink to this headline">¶</a></h1>
+<p>The Display() class now ties the code and block together accurately.  Editing
+either one should produce a consistent view in the other.  However, all is far
+from perfect.  Whenever you edit one of the views, it generates a completely
+new set of code for the other view.  This doesn&#8217;t result in anything incorrect
+as far as the views go, but it does result in extra layouts, and it may result
+in us re-running the entire workflow every time we change any bit of code.
+That would be bad.</p>
+<p>So, the desire is to figure out how to do updates on a much more granular
+level.  One way is to tie each line of the code to the a sub_block in the
+graph.  Another is to check each line in the code against the code that would
+be generated by a particular block in the graph.  This actually sounds fairly
+promising.  The question of what to do with identical blocks is interesting.
+This is sorta a useless duplication, so we may just mark one of the blocks
+as redundant or get rid of it...</p>
+</div>
+<div class="section" id="handling-comments-in-the-code-view">
+<h1>Handling Comments in the Code View<a class="headerlink" href="#handling-comments-in-the-code-view" title="Permalink to this headline">¶</a></h1>
+<p>If a user adds comments to the code view and then adds a new function block
+using the graph canvas, all the comments are lost.  This is because a new set
+of code is generated from the Block every time it is changed.  The code
+generated from the block is built from an AST which doesn&#8217;t contain the
+comment information.  It also doesn&#8217;t contain blank line information.</p>
+<p>Note that strings do make it into the AST, even if they don&#8217;t do anything, so
+one option is to use strings as comments.</p>
+<div class="section" id="containers">
+<h2>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h2>
+<p>Containers resize to fit the bounds of their components.  They also offset
+contained components to have their position relative to themselves.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/e-logo-rev.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">General Comments</a><ul>
+<li><a class="reference internal" href="#blocks-a-the-model-for-graphs">Blocks a the model for graphs</a><ul>
+<li><a class="reference internal" href="#executiongraph-options">ExecutionGraph Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions-without-imports">Functions without imports...</a></li>
+<li><a class="reference internal" href="#code-edits-updating-the-block">Code edits updating the Block</a></li>
+<li><a class="reference internal" href="#handling-comments-in-the-code-view">Handling Comments in the Code View</a><ul>
+<li><a class="reference internal" href="#containers">Containers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readme.html"
+                        title="previous chapter">Application Overview</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/notes.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="readme.html" title="Application Overview"
+             >previous</a> |</li>
+        <li><a href="index.html">BlockCanvas v3.2.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008, Enthought.
+      Last updated on Jan 27, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+    </div>
+  </body>
+</html>
