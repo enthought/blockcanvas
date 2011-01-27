@@ -1,6 +1,6 @@
 INFO = {
     'name': 'BlockCanvas',
-    'version': '3.2.1',
+    'version': '3.2.2',
     'install_requires': [
         'AppTools >= 3.4.1.dev',
         'Chaco >= 3.4.0.dev',
