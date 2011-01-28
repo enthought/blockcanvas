@@ -12,19 +12,19 @@ class ExperimentCanvasEditor(TraitsUIEditor):
     ##########################################################################
     # TraitsUIEditor traits
     ##########################################################################
-    
+
     # ??? Wny does this have to be a string?  Can't this be a view.
     # The name of the traits UI view used to create the UI (if not specified,
     # the default traits UI view is used).
     view = Any
-    
+
     ##########################################################################
     # TraitsUIEditor interface
     ##########################################################################
-    
+
     #fixme: Need an override for the name.
-    
-    def _view_default(self):        
+
+    def _view_default(self):
         """ Create a Traits UI view of the canvas in an experiment.  Use the
             controller as the controller for the Block Editor.
         """
@@ -35,5 +35,5 @@ class ExperimentCanvasEditor(TraitsUIEditor):
                        editor=BlockEditor(controller=self.obj.controller),
                  ),
              )
-             
-        return view             
+
+        return view

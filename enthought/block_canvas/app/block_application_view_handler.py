@@ -139,7 +139,7 @@ BlockApplicationMenuBar = \
                         PlotAction,
                         ),
                   name='Plot'),
-                  
+
             #Menu( Group(ClearContextAction),
             #      name = "Data" ),
             Menu( Group(
@@ -181,7 +181,7 @@ class BlockApplicationViewHandler(Controller):
                        'Segy files (*.segy)|*.segy'
         except ImportError:
             wildcard = 'Pickled files (*.pickle)|*.pickle'
-        
+
         app = info.object
         file_dialog = FileDialog(action = 'open',
                                  default_directory = app.data_directory,
@@ -192,7 +192,7 @@ class BlockApplicationViewHandler(Controller):
         data_context, filename = None, file_dialog.path
         if file_dialog.path != '':
             filesplit = os.path.splitext(filename)
-            if filesplit[1] != '': 
+            if filesplit[1] != '':
                 configurable_import = ConfigurableImportUI(filename = filename,
                                                            wildcard = wildcard)
                 ui = configurable_import.edit_traits(kind='livemodal')
@@ -222,9 +222,9 @@ class BlockApplicationViewHandler(Controller):
             if candidate in context.keys():
                 index = candidate
                 break
-            
+
         p = SimpleDataContextPlot(data_context=context, index=index)
-    
+
     #------------------------------------------------------------------------
     # Script loading/saving
     #------------------------------------------------------------------------
@@ -238,7 +238,7 @@ class BlockApplicationViewHandler(Controller):
 
         if file_dialog.path != '':
             info.object.load_code_from_file(file_dialog.path)
-            
+
         return
 
     def _on_save(self, info):
@@ -294,7 +294,7 @@ class BlockApplicationViewHandler(Controller):
         else:
             project_dir = ETSConfig.user_data
         return project_dir
-    
+
     def _save_project_graphically(self, parent, project, dirname):
         """ Saves the given project to a name **dirname**.  Gives the user
         graphical feedback.
@@ -352,7 +352,7 @@ class BlockApplicationViewHandler(Controller):
 
     #------------------------------------------------------------------------
     # Execution actions
-    #------------------------------------------------------------------------    
+    #------------------------------------------------------------------------
 
     def _on_execute(self, info):
         """Explicitly executes the current workflow."""
@@ -405,7 +405,7 @@ class BlockApplicationViewHandler(Controller):
 #        return
 #
 #
-#    
+#
 #    def _on_clear_context(self, info):
 #        """ Clears the active context
 #        """

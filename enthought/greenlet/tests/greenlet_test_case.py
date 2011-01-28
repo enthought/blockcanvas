@@ -19,7 +19,7 @@ def fmain(seen):
 
 
 class GreenletTestCase( unittest.TestCase ):
-    
+
     def test_simple(self):
         lst = []
         def f():
@@ -33,7 +33,7 @@ class GreenletTestCase( unittest.TestCase ):
         g.switch()
         lst.append(4)
         assert lst == range(5)
-    
+
     def test_threads(self):
         success = []
         def f():
@@ -45,7 +45,7 @@ class GreenletTestCase( unittest.TestCase ):
         for th in ths:
             th.join()
         assert len(success) == len(ths)
-    
+
 
     def test_exception(self):
         seen = []
@@ -59,20 +59,20 @@ class GreenletTestCase( unittest.TestCase ):
         assert seen == [SomeError]
         g2.switch()
         assert seen == [SomeError]
-    
+
     def send_exception(self, g, exc):
         def crasher(exc):
             raise exc
         g1 = greenlet(crasher, parent=g)
         g1.switch(exc)
-    
+
     def test_send_exception(self):
         seen = []
         g1 = greenlet(fmain)
         g1.switch(seen)
         self.failUnlessRaises(KeyError, self.send_exception, g1, KeyError)
         assert seen == [KeyError]
-    
+
     def test_dealloc(self):
         seen = []
         g1 = greenlet(fmain)
@@ -84,7 +84,7 @@ class GreenletTestCase( unittest.TestCase ):
         assert seen == [greenlet.GreenletExit]
         del g2
         assert seen == [greenlet.GreenletExit, greenlet.GreenletExit]
-    
+
     def test_dealloc_other_thread(self):
         seen = []
         someref = []
@@ -115,7 +115,7 @@ class GreenletTestCase( unittest.TestCase ):
         assert seen == [greenlet.GreenletExit]
         lock2.release()
         t.join()
-    
+
     def test_frame(self):
         def f1():
             f = sys._getframe(0)
@@ -130,8 +130,8 @@ class GreenletTestCase( unittest.TestCase ):
         assert not g
         assert next == "meaning of life"
         assert g.gr_frame is None
-    
+
 if __name__ == '__main__':
     unittest.main(argv=sys.argv)
-    
+
 ### EOF #######################################################################

@@ -24,15 +24,15 @@ from enthought.block_canvas.function_tools.python_function_info import PythonFun
 
 
 class Experiment(HasTraits):
-    """ 
+    """
     An Experiment represents a particular workflow and its associated data.
     It is associated with a particular context, but any data it produces
     is placed into a shadowing "local" context.
-    
+
     It encapsulates an execution model, its associated canvas, and the
     local context.
     """
-    
+
     # The name of the experiment.
     name = String()
 
@@ -41,10 +41,10 @@ class Experiment(HasTraits):
 
     # The Block Canvas
     canvas = Instance(BlockCanvas)
-    
+
     # The controller between the canvas and execution model
     controller = Instance(BlockGraphController)
-    
+
     # The execution context
     context = Instance(ExecutingContext)
 
@@ -60,7 +60,7 @@ class Experiment(HasTraits):
     #---------------------------------------------------------------------
     # Private Traits
     #---------------------------------------------------------------------
-    
+
     # A shadow trait for **shared_context** property
     _shared_context = Instance(IListenableContext, adapt='yes',
         rich_compare=False)
@@ -99,9 +99,9 @@ class Experiment(HasTraits):
         existing functions and imports in the code.
         """
         statements = self.exec_model.statements
-        functions = set([s.label_name for s in statements 
+        functions = set([s.label_name for s in statements
                           if hasattr(s, 'function') and (
-                              isinstance(s.function, PythonFunctionInfo) or 
+                              isinstance(s.function, PythonFunctionInfo) or
                               isinstance(s.function, LocalFunctionInfo))])
 
         # Basic name generation method: template + counter
@@ -116,10 +116,10 @@ class Experiment(HasTraits):
     #---------------------------------------------------------------------
     # Persistence
     #---------------------------------------------------------------------
-    
+
     def load_from_config(self, config, dirname, project=None):
         """ Loads the experiment.  The existing state of the experiment is
-        completely modified.  
+        completely modified.
 
         Parameters
         ----------
@@ -130,7 +130,7 @@ class Experiment(HasTraits):
         dirname: a string
             the absolute path to the subdirectory of the project that
             holds the experiment's saved data
-        
+
         project: Project instance
             If provided, the project is used to hook up references to
             the shared context.
@@ -148,7 +148,7 @@ class Experiment(HasTraits):
             self.controller = BlockGraphController(execution_model = self.exec_model)
             self.canvas = BlockCanvas(graph_controller=self.controller)
             self.controller.canvas = self.canvas
-        
+
         if "layout_file" in config:
             self.canvas.load_layout(join(dirname, config["layout_file"]))
 
@@ -160,21 +160,21 @@ class Experiment(HasTraits):
             name = config.get("shared_context")
             if name != "":
                 shared_context = project.find_context(name)
-            
+
         self._shared_context = shared_context
         self._update_exec_context()
 
 
     def save(self, basename, dirname):
         """ Saves the experiment into a directory.
-        
+
         Parameters
         ----------
         basename: string
             the name of the project directory
         dirname: string
             the name of the experiment's subdirectory
-        
+
         Returns
         -------
         A dict representing the saved state for this object.  All path
@@ -185,7 +185,7 @@ class Experiment(HasTraits):
         fullpath = join(basename, dirname)
         if not os.path.isdir(fullpath):
             os.mkdir(fullpath)
-        
+
         config = {}
         config["name"] = self.name
         config["save_dir"] = dirname
@@ -209,7 +209,7 @@ class Experiment(HasTraits):
         # Store the name of the shared context
         if self._shared_context is not None:
             config["shared_context"] = self._shared_context.name
-        
+
         return config
 
     #---------------------------------------------------------------------
@@ -224,7 +224,7 @@ class Experiment(HasTraits):
             self.controller.execution_model = new
         if self.context is not None:
             self.context.executable = new
-    
+
 
     #---------------------------------------------------------------------
     # Property getters/setters
@@ -250,7 +250,7 @@ class Experiment(HasTraits):
             subcontexts.append(newcontext)
         return
 
-        
+
     def _update_exec_context(self):
         mc = MultiContext(
             # Put the function filter in front so we don't dirty up the data
@@ -259,7 +259,7 @@ class Experiment(HasTraits):
             self._local_context,
             name='multi',
         )
-        
+
         if self._shared_context is not None:
             mc.subcontexts.append(self._shared_context)
 

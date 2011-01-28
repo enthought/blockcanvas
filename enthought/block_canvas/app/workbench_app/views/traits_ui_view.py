@@ -19,11 +19,11 @@ class TraitsUIView(WorkbenchView):
 
     # The object we want to use.
     obj = Instance(HasTraits)
-    
+
     # The traits view to use to visualize item.
     view = Any  # Instance(View) or Str
 
-    
+
     ###########################################################################
     # 'IWorkbenchPart' interface.
     ###########################################################################
@@ -34,6 +34,6 @@ class TraitsUIView(WorkbenchView):
         'parent' is the toolkit-specific control that is the view's parent.
 
         """
-        ui = self.obj.edit_traits(parent=parent, kind='subpanel', 
+        ui = self.obj.edit_traits(parent=parent, kind='subpanel',
                                   view=self.view)
         return ui.control

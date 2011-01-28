@@ -38,15 +38,15 @@ def localify_func_code(code, old_func_name, new_func_name, module_name):
             inserted = True
     return newcode
 
-    
+
 
 def edit_function_call(func_def):
-    
+
     if func_def.code is None:
         msg = "Perhaps your python path is not set correctly or\n" \
               "there is an error in the file (or one it imports).\n"
         error(None, msg, "Error loading function")
-        
+
         return None
 
     # If it is a user-defined function, one would want to edit it
@@ -56,26 +56,26 @@ def edit_function_call(func_def):
 
     if path_dir == usr_path:
         # This is a user function
-        
+
         is_ok = edit_user_function(func_def)
 
         if is_ok:
             if func_def.dirty:
                 func_def.write(overwrite = True)
-                
-            return func_def            
+
+            return func_def
     else:
         is_ok = edit_sys_function(func_def)
-            
+
         if is_ok:
             if func_def.dirty:
                 func_def.write(overwrite = False)
             return func_def
-        
+
 def edit_user_function(func_def):
     ui = func_def.edit_traits( view = edittable_function_call_view,
                                 kind='livemodal')
-    
+
     if not ui.result:
         # The user cancelled the edit
         func_def.reload()
@@ -85,14 +85,14 @@ def edit_user_function(func_def):
 
 def edit_sys_function(func_def):
     func_def.make_user_function()
-    
+
     ui = func_def.edit_traits(view=edittable_function_call_view,
                                kind='livemodal')
     if not ui.result:
         # The user cancelled the edit
         func_def.reload()
         return None
-        
+
     return ui.result
 
 def activate_function_call(func_def):
@@ -119,12 +119,12 @@ def activate_function_call(func_def):
             includes import and function call to be added to a script.
 
     """
-    
+
     if func_def.code is None:
         msg = "Perhaps your python path is not set correctly or\n" \
               "there is an error in the file (or one it imports).\n"
         error(None, msg, "Error loading function")
-        
+
         return None
 
     # If it is a user-defined function, one would want to edit it
@@ -134,10 +134,10 @@ def activate_function_call(func_def):
 
     if path_dir == usr_path:
         # This is a user function
-        
-        # We no longer edit the function before dropping it on the canvas 
+
+        # We no longer edit the function before dropping it on the canvas
         #is_ok = edit_user_function(func_def)
-        
+
         # Note: If the user edits the code, one should save the
         #        code and ask the user if (s)he wants to continue
         #        adding the function to the block.
@@ -158,7 +158,7 @@ def activate_function_call(func_def):
                 return func_def
             else:
                 return None
-            
+
         else:
             return func_def
 
@@ -181,10 +181,10 @@ def activate_function_call(func_def):
                 return func_def
             else:
                 return None
-            
+
         else:
             return func_def
-        
+
     return None
 
 

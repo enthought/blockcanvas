@@ -49,7 +49,7 @@ class StochasticInteractorTestCase(unittest.TestCase):
         desired = self.context['b']*numpy.ones(attribute_b.samples)
         self.assertTrue((desired == distribution_b.values).all())
 
-        
+
     def test_create_shadows(self):
         """ Test if shadows are working correctly.
         """

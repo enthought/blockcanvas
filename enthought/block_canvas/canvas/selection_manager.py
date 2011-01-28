@@ -58,7 +58,7 @@ class SelectionManager(HasTraits):
             item : ISelectable
                 An object to be selected or deselected.
             allow_remove : Boolean
-                Is the manager allowed to remove the item from the selection? 
+                Is the manager allowed to remove the item from the selection?
         """
 
         if item in self.selection:
@@ -77,7 +77,7 @@ class SelectionManager(HasTraits):
                 # Otherwise, clear the current selection, and make this the
                 # only selected item.
                 self.selection = [item]
-            
+
             if item.graph_node:
                 node = item.graph_node
                 if hasattr(node, 'function'):

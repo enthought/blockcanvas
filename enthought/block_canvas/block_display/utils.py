@@ -78,7 +78,7 @@ def add_to_existing_imports(code_block, from_import):
     block = code_block.block
     block._updating_structure = True
     result, modified = None, False
-    
+
     for sub_block in block.sub_blocks:
         if (isinstance(sub_block.ast, From) and
             sub_block.ast.modname == from_import.modname):
@@ -91,13 +91,13 @@ def add_to_existing_imports(code_block, from_import):
                 sub_block._set_inputs_and_outputs()
                 result = sub_block
                 break
-        
+
     block._updating_structure = False
     if result and modified:
         result.invalidate_cache()
         code_block.replace_sub_blocks([result], [result], True)
         block.invalidate_cache()
-        
+
     return result
 
 

@@ -24,7 +24,7 @@ class StyleManager(HasTraits):
     # Text field style information
     text_field_style = Instance(TextFieldStyle, ())
 
-    # Bullet style information 
+    # Bullet style information
     # FIXME: not used currently because when we instantiate the bullets, the
     # IOField does not know about its container (nor its
     # containers style_manager).

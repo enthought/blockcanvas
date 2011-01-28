@@ -9,37 +9,37 @@ import logging, os, shutil
 # Enthought library imports:
 from enthought.etsconfig.api \
     import ETSConfig
-    
+
 from enthought.naming.unique_name \
     import make_unique_name
-    
+
 from enthought.traits.api \
     import HasTraits, Property, Instance, Str, File, Any, on_trait_change
-    
+
 from enthought.traits.ui.api \
     import View, VGroup, Item, HSplit, VSplit, InstanceEditor, ValueEditor
-    
+
 from enthought.pyface.api \
     import DirectoryDialog
 
 from enthought.blocks.api \
     import Block, unparse
-        
+
 from enthought.block_canvas.block_display.block_unit \
     import BlockUnit
-    
+
 from enthought.contexts.data_context \
     import DataContext
-    
+
 from enthought.block_canvas.context.editors.context_shell_editor \
     import ContextShellEditor
-    
+
 from enthought.block_canvas.function_tools.handled_function_search \
     import HandledFunctionSearch
-    
+
 from enthought.block_canvas.function_tools.function_library \
     import FunctionLibrary
-    
+
 from enthought.block_canvas.function_tools.utils \
     import USER_MODULE_NAME
 
@@ -49,13 +49,13 @@ from enthought.block_canvas.interactor.configurable_interactor \
 # Local imports:
 from block_application_view_handler \
     import BlockApplicationMenuBar, BlockApplicationViewHandler
-    
+
 from ui.project_folder_ui \
     import ProjectFolderUI
-    
+
 from utils \
     import create_unique_project_name
-    
+
 # Global logger:
 logger = logging.getLogger(__name__)
 saved_context_prefix = 'saved_contexts_'
@@ -126,7 +126,7 @@ class BlockApplication(HasTraits):
 
     def trait_view(self, name=None, view_elements=None):
         return View(
-          VGroup( 
+          VGroup(
             HSplit(
                 Item( 'function_search',
                       label      = 'Search',
@@ -139,7 +139,7 @@ class BlockApplication(HasTraits):
                     Item( 'object.block_unit.codeblock_ui',
                           label      = 'Canvas',
                           id         = 'canvas',
-                          editor     = InstanceEditor( 
+                          editor     = InstanceEditor(
                                            view = 'canvas_view' ),
                           style      = 'custom',
                           dock       = 'horizontal',
@@ -185,7 +185,7 @@ class BlockApplication(HasTraits):
             Item( 'status',
                   style      = 'readonly',
                   show_label = False,
-                  resizable  = False 
+                  resizable  = False
             ),
             # fixme: This code only works on platforms for which wx.GCDC is
             # defined...
@@ -544,16 +544,16 @@ class BlockApplication(HasTraits):
 
         handler = self.function_search.handler
         func_def = handler.activated_function
-        
+
         if func_def is None:
             return
-        
+
         is_user_function = func_def.fullname.startswith(USER_MODULE_NAME)
-        
+
         if is_user_function \
                 and func_def.name in self.block_unit._function_context.keys():
             self.block_unit.codeblock.remove_from_imports(func_def.name, True)
-            
+
         self.block_unit.codeblock.add_function(func_def)
 
         return

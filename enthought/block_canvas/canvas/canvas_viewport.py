@@ -33,7 +33,7 @@ class CanvasViewport(Viewport):
     def center_viewport(self):
         """ Center viewports around the container's contents.
         """
-        
+
         if not self.component or not self.component.graph_controller:
             return
         nodes = self.component.graph_controller._nodes.values()

@@ -116,7 +116,7 @@ def integrate_ob(density_array, density_index, water_depth, kb, sea_water_grad):
            The Kelly Bushing
         sea_water_grad : scalar : units=psi/m
            Density of sea water
-        
+
         Returns
         -------
         overburden_log : array : units=psi

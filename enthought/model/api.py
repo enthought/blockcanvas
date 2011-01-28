@@ -6,7 +6,6 @@ from numeric_model \
            TerminationModel, SelectionReductionModel, CachedModel, \
            PassThruModel, NumericPipe, NumericObjectModel, NumericArrayModel, \
            ArrayExplorer, FilterParam
-           
+
 from polygon_filter \
     import PolygonFilter
-    

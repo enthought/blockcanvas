@@ -37,7 +37,7 @@ class InputVariableTestCase(VariableTestCase):
         v = self.variable_class(name='a')
         self.assertEqual(v.name , 'a')
         self.assertEqual(v.binding , 'a')
-        
+
         self.assertFalse(v.keyword_argument)
         self.assertEqual(v.call_signature,"a")
 
@@ -45,7 +45,7 @@ class InputVariableTestCase(VariableTestCase):
         v = self.variable_class(name='a', default='0')
         self.assertEqual(v.name , 'a')
         self.assertEqual(v.binding , '0')
-        
+
         self.assertTrue(v.keyword_argument)
         self.assertEqual(v.call_signature,"")
 

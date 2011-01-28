@@ -30,7 +30,7 @@ y = add(t3,c)
     clear_first = Bool(False)
     num_runs = Int(1)
     finish_callback = Any
-    
+
     traits_view = View(Item('code'),
                        Item('random_seed'),
                        Item('num_runs'),
@@ -41,14 +41,14 @@ y = add(t3,c)
                        buttons=['OK'],
                        resizable=True,
                        )
-                       
-    
-    
+
+
+
     def interactive_test(self):
         self.configure_test()
         self.run_test()
         return
-    
+
     def run_test(self):
         self.random_generator = Random()
         self.random_generator.seed(self.random_seed)
@@ -64,7 +64,7 @@ y = add(t3,c)
         self.block_code_editor.Bind(wx.EVT_TIMER, self.test_step, id=timerid)
         self.text_index = 0
         self.test_step(None)
-    
+
     def test_step(self, event):
         if self.text_index < len(self.code):
             if random()>0.8 or not self.random_backspace:
@@ -87,9 +87,9 @@ y = add(t3,c)
         super(CodeEditingTest, self).__init__(**kwtraits)
         from enthought.block_canvas.block_display.code_block_ui import editor_control
         self.block_code_editor = editor_control()
-        self.random_seed = int(random()*1000000) 
+        self.random_seed = int(random()*1000000)
         return
-        
+
     def insert_text(self, text, at_once=False):
         """Insert text into the code editor.  This can be done character
         by charager, or all at once if at_once is True"""
@@ -99,18 +99,18 @@ y = add(t3,c)
             for char in text:
                 self.block_code_editor.AddText(char)
         return
-    
+
 
     def clear_editor(self):
         """Removes all of the text all at once from the editor.
         this is equivalent for almost all purposes to the user
         selecting all and hitting backspace"""
         self.block_code_editor.ClearAll()
-    
+
     def goto_line(self, linenum):
         self.block_code_editor.GotoLine(linenum)
         return
-    
+
     def enter_basic_code(self):
         self.insert_text(self.basic_code)
 

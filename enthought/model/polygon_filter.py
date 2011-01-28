@@ -1,18 +1,18 @@
 #-------------------------------------------------------------------------------
-#  
-#  NumericModel filter for determining the set of points within a specified  
+#
+#  NumericModel filter for determining the set of points within a specified
 #  polygon.
-#  
+#
 #  Written by: Brandon DuRette
-#  
+#
 #  Date: 10/01/2005
-#  
+#
 #  (c) Copyright 2005 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
-#  Imports:  
+#  Imports:
 #-------------------------------------------------------------------------------
 
 from numpy \
@@ -20,7 +20,7 @@ from numpy \
 
 from enthought.kiva.agg \
     import points_in_polygon  # FIXME: bad dependency
-    
+
 from enthought.traits.api \
     import List, String, Tuple
 
@@ -28,7 +28,7 @@ from numeric_model \
     import NumericFilter
 
 #-------------------------------------------------------------------------------
-#  'PolygonFilter' class:  
+#  'PolygonFilter' class:
 #-------------------------------------------------------------------------------
 
 class PolygonFilter ( NumericFilter ):
@@ -47,14 +47,14 @@ class PolygonFilter ( NumericFilter ):
     #---------------------------------------------------------------------------
 
     def _eval ( self, model ):
-        """ Evaluates the result of the filter for the specified model. 
+        """ Evaluates the result of the filter for the specified model.
         """
         if len( self.points ) == 0:
             return None
-            
-        points = array( zip( getattr( model, self.x_value ), 
+
+        points = array( zip( getattr( model, self.x_value ),
                              getattr( model, self.y_value ) ) )
-        
+
         result = None
         for items in self.points:
             pip = points_in_polygon( points, array( items ) )
@@ -62,7 +62,7 @@ class PolygonFilter ( NumericFilter ):
                 result = pip
             else:
                 result = result | pip
-                
+
         return result
 
     #---------------------------------------------------------------------------
@@ -70,12 +70,12 @@ class PolygonFilter ( NumericFilter ):
     #---------------------------------------------------------------------------
 
     def _points_changed (  self ):
-        """ Handles the points trait being changed. 
+        """ Handles the points trait being changed.
         """
         self.updated = True
 
     def _points_items_changed (  self ):
-        """ Handles points being added or removed from points. 
+        """ Handles points being added or removed from points.
         """
         self.updated = True
-    
+

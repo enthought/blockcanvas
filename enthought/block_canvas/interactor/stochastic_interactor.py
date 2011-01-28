@@ -27,7 +27,7 @@ class StochasticInteractor(SimpleInteractor):
 
     execute_button = Button('Execute')
     distribution = Enum('constant', 'gaussian', 'triangular', 'uniform')
-    
+
     #---------------------------------------------------------------------------
     # object interface
     #---------------------------------------------------------------------------
@@ -74,14 +74,14 @@ class StochasticInteractor(SimpleInteractor):
                         distribution = Constant(value = self.ranges[input][0])
                     else:
                         distribution = Constant(value = value)
-                        
+
                 elif self.distribution == 'gaussian':
                     if self.ranges.has_key(input):
                         distribution = Gaussian(mean = self.ranges[input][0],
                                                 std = self.ranges[input][1])
                     else:
                         distribution = Gaussian(mean = value, std = 2.0)
-                        
+
                 elif self.distribution == 'triangular':
                     if self.ranges.has_key(input):
                         distribution = Triangular(mode = self.ranges[input][0],
@@ -102,15 +102,15 @@ class StochasticInteractor(SimpleInteractor):
                 s_item = StochasticItem(name = trait_name,
                                         distribution = distribution)
                 setattr(self, trait_name, s_item)
-                
+
         return
 
-    
+
     def _view_items(self):
         """ Overloading defintion in simple-interactor, for building a view
             given inputs.
         """
-        
+
         items = []
 
         self._setup_inputs()
@@ -128,7 +128,7 @@ class StochasticInteractor(SimpleInteractor):
         """
         pass
 
-        
+
     #---------------------------------------------------------------------------
     #  StochasticInteractor Interface
     #---------------------------------------------------------------------------
@@ -150,7 +150,7 @@ class StochasticInteractor(SimpleInteractor):
         # computing environment in future.
         seeds = {}
         results = { '_seeds': seeds }
-        
+
         # Create shadow contexts
         for input in self.inputs:
             trait_name = self._input_prefix + input
@@ -178,7 +178,7 @@ class StochasticInteractor(SimpleInteractor):
             --------
             range_dict: Dict
                e.g. {'a': (<a_low>, <a_high>)}
-               
+
         """
 
         range_dict = {}
@@ -189,7 +189,7 @@ class StochasticInteractor(SimpleInteractor):
                       'triangular': ['mode', 'low', 'high'],
                       'uniform': ['low', 'high']
             }
-        
+
         # Ranges should include parameters of the distribution.
         for name in list_inputs:
             stochastic_item = getattr(self, name)
@@ -202,7 +202,7 @@ class StochasticInteractor(SimpleInteractor):
 
         return range_dict
 
-    
+
 # Test
 if __name__ == '__main__':
     from enthought.numerical_modeling.workflow.api import Block
@@ -222,5 +222,5 @@ if __name__ == '__main__':
     interactor = StochasticInteractor(context=context, block=block,
                                       inputs=['b','z'], distribution='gaussian')
     interactor.edit_traits(kind='livemodal')
-    
+
 ### EOF ------------------------------------------------------------------------

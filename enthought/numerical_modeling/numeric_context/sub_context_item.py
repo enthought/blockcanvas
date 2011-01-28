@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an array value contained within a sub-context.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an array value contained within a sub-context.
@@ -22,7 +22,7 @@ from enthought.traits.api \
 
 from a_numeric_item \
     import ANumericItem
-    
+
 #-------------------------------------------------------------------------------
 #  'SubContextItem' class:
 #-------------------------------------------------------------------------------

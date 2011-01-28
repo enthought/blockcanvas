@@ -2,34 +2,34 @@ import enthought.traits.ui.menu as menu
 
 from enthought.numerical_modeling.numeric_context.api \
     import ANumericContext
-    
+
 from enthought.numerical_modeling.workflow.api \
     import Block
 
 from enthought.traits.api \
     import *
-    
+
 from enthought.traits.ui.api \
     import *
-    
+
 #-------------------------------------------------------------------------------
 #  'DisplayerEditor' class:
 #-------------------------------------------------------------------------------
 
 class DisplayerEditor ( HasTraits ):
-    
+
     # The label for the trait:
     label = Str
-    
+
     # Should a range editor be used (or a text editor)?
     is_range = Bool
-    
+
     # Low bound of range:
     low = Float
-    
+
     # High bound of range:
     high = Float
-    
+
     view = View(
         Item( 'label' ),
         Item( 'is_range' ),
@@ -43,9 +43,9 @@ class DisplayerEditor ( HasTraits ):
 #-------------------------------------------------------------------------------
 #  'DisplayerHandler' class:
 #-------------------------------------------------------------------------------
-        
+
 class DisplayerHandler( ViewHandler ):
-    
+
 #-- Event Handlers -------------------------------------------------------------
 
     def object_block_changed ( self, info ):
@@ -55,11 +55,11 @@ class DisplayerHandler( ViewHandler ):
             view.set_content( *info.object.view_items() )
             view.updated    = True
             self._no_update = False
-        
+
     def object_id_changed ( self, info ):
         if info.object.id != '':
             self._load_view( info )
-            
+
     def on_right_up ( self, info, item, event ):
         return
         if (item is not None) and (item._is_range is not None):
@@ -68,7 +68,7 @@ class DisplayerHandler( ViewHandler ):
                 low, high = item.editor.low, item.editor.high
             re = InteractorEditor( label    = item.label or item.name[4:],
                                    is_range = item._is_range,
-                                   low      = low, 
+                                   low      = low,
                                    high     = high )
             if re.edit_traits().result:
                 item.label     = re.label
@@ -85,7 +85,7 @@ class DisplayerHandler( ViewHandler ):
                 self._no_update      = False
                 if info.object.id != '':
                     self._save_view( info )
-                    
+
 #-- Private Methods ------------------------------------------------------------
 
     def _save_view ( self, info ):
@@ -99,7 +99,7 @@ class DisplayerHandler( ViewHandler ):
             pass
         if fh is not None:
             fh.close()
-            
+
     def _load_view ( self, info ):
         """ Tries to reload a persisted version of the view.
         """
@@ -112,7 +112,7 @@ class DisplayerHandler( ViewHandler ):
             pass
         if fh is not None:
             fh.close()
-            
+
     def _view_file ( self, info ):
         """ Returns the persisted file name associated with the view.
         """
@@ -121,7 +121,7 @@ class DisplayerHandler( ViewHandler ):
 #-------------------------------------------------------------------------------
 #  'Displayer' class:
 #-------------------------------------------------------------------------------
-                
+
 class Displayer ( HasTraits ):
     """ Displays the results of a computational model.
     """
@@ -133,7 +133,7 @@ class Displayer ( HasTraits ):
     # The persistence id associated with this displayer (empty string means no
     # persistence):
     id = Str
-    
+
     # The whole block:
     block = Any( Block( '' ) )
 
@@ -167,7 +167,7 @@ class Displayer ( HasTraits ):
         # Remove the old outputs:
         if old is not None:
             [ self.remove_trait( 'var_' + output ) for output in old.outputs ]
-            
+
         # Add the new inputs:
         if new is not None:
             [ self.add_trait( 'var_' + output, Any ) for output in new.outputs ]
@@ -208,7 +208,7 @@ class Displayer ( HasTraits ):
                 self._set_var( output, value )
 
     #-- Private Methods --------------------------------------------------------
-                    
+
     def _set_var ( self, name, value ):
         """ Set a 'legal' value for the specified output variable.
         """
@@ -216,16 +216,16 @@ class Displayer ( HasTraits ):
             n = len( value )
         except:
             n = 0
-            
+
         max_len = 10
         if isinstance( value, basestring ):
             max_len = 80
-            
+
         if n > max_len:
             value = '%s[%d]' % ( value.__class__.__name__, n )
-            
+
         setattr( self, 'var_' + name, value )
-    
+
     #---------------------------------------------------------------------------
     #  HasTraits interface:
     #---------------------------------------------------------------------------
@@ -239,4 +239,4 @@ class Displayer ( HasTraits ):
             resizable = True,
             handler   = DisplayerHandler
         )
-        
+

@@ -30,7 +30,7 @@ from constants \
 
 from context_modified \
     import ContextModified
-    
+
 from error \
     import NumericContextError
 
@@ -74,7 +74,7 @@ class DerivativeContext ( ANumericContext ):
 
     # The ContextDelegate the context uses to handle various policy decisions:
     context_delegate = Property
-    
+
     # The list of all sub_context names:
     sub_context_names = Property
 
@@ -95,11 +95,11 @@ class DerivativeContext ( ANumericContext ):
         super( DerivativeContext, self ).__init__( **traits )
         if context is not None:
             self.context = context
-    
+
     def __setstate__ ( self, state ):
         state.pop( '__traits_version__', None )
         self.set( **state )
-                    
+
 
     #-- 'DerivativeContext' Class Methods --------------------------------------
 
@@ -305,16 +305,16 @@ class DerivativeContext ( ANumericContext ):
         return self.context_base.context_indices
 
     def _get_context_delegate ( self ):
-        return self.context_base.context_delegate 
+        return self.context_base.context_delegate
 
     def _set_context_default_value ( self, delegate ):
         self.context_base.context_delegate = delegate
-        
+
     def _get_sub_context_names ( self ):
         return self.context_base.sub_context_names
 
     #---------------------------------------------------------------------------
-    #  Implementation of the 'defer_events' property:  
+    #  Implementation of the 'defer_events' property:
     #---------------------------------------------------------------------------
 
     def _get_defer_events ( self ):
@@ -323,7 +323,7 @@ class DerivativeContext ( ANumericContext ):
             return self.context_base.defer_events
         else:
             return False
-            
+
     def _set_defer_events ( self, x ):
         if self.context_base != None:
             self.context_base.defer_events = x
@@ -347,7 +347,7 @@ class DerivativeContext ( ANumericContext ):
             cm.removed = [ item.name for item in old.context_items ]
             old.on_trait_change( self._context_is_modified, 'context_modified',
                                  remove = True )
-                                 
+
             dm.removed = dict( old )
             old.on_trait_change( self._dict_is_modified, 'dict_modified',
                                  remove = True )
@@ -355,7 +355,7 @@ class DerivativeContext ( ANumericContext ):
         if new is not None:
             cm.added = [ item.name for item in new.context_items ]
             new.on_trait_change( self._context_is_modified, 'context_modified' )
-            
+
             dm.added = dict( new )
             new.on_trait_change( self._dict_is_modified, 'dict_modified' )
 

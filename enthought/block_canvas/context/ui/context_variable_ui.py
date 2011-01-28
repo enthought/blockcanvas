@@ -96,7 +96,7 @@ class CVLHandler(tui.Controller):
         # of this interacttor
         # FIXME: We need to put on a proper shadow context!
         exp.context.shadows = [exp._local_context]
-    
+
         var_configs = [VariableConfig(name=row.name) for row in selection]
         config_interactor = InteractorConfig(vars=self.model.variables,
                                              var_configs=var_configs)

@@ -24,7 +24,7 @@ class BlockCanvas(Canvas):
     #---------------------------------------------------------------------
     # DragTool traits
     #---------------------------------------------------------------------
-    
+
     # Override from DragTool base class.  Do not end drag operation
     # upon leaving the component.
     end_drag_on_leave = false
@@ -47,8 +47,8 @@ class BlockCanvas(Canvas):
 
     # Keep track of which items in the container are selected
     selection_manager = Instance(SelectionManager, ())
-    
-    # Tool used to wire outputs to inputs, only enabled when 
+
+    # Tool used to wire outputs to inputs, only enabled when
     # user enters a box.  Disabled after the wiring tool finishes
     # dragging.
     wiring_tool_enabled = Bool(False)
@@ -82,7 +82,7 @@ class BlockCanvas(Canvas):
             self._initial_layout_needed = False
         except:
             warnings.warn('Unable to load layout file "%s";'
-                          'using default layout.' % filename) 
+                          'using default layout.' % filename)
         finally:
             try:
                 file.close()
@@ -156,7 +156,7 @@ class BlockCanvas(Canvas):
         if not self.wiring_tool_enabled:
             self.overlays.append(self.wiring_tool)
             self.wiring_tool_enabled = True
-            
+
     def remove_wiring_tool(self):
         if self.wiring_tool_enabled:
             self.overlays.remove(self.wiring_tool)

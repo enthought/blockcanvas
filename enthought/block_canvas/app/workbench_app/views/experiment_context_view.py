@@ -13,10 +13,10 @@ from traits_ui_view import TraitsUIView
 
 # fixme: Convert to a handler.
 class ExperimentContextModelView(HasTraits):
-    """ Simple Model View that translates the context into a 
+    """ Simple Model View that translates the context into a
         ContextVariableList.
     """
-    
+
     # fixme: This isn't working because of relative import issues.
     model = Any # Instance(Experiment)
 
@@ -54,20 +54,20 @@ class ExperimentContextModelView(HasTraits):
 #        for name in new:
 #            del exec_context[name]
 #        exec_context.defer_events = False
-                
+
 class ExperimentContextView(TraitsUIView):
     """ Create a view of the active project's context.
-    
+
         fixme: Need to hook up listeners to the active project context.
     """
 
-    
+
     ###########################################################################
     # 'TraitsUIView' interface.
     ###########################################################################
 
     def _view_default(self):
-        """ This view uses a ModelView to translate the view into 
+        """ This view uses a ModelView to translate the view into
             ContextVariableList
         """
         view = View(

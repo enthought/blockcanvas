@@ -567,7 +567,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling(self):
         'Pickling'
-        
+
         def checked_pickle(c):
             p = loads(dumps(c))
             assert_similar_contexts(c, p)
@@ -774,7 +774,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling_dynamic_binding(self):
         'Pickling: dynamic binding'
-        
+
         p = self.factory()
         c = self.factory(context_name='c')
 
@@ -846,7 +846,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickled_parent_contexts_lose_new_names_in_children(self):
         "Regression: pickled parent contexts lose new names in children"
-        
+
         a = self.factory()
         a.b = self.factory()
         a = loads(dumps(a))
@@ -857,7 +857,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
     #@staticmethod # nose doesn't find static methods
     def test_pickling_subtypes_loses_fields(self):
         "Regression: pickling subtypes loses fields"
-        
+
         c = FooContext()
         assert_equal(c.a, 3)
         assert_equal(c.b, 4)
@@ -867,7 +867,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
     def test_pickling_duplicates_sub_context_names(self):
         "Regression: pickling duplicates 'sub_context_names'"
-        
+
         c = self.factory()
         c.d = self.factory()
         assert_equal(c.sub_context_names, ['d'])
@@ -907,7 +907,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
         # Construct a numeric context from the bottom up, pickle/unpickle it,
         # and look up using dotted notation.
-        
+
         well = self.factory()
         raw_logs = self.factory()
         log_suite = self.factory()
@@ -929,7 +929,7 @@ class NumericContextTest(MappingObjectTest, unittest.TestCase):
 
         # Construct a numeric context from the top down, pickle/unpickle it,
         # and look up using dotted notation.
-        
+
         well = self.factory()
         raw_logs = self.factory()
         log_suite = self.factory()
@@ -1019,14 +1019,14 @@ def test_all():
         global ctor
         for class_name, ctor in cases:
             class_name = 'Test' + class_name
-            
+
             # Flag name collisions that clobber other test cases
             try:
                 eval(class_name)
                 assert False, 'Test case name collision: ' + class_name
             except NameError:
                 pass
-            
+
             # Create the test case
             exec (
                 'class %s(base):\n'
@@ -1034,7 +1034,7 @@ def test_all():
                 '        self.factory = ctor\n'
                 ) % class_name
             test_support.run_unittest(eval(class_name))
-            
+
 
 ###############################################################################
 # Support

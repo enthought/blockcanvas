@@ -151,13 +151,13 @@ class EditField(Component):
     def _draw_mainlayer(self, gc, view_bounds, mode="default"):
 
         gc.save_state()
-        
+
         self.set_font(gc)
         scale = get_scale(gc)
         x = scale * (self.x + self.offset)
         y = scale * self.y
         gc.show_text_at_point(self.text, x, y)
-        
+
         if self._draw_cursor:
             x += self.metrics.get_text_extent(self.text[:self.index])[2]
             y2 = self.y2 - self.offset

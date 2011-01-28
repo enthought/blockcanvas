@@ -1,14 +1,14 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an abstract base class for a derived numberic context which filter
 #  their data in some way.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an abstract base class for a derived numberic context which filter
@@ -21,16 +21,16 @@
 
 from enthought.traits.api \
     import Instance, Property, Undefined
-    
+
 from a_numeric_filter \
     import ANumericFilter
-    
+
 from context_modified \
     import ContextModified
-    
+
 from derivative_context \
     import DerivativeContext
-    
+
 #-------------------------------------------------------------------------------
 #  'FilterContext' class:
 #-------------------------------------------------------------------------------

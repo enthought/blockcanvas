@@ -36,16 +36,16 @@ class ClassLibraryTest(unittest.TestCase):
 
 
     def test_xml_timings(self):
-        """Test the time it takes to import the xml module, not applicable 
+        """Test the time it takes to import the xml module, not applicable
         if xml not present"""
-        
+
         try:
             import xml
         except:
             # Skip this test if cp not available
             import nose
             raise nose.SkipTest()
-        
+
         import time
         t1 = time.clock()
         library = ClassLibrary(modules=[])
@@ -53,9 +53,9 @@ class ClassLibraryTest(unittest.TestCase):
         library.modules.append('xml')
         t2 = time.clock()
         self.assertEqual(t2-t1<2., True)
-        
 
-        
+
+
 
 
     def test_pickling(self):

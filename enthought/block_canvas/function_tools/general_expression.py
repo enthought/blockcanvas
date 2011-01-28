@@ -65,19 +65,19 @@ class NameFinder(object):
 class GeneralExpression(HasTraits):
     """ Class that holds information about assignments from general expressions.
     """
-    
+
     # Name displayed for the function in a UI as well as in the call signature.
     # If it is not specified, then we use the function's library name.
     name = Property(Str, depends_on=['code'])
-    
+
     label_name = Property(lambda obj: getattr(obj, 'name'),
-                          lambda obj, val: setattr(obj, 'name', val), 
+                          lambda obj, val: setattr(obj, 'name', val),
                           depends_on=['code'])
-    
+
     # List of the function's input variable names, bindings, and default values.
     # This should always be empty by definition.
     inputs = List(InputVariable, transient=True)
-    
+
     # List of the function's output variables names and bindings
     outputs = List(OutputVariable, transient=True)
 

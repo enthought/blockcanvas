@@ -37,7 +37,7 @@ x = array((1,2,3))
         self._base('''
 x = 3
 ''', {'x' : 3})
-        
+
     def test_assign_none(self):
         "Assign 'None'"
         self._base('''

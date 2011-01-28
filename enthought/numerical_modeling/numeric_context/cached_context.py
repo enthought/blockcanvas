@@ -1,16 +1,16 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a termination numeric context which passes all of the data it
 #  receives from its upstream numeric context through unchanged, and also
 #  caches the values to avoid having to constantly recalculate  upstream
 #  values.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a termination numeric context which passes all of the data it

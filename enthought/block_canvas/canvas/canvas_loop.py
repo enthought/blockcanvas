@@ -23,4 +23,4 @@ class CanvasLoop(CanvasBox):
     label = Property
     _label = Str("Loop")
 
-    
+

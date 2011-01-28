@@ -90,8 +90,8 @@ class PythonPathFromFilePathTestCase(unittest.TestCase):
         package_path = os.path.join('blah', 'xml')
         python_path = python_path_from_file_path(package, file_path, package_path=package_path)
         self.assertEqual(python_path,'xml.binky.mod')
-        
-        
+
+
     def test_package_name_repeated_in_path(self):
         package = 'xml'
         file_path = os.path.join('foo','bar','xml','blah',
@@ -105,6 +105,6 @@ class PythonPathFromFilePathTestCase(unittest.TestCase):
         actual = python_path_from_file_path('sample_package', path)
         desired = 'sample_package.sp_func'
         self.assertEqual(actual, desired)
-        
+
 if __name__ == '__main__':
     unittest.main()

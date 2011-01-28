@@ -1,16 +1,16 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a concrete class for a derived, filtered numeric context which
 #  passes the data it receives from its upstream context through
 #  unmodified, but provides a 'selection mask', which is a numeric boolean
 #  array that indicates which data items are in the selection.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a concrete class for a derived, filtered numeric context which
@@ -31,7 +31,7 @@ from enthought.traits.api \
 
 from constants \
     import CreateContext
- 
+
 from filter_context \
     import FilterContext
 

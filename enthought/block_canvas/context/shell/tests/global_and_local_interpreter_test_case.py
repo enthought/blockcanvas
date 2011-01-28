@@ -69,7 +69,7 @@ class GlobalAndLocalInterpreterTestCase(unittest.TestCase):
         """ Can we delete a global variable even if it isn't declared global?
         """
         self.globals[self.input_name] = self.global_input
-        self.assertTrue(self.globals.has_key(self.input_name))        
+        self.assertTrue(self.globals.has_key(self.input_name))
         # assert(vp==1)
         expr = "assert(%s==%s)" % (self.input_name, self.global_input)
         self.interpreter.push(expr)

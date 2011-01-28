@@ -14,11 +14,11 @@ from parse_tools_test_functions import *
 ##############################################################################
 
 class FunctionReturnsFromFunctionTestCase(unittest.TestCase):
-    """ This test case also is a reasonable test for 
+    """ This test case also is a reasonable test for
         function_returns_from_ast and function_returns_from_code because
         it is a wrapper around these.
     """
-    
+
     def setUp(self):
         unittest.TestCase.setUp(self)
 
@@ -83,13 +83,13 @@ class FunctionReturnsFromFunctionTestCase(unittest.TestCase):
 ##############################################################################
 
 class FunctionArgumentsFromFunctionTestCase(unittest.TestCase):
-    """ This test case also is a reasonable test for 
+    """ This test case also is a reasonable test for
         function_returns_from_ast and function_returns_from_code because
         it is a wrapper around these.
     """
-    
+
     def test_just_args(self):
-        
+
         def func(x, y):
             pass
 
@@ -144,19 +144,19 @@ class FunctionArgumentsFromFunctionTestCase(unittest.TestCase):
 ##############################################################################
 
 class FunctionArgumentsFromAstTestCase(unittest.TestCase):
-    """ This test case also is a reasonable test for 
+    """ This test case also is a reasonable test for
         function_returns_from_ast and function_returns_from_code because
         it is a wrapper around these.
     """
-    
+
     def _args_from_code(self, code):
         mod = compiler.parse(code)
         # Pull the function out the Module->Stmt nodes of the tree.
         func = mod.node.nodes[0]
         return function_arguments_from_ast(func)
-        
+
     def test_just_args(self):
-        
+
         code = "def func(x, y):\n" \
                "    pass"
 

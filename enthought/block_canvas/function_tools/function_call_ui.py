@@ -19,18 +19,18 @@ def create_view(readonly = False, show_units = False):
         columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),
                    ObjectColumn(name='binding', label='Binding', editable=True, width=0.6),
                   ]
-        
+
     if readonly:
         code_editor_style = 'readonly'
     else:
         code_editor_style = 'simple'
-        
-    
+
+
     view = View(
-               VSplit(                      
+               VSplit(
                       VGroup(Item('object.function.name'),
                              Item('object.function.module'),
-                                    
+
 
                              HGroup(
                                     VGroup(Label("Inputs"),
@@ -88,7 +88,7 @@ def create_view(readonly = False, show_units = False):
                   buttons=menu.OKCancelButtons,
                   close_result=False,
          )
-    
+
     return view
 
 def create_alternate_view():
@@ -97,13 +97,13 @@ def create_alternate_view():
                ]
 
     view = View(
-        Tabbed(                      
+        Tabbed(
             # Allow for a user specified view of the inputs
-            Item('function_view_instance', 
-                editor=InstanceEditor(view='traits_view'), 
+            Item('function_view_instance',
+                editor=InstanceEditor(view='traits_view'),
                 label = "Properties",
-                show_label=False, 
-                style='custom', 
+                show_label=False,
+                style='custom',
                 resizable=True,
                 ),
 
@@ -157,16 +157,16 @@ def create_alternate_view():
                 label="Context Info",
                 ),
             ),
-                  
+
 #            width=720, # about 80 columns wide on code view.
 #            height=700,
             resizable=True,
             buttons=menu.OKCancelButtons,
             close_result=False,
          )
-    
+
     return view
-    
+
 
 if __name__ == "__main__":
     from python_function_info import PythonFunctionInfo

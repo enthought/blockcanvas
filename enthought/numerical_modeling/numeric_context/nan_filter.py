@@ -1,15 +1,15 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Creates a filter for any element in all arrays of a context which are
 #  NaNs (or its inverse: the elements which do not contain a NaN for any
 #  of a context's arrays).
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Creates a filter for any element in all arrays of a context which are
@@ -28,7 +28,7 @@ from enthought.traits.api \
 
 from a_numeric_filter \
     import ANumericFilter
-    
+
 #-------------------------------------------------------------------------------
 #  'NaNFilter' class:
 #-------------------------------------------------------------------------------

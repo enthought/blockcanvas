@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an array value contained in an external object trait.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an array value contained in an external object trait.
@@ -22,10 +22,10 @@ from enthought.traits.api \
 
 from a_numeric_item \
     import ANumericItem
-  
+
 from context_modified \
     import ContextModified
-    
+
 #-------------------------------------------------------------------------------
 #  'TraitItem' class:
 #-------------------------------------------------------------------------------

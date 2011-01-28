@@ -31,7 +31,7 @@ class FunctionCallTestCase(unittest.TestCase):
 
 
     def test_xml_library(self):
-        
+
         # Find the library directory for python.
         lib_dir = os.path.dirname(xml.__file__)
         self._test_py_modules_in_directory(lib_dir)
@@ -44,37 +44,37 @@ class FunctionCallTestCase(unittest.TestCase):
             base_name = os.path.basename(path)
             module_name, ext = os.path.splitext(base_name)
             module_names.append(module_name)
-        
+
         for module_name in module_names:
             # fixme: do this with pkgutil?
             try:
                 # Skip modules that don't import.  Since not all modules
-                # in the standard library will import on all platforms.                
+                # in the standard library will import on all platforms.
                 exec "import %s" % module_name
-                module = eval(module_name)            
+                module = eval(module_name)
             except ImportError:
-                module = None                            
+                module = None
 
             if module:
                 functions = _get_functions(module)
-            
+
                 for function in functions:
                     func = FunctionCall.from_function(function)
                     signature = func.call_signature
                     # Uncomment this to see a printout of all the signatures.
                     #print signature
-            
+
 #############################################################################
 # Utility Functions
 #############################################################################
 
-def _get_functions(module): 
+def _get_functions(module):
     " Retreive all the functions from a module "
     import types
     functions = [function for function in module.__dict__.values() if
-                     isinstance(function, types.FunctionType)]                
+                     isinstance(function, types.FunctionType)]
     return functions
-                         
+
 
 if __name__ == '__main__':
     unittest.main()

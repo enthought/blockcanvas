@@ -20,7 +20,7 @@ from math import acos
 
 
 def default_glyph(gc, x, y, height, width):
-    """ The default 'drawn' image for buttons provided by the 
+    """ The default 'drawn' image for buttons provided by the
         glyph library when no other button is found or specified
     """
 
@@ -37,8 +37,8 @@ def default_glyph(gc, x, y, height, width):
 
 def gray_close_button(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         # Transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
         gc.set_stroke_color((0.5, 0.5, 0.5, 0.0))
@@ -69,8 +69,8 @@ def gray_close_button(gc, x, y, height, width):
 
 def gray_close_button_over(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
         gc.begin_path()
@@ -94,13 +94,13 @@ def gray_close_button_over(gc, x, y, height, width):
         gc.move_to(x1, y2)
         gc.line_to(x2, y1)
         gc.draw_path()
-        
+
     return
 
 def gray_close_button_down(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         gc.set_fill_color((0.4, 0.4, 0.4, 0.8))
         gc.set_stroke_color((0.1, 0.1, 0.1, 0.8))
         gc.begin_path()
@@ -125,13 +125,13 @@ def gray_close_button_down(gc, x, y, height, width):
         gc.move_to(x1, y2)
         gc.line_to(x2, y1)
         gc.draw_path()
-       
+
     return
 
 def gray_chevron_right_button(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         # Transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
         gc.set_stroke_color((0.5, 0.5, 0.5, 0.0))
@@ -161,8 +161,8 @@ def gray_chevron_right_button(gc, x, y, height, width):
 
 def gray_chevron_right_button_over(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
         gc.begin_path()
@@ -186,13 +186,13 @@ def gray_chevron_right_button_over(gc, x, y, height, width):
         gc.line_to(x1, y2)
         gc.line_to(x1, y1)
         gc.draw_path()
-        
+
     return
 
 def gray_chevron_down_button(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         # this is transparent for now
         gc.set_fill_color((0.5, 0.5, 0.5, 0.0))
         gc.set_stroke_color((0.5, 0.5, 0.5, 0.0))
@@ -217,13 +217,13 @@ def gray_chevron_down_button(gc, x, y, height, width):
         gc.line_to(x2, y2)
         gc.line_to(x1, y2)
         gc.draw_path()
-        
+
     return
 
 def gray_chevron_down_button_over(gc, x, y, height, width):
 
-    with gc:        
-        # Draw a filled circle 
+    with gc:
+        # Draw a filled circle
         gc.set_fill_color((1.0, 1.0, 1.0, 0.4))
         gc.set_stroke_color((1.0, 1.0, 1.0, 0.4))
         gc.begin_path()
@@ -247,11 +247,11 @@ def gray_chevron_down_button_over(gc, x, y, height, width):
         gc.line_to(x2, y2)
         gc.line_to(x1, y2)
         gc.draw_path()
-        
+
     return
 
 def close_button(gc, x, y, height, width):
-        
+
     with gc:
         # Draw button background
         radius = width/4.0
@@ -260,7 +260,7 @@ def close_button(gc, x, y, height, width):
 
         gc.begin_path()
         gc.move_to(x + radius, y)
-        gc.arc_to(x + width, y, 
+        gc.arc_to(x + width, y,
                 x + width, y + radius, radius)
         gc.arc_to(x + width, y + height,
                 x + width - radius, y + height,
@@ -268,7 +268,7 @@ def close_button(gc, x, y, height, width):
         gc.arc_to(x, y + height,
                 x, y, radius)
         gc.arc_to(x, y,
-                x + width + radius, y, 
+                x + width + radius, y,
                 radius)
         gc.draw_path()
 
@@ -302,7 +302,7 @@ def close_button_over(gc, x, y, height, width):
 
         gc.begin_path()
         gc.move_to(x + radius, y)
-        gc.arc_to(x + width, y, 
+        gc.arc_to(x + width, y,
                 x + width, y + radius, radius)
         gc.arc_to(x + width, y + height,
                 x + width - radius, y + height,
@@ -310,7 +310,7 @@ def close_button_over(gc, x, y, height, width):
         gc.arc_to(x, y + height,
                 x, y, radius)
         gc.arc_to(x, y,
-                x + width + radius, y, 
+                x + width + radius, y,
                 radius)
         gc.draw_path()
 
@@ -349,31 +349,31 @@ def io_bullet_drag(gc, x, y, height, width):
     _io_bullet_draw(gc, x, y, height, width,
                           fill_color=(0.5, 0.5, 0.5, 0.3),
                           border_color=(0.4, 0.4, 0.4, 0.5))
-    
+
 def io_bullet_down(gc, x, y, height, width):
     _io_bullet_draw(gc, x, y, height, width,
                           fill_color=(0.3, 0.3, 0.3, 1.0),
                           border_color=(0.4, 0.4, 0.4, 1.0))
-    
+
 def io_bullet_drop_target(gc, x, y, height, width):
     _io_bullet_draw(gc, x, y, height, width,
                           fill_color=(0.3, 0.3, 0.3, 1.0),
                           border_color=(0.4, 0.4, 0.4, 1.0),
                           highlight_color=(0.9, 0.8, 0.6, 0.7))
-    
-def _io_bullet_draw(gc, x, y, height, width, fill_color, 
+
+def _io_bullet_draw(gc, x, y, height, width, fill_color,
                     border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
-    
+
     with gc:
         # Draw bounding circle for selection and offset
         radius = width * 0.5
-        
+
         gc.set_fill_color(highlight_color)
         if highlight_color[3]>0.0:
             gc.set_stroke_color((0.1, 0.1, 0.1, 0.5))
         else:
             gc.set_stroke_color((0.0, 0.0, 0.0, 0.0))
-        
+
         gc.begin_path()
         gc.arc(x + width * 0.5,
             y + height * 0.5,
@@ -383,15 +383,15 @@ def _io_bullet_draw(gc, x, y, height, width, fill_color,
 
         # Draw connector glyph
 
-        #draw_triangle_glyph(gc, x, y, height, width, 
+        #draw_triangle_glyph(gc, x, y, height, width,
         #                    fill_color, border_color, highlight_color)
 
-        draw_circle_glyph(gc, x, y, height, width, 
+        draw_circle_glyph(gc, x, y, height, width,
                             fill_color, border_color, highlight_color)
 
-        #draw_square_glyph(gc, x, y, height, width, 
+        #draw_square_glyph(gc, x, y, height, width,
         #                    fill_color, border_color, highlight_color)
-        
+
     return
 
 def draw_triangle_glyph(gc, x, y, height, width, fill_color,
@@ -412,7 +412,7 @@ def draw_triangle_glyph(gc, x, y, height, width, fill_color,
     gc.line_to(x1, y1)
     gc.draw_path()
 
-    return 
+    return
 
 def draw_circle_glyph(gc, x, y, height, width, fill_color,
                     border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
@@ -429,7 +429,7 @@ def draw_circle_glyph(gc, x, y, height, width, fill_color,
            0, 2 * 3.14159)
     gc.draw_path()
 
-    return 
+    return
 
 def draw_square_glyph(gc, x, y, height, width, fill_color,
                     border_color, highlight_color=(0.0, 0.0, 0.0, 0.0)):
@@ -449,25 +449,25 @@ def draw_square_glyph(gc, x, y, height, width, fill_color,
     gc.line_to(x1, y2)
     gc.draw_path()
 
-    return 
+    return
 
 def _io_pie_draw(gc, x, y, height, width, fill_color, border_color):
-    
+
     with gc:
         # Draw vanguard glyph
         gc.set_fill_color(fill_color)
         gc.set_stroke_color(border_color)
-        
+
         gc.begin_path()
         gc.move_to(x + width/3, y)
         gc.line_to(x + width, y + height/2 - 2)
-        gc.arc_to(x + width, y + height/2, 
+        gc.arc_to(x + width, y + height/2,
                 x + width, y + height/2 + 2, 3.0)
         gc.line_to(x + width/3, y + height)
         gc.arc_to(x, y + height/2, x + width/3,
                 y,
                 width * 0.5)
-        
+
         gc.close_path()
         gc.draw_path()
 

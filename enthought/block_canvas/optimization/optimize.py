@@ -22,17 +22,17 @@ class InputOptimizationVariable(HasTraits):
     name = Str
     min = Float
     max = Float
-    
+
     traits_view = View(Item('name'),
                        Item('min'),
                        Item('max')
                        )
-    
+
 #class ConstraintOptimizationVariable():
-    
-    
+
+
 class Optimizer(HasTraits):
-    
+
     context = Instance(ParametricContext)
     block = Instance(Block)
     objective_var = Str
@@ -85,11 +85,11 @@ class Optimizer(HasTraits):
         input_plots = [PlotConfig(number=plot_num, x = 'plot_index', y=var_name, type='Line') for \
                        plot_num, var_name in enumerate(input_var_names)]
 
-        
+
         plot_configs = input_plots + [
                         PlotConfig(number=len(input_var_names), x='plot_index', y=self.objective_var, type='Line'),
                         PlotConfig(number=len(input_var_names) + 1, x='plot_index', y=self.constraint_var, type='Line'),]
-                        
+
         result_view = View(Item('context',
                                 editor=ContextPlotEditor(#view_shadows=True,
                                                          plot_configs=plot_configs,
@@ -99,33 +99,33 @@ class Optimizer(HasTraits):
                             height=500,
                             resizable=True)
         self.edit_traits(view=result_view, kind='modal')
-        
+
         return
-        
-        
+
+
 
 class COBYLAInstance(HasTraits):
     # The index in the array to be optimized that this instance refers to
     index = Int()
     # A back reference to the overall optimizer
     optimizer = Instance(Optimizer)
-    
+
     def minimize_at_index(self):
         context = self.optimizer._working_context
         input_vars = [var_obj.name for var_obj in self.optimizer.input_vars]
         input_upper_bounds = [var_obj.max for var_obj in self.optimizer.input_vars]
         input_lower_bounds = [var_obj.min for var_obj in self.optimizer.input_vars]
-        
-        result = minimize(self.objective_func, 
+
+        result = minimize(self.objective_func,
                           [context[input_var][self.index] for input_var in input_vars],
                           low = input_lower_bounds,
                           up = input_upper_bounds,
                           )
         for var_index, var_name in enumerate(input_vars):
             context[var_name][self.index] = result[2][var_index]
-        
-        
-                                                
+
+
+
     def objective_func(self, x):
         optimizer = self.optimizer
         context = optimizer._working_context
@@ -133,6 +133,5 @@ class COBYLAInstance(HasTraits):
         for var_index in range(len(optimizer.input_vars)):
             context[optimizer.input_vars[var_index].name][index] = x[var_index]
         greenlet.getcurrent().parent.switch()
-        return (context[optimizer.objective_var][index], 
+        return (context[optimizer.objective_var][index],
                 [context[optimizer.constraint_var][index]])
-    

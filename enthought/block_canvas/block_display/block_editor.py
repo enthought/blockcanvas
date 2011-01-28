@@ -33,8 +33,8 @@ class _BlockEditor(Editor):
 
     # Hold onto the window so that we get resize events.
     _window = Instance(Window)
-    
-    # these are required by some backends 
+
+    # these are required by some backends
     border_size = 0
     layout_style = 0
 
@@ -53,7 +53,7 @@ class _BlockEditor(Editor):
         viewport.min_zoom = 0.2
         self.canvas_view = viewport
 
-        self.scrolled = Scrolled(canvas, 
+        self.scrolled = Scrolled(canvas,
                                  fit_window = True,
                                  inside_padding_width = 0,
                                  mousewheel_scroll = False,

@@ -1,11 +1,11 @@
 """ This module contains utility functions for finding the functions contained
     within package or module and its sub-packages or modules.
-    
+
         # Search a module for all its functions.
         >>> from search_package2 import find_functions
         >>> find_functions('atexit')
         [('atexit', '_run_exitfuncs'), ('atexit', 'register')]
-        
+
         # Search a package and all its sub-packages for functions.
         >>> funcs = find_functions('xml')
         >>> for func in funcs[:3]: print func
@@ -13,7 +13,7 @@
         ('xml.dom.domreg', '_good_enough')
         ('xml.dom.domreg', 'getDOMImplementation')
 
-            
+
 """
 
 # Standard libary imports
@@ -36,28 +36,28 @@ logger = logging.getLogger(__name__)
 
 def find_functions(package, import_method=False):
     """ Recursively find all the functions in a package or module.
-    
+
         By default, find_functions searches for functions by "scanning"
         the code for function definitions.  It does this by using Python's
-        AST.  This prevents python from loading all of the modules into 
-        memory, but it also can miss some functions.  Setting 
+        AST.  This prevents python from loading all of the modules into
+        memory, but it also can miss some functions.  Setting
         import_method=True will actually import the modules in its search
         and may find functions that are not found using the other method.
-        
+
         Parameters
         ----------
         package: str
             A string such as 'foo.bar' that specifies the package to
-            search.  The package must be on the python path.          
+            search.  The package must be on the python path.
         import_method: bool
-            Default is False.   When True, modules are imported when 
+            Default is False.   When True, modules are imported when
             searching for functions.
-                
+
         Returns
         -------
         functions: list of tuples
-            A list of tuples with (module, name). module is a string for 
-            specifying the python module and the function name.  For example 
+            A list of tuples with (module, name). module is a string for
+            specifying the python module and the function name.  For example
             function 'foo.bar' would be returned as ('foo','bar')
     """
 
@@ -111,23 +111,23 @@ def find_functions_ast(package):
         functions.extend(visit_ast_node(ast, file_path, package))
 
     return functions
-    
-    
+
+
 def visit_ast_node(node, path, python_path):
     """ Given a and _ast node produced by 'compile' with the _ast.PyCF_ONLY_AST
         flag, returns a list of CallableObjects s from that node's toplevel
         functions.
     """
     functions = []
-    
+
     for child in node.body:
         if isinstance(child, _ast.FunctionDef):
             mod_and_name = (python_path, child.name)
             functions.append(mod_and_name)
 
     return functions
-    
-    
+
+
 def find_functions_import(package):
     """ Find functions using an import statement. Sloppier and consumes more
         memory than find_functions_ast, but also get submodules of the modules,
@@ -148,35 +148,35 @@ def find_functions_import(package):
         functions = find_functions_import_recurse(package)
 
     return functions
-    
+
 def find_functions_import_recurse(module_name):
     """ Search a module and all the modules within it for functions.
-        
-        The function imports the module and searches its __dict__ for 
+
+        The function imports the module and searches its __dict__ for
         functions.  It also search any module found within the module
         for functions.
     """
     functions = []
     try:
-        exec "import " + module_name in globals()    
+        exec "import " + module_name in globals()
         exec "mod_dict = " + module_name+".__dict__"
-    except: 
+    except:
         # Skip the rest of processing.
         mod_dict = {}
-    
+
     for name, item in mod_dict.items():
-        
+
         if (inspect.isfunction(item) or
             inspect.isbuiltin(item)):
             mod_and_name = (module_name, item.__name__)
             functions.append(mod_and_name)
-        elif (inspect.ismodule(item) and 
+        elif (inspect.ismodule(item) and
               item is not 'UserDict'):
-            results = find_functions_import_recurse(module_name+'.'+name)    
+            results = find_functions_import_recurse(module_name+'.'+name)
             functions.extend(results)
 
     return functions
-    
+
 ##########################################################################
 # Utility functions
 ##########################################################################
@@ -202,23 +202,23 @@ def python_path_from_file_path(package, file_path, package_path=None):
             # of a bad import or syntax error in __init__.py.
             # Use the old algorithm for now but this should be marked
             # to the user in the future.
-            try: 
-                start = file_path.rindex(package+os.path.sep) 
-            except ValueError: 
-                start = file_path.rindex(package) 
-                  
-            stop = file_path.rindex('.') 
-            python_path = file_path[start:stop] 
-            python_path = python_path.replace(os.path.sep, '.') 
+            try:
+                start = file_path.rindex(package+os.path.sep)
+            except ValueError:
+                start = file_path.rindex(package)
+
+            stop = file_path.rindex('.')
+            python_path = file_path[start:stop]
+            python_path = python_path.replace(os.path.sep, '.')
             return python_path
-         
+
     package_path = normalize_path_separator(package_path)
-    
+
     try:
         if file_path.find(package_path) != 0:
             return ''
         file_suffix = file_path[len(package_path):]
-        package_suffix = file_suffix.replace(os.path.sep, '.') 
+        package_suffix = file_suffix.replace(os.path.sep, '.')
         if package_suffix[-3:] == '.py':
             package_suffix = package_suffix[:-3]
         return package + package_suffix
@@ -227,17 +227,17 @@ def python_path_from_file_path(package, file_path, package_path=None):
 
 def normalize_path_separator(file_path):
     """ Ensure the file path uses the platform's directory separator.
-    """ 
+    """
     return os.path.join(*os.path.split(file_path))
-    
+
 def get_module_path(module_name):
     """ Given a module, get an absolute path to it.
 
         pkgutil, instead of imp, is used for 2 reasons:
-            
+
           * pkgutil works with dotted names
           * pkgutil works with eggs
-          
+
         There are a couple of downsides, the methods we use are not
         documented and the method was added in python 2.5. For convenience,
         _pkgutil is used instread, which is copied from Python 2.5 to support

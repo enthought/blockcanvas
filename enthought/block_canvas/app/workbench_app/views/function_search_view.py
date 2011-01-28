@@ -1,6 +1,6 @@
 """ Provides a view for searching functions found in the applications
     function library.
-    
+
     fixme: We aren't savings to function search preferences here
            between runs of the application.
 """
@@ -25,14 +25,14 @@ class AppFunctionSearch(FunctionSearch):
     """ Simple Model that includes a function search object as the
         model for the View.
     """
-           
+
     # The application that holds the function library
     app = Any #Instance(Application)
 
     ##########################################################################
     # HasTraits Interface
     ##########################################################################
-    
+
     def trait_view(self, name=None, view_element=None):
         # fixme: We don't want to modify the original views handler.
         #        This is sketchy and should be replaced by a better
@@ -41,20 +41,20 @@ class AppFunctionSearch(FunctionSearch):
         handler = AppFunctionSearchUIHandler(app=self.app)
         view.handler = handler
         return view
-                
+
     @on_trait_change('app.function_library')
     def _update_functions(self):
         """ If the library changes, ensure we have our library updated.
-        
+
             fixme: If we go to the query mechanism, this would go away...
         """
         self.all_functions = self.app.function_library.functions
-                        
-                        
+
+
 class FunctionSearchView(WorkbenchView):
     """ View for searching for functions in an application.
     """
-       
+
     ###########################################################################
     # 'IWorkbenchPart' interface.
     ###########################################################################
@@ -68,5 +68,5 @@ class FunctionSearchView(WorkbenchView):
         app = self.window.workbench.app
         function_search = AppFunctionSearch(app=app)
         ui = function_search.edit_traits(parent=parent, kind='subpanel')
-        
+
         return ui.control

@@ -8,13 +8,13 @@ def main():
     """
     import __builtin__,sys
     import time
-    
+
     global count
     global import_time, last_time, import_times
-    
+
     count = 0
     import_time = 0
-    
+
     last_time = time.time()
     start_time = last_time
     import_times = {}
@@ -26,7 +26,7 @@ def main():
         global import_time, last_time, import_times
         count += 1
         module = base_import(name, *args)
-        
+
         this_time = time.time()
         if import_times.has_key(name):
             import_times[name] += this_time-last_time
@@ -34,23 +34,23 @@ def main():
             import_times[name] = this_time-last_time
         import_time += this_time-last_time
         last_time = time.time()
-        
+
         return module
-    
+
     __builtin__.__import__ = my_import
-    
+
     # Use a non-modal UI to make opening and closing the UI, non-interactive.
     # I have to import 'enthought' to get the namespace loaded. Not sure why,
     #    probably setuptools related
-    import enthought 
+    import enthought
     from enthought.block_canvas.app.block_application import BlockApplication
     d = BlockApplication(code = '')
     d.edit_traits(kind='nonmodal')
-    
+
     print 'Number of import calls for an empty application = %d' % count
     print 'Unique modules imported = %d' % len(import_times)
     print 'Total time importing = %fs (%f%%)' % (import_time, import_time/(time.time() - start_time))
-    
+
     def sort_times(left, right):
         return cmp(right[1], left[1])
     items = import_times.items()
@@ -59,7 +59,7 @@ def main():
     print 'top 10 imports in total time'
     for item in items[0:10]:
         print '   %s = %f' % (item[0], item[1])
-    
+
     sys.exit(0)
 
 

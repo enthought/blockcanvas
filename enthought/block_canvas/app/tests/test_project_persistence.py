@@ -9,7 +9,7 @@ from os.path import abspath, join
 # Local imports
 from enthought.block_canvas.app.project import Project
 from enthought.block_canvas.app.tests.experiment_utils import (create_simple_experiment,
-    create_simple_project, create_multi_experiment_proj, compare_contexts, 
+    create_simple_project, create_multi_experiment_proj, compare_contexts,
     compare_experiments, compare_projects)
 
 
@@ -27,7 +27,7 @@ class ProjectPersistenceTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.root_dir = tempfile.gettempdir()
-        
+
         # The list of files and directories used by a test; these get cleaned
         # up in tearDown().
         self.files = []

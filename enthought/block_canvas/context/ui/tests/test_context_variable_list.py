@@ -66,7 +66,7 @@ def test_search():
 def test_row_value_changed():
     dc = gen_context()
     cvl = ContextVariableList(context=dc)
-    row = cvl.search_results[0]   
+    row = cvl.search_results[0]
     assert dc[row.name] != 100
     row.value = 100
     assert dc[row.name] == 100

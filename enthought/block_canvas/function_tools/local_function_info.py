@@ -36,7 +36,7 @@ class LocalFunctionInfo(CallableInfo):
     # Is the code for this definition editable?  Defaults to True for
     # LocalFunctionInfo.
     editable = True
-    
+
     ##########################################################################
     # LocalFunctionInfo interface
     ##########################################################################
@@ -45,9 +45,9 @@ class LocalFunctionInfo(CallableInfo):
     def from_function_ast(cls, function_ast):
         code = unparse(function_ast)
         return cls(code=code)
-        
 
-        
+
+
     ### Private methods ######################################################
 
     def _initialize_from_ast(self, function_ast):
@@ -75,7 +75,7 @@ class LocalFunctionInfo(CallableInfo):
     def _initialize_as_invalid(self):
         """ If the code we are pointing at is invalid, set all our variables
             to empty states.
-            
+
             fixme: Is this really a good idea?  This results in a lot of
                    flashing in a UI as we type.  Perhaps we just set
                    ourselves to invalid and require the user to check this
@@ -104,9 +104,9 @@ class LocalFunctionInfo(CallableInfo):
         try:
             ast = compiler.parse(self.code)
         except:
-            # If the code failed to load, invalidate all traits, 
+            # If the code failed to load, invalidate all traits,
             # set the load error based on the exception that happened,
-            # and set ast to None so that we don't do any further 
+            # and set ast to None so that we don't do any further
             # processing.
             ast = None
 
@@ -125,7 +125,7 @@ class LocalFunctionInfo(CallableInfo):
                 # There weren't any functions found to initialize from.
                 self._initialize_as_invalid()
                 self.load_error = "No function definition found."
-        else:                
+        else:
             self._initialize_as_invalid()
             # fixme: For now we just report the type of error.  This
             #        should be improved.
@@ -135,13 +135,13 @@ class LocalFunctionInfo(CallableInfo):
 ##############################################################################
 # Utility Function
 ##############################################################################
-     
+
 def exception_info(traceback_level=1):
     """ Return a formatted tuple of strings for the last traceback.
-        
+
         The tuple is of the form:
             (exception_name, exception_args, traceback)
-    """    
+    """
     cla, exc, trbk = sys.exc_info()
     exc_name = cla.__name__
     try:

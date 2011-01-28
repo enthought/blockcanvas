@@ -38,7 +38,7 @@ class FunctionCallToolsTest(unittest.TestCase):
         old_code = """def foo(a, b, c):
     a = 1+1
     b = 2+2
-    return a+b"""
+    return a+b"""
 
         new_code = localify_func_code(old_code, 'foo', 'bar', 'enthought.foobar')
         desired_code = """def bar(a, b, c):
@@ -46,7 +46,7 @@ class FunctionCallToolsTest(unittest.TestCase):
     a = 1+1
     b = 2+2
     return a+b
-""" 
+"""
         print repr(new_code)
         print repr(desired_code)
         self.assertEqual(new_code, desired_code)

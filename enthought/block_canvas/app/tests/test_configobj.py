@@ -11,7 +11,7 @@ from configobj import ConfigObj
 
 CONFIG_SPEC = "project_config_spec.txt"
 
-TEST_LINES = """ 
+TEST_LINES = """
 [Project]
     active_experiment = "exp1"
 
@@ -29,7 +29,7 @@ TEST_LINES = """
         save_dir = "exp2"
         layout_file = "layout2.txt"
         code_file = "code2.txt"
-    
+
 
 [Contexts]
     [[C1]]
@@ -107,7 +107,7 @@ GENERATED_OUTPUT = ['[Project]',
                     '        layout_file = layout2.txt',
                     '        name = exp2',
                     '        save_dir = exp2']
- 
+
 class ConfigObjTestCase(unittest.TestCase):
 
     def _get_spec_filename(self):

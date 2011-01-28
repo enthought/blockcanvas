@@ -46,13 +46,13 @@ class PolygonFilterTestCase( unittest.TestCase ):
         #    The traceback indicates that an instance requires an
         #    attribute '', which makes no sense.
         raise SkipTest()
-        
+
         polygon_filter = PolygonFilter(
             points = [ (0, 100), (1000, 100), (1000, 300), (0, 300) ],
             x_value = 'a',
             y_value = 'c'
         )
-        
+
         filtered_data = polygon_filter(self.numeric_model)
         self.assertEqual(filtered_data[101], 1)
         self.assertEqual(filtered_data[300], 1)

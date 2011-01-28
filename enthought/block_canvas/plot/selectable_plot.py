@@ -22,19 +22,19 @@ class ConfiguredContextPlot(HasTraits):
                      resizable=True,
                      show_label=False,)
                 )
-        
+
 class SelectablePlot(HasTraits):
     plot = Instance(ConfiguredContextPlot)
     context = Instance(IListenableContext, adapt='yes')
     plot_list = List(Str)
-    
+
 
     def __init__(self, **kwtraits):
         super(SelectablePlot, self).__init__(**kwtraits)
 #        self.plot_list = []
         self._plot_list_changed([])
         return
-    
+
     def trait_view(self, name=None, view_element=None):
         legal_values = [value for value in self.context.keys() if
                          hasattr(self.context[value], 'shape') and len(self.context[value].shape) == 1]

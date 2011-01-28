@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class FunctionArgument(HasTraits):
     """FunctionVariable represents a variable in a function definition,
     either the input of the output of a function."""
-    
+
     ##########################################################################
     # FunctionArgument Traits
     ##########################################################################
@@ -32,7 +32,7 @@ class FunctionArgument(HasTraits):
     def __repr__(self):
         """Return a more useful string representation of this class"""
         return "%s(name=%s)" % (self.__class__.__name__, repr(self.name))
-    
+
     def __str__(self):
         return self.__repr__()
 
@@ -45,7 +45,7 @@ class OutputArgument(FunctionArgument):
 class InputArgument(FunctionArgument):
 
     ##########################################################################
-    # InputArgument Traits 
+    # InputArgument Traits
     ##########################################################################
 
     # String representation of default argument.  If there isn't a
@@ -60,22 +60,22 @@ class InputArgument(FunctionArgument):
         """Generate a more useful string representation of InputArgument"""
         return "InputArgument(name=%s, default=%s)" % \
                 (repr(self.name), repr(self.default))
-    
+
     def __str__(self):
         return self.__repr__()
-        
+
 
 
 
 class CallableInfo(HasTraits):
     """ fixme: I think this should be an interface instead of a base class.
     """
-    
+
     ##########################################################################
     # CallableInfo Traits
     ##########################################################################
-    
-    # The package and module that this callable comes from.  The canonical 
+
+    # The package and module that this callable comes from.  The canonical
     # import statementthat would import this object is::
     #
     #     from %(module) import %(name)
@@ -85,40 +85,40 @@ class CallableInfo(HasTraits):
 
     # The name of the callable object.
     name = Str
-    
-    # A "pseudonym" for the callable so we can provide multiple signatures 
+
+    # A "pseudonym" for the callable so we can provide multiple signatures
     # for it.  If it isn't explicitly set, then we return name.
     # fixme: I'd like for this to look like:
     # library_name = SelfDelegate('name')
-    library_name = Property  
+    library_name = Property
     _library_name = Str
 
     # The full python path module+name for the object.  This is read-only.
     full_name = Property(Str)
-    
-    # List of the input arguments to the function 
+
+    # List of the input arguments to the function
     inputs = List(InputArgument)
-    
+
     # List of the output arguments of the function
     outputs = List(OutputArgument)
-    
+
     # Documentation for the function if available
     doc_string = Str
-    
+
     # The actual code for this callable.  If not
     # available (as in a CompiledPythonFunctionInfo),
     # returns None.
     code = Str
-    
+
     # Whether we are pointing at a valid callable
     is_valid = Bool
-    
+
     ##########################################################################
     # CallableInfo interface.
     ##########################################################################
-    
+
     ### Property get/set methods #############################################
-    
+
     def _get_full_name(self):
         """ Return module.name
         """
@@ -126,13 +126,13 @@ class CallableInfo(HasTraits):
             full_name = '.'.join((self.module, self.name))
         else:
             full_name = self.name
-        
-        return full_name    
-    
+
+        return full_name
+
     def _get_library_name(self):
         """ Return the library name for the function.  If it is empty,
             return the function's name.
-        """    
+        """
         return self._library_name or self.name
 
     def _set_library_name(self, value):

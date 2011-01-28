@@ -7,13 +7,13 @@ from enthought.traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 import enable_glyph_lib
 
 class Bullet(Component):
-    
+
     color = ColorTrait("gray")
-    
+
     drag_color = ColorTrait((0.6, 0.6, 0.6, 0.5))
     border_color = ColorTrait((0.4, 0.4, 0.4, 1.0))
-    bgcolor = "clear" 
-    
+    bgcolor = "clear"
+
     bullet_state = Enum("up", "down", "dragging", "over", "dropping")
 
     normal_pointer = Pointer("arrow")
@@ -46,7 +46,7 @@ class Bullet(Component):
             enable_glyph_lib.io_bullet_down(gc, self.x, self.y, self.width, self.height)
 
         return
-    
+
     def normal_left_down(self, event):
         self.bullet_state = "down"
         self.pointer = self.moving_pointer

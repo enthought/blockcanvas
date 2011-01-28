@@ -53,10 +53,10 @@ class CanvasSelectionTool(DragTool):
         event.pop(caller=component)
 
     def dragging(self, event):
-        # If the event's coordinates exceed the current view x/y/x2/y2, 
+        # If the event's coordinates exceed the current view x/y/x2/y2,
         # then adjust the select_box's dimensions appropriately and
         # set the viewport's view_position.
-        
+
         global_coords = event._pos_stack[0]
         deltax = global_coords[0] - self._prev_event_pos[0]
         deltay = global_coords[1] - self._prev_event_pos[1]
@@ -72,7 +72,7 @@ class CanvasSelectionTool(DragTool):
         vy2 = vy + vh - 1
 
         delta = 5
-        
+
         new_vx = vx
         if vx2 < x:
             if deltax > 0:
@@ -117,13 +117,13 @@ class CanvasSelectionTool(DragTool):
         except RuntimeError:
             pass
         self.component.request_redraw()
-       
+
     def drag_end(self, event):
         if self.partial_select:
             is_in = self.select_box.is_component_in
         else:
             is_in = self.select_box.is_completely_in
-        items = [ c for c in self.component.components 
+        items = [ c for c in self.component.components
                   if isinstance(c, CanvasBox) and is_in(c) ]
         self.component.selection_manager.select_items(items)
         self.component.selection_manager.add_subtract_mode = False

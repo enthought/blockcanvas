@@ -79,20 +79,20 @@ class CanvasGrid(AbstractOverlay):
         nh = len(self._horizontal_start)
         if (nv > 0) or (nh > 0):
             gc.save_state()
-    
+
             # Style setup.
             gc.set_line_dash(self.style.line_dash)
             gc.set_stroke_color(self.style.line_color)
             gc.set_line_width(self.style.line_width)
             gc.set_antialias(self.style.antialias)
-    
+
             # Draw lines.
             if nv > 0:
                 gc.line_set(self._vertical_start,self._vertical_end)
             if nh > 0:
                 gc.line_set(self._horizontal_start,self._horizontal_end)
             gc.stroke_path()
-    
+
             gc.restore_state()
 
 
@@ -120,8 +120,8 @@ class CanvasGrid(AbstractOverlay):
         w = x2 - x + 1
         h = y2 - y + 1
 
-        # Compute the remainder of the current x,y of the view_bounds 
-        # modulo x_interval and y_interval, so we know at what offset to 
+        # Compute the remainder of the current x,y of the view_bounds
+        # modulo x_interval and y_interval, so we know at what offset to
         # start drawing the grid lines.
         x = (int(x) / x_interval) * x_interval
         x2 = x + w

@@ -19,7 +19,7 @@ from enthought.numerical_modeling.numeric_context.api \
 from enthought.traits.api \
     import HasTraits, HasPrivateTraits, Float, Int, Any, Str, Enum, Dict, \
         List, Event, Bool
-    
+
 from enthought.traits.ui.api \
     import TextEditor, View, HGroup, Item, ViewHandler
 

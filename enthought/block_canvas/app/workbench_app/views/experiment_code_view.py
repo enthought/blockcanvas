@@ -4,20 +4,20 @@ from enthought.traits.ui.api import View, Item, InstanceEditor, CodeEditor
 # Local imports
 from traits_ui_view import TraitsUIView
 
-                
+
 class ExperimentCodeView(TraitsUIView):
     """ Create a view of the active project's context.
-    
+
         fixme: Need to hook up listeners to the active project context.
     """
 
-    
+
     ###########################################################################
     # 'TraitsUIView' interface.
     ###########################################################################
 
     def _view_default(self):
-        """ This view uses a ModelView to translate the view into 
+        """ This view uses a ModelView to translate the view into
             ContextVariableList
         """
         view = View(

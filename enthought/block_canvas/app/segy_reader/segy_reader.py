@@ -45,7 +45,7 @@ class SegyReader(HasTraits):
     trace_count         = Int(0)
     sample_rate         = QuantityTrait(0.0, msec, 'time')
 
-    # Byte offsets 
+    # Byte offsets
     inline_bytes        = Int(17)
     crossline_bytes     = Int(21)
     x_location_bytes    = Int(73)
@@ -91,7 +91,7 @@ class SegyReader(HasTraits):
             return '>'
         else:
             return '<'
-        
+
     def _get_crossline_format(self):
         """ Property getter for crossline_format
         """
@@ -100,12 +100,12 @@ class SegyReader(HasTraits):
 
     def _get_data_format(self):
         """ Property getter for data_format
-        """        
+        """
         if self.data_type == 'IBM':
             return self.byte_order_char + 'i'*(self.samples/4)
         else:
             return self.byte_order_char + 'f'*(self.samples/4)
-        
+
     def _get_inline_format(self):
         """ Property getter for inline_format
         """
@@ -146,9 +146,9 @@ class SegyReader(HasTraits):
         if self.filename == '':
             self.file_handle = None
             return
-        
+
         self.file_handle = file(self.filename, 'rb')
-        
+
         # Ignoring card-image-header; 3200 bytes of EBCDIC data
         self.file_handle.read(Segy.CARD_IMAGE_HEADER_LEN)
 
@@ -164,7 +164,7 @@ class SegyReader(HasTraits):
         # File settings
         self.samples = 4*binary_header.samples
         self._inspect_traces()
-        
+
         return
 
     #---------------------------------------------------------------------------
@@ -186,17 +186,17 @@ class SegyReader(HasTraits):
         byte_format = getattr(Segy, self.byte_order.replace(' ', '_').upper())
         del self.active_traceheader.model
         self.active_traceheader.model = TraceHeader(header_data, byte_format)
-        
+
     def _inspect_traces(self):
         """ Inspect all the traces, save the first trace-header
         """
-        
+
         # Get trace header data of 240 bytes.
         header_data = self.file_handle.read(Segy.TRACE_HEADER_LEN)
         # FIXME: there should be a provision to change byte-order.
         byte_format = getattr(Segy, self.byte_order.replace(' ', '_').upper())
         traceheader = TraceHeader(header_data, byte_format)
-        
+
         # Find trace counts
         trace_count = 0
         while header_data != '':
@@ -205,16 +205,16 @@ class SegyReader(HasTraits):
             header_data = self.file_handle.read(Segy.TRACE_HEADER_LEN)
 
         # Set all the UI fields.
-        self.trace_count = trace_count     
+        self.trace_count = trace_count
         self.active_traceheader.model = traceheader
         self.active_traceheader.total_headers = self.trace_count
-          
+
         self.samples_per_trace = traceheader.samplesInTrace
         # Convert sample rate from microseconds to milliseconds.
         self.sample_rate = 0.001*traceheader.sampleInterval
-        
+
         return
-        
+
     def _read_trace(self, header_data, check_length):
         """ Read a trace successfully from its header data and return a trace.
 
@@ -232,7 +232,7 @@ class SegyReader(HasTraits):
               factor by which x and y are scaled
             trace: array
               samples constituting the trace
-              
+
         """
 
         if len(header_data) != check_length:
@@ -256,7 +256,7 @@ class SegyReader(HasTraits):
                 y_val *= scale_factor
             else:
                 scale_factor = 1.0
-                
+
         # Read the trace data.
         raw_data = self.file_handle.read(self.samples)
 
@@ -264,15 +264,15 @@ class SegyReader(HasTraits):
             trace = ibm2ieee(array(struct.unpack(self.data_format, raw_data)))
         else:
             trace = array(struct.unpack(self.data_format, raw_data))
-        
+
         return x_val, y_val, inline_val, crossline_val, scale_factor, trace
-            
-            
+
+
     ### public methods ---------------------------------------------------------
 
     def read_data(self):
         """ Obtain x_locations, y_locations, data_locations, traces in a context
-        
+
             Returns:
             ---------
             context: DataContext
@@ -282,7 +282,7 @@ class SegyReader(HasTraits):
         # Check if the filename is valid for reading data
         if not self.file_handle:
             return None
-        
+
         # Set the file reader at the first char.
         if self.file_handle.closed:
             self.file_handle = file(self.filename, 'rb')
@@ -292,7 +292,7 @@ class SegyReader(HasTraits):
                                   message='Reading Segy Files',
                                   max=100, show_time=True, can_cancel=True)
         progress.open()
-        
+
         # Skip the card_image_header and binary header
         self.file_handle.seek(Segy.CARD_IMAGE_HEADER_LEN +
                               Segy.BINARY_HEADER_LEN)
@@ -309,7 +309,7 @@ class SegyReader(HasTraits):
                 inline_data_len == crossline_data_len):
             logger.error('SegyReader: Mismatch in format lengths')
             return None
-        
+
         if self.scale_format != '':
             scale_data_len = struct.calcsize(self.scale_format)
             if scale_data_len != x_data_len:
@@ -334,17 +334,17 @@ class SegyReader(HasTraits):
             if progress_pc - previous_update > 1:
                 cont_val, skip_val = progress.update(progress_pc)
                 previous_update = progress_pc
-                
+
                 # If the user has cancelled the action then stop the import
                 # immediately
                 if skip_val or not cont_val:
                     del traces
                     self.file_handle.close()
                     return None
-                
+
         self.file_handle.close()
         progress.update(100)
-        
+
         if read_error:
             del traces
             return None
@@ -366,13 +366,13 @@ class SegyReader(HasTraits):
                            'crossline_values':traces['crossline'],
                            'scale_factors':traces['scale_factor']})
         return
-        
-    
+
+
 # Local test
 if __name__ == '__main__':
     sr = SegyReader()
     ui = sr.edit_traits(kind = 'livemodal')
     if ui.result:
         context = sr.read_data()
- 
+
 ### EOF ------------------------------------------------------------------------

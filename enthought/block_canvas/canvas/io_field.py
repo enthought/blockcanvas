@@ -57,7 +57,7 @@ class IOField(Container):
 
     highlight_color = (.5, .5, .5, .25)
     border_visible = Bool(False)
-    
+
     # Bullet style information
     # FIXME: should be in style_manager when we figure out how to look these
     # styles up over several layers.
@@ -107,7 +107,7 @@ class IOField(Container):
         if self._box_on_top(event):
             self.box.container.remove_wiring_tool()
             event.handled = True
- 
+
     def _box_on_top(self, event):
         """ Checks to see if the box that holds this field is on top
             of all the other possible boxes in that location on the canvas.
@@ -124,7 +124,7 @@ class IOField(Container):
         return False
 
     def normal_left_up(self, event):
-        """ FIXME: Hack to make sure that selection tool doesn't get 
+        """ FIXME: Hack to make sure that selection tool doesn't get
             this event and add the function box to the selection.
         """
         event.handled = True
@@ -206,11 +206,11 @@ if (__name__=='__main__'):
     class MyFrame(DemoFrame):
         def _create_window(self):
             input = InputVariable(name='foo', default=3)
-                     
+
             box = IOField(input, position=[50,300], bounds=[150,15])
 
             container = Container(bounds=[800,600])
             container.add(box)
             return Window(self, -1, size=[800, 600], component=container)
 
-    demo_main(MyFrame)        
+    demo_main(MyFrame)

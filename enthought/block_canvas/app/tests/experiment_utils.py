@@ -64,7 +64,7 @@ def compare_projects(p, q):
     for j, exp in enumerate(p.experiments):
         if not compare_experiments(exp, q.experiments[j]):
             return False
-    
+
     if p.active_experiment is not None:
         if q.active_experiment is None:
             return False

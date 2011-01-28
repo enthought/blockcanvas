@@ -54,7 +54,7 @@ class RowLayoutEngine(HasTraits):
                 [['foo'], ['bar', 'baz'], ['zi', 'ze', 'za'], ['zoo']]
 
             Note: This only works for graphs that don't have any cycles
-                  in them.  A cycle will currently cause this to fail 
+                  in them.  A cycle will currently cause this to fail
                   and print a warning on the status bar.
         """
         # Initialize the rows to avoid returning None
@@ -69,11 +69,11 @@ class RowLayoutEngine(HasTraits):
         return rows
 
     #########################################################################
-    # RowLayoutEngine Protected Interface 
+    # RowLayoutEngine Protected Interface
     #########################################################################
 
     def _successor_graph(self, dep_graph):
-        """ 
+        """
             Given a dependency graph, reverse the dependency graph to create
             a list of successors for each node.
         """
@@ -83,7 +83,7 @@ class RowLayoutEngine(HasTraits):
             # Initialize to empty list in case this is a leaf node
             if not stop in successors:
                 successors[stop] = []
-            
+
             # Reverse the dependency graph
             for start in dep_graph[stop]:
                 if start in successors:
@@ -98,7 +98,7 @@ class RowLayoutEngine(HasTraits):
             by performing a recursive depth-first search.
             Returns False if there is a cycle present, True otherwise.
         """
-    
+
         seen = {}
         explored = []
 
@@ -123,7 +123,7 @@ class RowLayoutEngine(HasTraits):
                     return
         return True
 
-    
+
     def _create_hierarchy(self, dep_graph):
         """
             Before calling create_hierarchy, make sure that the graph is acyclic.
@@ -133,7 +133,7 @@ class RowLayoutEngine(HasTraits):
 
         """
         height = {}
-        
+
         # Get the roots of the graph (with no dependencies)
         # Going to build graph top-down
         successors = self._successor_graph(dep_graph)
@@ -150,7 +150,7 @@ class RowLayoutEngine(HasTraits):
                 for w in graph[v]:
                     _depth_first(graph, height, current_rank + 1, w)
             return v
-        
+
         # Get the recursion started
         for v in roots:
             _depth_first(successors, height, 1, v)
@@ -177,7 +177,7 @@ class RowLayoutEngine(HasTraits):
 
         # First turn the dependency list into successors
         successors = self._successor_graph(dep_graph)
-        
+
         # First pass move down the tree - assume fixed root nodes
         index = 1
         num_rows = len(rows)

@@ -31,7 +31,7 @@ class _Undefined(object):
     def __repr__(self):
         return "Undefined"
 
-        
+
 
 # Singleton version of Undefined (like None)
 Undefined = _Undefined()
@@ -57,7 +57,7 @@ class Variable(HasTraits):
 
     # Variable (or value) bound to this name.
     binding = Property(depends_on=['_binding'])
-    
+
     # Keep track of binding name that user may set.  This is a string or
     # None if there isn't a binding.
     _binding = Any(None)
@@ -69,8 +69,8 @@ class Variable(HasTraits):
     ##########################################################################
     # Variable interface
     ##########################################################################
-        
-        
+
+
     ### private property get/set methods #####################################
 
     def _get_binding(self):
@@ -120,8 +120,8 @@ class InputVariable(Variable):
 
     # True if this is a keyword argument.  False otherwise
     keyword_argument = Property
-    
-    
+
+
     ##########################################################################
     # Variable interface
     ##########################################################################
@@ -151,7 +151,7 @@ class InputVariable(Variable):
 
     def _get_call_signature(self):
         """ Return a string for how this variable looks in a function call.
-        
+
             For non-keyword arguments, this is simply the binding.  For
             keyword arguments, we have name=binding if a binding has been
             explicitly set for the variable.  Otherwise, nothing is returned
@@ -159,12 +159,12 @@ class InputVariable(Variable):
         """
         if not self.keyword_argument:
             signature = self.binding
-        else:    
+        else:
             if self._binding is None:
                 signature = ""
             else:
                 signature = "%s=%s" %(self.name, self.binding)
-                
+
         return signature
 
     ##########################################################################

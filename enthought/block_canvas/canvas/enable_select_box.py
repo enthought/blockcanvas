@@ -57,7 +57,7 @@ class EnableSelectBox(Component):
                  self.is_in(c.x, c.y2) or self.is_in(c.x2, c.y) )
 
     def is_completely_in(self, c):
-        """ Only returns true if all of the component is entirely inside 
+        """ Only returns true if all of the component is entirely inside
         the select box.
         """
 

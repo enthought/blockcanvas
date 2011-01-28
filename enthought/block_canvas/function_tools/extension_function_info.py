@@ -13,5 +13,5 @@ class ExtensionFunctionInfo(PythonFunctionInfo):
         # actually a defined-in-Python function.
         CallableInfo.__init__(self, **traits)
 
-    # FIXME: Actually flesh this out 
+    # FIXME: Actually flesh this out
 

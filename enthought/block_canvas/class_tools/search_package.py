@@ -1,7 +1,7 @@
 """ This module contains utility functions for finding the classes contained
     within package or module and its sub-packages or modules.
 
-    Related to the search_package in function_tools    
+    Related to the search_package in function_tools
 """
 
 # Standard libary imports
@@ -13,7 +13,7 @@ import logging
 
 
 # local copy of Python 2.5 pkgutil.py
-from enthought.block_canvas.function_tools import _pkgutil 
+from enthought.block_canvas.function_tools import _pkgutil
 
 # Import from function_tools
 from enthought.block_canvas.function_tools.search_package import get_module_path, \
@@ -30,28 +30,28 @@ logger = logging.getLogger(__name__)
 
 def find_classes(package, import_method=False):
     """ Recursively find all the classes in a package or module.
-    
+
         By default, find_classes searches for classes by "scanning"
         the code for class definitions.  It does this by using Python's
-        AST.  This prevents python from loading all of the modules into 
-        memory, but it also can miss some functions.  Setting 
+        AST.  This prevents python from loading all of the modules into
+        memory, but it also can miss some functions.  Setting
         import_method=True will actually import the modules in its search
         and may find classes that are not found using the other method.
-        
+
         Parameters
         ----------
         package: str
             A string such as 'foo.bar' that specifies the package to
-            search.  The package must be on the python path.          
+            search.  The package must be on the python path.
         import_method: bool
-            Default is False.   When True, modules are imported when 
+            Default is False.   When True, modules are imported when
             searching for classes.
-                
+
         Returns
         -------
         classes: list of tuples
-            A list of tuples with (module, name). module is a string for 
-            specifying the python module and the function name.  For example 
+            A list of tuples with (module, name). module is a string for
+            specifying the python module and the function name.  For example
             function 'foo.bar' would be returned as ('foo','bar')
     """
 
@@ -105,23 +105,23 @@ def find_classes_ast(package):
         classes.extend(visit_ast_node(ast, file_path, package))
 
     return classes
-    
-    
+
+
 def visit_ast_node(node, path, python_path):
     """ Given a and _ast node produced by 'compile' with the _ast.PyCF_ONLY_AST
         flag, returns a list of CallableObjects s from that node's toplevel
         functions.
     """
     classes = []
-    
+
     for child in node.body:
         if isinstance(child, _ast.ClassDef):
             mod_and_name = (python_path, child.name)
             classes.append(mod_and_name)
 
     return classes
-    
-    
+
+
 def find_classes_import(package):
     """ Find classes using an import statement. Sloppier and consumes more
         memory than find_classes_ast, but also get submodules of the modules,
@@ -142,35 +142,35 @@ def find_classes_import(package):
         classes = find_classes_import_recurse(package)
 
     return classes
-    
+
 def find_classes_import_recurse(module_name):
     """ Search a module and all the modules within it for classes.
-        
-        The function imports the module and searches its __dict__ for 
+
+        The function imports the module and searches its __dict__ for
         fus.  It also search any module found within the module
         for classes.
     """
     classes = []
     try:
-        exec "import " + module_name in globals()    
+        exec "import " + module_name in globals()
         exec "mod_dict = " + module_name+".__dict__"
-    except: 
+    except:
         # Skip the rest of processing.
         mod_dict = {}
-    
+
     for name, item in mod_dict.items():
-        
+
         if (inspect.isclass(item) or
             inspect.isbuiltin(item)):
             mod_and_name = (module_name, item.__name__)
             classes.append(mod_and_name)
-        elif (inspect.ismodule(item) and 
+        elif (inspect.ismodule(item) and
               item is not 'UserDict'):
-            results = find_classes_import_recurse(module_name+'.'+name)    
+            results = find_classes_import_recurse(module_name+'.'+name)
             classes.extend(results)
 
     return classes
-    
+
 
 if __name__ == "__main__":
     import doctest

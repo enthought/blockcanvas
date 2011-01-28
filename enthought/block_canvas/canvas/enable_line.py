@@ -29,7 +29,7 @@ class EnableLine(Component):
 
     # CanvasBox who's input is the end of the line
     end_node = Instance(CanvasBox)
-    
+
     # Whether to draw as a straight line or a bezier curve
     curve_type = Enum('line', 'curve')
 
@@ -38,7 +38,7 @@ class EnableLine(Component):
     #########################################################################
 
     bgcolor = "transparent"
-    
+
     #########################################################################
     # CoordinateBox interface
     #########################################################################
@@ -82,28 +82,28 @@ class EnableLine(Component):
             fixme: Color and width should be part of a style, as they should
                    also be in the function box
         """
-        
+
         if self.curve_type == "curve":
             self._draw_bezier(gc)
         else:
             self._draw_line(gc)
         return
-    
+
     def _draw_ports(self, gc):
         gc.save_state()
         start = self.start_node.bottom_center
         end = self.end_node.top_center
-        
+
         gc.set_stroke_color(self.container.style_manager.port_border_color)
-        
+
         # Draw Port Out
         gc.set_fill_color(self.container.style_manager.port_out_color)
         gc.begin_path()
         gc.arc(start[0], start[1], self.container.style_manager.port_radius,
                 3.14159, 2 * 3.14159)
-        gc.close_path() 
+        gc.close_path()
         gc.draw_path()
-        
+
         # Draw Port In
         gc.set_fill_color(self.container.style_manager.port_in_color)
         gc.begin_path()
@@ -112,7 +112,7 @@ class EnableLine(Component):
                 0,  3.14159)
         gc.close_path()
         gc.draw_path()
-        
+
         gc.restore_state()
 
     def _draw_line(self, gc):
@@ -125,9 +125,9 @@ class EnableLine(Component):
         gc.move_to(start[0], start[1])
         gc.line_to(end[0], end[1])
         gc.stroke_path()
-        
+
         gc.restore_state()
-        
+
         self._draw_ports(gc)
 
     def _draw_bezier(self, gc):
@@ -200,7 +200,7 @@ class EnableLine(Component):
         # lines will not render because enable skips rendering items with
         # bounds=[0,0]
         self.bounds = [max(x2-x,1), max(y2-y,1)]
-    
+
         # avoid firing too many request_redraws on the block_canvas; if our
         # position changes, it's usually in response to a block moving, which
         # will cause the canvas to update properly

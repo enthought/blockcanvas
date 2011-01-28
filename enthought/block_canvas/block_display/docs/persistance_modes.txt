@@ -7,10 +7,10 @@ Pursuing various ways of persisting the application:
         1. Context
         2. Script
         3. User settings for interactor ranges
-        4. 
-        
+        4.
+
 2. Data : by pickling the data context.
-        
+
 3. Script : Saving the code out as a .py file.
-        
+
 4.

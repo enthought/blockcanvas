@@ -41,7 +41,7 @@ class EnableBoxField(EditField):
         self.set_font(self.metrics)
         self.update_bounds()
         self.bgcolor = "clear"
-    
+
     def update_bounds(self):
         # Update the bounds on the text field and the bounds on the containers
         self.set_font(self.metrics)
@@ -105,7 +105,7 @@ class EnableBoxField(EditField):
             new_var = self.text.strip()
             from enthought.block_canvas.app.scripting import app
             app.update_function_variable_binding(self.box.graph_node, self.variable, new_var)
-            
+
     def _set_text(self, val):
         super(EnableBoxField, self)._set_text(val)
         self.unmodified_text = self.text

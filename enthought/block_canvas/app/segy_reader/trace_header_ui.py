@@ -57,7 +57,7 @@ trace_header_editor = TableEditor(columns=trace_header_columns,
 class TraceHeaderItem(HasTraits):
     """ Class for each object in trace header to be viewed.
     """
-    
+
     byte_offset = Str('')
     name        = Str('')
     value       = Any
@@ -71,16 +71,16 @@ class TraceHeaderView(HasTraits):
     """
 
     model                = Instance(TraceHeader)
-    field_list           = List(TraceHeaderItem) 
+    field_list           = List(TraceHeaderItem)
     trace_header_number  = Int(1)
     total_headers        = Int(250)
-    
+
     # Default dynamic view
     def trait_view(self, name=None, view_element=None):
         """ The default view should account for the number of trace
             headers that can be displayed.
         """
-        
+
         range_editor = RangeEditor(low = 1, high = self.total_headers)
         header_number_label = 'Trace header number (Total %s traces)' % \
                               self.total_headers
@@ -102,7 +102,7 @@ class TraceHeaderView(HasTraits):
 
         self.field_list = []
         if self.model is not None:
-            for i,v in enumerate(self.model.FIELDS): 
+            for i,v in enumerate(self.model.FIELDS):
                 self.field_list.append(
                     TraceHeaderItem(name=v,value=getattr(self.model, v),
                                     byte_offset=trace_header_byte_offsets[i]))
@@ -115,9 +115,9 @@ class TraceHeaderView(HasTraits):
         self.trace_header_number=1
         return
 
-    
+
 ### EOF ------------------------------------------------------------------------
 
-    
 
- 
+
+

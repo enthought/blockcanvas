@@ -42,7 +42,7 @@ class FontMetricsCache(HasTraits):
         if len(text) > 1:
             ## FIXME:  To Do.  Right now only handle single characters.
             return None
-            
+
         else:
             try:
                 return self.metrics_cache[text]
@@ -66,4 +66,4 @@ class FontMetricsCache(HasTraits):
             self.metrics.set_font(self.font)
         except:
             raise RuntimeError("Unable to set font on FontMetricsCache.")
-                
+

@@ -9,10 +9,10 @@ from enthought.block_canvas.function_tools.search_package import get_module_path
 # local imports
 from enthought.block_canvas.function_tools.python_function_info import \
     PythonFunctionInfo
-    
+
 from typical_functions import empty, simple, \
     with_defaults, with_defaults_none
-                                     
+
 
 
 class PythonFunctionInfoTestCase(unittest.TestCase):
@@ -65,7 +65,7 @@ class PythonFunctionInfoTestCase(unittest.TestCase):
         outputs = func.outputs
         desired = ('x','y')
         self._check_output(outputs, desired)
-        
+
     def test_with_defaults(self):
         func = PythonFunctionInfo.from_function(with_defaults)
 
@@ -97,11 +97,11 @@ class PythonFunctionInfoTestCase(unittest.TestCase):
 
         self.assertEqual(func.name, 'simple')
         self.assertEqual(func.library_name, 'simple')
-        
+
         func.library_name = 'foo'
         self.assertEqual(func.name, 'simple')
         self.assertEqual(func.library_name, 'foo')
-        
+
     def test_code(self):
         func = PythonFunctionInfo.from_function(simple)
         correct_code = """def simple(a,b):
@@ -109,7 +109,7 @@ class PythonFunctionInfoTestCase(unittest.TestCase):
     return x,y
 """
         self.assertEqual(func.code, correct_code)
-   
+
     def test_parse_error(self):
         # Because having a function checked in with a parse error creates problems
         # with the egg builder, we take an existing file and modify it.
@@ -121,11 +121,11 @@ class PythonFunctionInfoTestCase(unittest.TestCase):
         # Strip off the colon on the end of the second line to create a syntax error
         lines[1] = lines[1][:-1]
         open(new_filename, 'w').writelines(lines)
-        
+
         func = PythonFunctionInfo(module=new_module, name='badfunction')
         self.assertEqual(func.load_error, "failed to parse module '%s'" % new_module)
         os.unlink(new_filename)
-        
+
 # Missing Tests
 # 1. All the classmethod constructors.
 # 2. Changing package, name, etc. does it update loader.

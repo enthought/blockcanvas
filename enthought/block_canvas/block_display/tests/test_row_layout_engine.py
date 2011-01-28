@@ -72,7 +72,7 @@ class RowLayoutEngineTestCase(unittest.TestCase):
         """ Is the correct hierarchy produced? """
 
         rows = self.controller.layout_engine.organize_rows(self.model.dep_graph)
-        
+
         # There should be two rows, the first two statements in the first row
         # the last statement in the last row
         assert self.model.statements[0] in rows[0]

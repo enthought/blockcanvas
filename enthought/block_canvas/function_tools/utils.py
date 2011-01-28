@@ -53,9 +53,9 @@ def get_code_from_file( filepath, mode = 'r' ):
     return code
 
 def get_user_package_directory():
-    usr_dir = ETSConfig.user_data    
+    usr_dir = ETSConfig.user_data
     usr_data = os.path.join(usr_dir, USER_MODULE_NAME)
-    
+
     return usr_data
 
 
@@ -75,7 +75,7 @@ def initialize_user_data_dir():
     """
 
     usr_data = get_user_package_directory()
-    
+
     usr_dir = os.path.dirname(usr_data)
     if not usr_dir in sys.path:
         sys.path.append(usr_dir)

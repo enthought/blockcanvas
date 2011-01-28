@@ -19,7 +19,7 @@ class StochasticItemTestCase(unittest.TestCase):
 
         value = StochasticItem(name = 'a', distribution = Constant())
         distribution = value.distribution
-        
+
         # Check if the values of distribution are correct.
         self.assertTrue((distribution.values ==
                          distribution.value*numpy.ones(value.samples)).all())
@@ -59,5 +59,5 @@ class StochasticItemTestCase(unittest.TestCase):
 
 
 ### EOF -----------------------------------------------------------------------
-    
-                               
+
+

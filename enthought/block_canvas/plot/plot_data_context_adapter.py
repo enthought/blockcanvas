@@ -109,7 +109,7 @@ class PlotDataContextAdapter(AbstractPlotData):
     def get_datasource(self, name):
         """Gets a chaco DataSource for the named object."""
         return DataContextDataSource(context=self.context, context_name=name)
-        
+
     @on_trait_change('context:items_modified')
     def _fire_data_changed(self, obj, name, old, value):
         """ Translate 'items_modified' event to a chaco 'data_changed' event.

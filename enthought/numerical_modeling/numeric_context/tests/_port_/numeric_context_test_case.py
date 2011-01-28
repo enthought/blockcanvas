@@ -35,22 +35,22 @@ class NumericContextTestCase(AbstractContextTestCase):
         """ Make sure we don't die if we get run twice """
         input = arange(-31.416, 31.416, 0.01)
         desired_output = sin(input)
-        
+
         code  = "from numpy import sin, ones \n"
         code += "from geo.somewhere import interpolate_mask \n"
         code += "trash = interpolate_mask(input, input > 2.1) \n"
         code += "output=sin(input) \n"
         block = Block(code)
-        
+
         context = NumericContext()
         context['input'] = input
         block.execute(context)
         assert_array_equal(context['output'], desired_output)
-        
+
         block.execute(context)
         assert_array_equal(context['output'], desired_output)
-        
-    
+
+
     # TODO Re-enable when we start watching efficiency
     def HIDE_test_eval_is_not_slow(self):
         """ eval() with DataContext is the speed of a dict. (slowdown < 2.0)

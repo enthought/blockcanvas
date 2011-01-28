@@ -1,14 +1,14 @@
 #-------------------------------------------------------------------------------
-#  
-#  An event object which describes what changes have occurred to a numeric 
+#
+#  An event object which describes what changes have occurred to a numeric
 #  context.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ An event object which describes what changes have occurred to a numeric
@@ -27,7 +27,7 @@ from enthought.traits.api \
 #-------------------------------------------------------------------------------
 
 class ContextModified ( HasStrictTraits ):
-    """ An event object which describes what changes have occurred to a 
+    """ An event object which describes what changes have occurred to a
         numeric context.
     """
 

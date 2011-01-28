@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a concrete termination class intended for use with Traits UI
 #  based user interfaces or other Traits-based clients connected to the
 #  numeric context. It exposes array context items as traits and optionally
@@ -7,13 +7,13 @@
 #  control returns to the main event dispatch loop. This prevents screen
 #  updates from triggering as a result of intermediate or repeated
 #  calculations.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a concrete termination class intended for use with Traits UI
@@ -37,10 +37,10 @@ from enthought.pyface.timer.api \
 
 from context_modified \
     import ContextModified
-    
+
 from termination_context \
     import TerminationContext
-    
+
 #-------------------------------------------------------------------------------
 #  'TraitsContext' class:
 #-------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ global_value = 4
 
 def empty():
     pass
-        
+
 def simple(a,b):
     x,y=a,b
     return x,y
@@ -41,9 +41,9 @@ def with_varargs_kwargs(a,b=3,*args, **kw):
     x=a
     y=b
     z=args[:1]
-    zz=kw    
+    zz=kw
     return x,y,z,zz
-    
+
 def no_return(a,b):
     pass
 

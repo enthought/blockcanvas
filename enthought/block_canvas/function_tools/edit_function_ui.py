@@ -15,13 +15,13 @@ def create_view(model_view, readonly = False, show_units = True):
         columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),
                    ObjectColumn(name='binding', label='Value', editable=True, width=0.6),
                   ]
-        
+
     if readonly:
         code_editor_style = 'readonly'
     else:
         code_editor_style = 'simple'
-        
-    
+
+
     view = View(
                VSplit(
                       HGroup(
@@ -75,6 +75,6 @@ def create_view(model_view, readonly = False, show_units = True):
                   buttons=menu.OKCancelButtons,
                   close_result=False,
          )
-    
+
     return view
-    
+

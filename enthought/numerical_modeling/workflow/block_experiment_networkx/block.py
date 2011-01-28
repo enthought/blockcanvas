@@ -134,7 +134,7 @@ class Block(HasTraits):
         else:
             raise ValueError('Expecting string, Node, or sequence. Got %r' % x)
 
-        # We really want to keep the filename for "pristine" blocks, and 
+        # We really want to keep the filename for "pristine" blocks, and
         # _structure_changed nukes it most times
         self.filename = saved_filename
 

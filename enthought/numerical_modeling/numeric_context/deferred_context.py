@@ -1,18 +1,18 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a concrete derived numeric context that defers propagation of
 #  all upstream context events to a future point in time. The purpose is to
 #  allow iterative computations from triggering large numbers of events,
 #  most of which do not need to be immediately processed by downstream
 #  contexts. This class is related to the TraitsContext, but is intended
 #  to be used closer to the root context to improve performance.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a concrete derived numeric context that defers propagation of
@@ -39,10 +39,10 @@ from enthought.pyface.timer.api \
 
 from context_modified \
     import ContextModified
-    
+
 from derivative_context \
     import DerivativeContext
-    
+
 #-------------------------------------------------------------------------------
 #  'DeferredContext' class:
 #-------------------------------------------------------------------------------

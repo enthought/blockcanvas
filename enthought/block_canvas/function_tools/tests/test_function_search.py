@@ -105,31 +105,31 @@ class FunctionSearchTestCase(unittest.TestCase):
     def test_search_location(self):
         """ Does searching in the python path of functions work?
         """
-        
+
         self.fs.search_name = False
         self.fs.search_module = True
-        
+
         self.fs.search_term = "sample_package.bar"
         desired = ["bar_func1", "bar_func2"]
         actual = [function.name for function in self.fs.search_results]
         self.assertEqual(sorted(desired), sorted(actual))
-        
+
     def test_update_all_functions_forces_new_search(self):
         library = FunctionLibrary()
         fs = FunctionSearch(all_functions=library.functions)
         self.assertEqual(len(fs.search_results), 0)
-        
+
         library.modules=['os', 'sample_package']
         # Ensure we found some functions.  This isn't a test of
         # FunctionSearch, but we want it to be true to ensure our
         # test is valid.
         self.assertNotEqual(len(library.functions), 0)
-        
+
         # Now ensure the search results are updated and have something
         # in them.
         fs.all_functions = library.functions
         self.assertNotEqual(len(fs.search_results), 0)
-        
-        
+
+
 if __name__ == '__main__':
     unittest.main()

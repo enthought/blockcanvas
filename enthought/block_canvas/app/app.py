@@ -37,7 +37,7 @@ from enthought.block_canvas.class_tools.class_library import ClassLibrary
 # Local, relative imports
 from experiment import Experiment
 from project import Project
-from block_application_view_handler import (BlockApplicationMenuBar, 
+from block_application_view_handler import (BlockApplicationMenuBar,
                                             BlockApplicationViewHandler)
 
 
@@ -65,14 +65,14 @@ class Application(HasTraits):
     execution model, the canvas, the function search window,
     and the shell.
     """
-    
+
     ######################################################################
     # Application Traits
     ######################################################################
 
     # The currently loaded, active project
     project = Instance(Project)
-    
+
     # The view model for the current project's context.
     context_viewer = Instance(ContextVariableList)
 
@@ -82,14 +82,14 @@ class Application(HasTraits):
 
     # The Function Library
     # fixme: This should probably not live here.
-    function_library = Instance(FunctionLibrary, args=())    
+    function_library = Instance(FunctionLibrary, args=())
 
     # The data directory.
     data_directory = Str()
 
     # The directory for other files.
     file_directory = Str()
-   
+
     # Window for displaying HTML help for functions.
     # FIXME: It would be better to re-factor this into an active_help_item
     # trait with an HTML Editor.
@@ -100,16 +100,16 @@ class Application(HasTraits):
 
     # Exectue automatically whenever the nodes, bindings, etc. are changed
     auto_execute = Bool(False)
-    
+
     ######################################################################
     # object interface
     ######################################################################
-    
+
     def __init__(self, code=None, data_context=None, *args, **kwargs):
         super(Application, self).__init__(*args, **kwargs)
-     
+
         # Set the global app object in the scripting module.
-        scripting.app = self     
+        scripting.app = self
 
         self.project = Project()
 
@@ -136,7 +136,7 @@ class Application(HasTraits):
 
     def trait_view(self, name=None, view_elements=None):
         return View(
-          VGroup( 
+          VGroup(
             HSplit(
                   VSplit(
                     Item('function_search',
@@ -145,7 +145,7 @@ class Application(HasTraits):
                          id         = 'search',
                          style      = 'custom',
                          dock       = 'horizontal',
-                         show_label = False,                      
+                         show_label = False,
                     ),
                     Item('html_window',
                          style='custom',
@@ -154,7 +154,7 @@ class Application(HasTraits):
                          resizable=True,
                     ),
                     id='search_help_view'
-                  ),      
+                  ),
                 VSplit(
                     Item( 'object.project.active_experiment.canvas',
                           label      = 'Canvas',
@@ -188,7 +188,7 @@ class Application(HasTraits):
             Item( 'status',
                   style      = 'readonly',
                   show_label = False,
-                  resizable  = False 
+                  resizable  = False
             ),
           ),
           title     = 'Block Canvas',
@@ -202,13 +202,13 @@ class Application(HasTraits):
             KeyBinding(binding1='F5', method_name='_on_execute'),
             ),
         )
-        
-        
+
+
     ######################################################################
     # Application interface
     ######################################################################
-    
-    ### load/save python scripts #########################################    
+
+    ### load/save python scripts #########################################
 
     def load_code_from_file(self, filename):
         self.project.active_experiment.exec_model = \
@@ -243,7 +243,7 @@ class Application(HasTraits):
             return
 
         if 'viewable' not in globals:
-            msg = ("Cannot find the 'viewable' function in the module %s" 
+            msg = ("Cannot find the 'viewable' function in the module %s"
                 % filename)
             dlg = MessageDialog(message=msg, severity='error')
             dlg.open()
@@ -315,17 +315,17 @@ class Application(HasTraits):
         self.project.save(dirname)
 
     ### execution_model scripting api ####################################
-    
+
     def add_function_object_to_model(self, item, x=None, y=None):
-        """ Add the double clicked or dropped FunctionCall object to 
+        """ Add the double clicked or dropped FunctionCall object to
             the code/canvas.
-        
+
             The added function is also marked as selected.
-            
+
             If "New Function" is clicked, we hand back a FunctionCall based
             on a LocalFunctionInfo.  Otherwise, we hand back a FunctionCall
             based on a PythonFunctionInfo.
-            
+
             # fixme: We need to add LocalFunctionInfo objects to the
             #        FunctionLibrary somehow.
         """
@@ -340,8 +340,8 @@ class Application(HasTraits):
             # fixme: Generate a unique name that isn't on the canvas.
             code_template = "def %(name)s(a, b):\n" \
                             "    return x, y\n"
-            code = code_template % {'name':func_name}                   
-            # fixme: Short term for testing.  Remove imports in future and 
+            code = code_template % {'name':func_name}
+            # fixme: Short term for testing.  Remove imports in future and
             #        replace with FunctionCall UI.
             function = LocalFunctionInfo(code=code)
             traits_class = self.match_function_to_has_traits_class(item.name)
@@ -352,13 +352,13 @@ class Application(HasTraits):
                                           module=item.module)
             traits_class = self.match_function_to_has_traits_class(item.name)
             node = FunctionCall.from_callable_object(function, traits_class, self.project.active_experiment)
-        
+
         # Bring up the dialog box to edit it
         node.edit_traits(kind="modal")
 
-        self.add_function_to_execution_model(node, x, y)    
+        self.add_function_to_execution_model(node, x, y)
         self.select_function_on_canvas(node)
-        
+
 
     # fixme: Should this be a add_function, or is that to specific?
     # fixme: Make it scriptable...
@@ -366,7 +366,7 @@ class Application(HasTraits):
     def add_function_to_execution_model(self, function_call,
                                         x=None, y=None):
         """ Add a function/expression/etc to the active execution model.
-        
+
             Include optional information about the location of the item
             on the canvas.
         """
@@ -376,15 +376,15 @@ class Application(HasTraits):
         return
 
     def update_context_from_function_ui(self, function_call):
-        # If a custom UI was not used, return imemeadiately  
+        # If a custom UI was not used, return imemeadiately
         if function_call.function_view_instance == None:
             return
 
-        # If a custom UI was used, update the context 
+        # If a custom UI was used, update the context
         context = self.project.active_experiment.context
         # Prevent execution while loading in values to the ui
         prev_defer_execution = context.defer_execution
-        context.defer_execution = True 
+        context.defer_execution = True
 
         # Load values into context from ui
         for input in function_call.inputs:
@@ -404,7 +404,7 @@ class Application(HasTraits):
         return
 
     def match_function_to_has_traits_class(self, function_name):
-        """Finds a class whose name matches '_{function_name}_view'. 
+        """Finds a class whose name matches '_{function_name}_view'.
         Returns this class's traits_view attribute, if present.
         Returns None otherwise."""
 
@@ -446,7 +446,7 @@ class Application(HasTraits):
         variable.binding = new_binding
         self.project.active_experiment.controller.update_nodes([],[],[function_call.uuid])
         return
-    
+
     def update_node_with_edits(self, node, edited_node):
         """ Update a function/expression in the execution model with an edited
         copy.
@@ -464,21 +464,21 @@ class Application(HasTraits):
         """Expand all of the boxes on the canvas"""
         self.project.active_experiment.controller.expand_boxes()
         return
-    
+
     def collapse_all_boxes(self):
         """Collapse all of the boxes on the canvas"""
         self.project.active_experiment.controller.collapse_boxes()
         return
-    
+
     def scale_and_center(self):
         """Set the appropriate zoom level and position to see all of the
         blocks on the canvas"""
         self.project.active_experiment.controller.scale_and_center()
-        
+
     def relayout_boxes(self):
         """Re-layout all of the boxes on the screen"""
         self.project.active_experiment.controller.position_nodes()
-    
+
     def expand_box(self, box):
         """Expand a particular box on the canvas"""
         # FIXME: Should this operate on the UUID of the box, or
@@ -492,26 +492,26 @@ class Application(HasTraits):
 
     # fixme: Make it scriptable...
     def select_function_on_canvas(self, item):
-        """ Mark an item as selected on the canvas.  
-        
+        """ Mark an item as selected on the canvas.
+
             Currently selected items are unselected.
-            
+
             fixme: We really should have an execution_view_model that
                    keeps track of selection, etc. so that views other
                    than the canvas can react to and control changes in
                    a more coherent way.
         """
         controller = self.project.active_experiment.controller
-        
+
         # Clear out current selection so that we don't end up trying
         # to add to a current selection... (fixme: is this necessary)
         controller.canvas.selection_manager.unselect_all()
 
-        # Find the canvas box that cooresponds to the FunctionCall 
+        # Find the canvas box that cooresponds to the FunctionCall
         # object that we have and select it.
         # fixme: This should really be done on a ExecutionModelView
-        #        object which is yet to be invented...  
-        canvas_box = controller._nodes[item]        
+        #        object which is yet to be invented...
+        canvas_box = controller._nodes[item]
         controller.canvas.selection_manager.select_item(canvas_box)
 
     @on_trait_change('context_viewer:execute_for_names', post_init=True)
@@ -532,10 +532,10 @@ class Application(HasTraits):
 
     #@on_trait_change('project:active_experiment:exec_model:statements:inputs.binding')
     #def execute_for_input_binding(self, object, name, old, new):
-    #    """ When bindings change, execute the code for the new binding. 
+    #    """ When bindings change, execute the code for the new binding.
     #    """
     #    if not self.auto_execute:
-    #        return 
+    #        return
     #
     #    if name == 'binding':
     #        self.execute_for_names([new])
@@ -545,7 +545,7 @@ class Application(HasTraits):
 
     #@on_trait_change('project:active_experiment:exec_model:statements:outputs.binding')
     #def execute_for_output_binding(self, object, name, old, new):
-    #    """ When bindings change, execute the code for the new binding. 
+    #    """ When bindings change, execute the code for the new binding.
     #    """
     #    # We need to actually search for the node to get it to re-execute.
     #    # XXX: not enough time. Just re-executing the whole thing for now.
@@ -595,34 +595,34 @@ class Application(HasTraits):
 
     # expand/contract all
     # group/ungroup functions
-    # remove function   
-    
+    # remove function
+
 
     ### html window scripting api ########################################
     # fixme: When we get an active_help_item, these should disappear...
-    
+
     def html_window_set_text(self, text):
         self.html_window.set_text(text)
 
     def html_window_set_html(self, text):
         self.html_window.set_html(text)
-        
+
     def html_window_set_function_help(self, function_name, module_name):
         self.html_window.set_function_help(function_name, module_name)
 
-            
+
     ### Private interface ################################################
-    
-    ### Trait handlers ###################################################    
+
+    ### Trait handlers ###################################################
 
     # fixme: This should go away as the API becomes well defined.
-    @on_trait_change('function_search, function_library.functions+', 
+    @on_trait_change('function_search, function_library.functions+',
                      post_init=True)
     def _update_search_functions_from_library(self):
         """ Ensure that the functions searched in function search object
             are always in sync with the functions available in the function
             library.
-        """    
+        """
         self.function_search.all_functions = self.function_library.functions
 
     def _context_items_modified(self, event):
@@ -665,7 +665,7 @@ class Application(HasTraits):
         self.execute_for_names()
 
 
-    
+
 if __name__ == '__main__':
 
     code =  "from enthought.block_canvas.debug.my_operator import add, mul\n" \
@@ -679,23 +679,23 @@ if __name__ == '__main__':
        "e = mul(5, 3)\n" \
        "f = add(4, 2)\n" \
        "g = foo(2)\n"
-    
+
     # Enable logging
-    import logging 
+    import logging
     logging.getLogger().addHandler(logging.StreamHandler())
-    logging.getLogger().setLevel(logging.DEBUG)  
+    logging.getLogger().setLevel(logging.DEBUG)
 
     modules = ['os']
 
     class_library = ClassLibrary(modules=modules)
     func_library = FunctionLibrary(modules=modules)
     func_search = FunctionSearch(all_functions=func_library.functions)
-    
+
     app = Application(
-        code=code, 
+        code=code,
         data_context=DataContext(name='data'),
-        class_library=class_library, 
-        function_library=func_library, 
+        class_library=class_library,
+        function_library=func_library,
         function_search=func_search,
         )
 

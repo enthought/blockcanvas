@@ -46,9 +46,9 @@ class ConfigurableImportUIHandler(Handler):
             filesplit = os.path.splitext(filename)
             if filesplit[1] != '' :
                 info.object.reset_view(filename)
-            
+
         return
- 
+
 
     def closed(self, info, is_ok):
         """ Finalize the context in the importer
@@ -57,7 +57,7 @@ class ConfigurableImportUIHandler(Handler):
         if is_ok:
             info.object.get_context()
         return
-    
+
 #------------------------------------------------------------------------------
 #  ConfigurableImportUI class
 #------------------------------------------------------------------------------
@@ -97,14 +97,14 @@ class ConfigurableImportUI(HasTraits):
     #---------------------------------------------------------------------------
     # HasTraits methods
     #---------------------------------------------------------------------------
-    
+
     def __init__(self, **traits):
         """ Construct a view proxy to be able to refresh view when model changes
         """
 
         super(ConfigurableImportUI, self).__init__(**traits)
         self._view_proxy = self
-        
+
     def _filename_changed(self):
         """ Reset the model when filename changes
         """
@@ -116,7 +116,7 @@ class ConfigurableImportUI(HasTraits):
             self.model = None
         else:
             self.model = FileLogReaderUI(file_name = self.filename)
-            
+
         return
 
     def trait_view(self, name=None, view_element=None):
@@ -136,12 +136,12 @@ class ConfigurableImportUI(HasTraits):
                         'close_result': False,
                         'handler':ConfigurableImportUIHandler,
                         }
- 
+
             return View(Item(name='_view_proxy', show_label = False,
                              editor=InstanceEditor(view='actual_view'),
                              style='custom'),
                         **settings)
-        
+
         # Dynamic view
         items = []
         if has_geo and self.model:
@@ -179,30 +179,30 @@ class ConfigurableImportUI(HasTraits):
                              Item('object.model.samples_per_trace',
                                   style = 'readonly', width=50),
                              Item('object.model.trace_count',
-                                  style='readonly', width=50), 
+                                  style='readonly', width=50),
                              Item('object.model.sample_rate'),
                              label = 'Header info',
                              show_border = True,
                           ),
                           VGrid(
                              HGroup(
-                                Item('object.model.inline_bytes', 
-                                     editor = RangeEditor(mode = 'spinner', 
+                                Item('object.model.inline_bytes',
+                                     editor = RangeEditor(mode = 'spinner',
                                                           low = 1, high = 240)),
                                 Item('object.model.crossline_bytes',
-                                     editor = RangeEditor(mode = 'spinner', 
+                                     editor = RangeEditor(mode = 'spinner',
                                                           low = 1, high = 240)),
                              ),
                              HGroup(
                                 Item('object.model.x_location_bytes',
-                                     editor = RangeEditor(mode = 'spinner', 
+                                     editor = RangeEditor(mode = 'spinner',
                                                           low = 1, high = 240)),
                                 Item('object.model.y_location_bytes',
-                                     editor = RangeEditor(mode = 'spinner', 
+                                     editor = RangeEditor(mode = 'spinner',
                                                           low = 1, high = 240)),
                                 Item('object.model.xy_scale_bytes',
                                      label = 'XY Scale Bytes',
-                                     editor = RangeEditor(mode = 'spinner', 
+                                     editor = RangeEditor(mode = 'spinner',
                                                           low = 1, high = 240)),
                              ),
                              label = 'Byte offsets',
@@ -237,7 +237,7 @@ class ConfigurableImportUI(HasTraits):
     #---------------------------------------------------------------------------
     #  ConfigurableImportUI methods
     #---------------------------------------------------------------------------
-    
+
     def get_context(self):
         """ Finalize the context
         """
@@ -245,7 +245,7 @@ class ConfigurableImportUI(HasTraits):
         self.context = None
         if os.path.splitext(self.filename)[1] == '.pickle':
             self.context = DataContext.load_context_from_file(self.filename)
-                
+
         elif self.model:
             if isinstance(self.model, FileLogReaderUI):
                 reader = self.model.active_reader
@@ -258,19 +258,19 @@ class ConfigurableImportUI(HasTraits):
                 self.context = self.model.read_data()
 
         return
-    
+
     def reset_view(self, filename):
         """ Reset view proxy whenever model changes to fire events for UI to
             refresh
         """
-        
+
         self._view_proxy = None
         self.filename = filename
         self._view_proxy = self
 
         return
 
-    
+
 # Local test
 if __name__ == '__main__':
     c = ConfigurableImportUI()

@@ -32,19 +32,19 @@ class ApplicationWindow(WorkbenchWindow):
     ###########################################################################
     # ApplicationWindow traits.
     ###########################################################################
-       
+
     #### Private interface ####################################################
 
-    # fixme: We need complete arguments as to why these need to be traits.  
-    #        I can see the benefit of reusing the same actions in different 
+    # fixme: We need complete arguments as to why these need to be traits.
+    #        I can see the benefit of reusing the same actions in different
     #        locations in the UI (menu, toolbar, etc.) and ensuring there
-    #        names/implementations are uniform. But it is also verbose 
+    #        names/implementations are uniform. But it is also verbose
     #        and results in a lot of boiler plate.  The alternative is just
     #        to create the actions on the fly when we need.
-    
+
 
     ### Actions ###############################################################
-    
+
     # The action that exits the application.
     _exit_action = Instance(Action)
 
@@ -76,13 +76,13 @@ class ApplicationWindow(WorkbenchWindow):
             name     = 'Edit',
             contents = [
                 PerspectiveItem(id='Search', position='left'),
-                PerspectiveItem(id='Function Documentation', 
+                PerspectiveItem(id='Function Documentation',
                                 relative_to='Search', position='bottom'),
                 PerspectiveItem(id='Experiement Code', position='bottom'),
                 PerspectiveItem(id='Context', position='right')
             ]
         ),
-        
+
         Perspective(
             name     = 'Debug',
             contents = [
@@ -96,14 +96,14 @@ class ApplicationWindow(WorkbenchWindow):
 
     def _editor_manager_default(self):
         """ Use our custom editor manager be default. """
-    
+
         return ApplicationEditorManager(window=self)
-    
+
 
     def _menu_bar_manager_default(self):
         """ Setup the menus for the application. """
-        return MenuBarManager(self._file_menu, self._edit_menu, 
-                              self._macro_menu, self._view_menu, 
+        return MenuBarManager(self._file_menu, self._edit_menu,
+                              self._macro_menu, self._view_menu,
                               window=self)
 
     def _tool_bar_manager_default(self):
@@ -129,7 +129,7 @@ class ApplicationWindow(WorkbenchWindow):
 
         # fixme: This doesn't appear to be updating.
         debug_view = DebugView(window=self)
-        
+
         # fixme: I am quite sure this is not the way these views should
         #        be set up, but it is the easiest spot for now.
         # Create a view of the search window.
@@ -137,22 +137,22 @@ class ApplicationWindow(WorkbenchWindow):
                                          window=self)
 
         # Create a view of the html window.
-        doc_view = TraitsUIView(name='Function Documentation', 
-                                obj=self.workbench.app.html_window, 
+        doc_view = TraitsUIView(name='Function Documentation',
+                                obj=self.workbench.app.html_window,
                                 window=self)
 
         # Create a view of the project context.
-        context_view = ExperimentContextView(name='Context', 
-                                             obj=self.workbench.app.project.active_experiment, 
+        context_view = ExperimentContextView(name='Context',
+                                             obj=self.workbench.app.project.active_experiment,
                                              window=self)
 
         # Create a view of the project code.
-        experiment_code_view = ExperimentCodeView(name='Experiment Code', 
-                                             obj=self.workbench.app.project.active_experiment, 
+        experiment_code_view = ExperimentCodeView(name='Experiment Code',
+                                             obj=self.workbench.app.project.active_experiment,
                                              window=self)
-                                   
+
         return [debug_view, search_view, doc_view, context_view,
-                experiment_code_view]                                    
+                experiment_code_view]
 
 
     #### Menu initializers ###################################################
@@ -164,24 +164,24 @@ class ApplicationWindow(WorkbenchWindow):
                     # Create a new python script.
                     #NewScriptAction(),
                     # New Experiement. Ctrl-N should map here.
-                    #NewExperimentAction(), 
+                    #NewExperimentAction(),
                     # Open an entirely new Project, closing the current one
                     # if necessary.
                     self._new_project_action
-                    
+
                 )
 
         file_group = Group(new_group,
         #                   OpenAction()
         #                   CloseAction()
-                     )      
-        
+                     )
+
         exit_group = Group(self._exit_action)
 
         return MenuManager(new_group, exit_group, name="&File", id='FileMenu')
 
     def __edit_menu_default(self):
-        """ Initialize the Edit Menus. 
+        """ Initialize the Edit Menus.
         """
         undo_manager = self.workbench.undo_manager
 
@@ -196,7 +196,7 @@ class ApplicationWindow(WorkbenchWindow):
 
     def __macro_menu_default(self):
         """ The Undo menu handles Undo/Redo and macro recording.
-            
+
             fixme: Undo/Redo should go to the edit menu.
                    Macro recording should go somewhere else.
         """
@@ -218,16 +218,16 @@ class ApplicationWindow(WorkbenchWindow):
 
 
     ### Action Defaults ######################################################
-    
+
     def __exit_action_default(self):
         """ Trait initialiser. """
 
         return Action(name="E&xit", on_perform=self.workbench.exit)
 
-    
+
     def __new_project_action_default(self):
         """ Trait initialiser. """
-        
+
         return Action(name="New Project", on_perform=self._new_project)
 
     def _new_project(self):
@@ -236,28 +236,28 @@ class ApplicationWindow(WorkbenchWindow):
         """
         # fixme: Ask user it they want to save.  If so, do it.
         self.workbench.app.project.save()
-        
+
         # Close any editors associated with the old project.
         # (Perhaps) all of them.
         # fixme, we just close the current experiment.
         old_editor = self.get_editor(self.workbench.app.project)
         old_editor.close()
-        
+
         # Create a new project and set it as the application project.
         self.workbench.app.project = Project()
         self.workbench.app.project.add_experiment(Experiment())
-        
+
         # Bring it up in the editor.
         self.edit(self.workbench.app.project)
-        
+
     # fixme: This is temporary until we put the script into a view.
     #@on_trait_change('workbench.undo_manager.script_updated')
     #def _on_script_updated(self, undo_manager):
     #    if str(undo_manager) == "<undefined>":
     #        return
-    #        
+    #
     #    script = undo_manager.script
-    # 
+    #
     #    if script:
     #        print script,
     #    else:
@@ -265,7 +265,7 @@ class ApplicationWindow(WorkbenchWindow):
 
     def _active_editor_changed(self, old, new):
         """ Handle any UI related changes when a new editor becomes active.
-        
+
             For now, we simply swap out the Undo Stacks.
         """
 

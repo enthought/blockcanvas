@@ -6,7 +6,7 @@
 from numpy import inf
 
 # Enthought library imports:
-from enthought.traits.api import (Any, Bool, Dict, HasTraits, 
+from enthought.traits.api import (Any, Bool, Dict, HasTraits,
                                   Instance, List, on_trait_change, TraitListEvent)
 from enthought.traits.protocols.api import adapt
 
@@ -15,12 +15,12 @@ from enthought.block_canvas.app import scripting
 from enthought.block_canvas.canvas.enable_line import EnableLine
 from enthought.block_canvas.function_tools.i_minimal_function_info import \
     IMinimalFunctionInfo
-        
+
 # Local imports:
 from execution_model import ExecutionModel
 from block_node_factory import BlockNodeFactory
 from row_layout_engine import RowLayoutEngine
-    
+
 
 class BlockGraphController(HasTraits):
     """ The controller between the execution model and the canvas (view).
@@ -30,7 +30,7 @@ class BlockGraphController(HasTraits):
     # BlockGraphController Traits
     #########################################################################
 
-    # The execution model 
+    # The execution model
     execution_model = Instance(ExecutionModel)
 
     # Enable canvas that displays the graph - The Block Canvas
@@ -44,7 +44,7 @@ class BlockGraphController(HasTraits):
 
     # Edited function
     edited_function = Any
-    
+
     # Event that we fire whenever the graph has been updated, i.e. new blocks
     # are added or old ones removed.
     gap = List([50,100])
@@ -73,7 +73,7 @@ class BlockGraphController(HasTraits):
         for graph_node, box in self._nodes.items():
             if graph_node.uuid not in active_uuids:
                 box.dimmed = True
-                
+
         # To support unit tests, check if the canvas is not None:
         if self.canvas is not None:
             self.canvas.request_redraw()
@@ -83,7 +83,7 @@ class BlockGraphController(HasTraits):
         """
         if graph_node in self._nodes:
             self._nodes[ graph_node ].flagged = True
-           
+
         # To support unit tests, check if the canvas is not None:
         if self.canvas is not None:
             self.canvas.request_redraw()
@@ -143,7 +143,7 @@ class BlockGraphController(HasTraits):
         self.position_nodes()
 
     def scale_and_center(self):
-        """ Sets the zoom factor and centers the viewport to ensure that all 
+        """ Sets the zoom factor and centers the viewport to ensure that all
             boxes are visible.
         """
         if not self.execution_model.dep_graph:
@@ -275,7 +275,7 @@ class BlockGraphController(HasTraits):
             row_height += y_gap
             total_height += row_height
         avg_space = max_length / max_on_row
-                                
+
         for i, row in enumerate(hierarchy):
             x_pos =  max_length / (len(row) + 1)
             if i > 0:
@@ -288,7 +288,7 @@ class BlockGraphController(HasTraits):
                 n = self._nodes[graph_node]
                 uuid = graph_node.uuid
                 saved = self.saved_node_positions
-                if uuid in saved: 
+                if uuid in saved:
                     n.x = saved[uuid][0]
                     n.y = saved[uuid][1]
                 else:
@@ -315,7 +315,7 @@ class BlockGraphController(HasTraits):
 
 
     def position_in_viewport(self, component):
-        """ Places a component at the top center of the canvas 
+        """ Places a component at the top center of the canvas
             just below the toolbar.
         """
 
@@ -345,7 +345,7 @@ class BlockGraphController(HasTraits):
         """ Inspect object and see if it can be dropped here.  If so, return
             the droppable object.  Otherwise, return None.
         """
-        
+
         # fixme: poor man's interface checking for IBasicFunctionInfo.
         # fixme: This will not work for a LocalFunctionInfo, and it should...
         # fixme: This was for plotting...
@@ -378,7 +378,7 @@ class BlockGraphController(HasTraits):
     def _canvas_changed ( self, old, new ):
         """ If the display canvas changes, update the canvas
         """
-        if new: 
+        if new:
             new.graph_controller = self
 
     @on_trait_change("execution_model.statements_items")

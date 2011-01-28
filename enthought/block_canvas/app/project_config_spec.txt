@@ -3,8 +3,8 @@
 # for more details.
 
 
-# Note: All the paths in this file are treated as being relative to the project 
-# root.  They can be absolute paths, however, 
+# Note: All the paths in this file are treated as being relative to the project
+# root.  They can be absolute paths, however,
 
 
 # The project section consists of direct Project attributes.
@@ -19,7 +19,7 @@
 
     [[__many__]]
 
-    # Name of the experiment 
+    # Name of the experiment
     name = string()
 
     # Path to the subdirectory holding all of the subsequent files comprising
@@ -34,7 +34,7 @@
 
     # File name of shadow context's stored data
     local_context = string()
-    
+
     # Name of the shared context in the project
     shared_context = string()
 

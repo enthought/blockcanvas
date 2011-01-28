@@ -58,7 +58,7 @@ def main():
         import time
         import numpy
         time.sleep(1)
-        
+
         for i in range(1,100):
             interactor.interactor_shadow.input_a = numpy.sin(i/10)
             time.sleep(0.1)
@@ -75,16 +75,16 @@ def main():
     from enthought.block_canvas.block_display.block_unit_variables import \
             BlockUnitVariableList
     from threading import Thread
-    
-    vars = BlockUnitVariableList(block = bu.codeblock.block, 
+
+    vars = BlockUnitVariableList(block = bu.codeblock.block,
                                  context = bu._exec_context)
-    config = InteractorConfig(vars = vars.variables, 
+    config = InteractorConfig(vars = vars.variables,
                               var_configs=[VariableConfig(name='a', type="Shadow")],
                               plot_configs=[PlotConfig(x='x', y='y')])
-    interactor = ConfigurableInteractor(context = bu._exec_context, 
+    interactor = ConfigurableInteractor(context = bu._exec_context,
                                         block = bu.codeblock.block,
                                         interactor_config = config)
-    
+
 #    Thread(target=loop_interactor, args=(interactor,)).start()
     interactor.edit_traits(kind='livemodal')
 

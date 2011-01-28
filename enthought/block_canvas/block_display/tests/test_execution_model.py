@@ -25,7 +25,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         self.simple_context = dict(a=2, b=4, e=5)
 
     def test_import_func_with_const(self):
-        
+
         code = "from enthought.block_canvas.debug.my_operator import mul\n" \
                "a = mul(1.0, 2.0)\n" \
 
@@ -62,7 +62,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         assert import_line.find('add') and import_line.find('mul')
 
     def test_add_function(self):
-        
+
         code = "def foo(a, b):\n" \
                 "    x, y = a, b\n" \
                 "    return x, y\n" \
@@ -76,7 +76,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         model.add_function(func)
 
         assert len(model.sorted_statements) == 1
-        
+
         desired = '\ndef foo(a, b): \n    x, y = (a, b)\n    return x, y\n\nx, y = foo(1, 2)'
         self.assertEqual(desired, model.code)
 
@@ -125,14 +125,14 @@ class ExecutionModelTestCase(unittest.TestCase):
         code = "def foo(a, b):\n" \
                "\treturn b, a\n" \
                "x,y = foo(1,2)\n"
-        
+
         desired = '\ndef foo(a, b): \n    return b, a\n\nx, y = foo(1, 2)'
         model = ExecutionModel.from_code(code)
         self.assertEqual(desired, model.code)
 
 
     def test_import_code(self):
-        
+
         code = "from enthought.block_canvas.debug.my_operator import mul\n" \
                "def foo(a):\n" \
                "\tb = a\n" \

@@ -21,7 +21,7 @@ class AddSuffixAction(Action):
     view = View( Item('suffix'), buttons=['OK', 'Cancel'] )
 
     selected_fields = List()
- 
+
     def perform(self, event):
         dlg = SuffixDialog()
         if dlg.edit_traits(kind="livemodal"):
@@ -32,7 +32,7 @@ class AddSuffixAction(Action):
                     if not old_text.isdigit():
                         from enthought.block_canvas.app.scripting import app
                         new_text = old_text + '_' + suffix
-                        app.update_function_variable_binding(field.box.graph_node, 
+                        app.update_function_variable_binding(field.box.graph_node,
                                                              field.variable, new_text)
             self.container.wiring_tool.clear_selection()
         return
@@ -45,7 +45,7 @@ class ChangeSuffixAction(Action):
     view = View( Item('suffix'), buttons=['OK', 'Cancel'] )
 
     selected_fields = List()
- 
+
     def perform(self, event):
         dlg = SuffixDialog()
         if dlg.edit_traits(kind="livemodal"):
@@ -59,7 +59,7 @@ class ChangeSuffixAction(Action):
                             base = old_text[:i]
                             from enthought.block_canvas.app.scripting import app
                             new_text = base + '_' + suffix
-                            app.update_function_variable_binding(field.box.graph_node, 
+                            app.update_function_variable_binding(field.box.graph_node,
                                                                  field.variable, new_text)
             self.container.wiring_tool.clear_selection()
         return

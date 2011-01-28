@@ -2,7 +2,7 @@
 import unittest, platform
 
 # Local imports
-from enthought.block_canvas.function_tools.rest_html import convert_string, get_html_from_function_info 
+from enthought.block_canvas.function_tools.rest_html import convert_string, get_html_from_function_info
 
 from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
 
@@ -76,7 +76,7 @@ def proper_func1():
     Description
     -----------
     Estimates bulk density from vp using Gardner, Gardner, Gregory equation:
-      
+
                Rhob = cons * (Vp**expn)  in g/cc
 
     where the default value of 'cons' is .32 and the default value of 'expn' is
@@ -102,7 +102,7 @@ def proper_func2():
        Total Depth
     density_fill_value : scalar : units=g/cc
        Value for missing densities
-    
+
     Returns
     -------
     density_log : array : units=g/cc

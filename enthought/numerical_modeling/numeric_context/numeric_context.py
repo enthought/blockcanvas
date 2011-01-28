@@ -108,7 +108,7 @@ class NumericContext ( ANumericContext ):
     _context_items    = Dict( transient = True )
     _context_groups   = Dict
     _sub_contexts     = Dict
-    
+
     # Map to keep track of dynamic bindings, indexed by name and value bound
     _dynamic_bindings = Dict
 
@@ -157,15 +157,15 @@ class NumericContext ( ANumericContext ):
 
     def dispose ( self ):
         """ Clears the interal state of the object to ensure all memory is
-    	    released. If this is not called, circular references can confuse
-    	    pythons garbage collection and memory will be 'leaked'
-    	"""
+            released. If this is not called, circular references can confuse
+            pythons garbage collection and memory will be 'leaked'
+        """
 
         # FIXME: should this call dispose on sub_contexts?
         #  maybe, if the refcount is low enough, otherwise other uses
         #  of the subcontext would lose its data
-        
-        self.defer_events = True 
+
+        self.defer_events = True
         for item in self.context_items:
             item.context = None
         self.clear()
@@ -181,9 +181,9 @@ class NumericContext ( ANumericContext ):
 
             In some pickles, 'context_data' is saved as a dict, when now it is
             expected to be a EventDict.
-            
+
         """
-        
+
         context_data = state.pop( 'context_data', None )
         if context_data != None:
             if not isinstance( context_data, EventDict ):
@@ -194,7 +194,7 @@ class NumericContext ( ANumericContext ):
             state[ 'context_data' ] = context_data
 
         return
-    
+
     def __getstate__ ( self ):
         state = super( NumericContext, self ).__getstate__()
 
@@ -212,7 +212,7 @@ class NumericContext ( ANumericContext ):
 
         # Return the saveable state:
         state[ '__numeric_context_version__' ] = 1
-        
+
         return state
 
     def __setstate__ ( self, state ):
@@ -220,7 +220,7 @@ class NumericContext ( ANumericContext ):
 
         if version < 1:
             self.correct_state_items( state )
-            
+
             k = '__numeric_context_saved_bindings__'
             if k in state:
                 state[ '_dynamic_bindings' ] = state.pop( k )
@@ -235,7 +235,7 @@ class NumericContext ( ANumericContext ):
             if isinstance( k, basestring ):
                 d[ 'value' ].on_trait_change( self._dynamic_binding_handler,
                                               d[ 'trait_name' ] )
-               
+
         # We maintain various things like context items and event listeners
         # that don't survive a pickling. These get setup in response to the
         # dictionary changing, so let's reuse that mechanism to set them up
@@ -741,7 +741,7 @@ class NumericContext ( ANumericContext ):
         added   = sub_dict( new, new_keys - old_keys )
         removed = sub_dict( old, old_keys - new_keys )
         changed = sub_dict( old, new_keys & old_keys )
-        
+
         self._dict_is_modified(
             TraitDictEvent( added=added, changed=changed, removed=removed )
         )
@@ -944,7 +944,7 @@ class NumericContext ( ANumericContext ):
             context_data       = self.context_data
 
             added = []
-                
+
             for item in items:
                 if item not in context_items_list:
                     context_items_list.append( item )

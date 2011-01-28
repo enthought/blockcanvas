@@ -35,7 +35,7 @@ class BlockGraphTestCase(unittest.TestCase):
         b = Block(code)
         rename_variable(b.ast, 'x', 'y')
         self.assertEqual(desired, unparse(b.ast))
-        
+
 
 if __name__ == '__main__':
     unittest.main()

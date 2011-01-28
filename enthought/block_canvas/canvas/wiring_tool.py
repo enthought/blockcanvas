@@ -36,7 +36,7 @@ class WiringTool(AbstractOverlay, DragTool):
 
     # (x,y) coordinates for the end of line.
     _end_pos = Tuple
-    
+
     # References to the beginning and ending of the Input/Output Fields
     # that are being hooked up.
     _start_field = Instance(IOField)
@@ -108,10 +108,10 @@ class WiringTool(AbstractOverlay, DragTool):
         field.value.edit_left_up(event)
         self.event_state = "normal"
         event.handled = True
-        
+
 
     def normal_right_down(self, event):
-        """ Right click will bring up a dialog to edit the 
+        """ Right click will bring up a dialog to edit the
             prefix/suffix of the selected variables.
         """
         field = self._get_underlying_box_field(event.x, event.y)
@@ -149,16 +149,16 @@ class WiringTool(AbstractOverlay, DragTool):
                 self.input_selected_fields.remove(field)
             else:
                 self.output_selected_fields.remove(field)
- 
+
     #---------------------------------------------------------------------
     # DragTool interface
     #---------------------------------------------------------------------
- 
+
     def drag_start(self, event):
         field = self._get_underlying_box_field(event.x, event.y)
         if not field:
             return
-    
+
         self.add_to_selection(field)
         self._start_field = field
         event.window.set_mouse_owner(self, event.net_transform(),
@@ -209,7 +209,7 @@ class WiringTool(AbstractOverlay, DragTool):
         self.clear_end_field()
         if field and self._start_field:
             start_type = self._start_field.type
-            if ((start_type == 'input' and field.type == 'output') or 
+            if ((start_type == 'input' and field.type == 'output') or
                 (start_type == 'output' and field.type == 'input')):
                 pos = self._get_anchor_point(field)
                 field.icon.bullet_state = "dropping"
@@ -236,7 +236,7 @@ class WiringTool(AbstractOverlay, DragTool):
                     else:
                         matches[infield] = [(input, output)]
         return matches
-       
+
     def clear_end_field(self):
         if self._end_field:
             self._end_field.clear_selected()
@@ -256,13 +256,13 @@ class WiringTool(AbstractOverlay, DragTool):
     #---------------------------------------------------------------------
     # private interface
     #---------------------------------------------------------------------
- 
+
 
     def _get_anchor_point(self, field):
         x_pos = field.box.x + field.x + field.icon.x + field.icon.width/2
         y_pos = field.box.y + field.y + field.icon.y + field.icon.height/2
         return (x_pos, y_pos)
-        
+
     def _get_underlying_box_field(self, x, y):
         """ Returns either the underlying input or output field under the mouse or None.
             BlockCanvas -> CanvasBox ->  IOField -> EnableBoxField
@@ -300,7 +300,7 @@ class WiringTool(AbstractOverlay, DragTool):
         # Suggestions welcome.
         icon = copy.deepcopy(self._start_field.icon)
         icon.event_state = 'normal'
-        icon.position = [self._end_pos[0] - icon.width*0.5, self._end_pos[1] - icon.height*0.5] 
+        icon.position = [self._end_pos[0] - icon.width*0.5, self._end_pos[1] - icon.height*0.5]
         icon.bullet_state = "dragging"
         icon._draw_mainlayer(gc, view_bounds=view_bounds)
 

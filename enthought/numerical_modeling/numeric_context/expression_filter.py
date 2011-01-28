@@ -126,8 +126,8 @@ class ExpressionFilter ( ANumericFilter ):
         """
         try:
             mask = self._block.evaluate( context )
-            if ((mask is None) or 
-                issubdtype(mask.dtype, bool) or 
+            if ((mask is None) or
+                issubdtype(mask.dtype, bool) or
                 issubdtype(mask.dtype, int)):
                 return mask
             return (mask != 0.0)

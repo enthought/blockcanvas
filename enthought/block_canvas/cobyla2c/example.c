@@ -4,7 +4,7 @@
 /*
  * Copyright (c) 1992, Michael J. D. Powell (M.J.D.Powell@damtp.cam.ac.uk)
  * Copyright (c) 2004, Jean-Sebastien Roy (js@jeannot.org)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -12,10 +12,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -29,7 +29,7 @@
  * This software is a C version of COBYLA, contrained optimization by linear
  * approximation package originally developed by Michael J. D. Powell in
  * Fortran.
- * 
+ *
  * The original source code can be found at :
  * http://plato.la.asu.edu/topics/problems/nlores.html
  */
@@ -45,7 +45,7 @@ static char const rcsid[] =
 
 cobyla_function calcfc;
 
-typedef struct 
+typedef struct
 {
   int nprob;
 } example_state;
@@ -302,18 +302,18 @@ int calcfc(int n, int m, double *x, double *f, double *con, void *state_)
     d__2 = x[2];
     d__3 = x[3];
     d__4 = x[4];
-    con[1] = 8. - d__1 * d__1 - d__2 * d__2 - d__3 * d__3 - d__4 * d__4 - 
+    con[1] = 8. - d__1 * d__1 - d__2 * d__2 - d__3 * d__3 - d__4 * d__4 -
         x[1] + x[2] - x[3] + x[4];
     d__1 = x[1];
     d__2 = x[2];
     d__3 = x[3];
     d__4 = x[4];
-    con[2] = 10. - d__1 * d__1 - d__2 * d__2 * 2. - d__3 * d__3 - d__4 * 
+    con[2] = 10. - d__1 * d__1 - d__2 * d__2 * 2. - d__3 * d__3 - d__4 *
         d__4 * 2. + x[1] + x[4];
     d__1 = x[1];
     d__2 = x[2];
     d__3 = x[3];
-    con[3] = 5. - d__1 * d__1 * 2.f - d__2 * d__2 - d__3 * d__3 - x[1] * 
+    con[3] = 5. - d__1 * d__1 * 2.f - d__2 * d__2 - d__3 * d__3 - x[1] *
         2. + x[2] + x[4];
   } else if (state->nprob == 9) {
 
@@ -329,32 +329,32 @@ int calcfc(int n, int m, double *x, double *f, double *con, void *state_)
     d__6 = x[6];
 /* Computing 4th power */
     d__7 = x[7], d__7 *= d__7;
-    *f = d__1 * d__1 + d__2 * d__2 * 5. + d__3 * d__3 + d__4 * d__4 * 3. 
-        + d__5 * (d__5 * d__5) * 10. + d__6 * d__6 * 7. + d__7 * d__7 
+    *f = d__1 * d__1 + d__2 * d__2 * 5. + d__3 * d__3 + d__4 * d__4 * 3.
+        + d__5 * (d__5 * d__5) * 10. + d__6 * d__6 * 7. + d__7 * d__7
         - x[6] * 4. * x[7] - x[6] * 10. - x[7] * 8.;
     d__1 = x[1];
 /* Computing 4th power */
     d__2 = x[2], d__2 *= d__2;
     d__3 = x[4];
-    con[1] = 127. - d__1 * d__1 * 2. - d__2 * d__2 * 3. - x[3] - d__3 * 
+    con[1] = 127. - d__1 * d__1 * 2. - d__2 * d__2 * 3. - x[3] - d__3 *
         d__3 * 4. - x[5] * 5.;
     d__1 = x[3];
     con[2] = 282. - x[1] * 7. - x[2] * 3. - d__1 * d__1 * 10. - x[4] + x[
         5];
     d__1 = x[2];
     d__2 = x[6];
-    con[3] = 196. - x[1] * 23. - d__1 * d__1 - d__2 * d__2 * 6. + x[7] * 
+    con[3] = 196. - x[1] * 23. - d__1 * d__1 - d__2 * d__2 * 6. + x[7] *
         8.;
     d__1 = x[1];
     d__2 = x[2];
     d__3 = x[3];
-    con[4] = d__1 * d__1 * -4. - d__2 * d__2 + x[1] * 3. * x[2] - d__3 * 
+    con[4] = d__1 * d__1 * -4. - d__2 * d__2 + x[1] * 3. * x[2] - d__3 *
         d__3 * 2. - x[6] * 5. + x[7] * 11.;
   } else if (state->nprob == 10) {
 
 /* Test problem 10 (Hexagon area) */
 
-    *f = (x[1] * x[4] - x[2] * x[3] + x[3] * x[9] - x[5] * x[9] + x[5] * 
+    *f = (x[1] * x[4] - x[2] * x[3] + x[3] * x[9] - x[5] * x[9] + x[5] *
         x[8] - x[6] * x[7]) * -.5;
     d__1 = x[3];
     d__2 = x[4];

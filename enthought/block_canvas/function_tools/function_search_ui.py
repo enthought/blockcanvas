@@ -28,7 +28,7 @@ from python_function_info import PythonFunctionInfo
 
 function_search_preferences_view = \
     View(
-     
+
          VGroup(
              Label('Function name filters'),
              Item('name_filters', show_label=False),
@@ -39,7 +39,7 @@ function_search_preferences_view = \
                  Item('search_module'),
              ),
          ),
-         title='Function Preferences',         
+         title='Function Preferences',
          width=450,
          height=600,
          resizable=True,
@@ -54,35 +54,35 @@ function_search_preferences_view = \
 class FunctionSearchUIHandler(Handler):
     """ Handler for the function search user interface.
     """
-    
+
     ##########################################################################
     # FunctionSearchUIHandler traits
     ##########################################################################
-    
+
     # Which order are the rows sorted in? False=ascending, True=descending.
     reverse_sort = Bool(False)
-    
-    
+
+
     ##########################################################################
     # TableEditor callback traits
     ##########################################################################
-    
+
     # Set when a column a row is selected in the table.
     selected = Any
-    
+
     # Set when an item in the table is double clicked.
     dclicked = Any
-    
+
     # Set when a column heading is clicked on.
     column_clicked = Any
-    
+
     # Fires when the preferences button in the UI is clicked on.
     preferences = Event
-    
+
     # View used for the preferences dialog
     preferences_view = Any(function_search_preferences_view)
-    
-    
+
+
     ##########################################################################
     # FunctionSearchUIHandler interface
     ##########################################################################
@@ -102,19 +102,19 @@ class FunctionSearchUIHandler(Handler):
         """ Sort the functions based on the clicked column.  Reverse the
             order of the sort each time the column is clicked.
         """
-        
+
         #### This is the list of the rows in the table.
         values = event.editor.value
 
         #### Reverse the sort order.
         self.reverse_sort = not self.reverse_sort
-        
+
         # Sort by the clicked on column's field name and in the correct order.
         fields = [name for label, name in event.editor.adapter.columns]
         field = fields[event.column]
         values.sort(key=lambda x: getattr(x,field), reverse=self.reverse_sort)
-                
-        
+
+
 class SearchTableAdapter(TabularAdapter):
     """ Adapter to map the traits of the function items into UI table columns.
     """
@@ -133,7 +133,7 @@ class SearchTableAdapter(TabularAdapter):
     ##########################################################################
     # TabularAdapter traits
     ##########################################################################
-    
+
     # The columns to display (along with the adapter trait they map to.
     columns = [('Name', 'name'), ('Module', 'module')]
 
@@ -150,29 +150,29 @@ class SearchTableAdapter(TabularAdapter):
     ##########################################################################
 
     ### Private methods ######################################################
-    
+
     def _get_description(self, function_info):
         """ Grab a short text description of the described function.
-        
+
             The first line in the doc-string is returned if it is available.
             Otherwise, an empty string is returned.
         """
         # Create a PythonFunctionInfo for the function.
-        # fixme: This seems a little heavy weight to just get the 
+        # fixme: This seems a little heavy weight to just get the
         #        doc-string, but it is the shortest path between here
         #        and there...
         # fixme: We should likely do some error handling here...
         func = PythonFunctionInfo(module=function_info.module,
                                   name=function_info.name)
-        
+
         if func.doc_string is "":
             short_description = "No information about this function."
         else:
             # Use the first line as the "short" function description.
             short_description = func.doc_string.splitlines()[0]
-                
+
         return short_description
-            
+
     ##########################################################################
     # TableAdapter interface
     ##########################################################################
@@ -192,7 +192,7 @@ class SearchTableAdapter(TabularAdapter):
             fixme: Can we format this?  Send it html or something like that?
         """
         return self._get_description(self.item)
-        
+
     def _get_image(self):
         """ Retreive the image for each cell in the table.
 
@@ -260,7 +260,7 @@ function_search_view = \
 if __name__ == "__main__":
     from function_library import FunctionLibrary
     from function_search import FunctionSearch
-    
+
     library = FunctionLibrary(modules=['os', 'xml'])
     search = FunctionSearch(all_functions=library.functions)
     search.configure_traits(view=function_search_view)

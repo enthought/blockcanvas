@@ -7,7 +7,7 @@ from enthought.pyface.api import GUI, YES
 from enthought.pyface.workbench.api import Workbench
 
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
- 
+
 # Local imports.
 from application import Application
 from application_window import ApplicationWindow
@@ -17,7 +17,7 @@ logging.getLogger().addHandler(logging.StreamHandler())
 logging.getLogger().setLevel(logging.DEBUG)
 
 class ApplicationWorkbench(Workbench):
-    """ Workbench (ie. Main) class for our application. 
+    """ Workbench (ie. Main) class for our application.
     """
 
     ###########################################################################
@@ -25,8 +25,8 @@ class ApplicationWorkbench(Workbench):
     ###########################################################################
 
     app = Instance(Application)
-    
-    
+
+
     ###########################################################################
     # Workbench traits
     ###########################################################################
@@ -36,14 +36,14 @@ class ApplicationWorkbench(Workbench):
     window_factory = ApplicationWindow
 
     #### Private interface. ###################################################
-    
+
     def _exiting_changed(self, event):
         """ Called when the workbench is exiting. """
 
         #if self.active_window.confirm('Ok to exit?') != YES:
         #    event.veto = True
 
-        return            
+        return
 
     def _app_default(self):
         """ Create an application with a minimal library in it...
@@ -51,13 +51,13 @@ class ApplicationWorkbench(Workbench):
         function_library = FunctionLibrary(modules=['os'])
         return Application(function_library=function_library)
 
-        
+
 def main(argv):
     """ A simple example of using the the undo framework in a workbench. """
-    
+
     # Create the GUI.
     gui = GUI()
-    
+
     # Create the workbench.
     workbench = ApplicationWorkbench(state_location=gui.state_location)
 
@@ -69,10 +69,10 @@ def main(argv):
 
     # Start the GUI event loop.
     gui.start_event_loop()
-    
+
     return
 
 if __name__ == '__main__':
     import sys; main(sys.argv)
-    
+
 #### EOF ######################################################################

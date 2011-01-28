@@ -1,13 +1,13 @@
 """ Simple user interface for viewing/editing code in a LocalPythonFunction.
 
     The UI has read-only tables for the input/outputs of the function.  Below
-    that has a code window that allows users to edit the function.  When the 
+    that has a code window that allows users to edit the function.  When the
     function is edited, the inputs/outputs should update appropriately.  If
     there is a syntax error (load_error) in the text, the error is reported
     in a text box at the bottom of the UI.
-    
+
     Since we don't really do this in the application (we edit the FunctionCall),
-    the UI has been made private.  It is useful for testing that a LocalPythonFunction 
+    the UI has been made private.  It is useful for testing that a LocalPythonFunction
     is updating correctly based on changes to its code.
 """
 
@@ -25,7 +25,7 @@ input_columns = [ObjectColumn(name='name', label='Name', editable=False, width=0
 output_columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),
                   ObjectColumn(name='name', label='Name', editable=False, width=0.6),
                   ]
-        
+
 view = View(
        VSplit(
               HGroup(
@@ -83,8 +83,8 @@ view = View(
 if __name__ == "__main__":
     from enthought.block_canvas.function_tools.local_python_function import \
         LocalPythonFunction
-        
+
     code = "def new_function():\n" \
            "    pass"
-    func = LocalPythonFunction(code=code)           
+    func = LocalPythonFunction(code=code)
     func.configure_traits(view=view)

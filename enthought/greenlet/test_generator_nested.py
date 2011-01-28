@@ -6,7 +6,7 @@ class genlet(greenlet):
         self.args = args
         self.kwds = kwds
         self.child = None
-        
+
     def run(self):
         fn, = self.fn
         fn(*self.args, **self.kwds)
@@ -27,9 +27,9 @@ class genlet(greenlet):
 
             result = child.switch()
         else:
-            self.parent = greenlet.getcurrent()            
+            self.parent = greenlet.getcurrent()
             result = self.switch()
-        
+
         if self:
             return result
         else:
@@ -37,7 +37,7 @@ class genlet(greenlet):
 
 def Yield(value, level = 1):
     g = greenlet.getcurrent()
-    
+
     while level != 0:
         if not isinstance(g, genlet):
             raise RuntimeError, 'yield outside a genlet'
@@ -47,7 +47,7 @@ def Yield(value, level = 1):
         level -= 1
 
     g.switch(value)
-    
+
 def Genlet(func):
     class Genlet(genlet):
         fn = (func,)
@@ -83,7 +83,7 @@ def test_genlet_simple():
         for k in range(3):
             for j in g(5, seen):
                 seen.append(j)
-                
+
         assert seen == 3 * [1, 0, 2, 1, 3, 2, 4, 3, 5, 4]
 
 def test_genlet_bad():
@@ -91,7 +91,7 @@ def test_genlet_bad():
         Yield(10)
     except RuntimeError:
         pass
-    
+
 test_genlet_bad()
 test_genlet_simple()
 test_genlet_bad()

@@ -95,7 +95,7 @@ if __name__ == "__main__":
     # defined...
     #from enthought.traits.ui.dock_window_theme \
     #    import dock_window_theme, button_dock_window_theme
-    #    
+    #
     #dock_window_theme( button_dock_window_theme )
     if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
         code, context = load_vars(sys.argv[1])
@@ -103,5 +103,5 @@ if __name__ == "__main__":
         code, context = hardcode_vars()
 
     main(code, context)
-    
+
 ### EOF #####################################################################

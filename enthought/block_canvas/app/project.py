@@ -7,7 +7,7 @@ import os
 from os.path import abspath, join
 
 # Enthought library imports
-from enthought.traits.api import (Directory, HasTraits, Instance, Int, List, 
+from enthought.traits.api import (Directory, HasTraits, Instance, Int, List,
         on_trait_change, Property, Trait)
 
 # Block canvas imports
@@ -23,9 +23,9 @@ logger = logging.getLogger(__name__)
 class Project(HasTraits):
     """
     Ties together the contexts, execution model, and layouts that comprise a
-    single project.  Also stores various view-related state.  
+    single project.  Also stores various view-related state.
     """
-    
+
     # A list of contexts that are associated with the project
     contexts = List(Instance(IListenableContext, adapt='yes', rich_compare=False))
 
@@ -33,13 +33,13 @@ class Project(HasTraits):
     experiments = List(Instance(Experiment))
 
     # The active experiment for this project.  This can be used by scripting
-    # methods on the project. 
-    active_experiment = Property(Instance(Experiment), 
+    # methods on the project.
+    active_experiment = Property(Instance(Experiment),
         depends_on=['_active_exp_ndx', 'experiments', 'experiments_items'])
 
     # Name of directory where the project is saved out.  Projects are
     # always saved to their own directories.
-    project_save_path = Directory() 
+    project_save_path = Directory()
 
     #---------------------------------------------------------------------
     # Private traits
@@ -79,7 +79,7 @@ class Project(HasTraits):
         proj = cls()
         proj.load(dirname)
         return proj
-        
+
 
     #---------------------------------------------------------------------
     # Public methods / scripting API
@@ -147,7 +147,7 @@ class Project(HasTraits):
             raise IOError("Cannot load project from empty path.")
         elif not os.path.isdir(dirname):
             raise IOError("Cannot find directory: " + dirname)
-        
+
         filename = abspath(join(dirname, self.PROJECT_FILE_NAME))
         if not os.path.isfile(filename):
             raise IOError('Cannot load %s from project directory "%s".' % \
@@ -157,14 +157,14 @@ class Project(HasTraits):
         # the name and location of the real data files.
         configspec = ConfigObj(self.CONFIG_SPEC, list_values=False)
         config = ConfigObj(filename, configspec=configspec)
-        
+
         contexts = []
         for context_config in config["Contexts"].values():
             ctx = DataContext.load(join(dirname, context_config["file"]))
             ctx.name = context_config["name"]
             contexts.append(ctx)
         self.contexts = contexts
-        
+
         experiments = []
         if hasattr(scripting, "app"):
             app = scripting.app
@@ -184,7 +184,7 @@ class Project(HasTraits):
 
     def save(self, dirname=""):
         """ Saves the project as a directory named **dirname**.
-        
+
         If **dirname** is not provided, the **project_save_path** attribute
         should already be set.
 

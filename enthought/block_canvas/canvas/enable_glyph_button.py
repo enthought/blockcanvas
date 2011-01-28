@@ -95,7 +95,7 @@ class EnableGlyphButton(Component):
     def _get_bounds(self):
         """ Return the bounds of the button based on the active image size.
         """
-        
+
         return [12, 12]
 
     #########################################################################
@@ -115,7 +115,7 @@ class EnableGlyphButton(Component):
             glyph = self.down_glyph
         else:
             glyph = self.normal_glyph
-    
+
         return glyph
 
     def _mouse_over_state_changed(self):

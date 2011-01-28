@@ -39,7 +39,7 @@ class BlockNodeFactory(HasTraits):
                 if old_position != [] and new_inputs == old_inputs:
                     box.position = old_position
             # If something goes wrong, don't set the position
-            except: 
+            except:
                 pass
 
             # The rest of the settings are applied regardless of inputs/outputs

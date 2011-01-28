@@ -110,7 +110,7 @@ def dependency_graph(asts, to_ast=lambda x: x):
         iff a's AST uses names created by b's AST. We assume 'to_ast' is
         injective and elements of 'asts' are hashable. Raises a CyclicGraph
         exception when the output graph would have been cyclic.
-    
+
         If a name is created by multiple elements of 'asts', then the
         dependency graph won't determine a well-defined program. e.g.
 

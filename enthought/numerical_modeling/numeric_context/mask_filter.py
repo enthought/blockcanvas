@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a filter specified by an explicit mask.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a filter specified by an explicit mask.
@@ -19,10 +19,10 @@
 
 from enthought.traits.api \
     import Str, Array
-    
+
 from a_numeric_filter \
     import ANumericFilter
-    
+
 #-------------------------------------------------------------------------------
 #  'MaskFilter' class:
 #-------------------------------------------------------------------------------

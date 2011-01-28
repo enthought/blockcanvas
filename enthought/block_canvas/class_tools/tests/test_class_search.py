@@ -103,31 +103,31 @@ class ClassSearchTestCase(unittest.TestCase):
     def test_search_location(self):
         """ Does searching in the python path of classes work?
         """
-        
+
         self.cs.search_name = False
         self.cs.search_module = True
-        
+
         self.cs.search_term = "sample_package.bar"
         desired = ["BarClass1", "BarClass2"]
         actual = [a_class.name for a_class in self.cs.search_results]
         self.assertEqual(sorted(desired), sorted(actual))
-        
+
     def test_update_all_classes_forces_new_search(self):
         library = ClassLibrary()
         cs = ClassSearch(all_classes=library.classes)
         self.assertEqual(len(cs.search_results), 0)
-        
+
         library.modules=['datetime', 'sample_package']
         # Ensure we found some classes.  This isn't a test of
         # ClassSearch, but we want it to be true to ensure our
         # test is valid.
         self.assertNotEqual(len(library.classes), 0)
-        
+
         # Now ensure the search results are updated and have something
         # in them.
         cs.all_classes = library.classes
         self.assertNotEqual(len(cs.search_results), 0)
-        
-        
+
+
 if __name__ == '__main__':
     unittest.main()

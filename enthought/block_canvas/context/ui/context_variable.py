@@ -19,7 +19,7 @@ from enthought.block_canvas.app.utils import regex_from_str
 def set_var_value(value):
     """ Setting values in a BlockVariable to be either None, an int, a float,
     a string, or a numpy array.
-        
+
     A few common cases for numpy expressions are checked like 'array', 'arange',
     'linspace', 'zeros', and 'ones' and anything 'numpy.foo()'.
 
@@ -121,11 +121,11 @@ class ContextVariable(HasTraits):
         )
         if isinstance(self.value, numpy.ndarray):
             editor = array_eval_editor
-        
+
         return editor
 
     def trait_view(self, name=None, view_element=None):
-        """ Defines the view dynamically. 
+        """ Defines the view dynamically.
         """
         return tui.View(
             tui.Item('value',
@@ -159,7 +159,7 @@ class ContextVariable(HasTraits):
     def _get_editable(self):
         """ Work around the "edit" icon for values which can be edited inline.
         Fake this value as False if the inline editor can be used.
-        """ 
+        """
         if self.value is None or isinstance(self.value, (int, float, basestring)):
             return False
         return True
@@ -261,11 +261,11 @@ class ContextVariableList(HasTraits):
             self.context[name] = obj.value
 
     def _search_results_items_changed(self, event):
-        """ Add/remove the items from the context. 
+        """ Add/remove the items from the context.
 
         This should only get called when the user adds or deletes a row from the
         GUI. Changing the search term does not affect this.
-        
+
         Unique names are enforced. The enforcement is done here because the
         variables are constructed before being put on the list so this is the
         first opportunity to check with the context.
@@ -273,21 +273,21 @@ class ContextVariableList(HasTraits):
         # XXX: use the undo framework for this.
 
         self.context.defer_events = True
-        
+
         for var in event.added:
             var.name = self._create_unique_key(var.name)
             self.context[var.name] = var.value
 
         for var in event.removed:
             del self.context[var.name]
-            
+
         # This may have been triggered by creating a new var with the UI,
         # in which case, adding the new row needs to finish before we handle
         # the context events.
-        
+
         def _enable_events(context):
             context.defer_events = False
-            
+
         do_later(_enable_events, self.context)
 
 
@@ -303,7 +303,7 @@ class ContextVariableList(HasTraits):
             variables = self._extract_variables_from_context(self.context)
 
         self.variables = [var for var in self.variables if var.value != '']
-        
+
         self._update_search_results()
 
 
@@ -358,7 +358,7 @@ class ContextVariableList(HasTraits):
         result: List(Tuple)
             tuple is ordered as (key, value, datatype)
         """
- 
+
         if isinstance(value, int) or isinstance(value, float):
             return [(key, value, 'scalar')]
 
@@ -385,7 +385,7 @@ class ContextVariableList(HasTraits):
 
     def _create_unique_key(self, desired_name):
         """ Creates a unique name by appending _x to the desired name.
-        
+
         The algorithm here could use some refinement, but I expect only minimal
         name collisions as the result of operations of the ContextVariableList.
         Collisions are much more likely to happen due to the block execution.
@@ -416,7 +416,7 @@ if __name__ == '__main__':
     dc['foo_str'] = 'a string'
     dc['bar_int'] = 2
     dc['bar_float'] = 2.5
-    
+
     cvl = ContextVariableList(context=dc)
     cvl.configure_traits(view=context_variables_view)
 

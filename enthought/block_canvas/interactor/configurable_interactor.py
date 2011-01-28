@@ -293,7 +293,7 @@ class ConfigurableInteractor(SimpleInteractor):
                 for k,v in ranges['user'].items():
                     current_ranges[k] = v
                 self.ranges[key] = current_ranges
-            
+
         self.apply_ranges()
 
         return
@@ -367,7 +367,7 @@ def new_main():
 
     vars = BlockUnitVariableList(block=block, context=exp.context)
     config_interactor = InteractorConfig(vars=vars.variables)
-    
+
     interactor = ConfigurableInteractor(context=exp.context, block=block,
                                         interactor_config = config_interactor)
     interactor.configure_traits()

@@ -28,7 +28,7 @@ class BoxResizeTool(DragTool):
             an edge of the box
         """
 
-        # Resizing, ensure that the box does not get smaller than the 
+        # Resizing, ensure that the box does not get smaller than the
         # minimum bounds
         component = self.component
         xmin, ymin = component.normal_bounds
@@ -55,7 +55,7 @@ class BoxMoveTool(DragTool):
     # is outside of the viewport
     move_delay = Int(0.02)
 
-    # This event is how the Enable timer notifies us.     
+    # This event is how the Enable timer notifies us.
     timer = Event()
 
     # Override the inherited value of this from DragTool
@@ -66,7 +66,7 @@ class BoxMoveTool(DragTool):
 
     # The enable Window through which we set the timer
     _timer_window = Any()
-    
+
     # The amount by which to drag the box in the X and Y directions when the
     # mouse is outside of the viewport.  Unlike move_amount, these are signed
     # values that depend on where the mouse is relative to the viewport.
@@ -89,7 +89,7 @@ class BoxMoveTool(DragTool):
             mgr.add_subtract_mode = (event.control_down or event.shift_down)
             mgr.select_item(self.component)
 
-        self._component_offset = (event.x - self.component.x, 
+        self._component_offset = (event.x - self.component.x,
                                   event.y - self.component.y)
         event.handled = True
 
@@ -98,7 +98,7 @@ class BoxMoveTool(DragTool):
         # start a timer (if it has not been started already).  If a timer has
         # been started and the event fell back inside the bounds, then get
         # rid of it.
-        
+
         # Use the position in global coordinates.
         # FIXME: can we avoid reaching into the protected _pos_stack list?
         x, y = event._pos_stack[0]
@@ -109,7 +109,7 @@ class BoxMoveTool(DragTool):
         vy2 = vy + vh - 1
 
         unset_timer = True
-        if (x > vx2) or (x < vx): 
+        if (x > vx2) or (x < vx):
             if not self._timer_set:
                 self._start_timer(event.window)
                 if x < vx:
@@ -119,7 +119,7 @@ class BoxMoveTool(DragTool):
             unset_timer = False
         else:
             self._timer_drag_x = 0
-            
+
         if (y > vy2) or (y < vy):
             if not self._timer_set:
                 self._start_timer(event.window)
@@ -227,20 +227,20 @@ class BoxSelectionTool(BaseTool):
     """
     Handles a box being clicked and selected.
     """
-    
+
     def normal_left_up(self, event):
         """ Mouse went down and came straight up on item.
 
             This will either add or remove the mouse from the selection based
             on control key settings.
         """
-        
+
         event.handled = True
 
         # Make sure that this left up event is not after a drag
         if self.component._lock_selection:
             self.component._lock_selection = False
-            return 
+            return
 
         # Hand event into selection_manager to make decision on selection.
         mgr = self.component.selection_manager

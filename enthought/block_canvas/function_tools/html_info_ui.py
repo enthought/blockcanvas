@@ -1,6 +1,6 @@
 """ HTML Window UI for displaying text, html and function doc-strings.
 
-    fixme: This module may be better located somewhere else. 
+    fixme: This module may be better located somewhere else.
 """
 
 # Standard Library imports
@@ -41,10 +41,10 @@ html_view = View(
                  resizable=True,
                  buttons=NoButtons,
             )
-            
+
 class HtmlInfoUI(HasTraits):
     """ Model for the a window to display Html in an application.
-    
+
         This widget has the following APIs:
             set_text(text):
                 display raw text.
@@ -54,21 +54,21 @@ class HtmlInfoUI(HasTraits):
                 display an htmlified version of the doc-string for the
                 given function.
     """
-    
+
     ##########################################################################
     # HtmlInfoWindow traits
     ##########################################################################
-    
+
     # The html that is displayed in the lower panel of the search window.
     # fixme: This needs to be split out into another application level object.
     _html = Str("<html>\n<body>\n<em>Select a function</em>\n</body>\n</html>")
 
     view = html_view
-          
+
     def set_function_help(self, function_name, module_name):
         """ Display Beautified version of a function doc-string.
-        
-            The function is specified as the name of the function and the 
+
+            The function is specified as the name of the function and the
             module name for the function.
         """
         func = PythonFunctionInfo(name=function_name, module=module_name)
@@ -76,26 +76,26 @@ class HtmlInfoUI(HasTraits):
         if func.doc_string == "":
             self.set_text("No information about this function.")
         else:
-            self._html = rest_html.convert_function_info(func.name, 
+            self._html = rest_html.convert_function_info(func.name,
                                                          func.doc_string)
 
     def set_text(self, text):
         """ Display a message in the help window.
-        
+
             The text message is wrapped in html tags so that it displays
             correctly in the html window.
         """
         self._html = self._htmlify(text)
-        
+
     def set_html(self, html):
         """ Display html text without modification into the window.
         """
         self._html = html
-        
-        
+
+
     ### private methods ######################################################
 
-        
+
     def _htmlify(self, text):
         """ Add <html> and <body> tags around text so that it is valid html.
         """

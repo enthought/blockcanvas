@@ -2,7 +2,7 @@
 
 /*
  * Copyright (c) 2004, Jean-Sebastien Roy (js@jeannot.org)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -51,9 +51,9 @@ int PyObject_AsDouble(PyObject *py_obj, double *x)
   PyObject *py_float;
 
   py_float = PyNumber_Float(py_obj);
-  
+
   if (py_float == NULL) return -1;
-  
+
   *x = PyFloat_AsDouble(py_float);
 
   Py_DECREF(py_float);
@@ -64,18 +64,18 @@ double *PyList_AsDoubleArray(PyObject *py_list, int *size)
 {
   int i;
   double *x;
-  
+
   if (!PyList_Check(py_list))
   {
     *size = -1;
     return NULL;
   }
-  
+
   *size = PyList_Size(py_list);
   if (*size <= 0) return NULL;
   x = malloc((*size)*sizeof(*x));
   if (x == NULL) return NULL;
-  
+
   for (i=0; i<(*size); i++)
   {
     PyObject *py_float = PyList_GetItem(py_list, i);
@@ -85,27 +85,27 @@ double *PyList_AsDoubleArray(PyObject *py_list, int *size)
       return NULL;
     }
   }
-  
+
   return x;
 }
 
 int PyList_IntoDoubleArray(PyObject *py_list, double *x, int size)
 {
   int i;
-  
+
   if (py_list == NULL) return 1;
-  
+
   if (!PyList_Check(py_list)) return 1;
-  
+
   if (size != PyList_Size(py_list)) return 1;
-  
+
   for (i=0; i<size; i++)
   {
     PyObject *py_float = PyList_GetItem(py_list, i);
     if (py_float == NULL || PyObject_AsDouble(py_float, &(x[i])))
       return 1;
   }
-  
+
   return 0;
 }
 
@@ -113,10 +113,10 @@ PyObject *PyDoubleArray_AsList(int size, double *x)
 {
   int i;
   PyObject *py_list;
-  
+
   py_list = PyList_New(size);
   if (py_list == NULL) return NULL;
-  
+
   for (i=0; i<size; i++)
   {
     PyObject *py_float;
@@ -127,7 +127,7 @@ PyObject *PyDoubleArray_AsList(int size, double *x)
       return NULL;
     }
   }
-  
+
   return py_list;
 }
 
@@ -185,7 +185,7 @@ int function(int n, int m, double *x, double *f, double *con, void *state)
   Py_DECREF(result);
 
   return 0;
-    
+
 failure:
   py_state->failed = 1;
   Py_XDECREF(result);
@@ -202,7 +202,7 @@ PyObject *moduleCobyla_minimize(PyObject *self, PyObject *args)
   int rc, iprint, maxfun;
   double *x;
   double rhobeg, rhoend;
-    
+
   if (!PyArg_ParseTuple(args, "OO!iddii",
     &py_function,
     &PyList_Type, &py_x0,
@@ -214,21 +214,21 @@ PyObject *moduleCobyla_minimize(PyObject *self, PyObject *args)
     PyErr_SetString(PyExc_TypeError, "cobyla: function must be callable.");
     return NULL;
   }
-    
+
   x = PyList_AsDoubleArray(py_x0, &n);
   if (n != 0 && x == NULL)
   {
     if (x) free(x);
-    
+
     PyErr_SetString(PyExc_ValueError, "cobyla: invalid initial vector.");
     return NULL;
   }
-    
+
   py_state.py_function = py_function;
   py_state.failed = 0;
 
   Py_INCREF(py_function);
-  
+
   rc = cobyla(n, m, x, rhobeg, rhoend, iprint, &maxfun, function, &py_state);
 
   Py_DECREF(py_function);

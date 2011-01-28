@@ -134,15 +134,15 @@ def convert_string(string):
     return "<html>\n<body>\n" + convert_string_fragment(string) + "</body>\n</html>"
 
 def convert_function_info(function_name, doc_string, defaults=[]):
-    """ Given a documentation string, writes html documentation. First tries 
-        to identify the standard docstring format for has_units objects. If 
-        sucessful, outputs a nicely formatted html. Otherwise, converts to html 
+    """ Given a documentation string, writes html documentation. First tries
+        to identify the standard docstring format for has_units objects. If
+        sucessful, outputs a nicely formatted html. Otherwise, converts to html
         with no other changes.
 
         Code borrowed from numerical_modelling's has_unit.py
     """
     system = platform.system()
-    
+
     stripped_lines = [line.strip() for line in doc_string.splitlines()]
 
     # XXX: hack to avoid expensive formatting. Remove later.
@@ -227,7 +227,7 @@ def convert_function_info(function_name, doc_string, defaults=[]):
                 html += "="
             html += " <b>" + function_name + "</b>("
             for i,var in enumerate(inputlines):
-                html += var[0]         
+                html += var[0]
                 if len(defaults) is not 0:
                     index = len(defaults) - len(inputlines) + i
                     if index >= 0:

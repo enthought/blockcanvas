@@ -1,14 +1,14 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an array value whose value is determined by an expression
 #  evaluated on a context.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an array value whose value is determined by an expression
@@ -30,10 +30,10 @@ from a_numeric_item \
 
 from context_modified \
     import ContextModified
-    
+
 from error \
     import NumericItemError
-    
+
 #-------------------------------------------------------------------------------
 #  'EvaluatedItem' class:
 #-------------------------------------------------------------------------------

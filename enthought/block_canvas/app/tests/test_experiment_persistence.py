@@ -20,7 +20,7 @@ class ExperimentPersistenceTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.root_dir = tempfile.gettempdir()
-        
+
         # The list of files and directories used by a test; these get cleaned
         # up in tearDown().
         self.files = []
@@ -51,7 +51,7 @@ class ExperimentPersistenceTestCase(unittest.TestCase):
         dirname = "first_experiment"
         self.directories.append(join(root_dir, dirname))
         config = exp.save(self.root_dir, dirname)
-        
+
         e2 = Experiment()
         e2.load_from_config(config, join(root_dir,dirname))
         self.assertEqual(exp, e2)

@@ -5,7 +5,7 @@
     the FunctionSearch object, because it needs to access multiple things on
     the application including the FunctionLibrary, the Canvas, and the HTML
     Window.
-    
+
     GUI code for instrument search.
 
 """
@@ -38,7 +38,7 @@ from enthought.block_canvas.function_tools.general_expression import GeneralExpr
 if ETSConfig.toolkit == 'wx':
     from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
 else:
-    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor 
+    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor
 
 # Local imports
 from function_search_preferences_ui import function_search_preferences_view
@@ -63,34 +63,34 @@ NEW_LOOP_ENTRY = MinimalFunctionInfo(name="Add New Loop",
 ##############################################################################
 # AppFunctionSearchUIHandler
 #
-# It's customized for the app object insted of directly sitting on the 
+# It's customized for the app object insted of directly sitting on the
 # FunctionSearch object.
 ##############################################################################
 
 class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
     """ Handler for the function search user interface.
-    
-        This class:        
-            1) customizes the list of functions displayed so that a 
+
+        This class:
+            1) customizes the list of functions displayed so that a
                "New Function" item is at the top of the list.
             2) Adds function library configuration to the preferences page.
             3) Adds functions to the canvas when they are double-clicked.
     """
-    
+
     ##########################################################################
     # AppFunctionSearchUIHandler traits
     ##########################################################################
-    
+
     # The application object we are pointing at.
     # It is any, because this UI is serving multiple different app types
     # currently.
     app = Any
-    
+
     # List of search results with NEW_FUNCTION_ENTRY and NEW_EXPR_ENTRY always
     # at front.
     search_results = List
 
-        
+
     ##########################################################################
     # FunctionSearchUIHandler traits
     ##########################################################################
@@ -113,7 +113,7 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
                                 kind='livemodal')
 
     ### trait initializers ###################################################
-    
+
     def _app_default(self):
         """ Default to the application set in the scripting module.
             fixme: This can go away once we completely switch to the workbench.
@@ -127,7 +127,7 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         """
         if not value:
             return
-        
+
         if value == NEW_FUNCTION_ENTRY:
             msg = "Create an editable, user defined function."
             self.app.html_window_set_text(msg)
@@ -143,7 +143,7 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
 
     def _dclicked_changed(self, event):
         """ Add the double clicked FunctionCall object to the code/canvas.
-        
+
             The added function is also marked as selected.
         """
         self.app.add_function_object_to_model(event.item)
@@ -152,10 +152,10 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         """ Sort the functions based on the clicked column.  Reverse the
             order of the sort each time the column is clicked.
         """
-        
+
         # Call the super class which handles sorting list in correct order.
         super(AppFunctionSearchUIHandler, self)._column_clicked_changed(event)
-        
+
         # Now ensure the "add new ..." entries are always first in UI.
         values = event.editor.value
         values.remove(NEW_FUNCTION_ENTRY)
@@ -166,15 +166,15 @@ class AppFunctionSearchUIHandler(FunctionSearchUIHandler):
         values.insert(2, NEW_LOOP_ENTRY)
 
 
-    ### property get/set methods #############################################        
-    
+    ### property get/set methods #############################################
+
     def object_search_results_changed(self, info):
         """ Append the "new function" place holder function onto the results.
         """
         function_results = info.object.search_results
         self.search_results = ([NEW_FUNCTION_ENTRY, NEW_EXPR_ENTRY, NEW_LOOP_ENTRY]
             + function_results)
-        
+
 
 
 class AppSearchTableAdapter(SearchTableAdapter):
@@ -184,7 +184,7 @@ class AppSearchTableAdapter(SearchTableAdapter):
     ##########################################################################
     # AppSeachTabularAdapter traits
     ##########################################################################
-    
+
     # Font for bolding the "add new function" row in table
     # fixme: Make system dependent (lookup standard font and apply bold to it)
     bold_font = Font("Arial 9 Bold Italic")
@@ -196,20 +196,20 @@ class AppSearchTableAdapter(SearchTableAdapter):
 
     def get_font(self, object, trait, row):
         """ The Add new function item should appear in bold.
-        
+
             "Add new function" is always in the first row, so we can simply
-            make that row bold.             
+            make that row bold.
         """
         if row <= 2:
             font = self.bold_font
         else:
             font = self.normal_font
-        
-        return font            
+
+        return font
 
 
     ### Private methods ######################################################
-    
+
     def _get_tooltip(self):
         """ Tooltip text is the firt line of the doc-string for the function.
 
@@ -225,7 +225,7 @@ class AppSearchTableAdapter(SearchTableAdapter):
             short_description = "Create a loop over a block of expressions."
         else:
             short_description = super(AppSearchTableAdapter, self)._get_tooltip()
-            
+
         return short_description
 
 
@@ -284,14 +284,14 @@ function_search_view = \
 
 
 if __name__ == "__main__":
-    
+
     from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-    
+
     from enthought.block_canvas.app import app
-    
-    
+
+
     library = FunctionLibrary(modules=['os','cp.rockphysics'])
     this_app = app.Application(function_library=library)
-    
+
 
     this_app.function_search.edit_traits(view=function_search_view)

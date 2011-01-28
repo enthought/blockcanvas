@@ -1,17 +1,17 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines an abstract base class for numeric contexts which can act as
 #  'termination' points of numeric context pipelines. Note that the first
 #  termination context encountered does not have to be the endpoint of the
 #  pipeline, but the last context in the pipeline should derive from
 #  TerminationContext.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines an abstract base class for numeric contexts which can act as
@@ -27,10 +27,10 @@
 
 from enthought.traits.api \
     import Property
-    
+
 from constants \
     import CreateContext
-    
+
 from derivative_context \
     import DerivativeContext
 

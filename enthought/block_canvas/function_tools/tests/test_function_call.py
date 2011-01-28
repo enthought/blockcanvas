@@ -13,7 +13,7 @@ from enthought.block_canvas.function_tools.function_info import \
 from enthought.block_canvas.function_tools.tests.typical_functions import simple, with_defaults, \
     with_defaults_none, with_varargs, with_kwargs, with_varargs_kwargs, \
     no_return, empty_return
-    
+
 
 class FunctionCallTestCase(unittest.TestCase):
 
@@ -31,12 +31,12 @@ class FunctionCallTestCase(unittest.TestCase):
     # FunctionDefinitionTestCase interface
     ##########################################################################
 
-            
+
 
     def test_simple(self):
 
         func_call = FunctionCall.from_function(simple)
-                
+
         inputs = func_call.inputs
 
         # Check the names.
@@ -55,14 +55,14 @@ class FunctionCallTestCase(unittest.TestCase):
         outputs = [x.name for x in func_call.outputs]
         desired = ['x','y']
         self.assertEqual(outputs, desired)
-        
+
         # Check the module.
         # fixme: Do we actually want to test this here?  I think only if
         #        we choose to move module up to the func_call level.
         desired = simple.__module__
         self.assertEqual(func_call.function.module, desired)
 
-        
+
     def test_with_defaults(self):
         func = FunctionCall.from_function(with_defaults)
 
@@ -147,7 +147,7 @@ class FunctionCallTestCase(unittest.TestCase):
 #
 #    def test_with_varargs_kwargs(self):
 #
-#        func = FunctionCall.from_function(with_varargs_kwargs)            
+#        func = FunctionCall.from_function(with_varargs_kwargs)
 #
 #        inputs = func.inputs
 #
@@ -166,10 +166,10 @@ class FunctionCallTestCase(unittest.TestCase):
 #
 #        self.assertEqual(func.var_args,"args")
 #        self.assertEqual(func.kw_args,"kw")
-        
+
     def test_no_return(self):
 
-        func = FunctionCall.from_function(no_return)            
+        func = FunctionCall.from_function(no_return)
 
 
         # Now check the output names.
@@ -177,63 +177,63 @@ class FunctionCallTestCase(unittest.TestCase):
         desired = []
         self.assertEqual(outputs, desired)
 
-    
+
     def test_label_name(self):
 
-        func = FunctionCall.from_function(simple)            
+        func = FunctionCall.from_function(simple)
         self.assertEqual(func.label_name,"simple")
-        
+
         func.function.name = "no_return"
         self.assertEqual(func.label_name, "no_return")
 
         func.function.library_name = "foo"
         self.assertEqual(func.label_name,"foo")
 
-    
-    
+
+
     ### Call Signature tests #################################################
 
     def test_simple_call_signature(self):
 
         func = FunctionCall.from_function(simple)
-                
+
         desired = 'x, y = simple(a, b)'
         self.assertEqual(func.call_signature, desired)
 
 
     def test_no_return_call_signature(self):
-           
+
         func = FunctionCall.from_function(no_return)
-                
+
         desired = 'no_return(a, b)'
         self.assertEqual(func.call_signature, desired)
 
     def test_empty_return_call_signature(self):
 
         func = FunctionCall.from_function(empty_return)
-                
+
         desired = 'empty_return(a, b)'
-        self.assertEqual(func.call_signature, desired)        
-        
+        self.assertEqual(func.call_signature, desired)
+
     def test_unbound_default_call_signature(self):
 
 
         func = FunctionCall.from_function(with_defaults)
-                
+
         desired = 'x, y = with_defaults(a)'
         self.assertEqual(func.call_signature, desired)
 
     def test_name_change_updates_call_signature(self):
 
         func = FunctionCall.from_function(simple)
-                
+
         desired = 'x, y = simple(a, b)'
         self.assertEqual(func.call_signature, desired)
-        
+
         func.label_name = 'baz'
         desired = 'x, y = baz(a, b)'
         self.assertEqual(func.call_signature, desired)
-        
+
         # fixme: HAVE NOT TESTED WHAT THIS DOES TO IMPORT STATEMENT,
         #        ETC.
 
@@ -248,7 +248,7 @@ class FunctionCallTestCase(unittest.TestCase):
            "f = add(d,e)"
 
         foo_block = Block(code)
-        info = find_functions(foo_block.ast)        
+        info = find_functions(foo_block.ast)
 
         desired = 'enthought.block_canvas.debug.my_operator'
         assert 'add' in info
@@ -268,7 +268,7 @@ class FunctionCallTestCase(unittest.TestCase):
 
         foo_block = Block(code)
         info = find_functions(foo_block.ast)
-            
+
         assert 'add1' in info
         assert not( 'add' in info )
         assert info['add1']
@@ -281,16 +281,16 @@ class FunctionCallTestCase(unittest.TestCase):
         code = "def foo(a,b):\n" \
                "\tx,y=a,b\n" \
                "\treturn x,y\n" \
-               "i,j = foo(1,2)\n" 
+               "i,j = foo(1,2)\n"
         foo_block = Block(code)
         info = find_functions(foo_block.ast)
 
         assert 'foo' in info
         assert info['foo']
-    
-    # 
+
+    #
     # Test from_ast()
-    # 
+    #
     def test_import(self):
         code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
@@ -301,7 +301,7 @@ class FunctionCallTestCase(unittest.TestCase):
         foo_block = Block(code)
         info = find_functions(foo_block.ast)
         foo_call = FunctionCall.from_ast(foo_block.sub_blocks[1].ast, info)
-        
+
         desired = 'result = add(a, b)'
         self.assertEqual(foo_call.call_signature, desired)
 
@@ -321,18 +321,18 @@ class FunctionCallTestCase(unittest.TestCase):
         code = "def foo(a):\n" \
                "    b = a\n" \
                "    return b\n" \
-               "y = foo(2)\n" 
+               "y = foo(2)\n"
         foo_block = Block(code)
         info = find_functions(foo_block.ast)
         foo_call = FunctionCall.from_ast(foo_block.sub_blocks[-1].ast, info)
 
         desired = 'b = foo(2)'
-        self.assertEqual(foo_call.call_signature, desired) 
+        self.assertEqual(foo_call.call_signature, desired)
 
 # This test is more for the AST version of things...
 #    def test_with_arg_defaults(self):
 #        """ THIS TEST WILL FAIL! (IT SHOULDN'T).
-#        
+#
 #            We don't handle default arguments that are not const as keyword
 #            arguments right now.
 #        """
@@ -361,7 +361,7 @@ class FunctionCallTestCase(unittest.TestCase):
 #        self.assertEqual(outputs, desired)
 
 
-                         
+
 # Missing Tests
 # 1. construction from call ast.
 # 2. label changes change function name.

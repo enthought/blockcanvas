@@ -23,7 +23,7 @@ builtin_names = set(dir(__builtin__))
 
 
 class StatementWalker(object):
-    """ Walks code ast to find all nodes that will be used to create statements 
+    """ Walks code ast to find all nodes that will be used to create statements
         for the ExecutionModel object.
         There is a method for visitAssign in order to capture output binding
         information for the function calls returned from FunctionCall.from_ast
@@ -90,7 +90,7 @@ class ExecutionModel(HasTraits):
 
     # Topologically sorted list of function calls in statements
     sorted_statements = Property(depends_on=['statements', 'statements_items'])
-    
+
     # Dependency Graph of all the statements in the body
     dep_graph = Property(depends_on=['statements', 'statements_items'])
 
@@ -134,7 +134,7 @@ class ExecutionModel(HasTraits):
 
         # Build dictionaries for import information and local defs
         info = find_functions(ast)
-        
+
         # Collect all the function calls in the code and add them to
         # self.statements
         statement_info = walk(ast, StatementWalker())
@@ -204,7 +204,7 @@ class ExecutionModel(HasTraits):
             is executed.
         outputs : list of str, optional
             Names that can be used to restrict the execution to portions of the
-            code. Ideally, only code that affects these outputs variables is 
+            code. Ideally, only code that affects these outputs variables is
             executed.
         """
         if globals is None:
@@ -395,7 +395,7 @@ class ExecutionModel(HasTraits):
         return sorted
 
     def _get_imports_and_locals(self):
-        """ Generate the import statements and local definitions  
+        """ Generate the import statements and local definitions
             Should we worry about the order of the imports?
         """
 
@@ -444,12 +444,12 @@ class ExecutionModel(HasTraits):
         """ Generate the body of code not including imports and local definitions """
         return '\n'.join(statement.call_signature
                          for statement in self.sorted_statements)
-            
+
     @cached_property
     def _get_code(self):
         """ Return the code for this execution model """
         return self.imports_and_locals + self.body
-        
+
 
     def _get_block(self):
         """ Creates a new Block from the code for this model. """

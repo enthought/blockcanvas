@@ -5,7 +5,7 @@
 import numpy
 
 # ETS imports
-from enthought.traits.api import (Any, Dict, HasTraits, Instance, List, 
+from enthought.traits.api import (Any, Dict, HasTraits, Instance, List,
         on_trait_change)
 from enthought.traits.ui.api import View, Item, Group, TextEditor
 
@@ -86,7 +86,7 @@ class SimpleInteractor(HasTraits):
             items.append(item)
 
         return items
-    
+
     def _anytrait_changed(self, name, old, new):
         if name.startswith(self._input_prefix):
             name = name[len(self._input_prefix):]
@@ -106,12 +106,12 @@ if __name__ == "__main__":
     context = DataContext(name='Data')
     context['a'] = 1
     context['b'] = 2
-    
+
     exp = Experiment(code=code, shared_context=context)
 
     interactor = SimpleInteractor(inputs=exp.exec_model.block.inputs,
-                                  context = exp.context) 
+                                  context = exp.context)
     interactor.configure_traits()
-    
+
     from pprint import pprint
     pprint(exp.context.items())

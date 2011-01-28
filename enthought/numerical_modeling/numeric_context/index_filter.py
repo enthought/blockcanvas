@@ -1,14 +1,14 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Creates a filter for all elements specified by a list of array indices
 #  (or its inverse: the elements not specified by a list of array indices).
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Creates a filter for all elements specified by a list of array indices
@@ -26,7 +26,7 @@ from enthought.traits.api \
 
 from a_numeric_filter \
     import ANumericFilter
-    
+
 #-------------------------------------------------------------------------------
 #  'IndexFilter' class:
 #-------------------------------------------------------------------------------

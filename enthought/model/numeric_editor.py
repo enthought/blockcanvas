@@ -1,44 +1,44 @@
 #-------------------------------------------------------------------------------
-#  
-#  Tools useful for visually editing the contents of a numeric model.  
-#  
+#
+#  Tools useful for visually editing the contents of a numeric model.
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 11/23/2005
-#  
+#
 #  (c) Copyright 2005 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
-#  Imports:  
+#  Imports:
 #-------------------------------------------------------------------------------
 
 from enthought.traits.api \
     import HasPrivateTraits, Instance
-    
+
 from enthought.traits.ui.api \
     import TreeEditor, TreeNode, View, HGroup, VGroup, Item
-    
+
 from enthought.traits.ui.menu \
     import NoButtons
-    
+
 from numeric_model \
     import FilterSet, AggregateFilter, ExpressionFilter
-    
+
 #-------------------------------------------------------------------------------
-#  'FilterSet' view:  
+#  'FilterSet' view:
 #-------------------------------------------------------------------------------
-        
+
 root_view = View()
-    
+
 #-------------------------------------------------------------------------------
-#  'AggregateFilter' view:  
+#  'AggregateFilter' view:
 #-------------------------------------------------------------------------------
-        
+
 group_view = View(
     VGroup(
-        VGroup( 
+        VGroup(
             'name',  '_',
             'rule@', '_',
             VGroup(
@@ -50,11 +50,11 @@ group_view = View(
             label       = 'Filter'
         ),
         VGroup(
-            HGroup( 
-                '55', 'value', 
+            HGroup(
+                '55', 'value',
                 HGroup(
                     'is_bit{Value is a bit number}',
-                    show_left = False 
+                    show_left = False
                 )
             ),
             'foreground_color',
@@ -68,15 +68,15 @@ group_view = View(
 )
 
 #-------------------------------------------------------------------------------
-#  'ExpressionFilter' view:  
+#  'ExpressionFilter' view:
 #-------------------------------------------------------------------------------
 
 expression_view = View(
     VGroup(
-        VGroup( 
+        VGroup(
             'filter{Expression}', '_',
             'name',               '_',
-            VGroup( 
+            VGroup(
                 'enabled',
                 'use_value{Use value information}',
                 show_left = False
@@ -85,11 +85,11 @@ expression_view = View(
             label       = 'Filter'
         ),
         VGroup(
-            HGroup( 
-                '55', 'value', 
+            HGroup(
+                '55', 'value',
                 HGroup(
                     'is_bit{Value is a bit number}',
-                    show_left = False 
+                    show_left = False
                 )
             ),
             'foreground_color',
@@ -101,9 +101,9 @@ expression_view = View(
     ),
     buttons = NoButtons
 )
-    
+
 #-------------------------------------------------------------------------------
-#  NumericFilter editor:  
+#  NumericFilter editor:
 #-------------------------------------------------------------------------------
 
 nodes = [
@@ -126,7 +126,7 @@ nodes = [
               view       = group_view,
               icon_group = 'filter_group',
               icon_open  = 'filter_group' ),
-               
+
      TreeNode( node_for   = [ ExpressionFilter ],
                label      = 'name',
                name       = 'Expression',
@@ -136,17 +136,17 @@ nodes = [
 
 def NumericFilterEditor ( ):
     return TreeEditor( nodes = nodes )
-    
+
 #-------------------------------------------------------------------------------
-#  Test case:  
+#  Test case:
 #-------------------------------------------------------------------------------
-        
+
 class TestFilter ( HasPrivateTraits ):
-    
+
     filter = Instance( AggregateFilter, () )
-    
+
     view = View(
-        VGroup( 
+        VGroup(
             Item( 'filter', editor = NumericFilterEditor() ),
             show_labels = False
         ),
@@ -155,8 +155,8 @@ class TestFilter ( HasPrivateTraits ):
         resizable = True,
         buttons   = NoButtons
     )
-    
-if __name__ == '__main__':    
+
+if __name__ == '__main__':
     test = TestFilter()
-    test.configure_traits() 
+    test.configure_traits()
     print len( test.filter.filters )

@@ -115,7 +115,7 @@ class _ContextPlotEditor(Editor):
                                                   high=max(self.value[plot_item.y]))
                         plot.img_plot(plot_item.y, colormap=gray(color_range),
                                       name=plot_item.y)
-                        
+
                     else:
                         plot_type = {'Line':'line', 'Scatter':'scatter'}[plot_item.type]
                         plot.plot((plot_item.x, plot_item.y),
@@ -126,13 +126,13 @@ class _ContextPlotEditor(Editor):
                             plot.index_axis.title = plot.index_axis.title + ', ' + plot_item.x
                         else:
                             plot.index_axis.title = plot_item.x
-    
+
                         if plot.value_axis.title != '':
                             plot.value_axis.title = plot.value_axis.title + ', ' + plot_item.y
                         else:
                             plot.value_axis.title = plot_item.y
-    
-    
+
+
                         if self.view_shadows and hasattr(self.value, 'shadows'):
                             self.generate_shadow_plots(plot, shadowcolors, plot_item, plot_type)
 

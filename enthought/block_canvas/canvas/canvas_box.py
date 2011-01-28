@@ -56,12 +56,12 @@ class CanvasBox(Container, SelectableComponentMixin):
     # Width is determined later by measuring the extents of the text.
     cell_padding = Float(1.0)
 
-    
+
     # FIXME: These would be more generic if they were "named" connection points,
     # and a Box had a list (or dict) of connection points that indicated
     # locations on the box.  There would be a default set ("upper-left",
     # "center", etc.), but users could add new ones.
-    
+
     # Location of the top center point of the box
     top_center = Property(depends_on=['position', 'bounds'])
     # Location of the bottom center point of the box.
@@ -95,8 +95,8 @@ class CanvasBox(Container, SelectableComponentMixin):
     # Size of the border drawn around group boxes
     border = Float(4.0)
 
-    # The move_tool is being exposed as public because in order to make the 
-    # selection_manager work correctly, it must pass the drag events to 
+    # The move_tool is being exposed as public because in order to make the
+    # selection_manager work correctly, it must pass the drag events to
     # all the items in the selection_manager's selection.
     move_tool = Instance(BoxMoveTool)
 
@@ -183,7 +183,7 @@ class CanvasBox(Container, SelectableComponentMixin):
         if ((x > self.x and x < upper_x) and
             (y > self.y and y < upper_y)):
             return True
-        return False    
+        return False
 
     #---------------------------------------------------------------------
     # CanvasBox interface
@@ -296,7 +296,7 @@ class CanvasBox(Container, SelectableComponentMixin):
             cell.y = y
             cell.x2 = x2
             y = y + y_space
-            
+
     #--- Trait default initializers --------------------------------------
 
     def __window_buttons_default(self):
@@ -322,12 +322,12 @@ class CanvasBox(Container, SelectableComponentMixin):
         close_button = EnableGlyphButton(normal_glyph="gray_close_button",
                 over_glyph="gray_close_button_over",
                 down_glyph="gray_close_button_down")
-        
+
         close_button.on_trait_change(self.close_clicked, 'clicked')
         window_buttons.add(close_button)
 
         return window_buttons
-    
+
     #--- Trait listeners -------------------------------------------------
 
     def _style_changed(self):
@@ -389,7 +389,7 @@ class CanvasBox(Container, SelectableComponentMixin):
         else:
             max_output_width = 0
         width = max_input_width + max_output_width + 2*self._style.corner_radius + self.cell_padding
-        height = max(len(self.input_fields), 
+        height = max(len(self.input_fields),
                      len(self.output_fields)) * (self.cell_padding + self.cell_height)
         # Account for space at bottom and at the top
         height += 2*self._style.corner_radius
@@ -460,13 +460,13 @@ class CanvasBox(Container, SelectableComponentMixin):
         w = self.width
         h = self.height
         border = self.border
-        
+
         shadow1 = (x+border/2, x+border/2+w, y-border/2, y-border/2+h)
         shadow2 = (x+border, x+border+w, y-border, y-border+h)
         main = (x, x+w, y, y+h)
         for x1, x2, y1, y2 in [shadow2, shadow1, main]:
             gc.save_state()
-    
+
             # Set up the styles.
             gc.set_fill_color(self._style.window_fill_color_)
             gc.set_stroke_color(self._style.window_border_color_)

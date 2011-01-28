@@ -24,7 +24,7 @@ class FunctionInfoWalker(object):
         import_names = nodelist[1]
         for name in import_names:
             func_name = name[0]
-            func = self.get_function_object(import_base, func_name) 
+            func = self.get_function_object(import_base, func_name)
 
             if callable(func):
                 info = python_function_info_from_function(func,
@@ -35,7 +35,7 @@ class FunctionInfoWalker(object):
                 if as_name:
                     func_name = as_name
                 self.function_callables[func_name] = info
-        
+
     def get_function_object(self, python_path, name):
         """ Get the python function for a given function """
         fullname = '.'.join((python_path, name))
@@ -45,7 +45,7 @@ class FunctionInfoWalker(object):
             function = getattr(module, name)
             return function
         except Exception, e:
-            msg = ("Failed to find function %s [%s: %s]" % 
+            msg = ("Failed to find function %s [%s: %s]" %
                 (name, e.__class__.__name__, e))
             warnings.warn(msg)
             return None

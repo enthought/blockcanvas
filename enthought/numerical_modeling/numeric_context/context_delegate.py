@@ -1,19 +1,19 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Delegate base class that can be used to customize various policies of a
 #  numeric context via subclassing.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Delegate base class that can be used to customize various policies of a
     numeric context via subclassing.
-"""    
+"""
 
 #-------------------------------------------------------------------------------
 #  Imports:

@@ -2,7 +2,7 @@
 
     It is used for displaying the input values of a context as well as the
     fields required by the chosen distribution.
-    
+
 """
 
 # ETS imports
@@ -21,7 +21,7 @@ class StochasticItem(HasTraits):
 
         It is used for displaying the input values and obtaining values for
         various distributions.
-        
+
     """
 
     # Name and current value in the context
@@ -30,14 +30,14 @@ class StochasticItem(HasTraits):
     # Distribution details
     distribution = Instance(Distribution)
     samples = Property(depends_on = ['distribution'])
-    
+
 
     #---------------------------------------------------------------------------
     #  object interface
     #---------------------------------------------------------------------------
 
     ### public methods ---------------------------------------------------------
-    
+
     def trait_view(self, name=None, view_element=None):
         """ Default view
         """
@@ -80,11 +80,11 @@ class StochasticItem(HasTraits):
     def _set_samples(self, value):
         """ Property setter
         """
-        
+
         self.distribution.samples = int(value)
         return
-    
-        
+
+
 # Test
 if __name__ == '__main__':
     d = Constant(value=50.0)
@@ -92,9 +92,9 @@ if __name__ == '__main__':
     # d = Triangular(low=20., mode=40., high=50.)
     # d = Uniform(low=40., high=60.)
     s = StochasticItem(name='a', distribution=d)
-    
+
     ui = s.edit_traits(kind='livemodal')
     if ui.result:
         print s.distribution.values
-        
+
 ### EOF ------------------------------------------------------------------------

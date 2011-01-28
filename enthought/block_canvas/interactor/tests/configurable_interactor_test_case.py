@@ -87,7 +87,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
            StochasticInteractor))
         self.failUnless(isinstance(
            self.interactor.interactor_stochastic_uniform, StochasticInteractor))
-        
+
 
     def test_load_project_ranges_for_shadow_interactor(self):
         """ Does loading ranges from file work for shadow interactor ?
@@ -180,7 +180,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
 
 
     def test_load_project_ranges_for_stochastic_constant_interactor(self):
-        """ Does loading parameters from file work for stochastic interactor 
+        """ Does loading parameters from file work for stochastic interactor
             with constant distribution ?
         """
 
@@ -218,10 +218,10 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         self.assertEqual(len(lines), 1)
         self.assertEqual(len(lines[0]), 2)
         self.assertEqual(lines[0][1], str(37.5))
-        
-    
+
+
     def test_load_project_ranges_for_stochastic_gaussian_interactor(self):
-        """ Does loading parameters from file work for stochastic interactor 
+        """ Does loading parameters from file work for stochastic interactor
             with gaussian distribution ?
         """
 
@@ -233,7 +233,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         child_int._view_items()
         self.assertEqual(child_int.input_f.distribution.mean, 39)
         self.assertEqual(child_int.input_f.distribution.std, 3)
-        
+
 
     def test_save_project_ranges_for_stochastic_gaussian_interactor(self):
         """ Does saving parameters to file work for stochastic interactor
@@ -261,9 +261,9 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         self.assertEqual(lines[0][1], str(200.0))
         self.assertEqual(lines[0][2], str(0.5))
 
-        
+
     def test_load_project_ranges_for_stochastic_triangular_interactor(self):
-        """ Does loading parameters from file work for triangular interactor 
+        """ Does loading parameters from file work for triangular interactor
             with triangular distribution ?
         """
 
@@ -276,7 +276,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         self.assertEqual(child_int.input_g.distribution.mode, 44)
         self.assertEqual(child_int.input_g.distribution.low, 39)
         self.assertEqual(child_int.input_g.distribution.high, 49)
-        
+
 
     def test_save_project_ranges_for_stochastic_triangular_interactor(self):
         """ Does saving parameters to file work for stochastic interactor
@@ -309,7 +309,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
 
 
     def test_load_project_ranges_for_stochastic_uniform_interactor(self):
-        """ Does loading parameters from file work for stochastic interactor 
+        """ Does loading parameters from file work for stochastic interactor
             with uniform distribution ?
         """
 
@@ -320,7 +320,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         child_int._view_items()
         self.assertEqual(child_int.input_h.distribution.low, 40)
         self.assertEqual(child_int.input_h.distribution.high, 58)
-        
+
 
     def test_save_project_ranges_for_stochastic_uniform_interactor(self):
         """ Does saving parameters to file work for stochastic interactor

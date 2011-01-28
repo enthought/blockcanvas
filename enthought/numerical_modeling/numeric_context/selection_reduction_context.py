@@ -1,15 +1,15 @@
 #-------------------------------------------------------------------------------
-#  
+#
 #  Defines a termination numeric context which filters (i.e. reduces) the
 #  data it receives from its upstream numeric context using its selection
 #  mask.
-#  
+#
 #  Written by: David C. Morrill
-#  
+#
 #  Date: 03/07/2007
-#  
+#
 #  (c) Copyright 2007 by Enthought, Inc.
-#  
+#
 #-------------------------------------------------------------------------------
 
 """ Defines a termination numeric context which filters (i.e. reduces) the
@@ -26,10 +26,10 @@ from numpy \
 
 from enthought.traits.api \
     import Constant, Undefined
-    
+
 from termination_context \
     import TerminationContext
-    
+
 #-------------------------------------------------------------------------------
 #  'SelectionReductionContext' class:
 #-------------------------------------------------------------------------------

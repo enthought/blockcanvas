@@ -29,11 +29,11 @@ def teardown():
 ##############################################################################
 
 def test_initializing_with_library_initializes_function_searh():
-        
+
     library = FunctionLibrary(modules=['os'])
 
     b = Application(function_library=library)
-    
+
     raise nose.SkipTest
     # FIXME:
     #   The assertion below is failing because in
@@ -44,35 +44,35 @@ def test_initializing_with_library_initializes_function_searh():
     assert_equal(b.function_search.all_functions, library.functions)
 
 def test_changing_library_initializes_function_searh():
-        
+
     library = FunctionLibrary(modules=['os'])
 
     b = Application()
     b.function_library = library
-    assert_equal(b.function_search.all_functions, library.functions) 
+    assert_equal(b.function_search.all_functions, library.functions)
 
 
 def test_changing_library_functions_initializes_function_searh():
-        
+
     library = FunctionLibrary(modules=['os'])
 
     b = Application()
     b.function_library = library
-    assert_equal(b.function_search.all_functions, library.functions) 
-    
+    assert_equal(b.function_search.all_functions, library.functions)
+
     # This forces the library to recalculate its functions.
     library.modules = ['os', 'telnetlib']
-    assert_equal(b.function_search.all_functions, library.functions) 
+    assert_equal(b.function_search.all_functions, library.functions)
 
 def test_appending_library_functions_initializes_function_searh():
-        
+
     library = FunctionLibrary(modules=['os'])
 
     b = Application()
     b.function_library = library
-    assert_equal(b.function_search.all_functions, library.functions) 
-    
+    assert_equal(b.function_search.all_functions, library.functions)
+
     # This is sorta cheating, but add an item to the function list
     # and ensure that we are updating.
     library.functions.append(MinimalFunctionInfo())
-    assert_equal(b.function_search.all_functions, library.functions) 
+    assert_equal(b.function_search.all_functions, library.functions)
