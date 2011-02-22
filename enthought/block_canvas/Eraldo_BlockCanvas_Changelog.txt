@@ -1,0 +1,55 @@
+﻿BlockCanvas Changelog ...... 
+
+Added features:
+
+ - Groups/Loops support
+   The app is now capable to manage loop/group of different form. The abstraction introduced 
+   by FunctionCallGroup object together with GroupSpec object should be enough general to 
+   represent every type of code block admissible in Python (a small effort is needed to add
+   support for multi-block construct like if....else, try...except etc.). 
+
+   Plain group have been added due to its consistency with the existence in the work-flow of
+   group of statements that all together describe a "functionality" like "hardware_interface',
+   'pre-processing', 'denoising' etc. It is not just a "view" problem to put them together, think  
+   for example about the opportunity to reuse the same "block" in different application. 
+   This "migration" will be fully supported when an export methods will be added to FunctionCallGroup obj.
+
+Bug Fix:
+
+ - Load/Save Project
+   It has been fixed and also manage group creation parsing code. 
+   
+ - Save script
+
+Optimization:
+
+ - Context cleaned before executing the code. Results that are just to be overwritten are cleaned 
+   from the context passed to exec. It speeds up the execution of a factor that increase with increasing 
+   size of this old-results. Working with ndarray of about 3e5 elements it speedup the code of about 15 times
+   on my machine. 
+
+ - No execution adding block. 
+
+Experimental features:
+
+ - Put together Code&Data to create e self-contained Script/Function to use for batch application. 
+
+ 
+Future Targets:
+
+ - Export of plain group.
+
+ - Properly restore Projects containing Plain group. 
+
+ - Fully support group/loop creation (e.g. adding every possible form of for, while loop as well as all the other 
+                                construct like if....elif....else etc.).  
+
+ - Graphically manage group/loop creation through some visual aids (e.g. like mouse_selection of different blocks then
+   pressing a button).  
+
+Dreams: 
+
+ - Create a Python (full) Graphical Programming Environment.
+ 
+
+	  
