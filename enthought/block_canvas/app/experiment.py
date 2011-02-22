@@ -21,7 +21,7 @@ from enthought.execution.executing_context import ExecutingContext
 from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
 from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
 
-
+from enthought.block_canvas.app.export import export_as_script, export_as_function
 
 class Experiment(HasTraits):
     """
@@ -93,25 +93,6 @@ class Experiment(HasTraits):
         self._shared_context = shared_context
         self._local_context = DataContext(name = self._LOCAL_NAME_TEMPLATE())
         self._update_exec_context()
-
-    def generate_unique_function_name(self):
-        """ Returns a unique name for a new function based on the names of
-        existing functions and imports in the code.
-        """
-        statements = self.exec_model.statements
-        functions = set([s.label_name for s in statements
-                          if hasattr(s, 'function') and (
-                              isinstance(s.function, PythonFunctionInfo) or
-                              isinstance(s.function, LocalFunctionInfo))])
-
-        # Basic name generation method: template + counter
-        base_name = "new_function"
-        if base_name not in functions:
-            return base_name
-        i = 1
-        while base_name + str(i) in functions:
-            i += 1
-        return base_name + str(i)
 
     #---------------------------------------------------------------------
     # Persistence
@@ -202,6 +183,9 @@ class Experiment(HasTraits):
         finally:
             f.close()
 
+        # Clean context
+        self.exec_model._clean_old_results_from_context(self.context.subcontext) 
+
         # Save the local context
         config["local_context"] = "local_context.pickle"
         self._local_context.save(join(fullpath, "local_context.pickle"))
@@ -211,6 +195,54 @@ class Experiment(HasTraits):
             config["shared_context"] = self._shared_context.name
 
         return config
+
+    def save_script(self,filename):
+        """ Save the execution model code as script. """
+        f = file(filename, "w")
+        try:
+            f.write(self.exec_model.code)
+        finally:
+            f.close()
+    
+    def export_as_function(self,filename,func_name, mode="w"):
+        """ Export this experiment as a function for batch application. 
+        
+        It puts together the model (i.e. code) and the parameters 
+        (i.e. context) to create a self-contained function to be used 
+        in batch application.  
+        """
+        imports_and_locals = self.exec_model.imports_and_locals
+        sorted_statements = self.exec_model.sorted_statements
+        context = self.context
+
+        # Clean context
+        self.exec_model._clean_old_results_from_context(context.subcontext) 
+       
+        export_as_function(filename, func_name, \
+                           imports_and_locals, sorted_statements, context, \
+                           reserved_inputs=[], \
+                           reserved_outputs=[], \
+                           mode=mode)
+
+    def export_as_script(self,filename, mode="w"):
+        """ Export this experiment as a script for batch application. 
+        
+        It puts together the model (i.e. code) and the parameters 
+        (i.e. context) to create a self-contained script to be used 
+        in batch application. 
+        """        
+        imports_and_locals = self.exec_model.imports_and_locals
+        sorted_statements = self.exec_model.sorted_statements
+        context = self.context
+        
+        # Clean context
+        self.exec_model._clean_old_results_from_context(context.subcontext) 
+        
+        export_as_script(filename, \
+                         imports_and_locals, sorted_statements, context, \
+                         reserved_inputs=[], \
+                         reserved_outputs=[], \
+                         mode=mode)
 
     #---------------------------------------------------------------------
     # Trait Event Handlers

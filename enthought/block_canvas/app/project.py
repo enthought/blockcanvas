@@ -80,7 +80,6 @@ class Project(HasTraits):
         proj.load(dirname)
         return proj
 
-
     #---------------------------------------------------------------------
     # Public methods / scripting API
     #---------------------------------------------------------------------

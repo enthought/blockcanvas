@@ -77,7 +77,7 @@ class ExecutionModelTestCase(unittest.TestCase):
 
         assert len(model.sorted_statements) == 1
 
-        desired = '\ndef foo(a, b): \n    x, y = (a, b)\n    return x, y\n\nx, y = foo(1, 2)'
+        desired = '\ndef foo(a, b): \n    x, y = (a, b)\n    return x, y\n\nx_, y_ = foo(1, 2)'
         self.assertEqual(desired, model.code)
 
     def test_remove_function(self):
@@ -165,7 +165,7 @@ class ExecutionModelTestCase(unittest.TestCase):
                "b = add(1.0,3.0)\n" \
 
         model = ExecutionModel.from_code(code)
-        model.merge_statements([model.statements[0].uuid, model.statements[1].uuid])
+        model.merge_statements(ids=[model.statements[0].uuid, model.statements[1].uuid])
 
     def test_unmerge_statements(self):
 
@@ -174,7 +174,7 @@ class ExecutionModelTestCase(unittest.TestCase):
                "b = add(1.0,3.0)\n" \
 
         model = ExecutionModel.from_code(code)
-        model.merge_statements([model.statements[0].uuid, model.statements[1].uuid])
+        model.merge_statements(ids=[model.statements[0].uuid, model.statements[1].uuid])
         model.unmerge_statements(model.statements[0].uuid)
 
     def test_restricted(self):

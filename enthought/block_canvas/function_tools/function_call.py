@@ -17,9 +17,9 @@ import warnings
 
 # enthought library imports
 from uuid import UUID, uuid4
-from enthought.traits.api import (Any, Delegate, Event, HasTraits, Instance,
+from enthought.traits.api import (Any, Delegate, Event, HasTraits, Instance, 
         List, on_trait_change, Property, Str)
-from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor,
+from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor, 
         ButtonEditor, VGroup, spring)
 
 # CodeTools imports
@@ -35,18 +35,18 @@ from parse_tools import function_inputs_from_call_ast
 from python_function_info import PythonFunctionInfo
 
 def find_next_binding(var, active_experiment):
-    """Determines the next open binding for input and output variables based on the
+    """Determines the next open binding for input and output variables based on the 
     current experiment's context and the binding of other statements.
 
     If no active experiment is give, simply the variable name plus an '_' is returned."""
     # Set the binding prefix we are looking for once
-    binding_prefix = "{0}_".format(var.name)
+    binding_prefix = "{0}".format(var.name)
 
     if active_experiment != None:
         # Initialize binding prefix set with context
         bps = set([key for key in active_experiment.context.keys() if binding_prefix in key])
 
-        # Add in bindings from statement prefixes.
+        # Add in bindings from statement prefixes.  
         # This ensures unique bindings even when the code + context has not been executed
         for stmt in active_experiment.exec_model.statements:
             # Add binding from other inputs
@@ -124,13 +124,11 @@ class FunctionCall(HasTraits):
             if self.active_experiment != None:
                 context = self.active_experiment.context
                 trait_kw = dict([(input.name, context[input.binding]) for input in self.inputs if input.binding in context.keys()])
-                out_kw = dict([(output.name, context[output.binding]) for output in self.outputs if output.binding in context.keys()])
-                trait_kw.update(out_kw)
 
             # Generate the new view
             self.function_view_instance = self.function_view_class(**trait_kw)
             return create_alternate_view()
-
+    
     def _convert_to_local_fired(self, event):
         new_name = 'local_' + self.function.library_name
         new_code = localify_func_code(self.function.code,
@@ -150,20 +148,20 @@ class FunctionCall(HasTraits):
     ##########################################################################
 
     ### Class methods -- constructors ########################################
-
-    # fixme: This is the signature we want.
+    
+    # fixme: This is the signature we want.    
     #def from_ast(cls, ast, function_info=None):
     @classmethod
     def from_ast(cls, ast, function_callables=None):
         """ Create a FunctionCall object from a python abstract syntax tree
-            object.
-
+            object.  
+            
             The AST is expected to be for expressions from code of this type:
-
+            
                 a, b = foo(c,d)
-
-            This has the assignment variables as well as the call of the
-            function.
+            
+            This has the assignment variables as well as the call of the 
+            function.                    
         """
 
         # Initialize result
@@ -175,7 +173,7 @@ class FunctionCall(HasTraits):
         if res:
             name, args = res
             func_name = name[0]
-
+            
             if func_name in function_callables:
                 result = FunctionCall.from_callable_object(function_callables[func_name])
 
@@ -190,7 +188,11 @@ class FunctionCall(HasTraits):
             # Returns have be gotten from the block code
             if len(args) == len(result.inputs):
                 for arg, input in zip(args, result.inputs):
-                    input.binding = str(arg)
+                    if isinstance(arg,tuple):
+                        name,binding = arg
+                        input.binding = binding
+                    else:
+                        input.binding = str(arg)
 
         else:
             # FIXME: What should we return if this ast doesn't contain
@@ -201,24 +203,24 @@ class FunctionCall(HasTraits):
 
     @classmethod
     def from_callable_object(cls, function, function_view_class=None, active_experiment=None):
-        """ Create a FunctionCall object given a CallableInfo.
+        """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
             The location for the function will default to the file information
-            for the function.
-
-            Note that this currently only works for PythonFunctionInfo and
+            for the function.           
+            
+            Note that this currently only works for PythonFunctionInfo and 
             LocalPythonFunctionInfo objects.
         """
 
-        # Specify the inputs
+        # Specify the inputs 
         inputs = [InputVariable(name=input.name, default=input.default)
                       for input in function.inputs]
 
         # Add input bindings, taking into account existing context if possible
         for input in inputs:
             input.binding = find_next_binding(input, active_experiment)
-
+    
         # Specify the outputs
         outputs = [OutputVariable(name=output.name) for output in function.outputs]
 
@@ -227,23 +229,23 @@ class FunctionCall(HasTraits):
             output.binding = find_next_binding(output, active_experiment)
 
         # Make the new FunctionCall
-        result = cls(inputs=inputs, outputs=outputs, function=function,
+        result = cls(inputs=inputs, outputs=outputs, function=function, 
                     function_view_class=function_view_class, active_experiment=active_experiment)
 
         return result
 
     @classmethod
     def from_function(cls, function, function_view_class=None, active_experiment=None):
-        """ Create a FunctionCall object given a CallableInfo.
+        """ Create a FunctionCall object given a CallableInfo.  
 
             The bindings for inputs and outputs will default to Undefined.
             The location for the function will default to the file information
-            for the function.
-
-            Note that this currently only works for PythonFunctionInfo and
+            for the function.           
+            
+            Note that this currently only works for PythonFunctionInfo and 
             LocalPythonFunctionInfo objects.
         """
-
+    
         callable_object = PythonFunctionInfo.from_function(function)
         return cls.from_callable_object(callable_object, function_view_class, active_experiment)
 
@@ -264,12 +266,12 @@ class FunctionCall(HasTraits):
 
     def _set_label_name(self, name):
         self._label_name = name
-        return
-
+        return 
+        
     def _get_call_signature(self):
         """ Return a python code that will call this function with the
             appropriate bindings.
-
+            
             Returns:
             --------
             code: Str
@@ -286,7 +288,7 @@ class FunctionCall(HasTraits):
             call_signature = "%s = %s(%s)" % (out_args, self.label_name, in_args)
         else:
             call_signature = "%s(%s)" % (self.label_name, in_args)
-
+            
         return call_signature
 
 
@@ -311,13 +313,13 @@ class FunctionCall(HasTraits):
     def update_from_function(self):
         """ Updates input and output variable bindings appropriately when
         the FunctionInfo's code changes.
-
+        
         This is not the same as just calling from_callable_object and then
         cloning the traits, because the existing bindings have to be taken
         into account.
         """
         function = self.function
-
+        
         input_bindings = dict((obj.name,obj._binding) for obj in self.inputs)
         inputs = []
         for input in function.inputs:
@@ -359,7 +361,7 @@ if __name__ == '__main__':
     code = "def foo(a):\n" \
            "\tb = a\n" \
            "\treturn b\n" \
-           "y = foo(2)\n"
+           "y = foo(2)\n" 
     foo_block = Block(code)
     info = find_functions(foo_block.ast)
     print "Info", info

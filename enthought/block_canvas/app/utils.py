@@ -13,6 +13,42 @@ logger = logging.getLogger(__name__)
 # Global translator to ensure that log-context names are python-friendly
 trans_table = string.maketrans('/.\\@#$%^&*()-+=<>', '_________________')
 
+# Enthought library imports
+from enthought.traits.api import \
+    HasTraits, Str, List, Unicode, File, Directory
+
+from enthought.traits.ui.api import \
+    View, Item, CheckListEditor
+
+#-------------------------------------------------------------------------------
+#  Helping view
+#-------------------------------------------------------------------------------  
+
+class FuncNameInput(HasTraits):
+    """ GUI to enter the function name
+    """
+    
+    out_str = Str('')
+    
+    trait_view = View(Item('out_str',label='func name'),
+                      title = 'Input Func Name',
+                      width = 200,
+                      resizable = True,
+                      buttons   = ['OK','Help'])
+
+ 
+class SelGType(HasTraits):
+    
+    check_list=List('for1',editor=CheckListEditor(values=['for1','for2','plain'],
+                                           cols=1))
+    
+    trait_view = View(Item('check_list',
+                           label='Group/Loop',
+                           height = 40),
+                      title = 'Group/Loop type selection',
+                      buttons= ['OK'])
+
+
 #-------------------------------------------------------------------------------
 #  Export functions
 #-------------------------------------------------------------------------------

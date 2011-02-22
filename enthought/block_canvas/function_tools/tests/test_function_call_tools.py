@@ -45,8 +45,7 @@ class FunctionCallToolsTest(unittest.TestCase):
     from enthought.foobar import *
     a = 1+1
     b = 2+2
-    return a+b
-"""
+    return a+b"""
         print repr(new_code)
         print repr(desired_code)
         self.assertEqual(new_code, desired_code)

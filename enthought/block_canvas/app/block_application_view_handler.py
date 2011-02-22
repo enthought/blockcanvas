@@ -2,7 +2,7 @@
     primary purpose is to set up/call actions for menu items.
 
 """
-from enthought.contexts.data_context import DataContext
+#from enthought.contexts.data_context import DataContext
 
 # Standard imports
 import os, logging
@@ -17,10 +17,11 @@ import enthought.pyface.api as pyface
 from enthought.etsconfig.api import ETSConfig
 
 # Local imports
-from ui.configurable_import_ui import ConfigurableImportUI
-from ui.project_folder_ui import ProjectFolderUI
-from utils import create_unique_project_name
-from enthought.block_canvas.plot.context_plot import ContextPlot
+from enthought.contexts.api import DataContext
+from enthought.block_canvas.app.ui.configurable_import_ui import ConfigurableImportUI
+from enthought.block_canvas.app.ui.project_folder_ui import ProjectFolderUI
+from enthought.block_canvas.app.utils import create_unique_project_name
+#from enthought.block_canvas.plot.context_plot import ContextPlot
 
 # Global logger
 logger = logging.getLogger(__name__)
@@ -32,6 +33,11 @@ logger = logging.getLogger(__name__)
 CloseAction = Action(
     name   = 'Close',
     action = '_on_close',
+)
+
+ResetAction = Action(
+    name   = 'Reset',
+    action = '_on_reset',
 )
 
 ImportDataFileAction = Action(
@@ -65,6 +71,13 @@ SaveAsAction = Action(
     action = '_on_save_as',
 )
 
+ExportAsFunctionAction = Action(
+    name = 'Export as Function\n(EXPERIMENTAL)',
+    action = '_on_export_as_function')
+
+ExportAsScriptAction = Action(
+    name = 'Export as Script\n(EXPERIMENTAL)',
+    action = '_on_export_as_script')
 
 OpenProjectAction = Action(
     name   = 'Open Project',
@@ -101,15 +114,10 @@ ToggleAutoExecuteAction = Action(
 
 # Plot group actions
 
-PlotAction = Action(
-    name='Plot',
-    action = '_on_plot',
-)
-
-RunCustomUIAction = Action(
-    name = "Run Custom UI Script",
-    action = "_on_run_custom_ui",
-)
+#RunCustomUIAction = Action(
+#    name = "Run Custom UI Script",
+#    action = "_on_run_custom_ui",
+#)
 
 BlockApplicationMenuBar = \
         MenuBar(
@@ -117,7 +125,7 @@ BlockApplicationMenuBar = \
                         OpenProjectAction,
                         OpenAction,
                         ImportDataFileAction,
-                        RunCustomUIAction,
+                        #RunCustomUIAction,
                   ),
                   Group(
                         SaveProjectAction,
@@ -125,6 +133,10 @@ BlockApplicationMenuBar = \
                         #SaveDataAction,
                         SaveAction,
                         SaveAsAction,
+                  ),
+                  Group(
+                        ExportAsFunctionAction,
+                        ExportAsScriptAction,
                   ),
                   Group(
                         CloseAction,
@@ -136,10 +148,9 @@ BlockApplicationMenuBar = \
                         ),
                   name='Run'),
             Menu( Group(
-                        PlotAction,
+                        ResetAction,
                         ),
-                  name='Plot'),
-
+                  name='Reset'),
             #Menu( Group(ClearContextAction),
             #      name = "Data" ),
             Menu( Group(
@@ -181,7 +192,7 @@ class BlockApplicationViewHandler(Controller):
                        'Segy files (*.segy)|*.segy'
         except ImportError:
             wildcard = 'Pickled files (*.pickle)|*.pickle'
-
+        
         app = info.object
         file_dialog = FileDialog(action = 'open',
                                  default_directory = app.data_directory,
@@ -192,39 +203,28 @@ class BlockApplicationViewHandler(Controller):
         data_context, filename = None, file_dialog.path
         if file_dialog.path != '':
             filesplit = os.path.splitext(filename)
-            if filesplit[1] != '':
+            if filesplit[1] != '': 
                 configurable_import = ConfigurableImportUI(filename = filename,
                                                            wildcard = wildcard)
                 ui = configurable_import.edit_traits(kind='livemodal')
-                if ui.result and configurable_import.context:
+                if ui.result and isinstance(configurable_import.context,DataContext):
                     data_context = configurable_import.context
                     app.load_context(
                         data_context, mode=configurable_import.save_choice_)
 
                     filename = configurable_import.filename
 
-        if data_context:
+        if isinstance(data_context,DataContext):
             logger.debug('Loading data from %s' % filename)
         else:
             logger.error('Unidentified file format for data import: %s' %
                          filename)
         return
-
-    def _on_plot(self, info):
-        from cp.plot.simple_datacontext_plot import SimpleDataContextPlot
-        context = info.object.project.active_experiment.context
-#        plot_window = ContextPlot(context=context)
-#        plot_window.edit_traits()
-        index = None
-        candidates = ['depth', 'DEPTH', 'Depth', 'time', 'TWT', 'twt', 'dbm',
-                      ]
-        for candidate in candidates:
-            if candidate in context.keys():
-                index = candidate
-                break
-
-        p = SimpleDataContextPlot(data_context=context, index=index)
-
+    
+    def _on_reset(self,info):
+        info.object.reset()
+        pyface.information(parent=info.ui.control, message='Project cleaned')
+    
     #------------------------------------------------------------------------
     # Script loading/saving
     #------------------------------------------------------------------------
@@ -238,24 +238,19 @@ class BlockApplicationViewHandler(Controller):
 
         if file_dialog.path != '':
             info.object.load_code_from_file(file_dialog.path)
-
+            
         return
 
     def _on_save(self, info):
         """ Save script to file """
-        if os.path.exists(info.object.file_path):
-            info.object.save_block_to_file(info.object.file_path)
-            msg = 'Saving script at ', info.object.file_path
-            logger.debug(msg)
-        else:
-            self._on_save_as(info)
+        self._on_save_as(info)
         return
 
 
     def _on_save_as(self, info):
         """ Menu action to save script to file of different name """
         file_dialog = FileDialog(action='save as',
-                                 default_path=info.object.file_path,
+                                 default_path=info.object.file_directory,
                                  wildcard='All files (*.*)|*.*')
         file_dialog.open()
 
@@ -265,18 +260,53 @@ class BlockApplicationViewHandler(Controller):
             logger.debug(msg)
         return
 
-    def _on_run_custom_ui(self, info):
-        """ Run a custom UI on top of the context.
+    def _on_export_as_function(self, info):
+        """ Menu action to save function to file of different name 
+        
+        In this case the execution model and the local context are both
+        included in the definition of a new function where free_variables
+        take their default_value from the context.
         """
-        wildcard = FileDialog.WILDCARD_PY.rstrip('|')
-        file_dialog = FileDialog(action='open',
-                                 default_directory=info.object.file_directory,
-                                 wildcard=wildcard)
+        file_dialog = FileDialog(action='save as',
+                                 default_path=info.object.file_directory,
+                                 wildcard='All files (*.*)|*.*')
         file_dialog.open()
 
         if file_dialog.path != '':
-            info.object.run_custom_ui(file_dialog.path, live=False)
-        return
+            info.object.export_as_function(file_dialog.path)
+            msg = 'Saving script at ', file_dialog.path
+            logger.debug(msg)
+        return        
+    
+    def _on_export_as_script(self, info):
+        """ Menu action to save script to file of different name 
+        
+        In this case the execution model and the local context are both
+        merged in a script in the form of assignments.
+        """
+        file_dialog = FileDialog(action='save as',
+                                 default_path=info.object.file_directory,
+                                 wildcard='All files (*.*)|*.*')
+        file_dialog.open()
+
+        if file_dialog.path != '':
+            info.object.export_as_script(file_dialog.path)
+            msg = 'Saving script at ', file_dialog.path
+            logger.debug(msg)
+        return 
+
+    #    def _on_run_custom_ui(self, info):
+    #        """ Run a custom UI on top of the context.
+    #        """
+    #        wildcard = FileDialog.WILDCARD_PY.rstrip('|')
+    #        file_dialog = FileDialog(action='open',
+    #                                 default_directory=info.object.file_directory,
+    #                                 wildcard=wildcard)
+    #        file_dialog.open()
+    #
+    #        if file_dialog.path != '':
+    #            info.object.run_custom_ui(file_dialog.path, live=False)
+    #        return
 
 
     #------------------------------------------------------------------------
@@ -294,7 +324,7 @@ class BlockApplicationViewHandler(Controller):
         else:
             project_dir = ETSConfig.user_data
         return project_dir
-
+    
     def _save_project_graphically(self, parent, project, dirname):
         """ Saves the given project to a name **dirname**.  Gives the user
         graphical feedback.
@@ -352,7 +382,7 @@ class BlockApplicationViewHandler(Controller):
 
     #------------------------------------------------------------------------
     # Execution actions
-    #------------------------------------------------------------------------
+    #------------------------------------------------------------------------    
 
     def _on_execute(self, info):
         """Explicitly executes the current workflow."""
@@ -405,7 +435,7 @@ class BlockApplicationViewHandler(Controller):
 #        return
 #
 #
-#
+#    
 #    def _on_clear_context(self, info):
 #        """ Clears the active context
 #        """

@@ -220,7 +220,7 @@ class FunctionCallTestCase(unittest.TestCase):
 
         func = FunctionCall.from_function(with_defaults)
 
-        desired = 'x, y = with_defaults(a)'
+        desired = 'x, y = with_defaults(a, b=b)'
         self.assertEqual(func.call_signature, desired)
 
     def test_name_change_updates_call_signature(self):

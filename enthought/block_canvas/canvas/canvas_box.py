@@ -147,16 +147,28 @@ class CanvasBox(Container, SelectableComponentMixin):
         """ Double click opens the edit dialog for the function.
             FIXME:  Double Click should trigger editing of self.graph_node
         """
-        # Explicitly edit a copy of the graph_node and make the replacement
-        # ourselves using the scripting layer.
-        from enthought.block_canvas.app.scripting import app
-        graph_node = self.graph_node.clone_traits()
-
+        from enthought.block_canvas.app import scripting
+        from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup
+        
+        # It is not necessary to clone the whole container for a group of
+        # statements (i.e. FunctionCallGroup object) so let's edit the original 
+        # object. 
+        if isinstance(self.graph_node,FunctionCallGroup): 
+            graph_node = None
+            res = self.graph_node.configure_traits(kind='livemodal')
+            self.graph_node.update_from_UI()
+            is_OK = res
+        else:
+            # Explicitly edit a copy of the graph_node and make the replacement
+            # ourselves using the scripting layer.
+            graph_node = self.graph_node.clone_traits()
+            res = graph_node.edit_traits(kind='modal')
+            is_OK = res.result
+            
         # Check the result of editing the traits.  Don't trigger
         # and update if the user hits Cancel button.
-        res = graph_node.edit_traits(kind='modal')
-        if res.result:
-            app.update_node_with_edits(self.graph_node, graph_node)
+        if is_OK:
+            scripting.app.update_node_with_edits(self.graph_node, graph_node)
 
         event.handled=True
 

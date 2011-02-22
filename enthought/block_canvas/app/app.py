@@ -3,6 +3,8 @@
 # Standard library imports
 import os
 import re
+# New standard library imports - Eraldo 
+import time
 
 # Enthought library imports
 from enthought.pyface.message_dialog import MessageDialog
@@ -32,6 +34,11 @@ from enthought.block_canvas.function_tools.python_function_info import PythonFun
 from enthought.block_canvas.function_tools.function_call import FunctionCall
 from enthought.block_canvas.function_tools.general_expression import GeneralExpression
 
+# New imports - Eraldo 
+from enthought.block_canvas.function_tools.group_spec import GroupSpec
+from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup 
+######################
+
 from enthought.block_canvas.class_tools.class_library import ClassLibrary
 
 # Local, relative imports
@@ -39,6 +46,9 @@ from experiment import Experiment
 from project import Project
 from block_application_view_handler import (BlockApplicationMenuBar,
                                             BlockApplicationViewHandler)
+
+# New local imports - Eraldo
+from utils import FuncNameInput,SelGType
 
 
 python_name = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
@@ -135,87 +145,146 @@ class Application(HasTraits):
     ######################################################################
 
     def trait_view(self, name=None, view_elements=None):
-        return View(
-          VGroup(
-            HSplit(
-                  VSplit(
-                    Item('function_search',
-                         editor = InstanceEditor(view=function_search_view),
-                         label      = 'Search',
-                         id         = 'search',
-                         style      = 'custom',
-                         dock       = 'horizontal',
-                         show_label = False,
+        if name is None or name=='full':
+            return View(
+              VGroup( 
+                HSplit(
+                      VSplit(
+                        Item('function_search',
+                             editor = InstanceEditor(view=function_search_view),
+                             label      = 'Search',
+                             id         = 'search',
+                             style      = 'custom',
+                             dock       = 'horizontal',
+                             show_label = False,                      
+                        ),
+                        Item('html_window',
+                             style='custom',
+                             show_label=False,
+                             springy= True,
+                             resizable=True,
+                        ),
+                        id='search_help_view'
+                      ),      
+                    VSplit(
+                        Item( 'object.project.active_experiment.canvas',
+                              label      = 'Canvas',
+                              id         = 'canvas',
+                              # FIXME:  need a new way to control the canvas
+                              # not using BlockEditor
+                              editor     = BlockEditor(),
+                              dock       = 'horizontal',
+                              show_label = False
+                        ),
+                        Item( 'object.project.active_experiment.exec_model.code',
+                              label      = 'Code',
+                              id         = 'code',
+                              editor     = CodeEditor(dim_lines = 'dim_lines',
+                                                      dim_color = 'dim_color',
+                                                      squiggle_lines = 'squiggle_lines'),
+                              dock       = 'horizontal',
+                              show_label = False
+                        ),
                     ),
-                    Item('html_window',
-                         style='custom',
-                         show_label=False,
-                         springy= True,
-                         resizable=True,
+                    Item( 'context_viewer',
+                          label = 'Context',
+                          id = 'context_table',
+                          editor = InstanceEditor(),
+                          style = 'custom',
+                          dock = 'horizontal',
+                          show_label = False,
                     ),
-                    id='search_help_view'
-                  ),
-                VSplit(
-                    Item( 'object.project.active_experiment.canvas',
-                          label      = 'Canvas',
-                          id         = 'canvas',
-                          # FIXME:  need a new way to control the canvas
-                          # not using BlockEditor
-                          editor     = BlockEditor(),
-                          dock       = 'horizontal',
-                          show_label = False
-                    ),
-                    Item( 'object.project.active_experiment.exec_model.code',
-                          label      = 'Code',
-                          id         = 'code',
-                          editor     = CodeEditor(dim_lines = 'dim_lines',
-                                                  dim_color = 'dim_color',
-                                                  squiggle_lines = 'squiggle_lines'),
-                          dock       = 'horizontal',
-                          show_label = False
-                    ),
+                    id='panel_split',
                 ),
-                Item( 'context_viewer',
-                      label = 'Context',
-                      id = 'context_table',
-                      editor = InstanceEditor(),
-                      style = 'custom',
-                      dock = 'horizontal',
+                Item( 'status',
+                      style      = 'readonly',
                       show_label = False,
+                      resizable  = False 
                 ),
-                id='panel_split',
-            ),
-            Item( 'status',
-                  style      = 'readonly',
-                  show_label = False,
-                  resizable  = False
-            ),
-          ),
-          title     = 'Block Canvas',
-          menubar   = BlockApplicationMenuBar,
-          width     = 800,
-          height    = 600,
-          id        = 'enthought.block_canvas.app.application',
-          resizable = True,
-          handler   = BlockApplicationViewHandler(model=self),
-          key_bindings = KeyBindings(
-            KeyBinding(binding1='F5', method_name='_on_execute'),
-            ),
-        )
+              ),
+              title     = 'Block Canvas',
+              menubar   = BlockApplicationMenuBar,
+              width     = 1024,
+              height    = 768,
+              id        = 'enthought.block_canvas.app.application',
+              resizable = True,
+              handler   = BlockApplicationViewHandler(model=self),
+              key_bindings = KeyBindings(
+                KeyBinding(binding1='F5', method_name='_on_execute'),
+                ),
+            )
+        elif name == 'simple':
+            return View( 
+                        HSplit(
+                                VSplit(
+                                        Item('function_search',
+                                             editor = InstanceEditor(view=function_search_view),
+                                             label      = 'Search',
+                                             id         = 'search',
+                                             style      = 'custom',
+                                             dock       = 'horizontal',
+                                             show_label = False),
+                                        Item('html_window',
+                                             style='custom',
+                                             show_label=False,
+                                             springy= True,
+                                             resizable=True),
+                                        id='search_help_view'
+                                        ),      
+                                  Item( 'object.project.active_experiment.canvas',
+                                              label      = 'Canvas',
+                                              id         = 'canvas',
+                                              # FIXME:  need a new way to control the canvas
+                                              # not using BlockEditor
+                                              editor     = BlockEditor(),
+                                              dock       = 'horizontal',
+                                              show_label = False),
+                                id='panel_split'),
+                      title     = 'Block Canvas - Simple View',
+                      menubar   = BlockApplicationMenuBar,
+                      width     = 800,
+                      height    = 600,
+                      id        = 'enthought.block_canvas.app.application.simple',
+                      resizable = True,
+                      handler   = BlockApplicationViewHandler(model=self),
+                      key_bindings = KeyBindings(
+                                                 KeyBinding(binding1='F5', method_name='_on_execute'),
+                                                 )
+                    )
 
 
     ######################################################################
     # Application interface
     ######################################################################
 
+    def reset(self):
+        """ Reset the Application to its initial state. 
+        
+        Clean all old attributes and instanciate new ones.
+        """
+                
+        for context in self.project.contexts:
+            self.project.remove_context(context)
+
+        data_context = DataContext(name='data')
+        self.project.add_context(data_context)
+        exp = Experiment(shared_context=data_context)                
+        self.project.active_experiment = exp
+        self.context_viewer = ContextVariableList(context=exp.context)
+
     ### load/save python scripts #########################################
 
     def load_code_from_file(self, filename):
-        self.project.active_experiment.exec_model = \
-            ExecutionModel.from_file(filename)
-
+        experiment = Experiment()
+        experiment.load_code_from_file(filename)
+        self.project.experiments.append(experiment)
+        self.project.active_experiment = experiment
+        self.update_functions_UI(self.project.active_experiment.exec_model.statements)   
+        self.update_functions_context(self.project.active_experiment,
+                                      self.project.active_experiment.exec_model.statements)
+        
     def save_code_to_file(self, filename=""):
-        pass
+        self.project.active_experiment.save_script(filename)   
 
     def run_custom_ui(self, filename, live=True):
         """ Load a module to visually interact with the context.
@@ -267,7 +336,7 @@ class Application(HasTraits):
     def get_active_project(self):
         return self.project
 
-    ### persistence #################################################
+    ### persistence ######################################################
 
     def load_context(self, context, mode='add'):
         """ Load a new context.
@@ -307,6 +376,10 @@ class Application(HasTraits):
         if new_proj is None:
             raise IOError('Unable to load project from directory "%s"' % dirname)
         self.project = new_proj
+        self.update_functions_UI(self.project.active_experiment.exec_model.statements)   
+        self.update_functions_context(self.project.active_experiment,
+                                      self.project.active_experiment.exec_model.statements)
+        
 
     def save_project(self, dirname):
         """ Saves the current project to the given directory. """
@@ -329,36 +402,74 @@ class Application(HasTraits):
             # fixme: We need to add LocalFunctionInfo objects to the
             #        FunctionLibrary somehow.
         """
+        # Prevent the execution of the code when adding a new block. 
+        self.project.active_experiment.exec_model.allow_execute = False
+        
+        group = False
+        
         if item == NEW_EXPR_ENTRY:
             node = GeneralExpression()
 
         elif item == NEW_FUNCTION_ENTRY:
             exp = self.project.active_experiment
-            func_name = exp.generate_unique_function_name()
+            base_name = 'new_function'
+            func_name = exp.exec_model.generate_unique_function_name(base_name = base_name)
 
             # This should create a LocalFunctionInfo...
             # fixme: Generate a unique name that isn't on the canvas.
             code_template = "def %(name)s(a, b):\n" \
                             "    return x, y\n"
-            code = code_template % {'name':func_name}
-            # fixme: Short term for testing.  Remove imports in future and
+            code = code_template % {'name':func_name}                   
+            # fixme: Short term for testing.  Remove imports in future and 
             #        replace with FunctionCall UI.
             function = LocalFunctionInfo(code=code)
             traits_class = self.match_function_to_has_traits_class(item.name)
-            node = FunctionCall.from_callable_object(function, traits_class, self.project.active_experiment)
+            node = FunctionCall.from_callable_object(function, traits_class, exp)
+
+        elif item == NEW_LOOP_ENTRY:
+ 
+            group = True
+            
+            exp = self.project.active_experiment
+            base_name = 'group'
+            group_name = exp.exec_model.generate_unique_function_name(base_name = base_name)
+                        
+            selection = SelGType()
+            is_ok = selection.configure_traits(kind='modal')
+                        
+            if is_ok:                             
+                group_type = selection.check_list[0]
+                lsp = GroupSpec(type=group_type,active_experiment=self.project.active_experiment)            
+                node = FunctionCallGroup(lsp, gname=group_name);
+            else:
+                return
 
         else:
             function = PythonFunctionInfo(name=item.name,
                                           module=item.module)
             traits_class = self.match_function_to_has_traits_class(item.name)
             node = FunctionCall.from_callable_object(function, traits_class, self.project.active_experiment)
-
-        # Bring up the dialog box to edit it
-        node.edit_traits(kind="modal")
-
-        self.add_function_to_execution_model(node, x, y)
-        self.select_function_on_canvas(node)
-
+        
+        if group:
+            res = node.configure_traits(kind="livemodal")
+            # FIXME: It will disappear when the creation of loops will be  
+            # properly managed ("graphically") in the canvas 
+            node.update_from_UI()
+            its_OK = res
+        else:
+            # Bring up the dialog box to edit it
+            res = node.edit_traits(kind="modal") 
+            its_OK = res.result           
+                      
+        if its_OK:
+            t_in = time.time() 
+            self.add_function_to_execution_model(node, x, y)  
+            t_out = time.time()
+            print '%f seconds: add func to execution model' % (t_out-t_in)
+            self.select_function_on_canvas(node)
+        
+        self.project.active_experiment.exec_model.allow_execute = True
+        return
 
     # fixme: Should this be a add_function, or is that to specific?
     # fixme: Make it scriptable...
@@ -376,33 +487,40 @@ class Application(HasTraits):
         return
 
     def update_context_from_function_ui(self, function_call):
-        # If a custom UI was not used, return imemeadiately
-        if function_call.function_view_instance == None:
-            return
-
-        # If a custom UI was used, update the context
+        
+        # If a custom UI was used, update the context 
         context = self.project.active_experiment.context
         # Prevent execution while loading in values to the ui
         prev_defer_execution = context.defer_execution
-        context.defer_execution = True
+        context.defer_execution = True 
 
-        # Load values into context from ui
-        for input in function_call.inputs:
-            if hasattr(function_call.function_view_instance, input.name):
-                context[input.binding] = getattr(function_call.function_view_instance, input.name)
-
-        for output in function_call.outputs:
-            if hasattr(function_call.function_view_instance, output.name):
-                context[output.binding] = getattr(function_call.function_view_instance, output.name)
-
-        # Clear the deffered names to skip execution & Restore defer_execution
+        if isinstance(function_call, FunctionCallGroup):
+            pass
+        elif hasattr(function_call,'function_view_instance') and \
+                not function_call.function_view_instance is None:   
+            # Load values into context from ui - input
+            for input in function_call.inputs:
+                if hasattr(function_call.function_view_instance, input.name):
+                    context[input.binding] = getattr(function_call.function_view_instance, input.name)
+    
+            # Load values into context from ui - output
+            for output in function_call.outputs:
+                if hasattr(function_call.function_view_instance, output.name):
+                    context[output.binding] = getattr(function_call.function_view_instance, output.name)
+           
+            del function_call.function_view_instance # Cleans up function_call
+        else:
+            # This is needed to handle GemeralExpression objects
+            pass
+            
+        # Clear the deferred names to skip execution & Restore defer_execution
         if not self.auto_execute:
             context._deferred_execution_names = []
+
         context.defer_execution = prev_defer_execution
 
-        del function_call.function_view_instance # Cleans up function_call
         return
-
+    
     def match_function_to_has_traits_class(self, function_name):
         """Finds a class whose name matches '_{function_name}_view'.
         Returns this class's traits_view attribute, if present.
@@ -447,17 +565,50 @@ class Application(HasTraits):
         self.project.active_experiment.controller.update_nodes([],[],[function_call.uuid])
         return
 
-    def update_node_with_edits(self, node, edited_node):
-        """ Update a function/expression in the execution model with an edited
-        copy.
+    def update_functions_UI(self,statements):
+        """ Recursively updates statements UI class
         """
-        node.copy_traits(edited_node)
-        self.update_node_ui(node)
+        for statement in statements:
+            if isinstance(statement,FunctionCallGroup):
+                self.update_functions_UI(statement.group_statements)
+            else:
+                self._update_func_UI(statement)
 
+    def update_functions_context(self, exp, statements):
+        """ Recursively updates statements active_experiment attribute
+        """
+        for statement in statements:   
+            if isinstance(statement,FunctionCallGroup):
+                self.update_functions_context(exp,statement.group_statements)
+            else:
+                # FunctionCall must be aware of the context
+                statement.active_experiment = exp
+        return
+
+    def update_node_with_edits(self, node, edited_node):
+        """ Update a function/expression/group in the execution model.
+        
+        With an edited copy for single statements, with the original node
+        for groups/loops.
+        FIXME: The execution is not allowed during the update. Is it 
+        better to check the the auto_execute flag?   
+        """
+        
+        self.project.active_experiment.exec_model.allow_execute = False
+
+        if edited_node is not None: 
+            node.copy_traits(edited_node)
+                    
+        self.update_node_ui(node)   
+        
+        self.project.active_experiment.exec_model.allow_execute = True  
+        
     def update_node_ui(self, node):
         """ Update the UI for the given node.
         """
         self.project.active_experiment.controller.update_nodes([], [], [node.uuid])
+        # FIXME: Is it still needed? 
+        self.project.active_experiment.controller.canvas.request_redraw()
         self.update_context_from_function_ui(node)
 
     def expand_all_boxes(self):
@@ -593,10 +744,43 @@ class Application(HasTraits):
         variable.binding = name
         self.project.active_experiment.controller.update_nodes([], [], [graph_node])
 
-    # expand/contract all
-    # group/ungroup functions
-    # remove function
 
+    ### Group/loop management ############################################
+
+    def create_group_from_functions(self,gfunc=None,ids=None):
+        """ Create a group object from a list of statements.
+        
+        Statements to merge must be included in the execution model and
+        can be specified through a list of id: - ids - . 
+        If ids is null all the statements in the execution model will be merged.
+        The group type specification is passed through the gfunc obj.   
+        """
+        self.poject.active_experiment.exec_model.merge_statements(gfunc=gfunc,ids=ids)
+        return
+
+    def explode_all_groups(self):
+        """ Remove all groups from the current execution model.
+        
+        Is a task for the calling app to know if it is meaningful to add 
+        grouped statements to the execution model without the original group
+        specification.  
+        """
+        self.poject.active_experiment.exec_model.unmerge_all_groups()
+        
+    def explode_group(self,id):
+        """ Separate Group specified by id into statements. """
+        self.poject.active_experiment.exec_model.unmerge_statements(id)
+        
+    ### Export code&data together for batch application ##################
+    # FIXME: Highly experimental!!!! 
+    
+    def export_as_function(self, filename=""):  
+        mod_view = FuncNameInput()
+        mod_view.configure_traits(kind='modal')
+        self.project.active_experiment.export_as_function(filename,mod_view.out_str)
+    
+    def export_as_script(self,filename=""):
+        self.project.active_experiment.export_as_script(filename)
 
     ### html window scripting api ########################################
     # fixme: When we get an active_help_item, these should disappear...
@@ -612,6 +796,15 @@ class Application(HasTraits):
 
 
     ### Private interface ################################################
+
+    def _update_func_UI(self,stmt):
+        """ Updates statement UI class. 
+        
+        FIXME: It works properly ONLY if the function in stmt belongs to one of 
+        the modules in class library.  
+        """
+        traits_class = self.match_function_to_has_traits_class(stmt.label_name)
+        stmt.function_view_class = traits_class
 
     ### Trait handlers ###################################################
 
@@ -680,6 +873,7 @@ if __name__ == '__main__':
        "f = add(4, 2)\n" \
        "g = foo(2)\n"
 
+    
     # Enable logging
     import logging
     logging.getLogger().addHandler(logging.StreamHandler())

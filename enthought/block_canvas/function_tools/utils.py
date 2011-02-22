@@ -2,12 +2,15 @@
 """
 
 # Standard imports
-import os, sys
+import os, sys, string
 
 # Enthought library imports
 from enthought.etsconfig.api import ETSConfig
 from enthought.blocks.analysis import walk
 
+from enthought.traits.api import \
+    HasTraits, Str, List, Unicode, File, Directory
+    
 # Global assignment
 USER_MODULE_NAME = 'user_functions'
 
@@ -86,6 +89,35 @@ def initialize_user_data_dir():
         open(os.path.join(usr_data, '__init__.py'), 'w').close()
 
     return usr_data
+
+#-------------------------------------------------------------------------------
+# Code operations
+#-------------------------------------------------------------------------------
+
+def indent_space(n):
+    base_ind = ' '  
+    indent = ''    
+    for _ in range(n):
+        indent += base_ind
+    return indent
+    
+
+def reindent(s, numSpaces):
+    s = string.split(s, '\n')
+    s = [(numSpaces * ' ') + line for line in s]
+    s = string.join(s, '\n')
+    return s
+
+#-------------------------------------------------------------------------------
+#  Miscellaneous functions
+#-------------------------------------------------------------------------------
+
+# FIXME: Use a more "Advanced" checking.  
+def is_str(a):
+    return (isinstance(a,str) or isinstance(a,Str) or \
+            isinstance(a,unicode) or isinstance(a,Unicode) or \
+            isinstance(a,File) or isinstance(a,Directory))
+
 
 
 # Test

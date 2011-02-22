@@ -18,7 +18,7 @@ from decorator_tools import getsource
 import _pkgutil
 from function_variables import OutputVariable
 
-# Flags for func_code.co_flags that indicate whether we have a
+# Flags for func_code.co_flags that indicate whether we have a 
 # variable number of arguments or keyword arguments for the function.
 VAR_ARGS = 4
 KW_ARGS = 8
@@ -60,20 +60,20 @@ def function_arguments_from_function(func):
 
         Returns
         -------
-        args
+        args          
             List of (name, default) argument pairs.  `name` is always a string.
             `default` is None if it is not present.  Otherwise, it is a string
-            version of the default.
-        var_args
-            Name of the \*args argument.  Empty if it missing.
-        kw_args
+            version of the default. 
+        var_args      
+            Name of the \*args argument.  Empty if it missing.            
+        kw_args       
             Name of the \*\*kw argument.  Empty if it missing.
     """
-
+           
         #fixme: This is duplicated from:
         #    enthought\numerical_modeling\units\function_signature.py
-        #fixme: Rework this methods so that it returns
-        #    args, var_args, kw_args
+        #fixme: Rework this methods so that it returns 
+        #    args, var_args, kw_args 
         #    args should be a list of (name, default) strings.  If default
         #    is not set, it should be None.
 
@@ -91,14 +91,14 @@ def function_arguments_from_function(func):
     # arguments and match to the last arguments in the
     # args_ordered list. It is None, if there are no keyword arguments.
     defaults = func.func_defaults or []
-
+    
     # map defaults to string values.
     defaults = [str(value) for value in defaults]
 
-    no_defaults_count = len(args_ordered) - len(defaults)
+    no_defaults_count = len(args_ordered) - len(defaults) 
     defaults = [None] * no_defaults_count + list(defaults)
     args = zip(args_ordered, defaults)
-
+           
     # Handle variable length and arbitrary keyword arguments.
     var_args = ""
     kw_args = ""
@@ -110,14 +110,14 @@ def function_arguments_from_function(func):
         index += 1
     if flags & KW_ARGS:
         kw_args = var_kw_args[index]
-
-
+        
+        
     return args, var_args, kw_args
 
-
+                
 
 def function_inputs_from_call_ast(ast, info=None):
-    """ Returns function names and input/output binding
+    """ Returns function names and input/output binding 
         information from the CallFunc.
     """
     func = walk(ast, FunctionCallWalker())
@@ -128,7 +128,7 @@ def function_inputs_from_call_ast(ast, info=None):
         return func_names, func_args
     else:
         return None
-
+    
 class FunctionCallWalker(ASTVisitor):
     """ Collects binding information from the CallFunc.
         This Walker is only useful if there is only one function
@@ -141,14 +141,19 @@ class FunctionCallWalker(ASTVisitor):
     def visitCallFunc(self, node):
         self.func_names.append(node.node.name)
         for arg in node.args:
-            if hasattr(arg, 'name'):
-                self.func_args.append(arg.name)
-            elif hasattr(arg, 'value'):
-                self.func_args.append(arg.value)
+            if isinstance(arg,compiler.ast.Keyword):
+                nm = arg.name
+                val = arg.expr.name
+                self.func_args.append((nm,val))
             else:
-                msg = "Unknown argument, %s" % arg
-                warnings.warn(msg)
-
+                if hasattr(arg, 'name'):
+                    self.func_args.append(arg.name)
+                elif hasattr(arg, 'value'):
+                    self.func_args.append(arg.value)
+                else:
+                    msg = "Unknown argument, %s" % arg
+                    warnings.warn(msg)
+                
 def _get_keyword_defaults(default_nodes, func_name):
     """ Translate the default nodes of an ast into default arguments.
     """
@@ -162,7 +167,7 @@ def _get_keyword_defaults(default_nodes, func_name):
         elif isinstance(node, compiler.ast.Name):
             if node.name in ["None", "True", "False"]:
                 default = node.name
-            else:
+            else:    
                 msg = "Got variable name for keyword value in " \
                       "function: %s.  Using its name: %s" % \
                       (func_name, node.name)
@@ -175,38 +180,38 @@ def _get_keyword_defaults(default_nodes, func_name):
             # value.
             try:
                 default = unparse(node)
-            except:
+            except:   
                 msg = "Got '%s' node for keyword value in function." \
                       "  Using None as a stopgap." % node
                 warnings.warn(msg)
                 default = None
-
-        defaults.append(default)
-
+                
+        defaults.append(default)                    
+        
     return defaults
-
+    
 def _get_varargs_kwargs(varargs, kwargs, argnames):
     """ Determine the variable names for the varargs and kwargs variables.
-
-
+    
+    
         These will be empty if the function doesn't have either of
-        these values (varargs==kwargs==False).  Otherwise, this
+        these values (varargs==kwargs==False).  Otherwise, this 
         method will determine which names to read out of the argnames
         list to determine these values.
-
+        
         Parameters:
         -----------
         varargs: Bool
             Does this function have a *args value in the signature?
-
+        
         kwargs: Str
-            The name of the arbitrary keywords argument in its
+            The name of the arbitrary keywords argument in its 
             signature?
 
         argnames: List(Str)
-            The names of all the function arguments as read from
+            The names of all the function arguments as read from 
             the AST.
-
+            
         Returns:
         --------
         func_varargs: Str
@@ -214,16 +219,16 @@ def _get_varargs_kwargs(varargs, kwargs, argnames):
 
         func_kwargs: Str
             Name of keyword args variable
-
+            
     """
-
+    
     if varargs and not kwargs:
         func_varargs = argnames[-1]
         func_kwargs = ""
-    elif not varargs and kwargs:
+    elif not varargs and kwargs:           
         func_varargs = ""
         func_kwargs = argnames[-1]
-    elif varargs and kwargs:
+    elif varargs and kwargs:           
         func_varargs = argnames[-2]
         func_kwargs = argnames[-1]
     else:
@@ -234,7 +239,7 @@ def _get_varargs_kwargs(varargs, kwargs, argnames):
 
 def function_arguments_from_ast(ast):
     """ Convert the inputs found in the AST into InputVariable objects.
-
+    
         This handles finding the keyword arguments and trying to convert
         them from their AST representation into something that is useful
         as a default argument.  We also track whether the input arguments
@@ -247,7 +252,7 @@ def function_arguments_from_ast(ast):
     varargs = ast.varargs == True
     kwargs = ast.kwargs == True
     var_args, kw_args = _get_varargs_kwargs(varargs, kwargs, ast.argnames)
-
+    
     # There is little used syntax in python where arguments can be specified
     # in a tuple for grouping.  We flatten these out.
     flattened_argnames = []
@@ -255,8 +260,8 @@ def function_arguments_from_ast(ast):
         if type(argname) == type(()):
             flattened_argnames.extend(argname)
         else:
-            flattened_argnames.append(argname)
-
+            flattened_argnames.append(argname) 
+    
 
     # Now trim off the varargs and kwargs names from the argument list
     # if they exist.
@@ -267,45 +272,45 @@ def function_arguments_from_ast(ast):
     # Create the array of arg,defaults pairs.  Use undefined, if no default
     # is given.
     defaults = _get_keyword_defaults(ast.defaults, ast.name)
-    no_defaults_count = len(argnames) - len(defaults)
+    no_defaults_count = len(argnames) - len(defaults) 
     defaults = [None] * no_defaults_count + defaults
     args = zip(argnames, defaults)
-
+           
     return args, var_args, kw_args
 
 def outputs_from_function_ast(func_ast):
     """ Find the outputs by parsing the return statement in the ast and
-        getting the names of the returned arguments.
-
+        getting the names of the returned arguments. 
+        
     """
-    # Limit the ast to the one for this function node.
+    # Limit the ast to the one for this function node.        
     ast = find_function_node(func_ast, True)
     results = compiler.walk(ast, ReturnVariablesFinder()).return_vals
-
-    if results:
+    
+    if results:        
         output_names = results[0]
         # Create an output variable for each of the return values.
         outputs = [OutputVariable(name=arg) for arg in output_names]
-    else:
+    else: 
         # This function doesn't have any outputs.
         outputs = []
     return outputs
 
 def find_function_node(func_ast, check_name):
     """finds the funtion node, optionally matching the name
-
+    
        fixme: Why would you ever not want to check that the name matches?
-              This seems dangerous.
+              This seems dangerous. 
     """
-
+    
     ast = func_ast
-
+    
     if isinstance(ast, Module):
         ast = ast.node
-
+        
     if isinstance(ast, Function):
         return ast
-
+    
     if isinstance(ast, Stmt):
         for node in ast.nodes:
             if isinstance(node, Function):
@@ -314,7 +319,7 @@ def find_function_node(func_ast, check_name):
                 #FIXME what the heck is self?
                 if node.name == self.name:
                     return node
-
+                
     raise ValueError("Code does not contain a function declaration")
 
 
@@ -342,7 +347,7 @@ def function_returns_from_code(code):
         result = function_returns_from_ast(ast)
     else:
         result = None
-
+        
     return result
 
 
@@ -459,7 +464,7 @@ class ReturnVariablesFinder:
             return variables.
         """
         from compiler.ast import Tuple, Name, Const
-
+        
         # If the contents of the return statement is a name variable, then
         # it is the only return value for this statement.
         if isinstance(node.value, Name):
@@ -469,7 +474,7 @@ class ReturnVariablesFinder:
         # then we'll return the list.
         elif isinstance(node.value, Tuple):
             children = node.value.nodes
-            names = [child.name for child in children
+            names = [child.name for child in children 
                          if isinstance(child,Name)]
             # Ensure all variables were simple name variables.
             if len(names) == len(children):
@@ -486,7 +491,7 @@ class ReturnVariablesFinder:
             self.return_vals.append([])
         else:
             # We default to treating the return value as a single value
-            # called "result"
+            # called "result"                
             self.return_vals.append(['result'])
 
         return
