@@ -98,6 +98,18 @@ class Experiment(HasTraits):
     # Persistence
     #---------------------------------------------------------------------
 
+
+    def load_code_from_file(self,filename):
+        
+        # Clear out the old references
+        self.canvas = self.controller = self.exec_model = None
+        
+        self.exec_model = ExecutionModel.from_file(filename)
+        self.controller = BlockGraphController(execution_model = self.exec_model)
+        self.canvas = BlockCanvas(graph_controller=self.controller)
+        self.controller.canvas = self.canvas
+
+
     def load_from_config(self, config, dirname, project=None):
         """ Loads the experiment.  The existing state of the experiment is
         completely modified.
