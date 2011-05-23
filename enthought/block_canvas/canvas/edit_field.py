@@ -99,15 +99,30 @@ class EditField(Component):
         event.handled = True
         self.request_redraw()
 
+    def normal_character(self, event):
+        # handle normal text entry
+        char = event.character
+        old_len = len(self._text)
+
+        self._text.insert(self.index, char)
+        self.index += 1
+        self._text_changed = True
+
+        if old_len != len(self._text):
+            self.update_bounds()
+
+        event.handled = True
+        self.invalidate_draw()
+        self.request_redraw()
+
     def normal_key_pressed(self, event):
         char = event.character
         old_len = len(self._text)
 
         #Normal characters
         if len(char) == 1:
-            self._text.insert(self.index, char)
-            self.index += 1
-            self._text_changed = True
+            # leave unhandled, and let character event be generated
+            return
 
         #Deletion
         elif char == "Backspace":
