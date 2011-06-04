@@ -45,8 +45,8 @@ DOCLINES = __doc__.split("\n")
 cobyla = Extension(
     'blockcanvas.cobyla2c.moduleCobyla',
     sources=[
-        'enthought/block_canvas/cobyla2c/cobyla.c',
-        'enthought/block_canvas/cobyla2c/moduleCobyla.c'
+        'blockcanvas/cobyla2c/cobyla.c',
+        'blockcanvas/cobyla2c/moduleCobyla.c'
         ],
     )
 
@@ -77,7 +77,7 @@ setup(
     author = 'Enthought, Inc',
     author_email = 'info@enthought.com',
     download_url = (
-        'http://www.enthought.com/repo/ETS/BlockCanvas-%s.tar.gz' %
+        'http://www.enthought.com/repo/ets/BlockCanvas-%s.tar.gz' %
         INFO['version']),
     classifiers = [c.strip() for c in """\
         Development Status :: 5 - Production/Stable
@@ -107,9 +107,6 @@ setup(
     maintainer = 'ETS Developers',
     maintainer_email = 'enthought-dev@enthought.com',
     name = 'BlockCanvas',
-    namespace_packages = [
-        "enthought",
-        ],
     packages = find_packages(exclude=[
         'integrationtests',
         'integrationtests.*',
