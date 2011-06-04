@@ -3,7 +3,7 @@
 # a unittest.TestCase to conform to our process.
 import unittest
 
-from enthought.greenlet import greenlet
+from blockcanvas.greenlet import greenlet
 import sys, thread, threading
 
 class SomeError(Exception):

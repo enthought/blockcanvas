@@ -10,10 +10,10 @@ from cPickle \
 from numpy \
     import arange, ndarray
 
-from enthought.numerical_modeling.workflow.api \
+from blockcanvas.numerical_modeling.workflow.api \
     import Block
 
-from enthought.numerical_modeling.numeric_context.api \
+from blockcanvas.numerical_modeling.numeric_context.api \
     import NumericContext
 
 from traits.api \
@@ -450,7 +450,7 @@ class Interactor ( HasPrivateTraits ):
 
         return View(
             Group( *self.view_items() ),
-            id        ='enthought.numerical_modeling.ui.interactor.Interactor',
+            id        ='blockcanvas.numerical_modeling.ui.interactor.Interactor',
             title     = 'Parametric Controls',
             width     = 400,
             height    = 200,
@@ -490,7 +490,7 @@ class StochasticInteractorHandler ( InteractorHandler ):
                 #resize the distributions to ensure there are enough points
                 inputs[input].samples = interactor.realizations_per_host
 
-        from enthought.numerical_modeling.workflow.study.stochastic import \
+        from blockcanvas.numerical_modeling.workflow.study.stochastic import \
             run_block
         results = c.loop_apply(run_block.run_stocastic_block,
                                0,
@@ -648,7 +648,7 @@ class StochasticInteractor(Interactor):
 
         return View(
             Group( *self.view_items() ),
-            id        ='enthought.numerical_modeling.ui.interactor.StocasticInteractor',
+            id        ='blockcanvas.numerical_modeling.ui.interactor.StocasticInteractor',
             width     = 250,
             height    = 500,
             buttons   = [Action(name="Execute", action="execute_stochastic")],

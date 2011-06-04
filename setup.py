@@ -51,7 +51,7 @@ cobyla = Extension(
     )
 
 greenlet = Extension(
-    'enthought.greenlet.greenlet',
+    'blockcanvas.greenlet.greenlet',
     sources = [
         'enthought/greenlet/greenlet.c',
         ],

@@ -1,9 +1,9 @@
 import traitsui.menu as menu
 
-from enthought.numerical_modeling.numeric_context.api \
+from blockcanvas.numerical_modeling.numeric_context.api \
     import ANumericContext
 
-from enthought.numerical_modeling.workflow.api \
+from blockcanvas.numerical_modeling.workflow.api \
     import Block
 
 from traits.api \
@@ -233,7 +233,7 @@ class Displayer ( HasTraits ):
     def trait_view ( self, name = None, view_element = None ):
         return View(
             Group( *self.view_items() ),
-            id        = 'enthought.numerical_modeling.ui.displayer.Displayer',
+            id        = 'blockcanvas.numerical_modeling.ui.displayer.Displayer',
             width     = 250,
             buttons   = menu.NoButtons,
             resizable = True,

@@ -26,10 +26,10 @@ from traitsui.menu \
 from traitsui.table_column \
     import NumericColumn
 
-from enthought.model.traits.ui.wx.numeric_editor \
+from blockcanvas.model.traits.ui.wx.numeric_editor \
     import ToolkitEditorFactory as NumericEditor
 
-from enthought.model.api \
+from blockcanvas.model.api \
     import ANumericModel, NumericArrayModel, ExpressionFilter, IndexFilter
 
 #-------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ class NumericModelObject ( HasPrivateTraits ):
                           editor = number_editor ),
                     show_labels = False,
                     id          = 'splitter' ),
-            id        = 'enthought.model.numeric_model_view',
+            id        = 'blockcanvas.model.numeric_model_view',
             title     = 'Array Viewer',
             dock      = 'horizontal',
             width     = 0.5,

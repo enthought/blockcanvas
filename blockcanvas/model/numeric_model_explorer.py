@@ -35,10 +35,10 @@ from traitsui.menu \
 from traitsui.table_column \
     import NumericColumn, ObjectColumn
 
-from enthought.model.traits.ui.wx.numeric_editor \
+from blockcanvas.model.traits.ui.wx.numeric_editor \
     import ToolkitEditorFactory as NumericEditor
 
-from enthought.model.api \
+from blockcanvas.model.api \
     import ANumericModel, NumericArrayModel, ReductionModel, SelectionModel, \
            SelectionReductionModel, NumericItem, ExpressionFilter, \
            IndexFilter, PolygonFilter
@@ -723,7 +723,7 @@ class NumericModelExplorer ( HasPrivateTraits ):
                 id = 'splitter'
             ),
             title     = self.title,
-            id        = 'enthought.model.numeric_model_explorer',
+            id        = 'blockcanvas.model.numeric_model_explorer',
             dock      = 'horizontal',
             width     = 0.4,
             height    = 0.5,

@@ -9,7 +9,7 @@ from numpy import arange
 
 from traits.api import Array, HasTraits
 
-from enthought.model.api import NumericModel, NumericItem, PolygonFilter
+from blockcanvas.model.api import NumericModel, NumericItem, PolygonFilter
 
 
 # Setup a logger for this module.

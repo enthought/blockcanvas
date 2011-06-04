@@ -54,11 +54,11 @@ from pyface.sizers.flow \
 from pyface.image_resource \
     import ImageResource
 
-from enthought.model.api \
+from blockcanvas.model.api \
     import ANumericModel, NumericFilter, IndexFilter, ExpressionFilter, \
            MappingModel, CachedModel, FilterSet, EvaluatedNumericItem
 
-from enthought.model.numeric_editor \
+from blockcanvas.model.numeric_editor \
     import NumericFilterEditor
 
 from numeric_editor_model \

@@ -22,7 +22,7 @@ import \
     enthought.blocks.compiler_.ast.get_children_tree
 
 # XXX Hack
-from enthought.numerical_modeling.name_magic import magically_bound_names
+from blockcanvas.numerical_modeling.name_magic import magically_bound_names
 
 ###############################################################################
 # analysis public interface

@@ -34,7 +34,7 @@ from traitsui.table_filter \
 from traitsui.ui_traits \
     import SequenceTypes
 
-from enthought.model.api \
+from blockcanvas.model.api \
     import ANumericModel, SortFilter
 
 from pyface.ui.wx.grid.api \

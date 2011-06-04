@@ -1,5 +1,5 @@
-from enthought.numerical_modeling.name_magic import magically_bound_names # XXX
-from enthought.numerical_modeling.numeric_context.api import (
+from blockcanvas.numerical_modeling.name_magic import magically_bound_names # XXX
+from blockcanvas.numerical_modeling.numeric_context.api import (
     MaskFilter, NumericContext, OpenContext, PassThruContext, ReductionContext
 )
 

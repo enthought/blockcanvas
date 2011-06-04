@@ -5,7 +5,7 @@ import nose
 
 from traits.util.sequence import union
 
-from enthought.numerical_modeling.numeric_context.api import EventDict
+from blockcanvas.numerical_modeling.numeric_context.api import EventDict
 
 from mapping_object_test_case import HashMappingProtocolTest
 

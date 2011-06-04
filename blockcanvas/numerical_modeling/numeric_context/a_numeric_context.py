@@ -21,7 +21,7 @@ import copy
 
 from numpy import ndarray
 
-from enthought.numerical_modeling.numeric_context.event \
+from blockcanvas.numerical_modeling.numeric_context.event \
     import single_event
 
 from traits.api \

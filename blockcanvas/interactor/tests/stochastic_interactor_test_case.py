@@ -8,7 +8,7 @@ import numpy, unittest
 import nose
 
 # ETS imports
-from enthought.numerical_modeling.workflow.api import Block
+from blockcanvas.numerical_modeling.workflow.api import Block
 
 # Local imports
 from enthought.contexts.api import DataContext, MultiContext

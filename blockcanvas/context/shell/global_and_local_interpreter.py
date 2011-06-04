@@ -10,7 +10,7 @@ from code import softspace
 from wx.py.interpreter import Interpreter
 
 # ETS imports
-from enthought.numerical_modeling.numeric_context.api import NumericContext, \
+from blockcanvas.numerical_modeling.numeric_context.api import NumericContext, \
     EventDict
 
 

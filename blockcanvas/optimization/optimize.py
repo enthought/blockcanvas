@@ -9,7 +9,7 @@ from enthought.contexts.parametric_context import ParametricContext
 
 from enthought.contexts.data_context import DataContext
 from blockcanvas.cobyla2c.cobyla import minimize
-from enthought.greenlet import greenlet
+from blockcanvas.greenlet import greenlet
 from blockcanvas.plot.configurable_context_plot import ConfigurableContextPlot
 from blockcanvas.interactor.interactor_config import PlotConfig
 from blockcanvas.plot.context_plot import ContextPlotEditor

@@ -13,9 +13,9 @@ from test import test_support
 import unittest
 
 # ETS imports
-from enthought.numerical_modeling.numeric_context.tests.mapping_object_test_case import \
+from blockcanvas.numerical_modeling.numeric_context.tests.mapping_object_test_case import \
     BasicMappingProtocolTest, adapt_keys
-from enthought.numerical_modeling.numeric_context.api import \
+from blockcanvas.numerical_modeling.numeric_context.api import \
      NumericContext, DerivativeContext, PassThruContext, TraitsContext, CachedContext
 from scimath.units.api import UnitArray
 from traits.api import Int

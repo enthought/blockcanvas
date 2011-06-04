@@ -5,7 +5,7 @@
 import wx
 
 # Enthought Library imports:
-from enthought.numerical_modeling.numeric_context.api import NumericContext
+from blockcanvas.numerical_modeling.numeric_context.api import NumericContext
 from pyface.python_shell import PythonShell
 from pyface.ui.wx.python_shell import PyShell #temporary
 #from pyface.ui.qt4.python_shell import PyShell #temporary

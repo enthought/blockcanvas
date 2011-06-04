@@ -35,14 +35,14 @@ from traitsui.api \
 from traitsui.api \
     import BasicEditorFactory
 
-from enthought.model.traits.ui.wx.numeric_editor \
+from blockcanvas.model.traits.ui.wx.numeric_editor \
     import ToolkitEditorFactory as NumericEditor
 
-from enthought.model.api \
+from blockcanvas.model.api \
     import NumericObjectModel, ANumericModel, NumericItem, IndexFilter, \
            PolygonFilter
 
-from enthought.model.numeric_model_explorer \
+from blockcanvas.model.numeric_model_explorer \
     import ModelData, SelectionData, NumericModelExplorerInteraction
 
 from chaco.plot_canvas \
@@ -148,7 +148,7 @@ class _TableEditor ( Editor ):
                              user_selection_filter = IndexFilter(),
                              sortable = True ) ),
                      kind = 'subpanel',
-                     id   = 'enthought.model.numeric_ui._TableEditor' )
+                     id   = 'blockcanvas.model.numeric_ui._TableEditor' )
         ).control
 
     #---------------------------------------------------------------------------

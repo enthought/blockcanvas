@@ -33,7 +33,7 @@ class NumericReference ( HasPrivateTraits ):
     #---------------------------------------------------------------------------
 
     # The context this is a reference to:
-    context = Instance( 'enthought.model.numeric_context.a_numeric_context.'
+    context = Instance( 'blockcanvas.model.numeric_context.a_numeric_context.'
                         'ANumericContext' )
 
     # The name of the context item this is a reference to:

@@ -4,7 +4,7 @@ from numpy import all, arange, array, ndarray
 from traits.testing.api import doctest_for_module
 
 from enthought.blocks.api import Block
-from enthought.numerical_modeling.numeric_context.context_factory import default_context
+from blockcanvas.numerical_modeling.numeric_context.context_factory import default_context
 
 class ExecutionTestCase(unittest.TestCase):
 

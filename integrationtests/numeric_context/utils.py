@@ -4,7 +4,7 @@ from nose.tools import assert_equal
 from numpy import ndarray, all
 
 # ETS imports
-from enthought.numerical_modeling.numeric_context.api import ANumericContext
+from blockcanvas.numerical_modeling.numeric_context.api import ANumericContext
 from traits.util.dict import dict_zip
 from traits.util.sequence import union
 
