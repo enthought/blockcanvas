@@ -2,10 +2,10 @@
 from traits.api import HasTraits, implements, Instance
 
 # Application imports
-from enthought.block_canvas.canvas.i_canvas_node_factory import ICanvasNodeFactory
-from enthought.block_canvas.canvas.canvas_box import CanvasBox
-from enthought.block_canvas.function_tools.function_call import FunctionCall
-from enthought.block_canvas.function_tools.general_expression import GeneralExpression
+from blockcanvas.canvas.i_canvas_node_factory import ICanvasNodeFactory
+from blockcanvas.canvas.canvas_box import CanvasBox
+from blockcanvas.function_tools.function_call import FunctionCall
+from blockcanvas.function_tools.general_expression import GeneralExpression
 
 class BlockNodeFactory(HasTraits):
     """ A factory that transforms properly decorated blocks (see block_graph.py)

@@ -25,24 +25,24 @@ from pyface.api import error
 from pyface.image_resource import ImageResource
 
 # Block Canvas imports
-from enthought.block_canvas.function_tools.i_minimal_function_info import \
+from blockcanvas.function_tools.i_minimal_function_info import \
     MinimalFunctionInfo
-from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
-from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
-from enthought.block_canvas.function_tools.function_call import FunctionCall
-from enthought.block_canvas.function_tools.function_search_ui import \
+from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
+from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
+from blockcanvas.function_tools.function_call import FunctionCall
+from blockcanvas.function_tools.function_search_ui import \
     FunctionSearchUIHandler, SearchTableAdapter
-from enthought.block_canvas.function_tools.general_expression import GeneralExpression
+from blockcanvas.function_tools.general_expression import GeneralExpression
 
 # App imports
 if ETSConfig.toolkit == 'wx':
-    from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+    from blockcanvas.ui.hyperlink_editor import HyperlinkEditor
 else:
     from traitsui.api import ButtonEditor as HyperlinkEditor
 
 # Local imports
 from function_search_preferences_ui import function_search_preferences_view
-from enthought.block_canvas.app import scripting
+from blockcanvas.app import scripting
 
 
 ### FIXME:  This is a cut and paste from the application,
@@ -285,9 +285,9 @@ function_search_view = \
 
 if __name__ == "__main__":
 
-    from enthought.block_canvas.function_tools.function_library import FunctionLibrary
+    from blockcanvas.function_tools.function_library import FunctionLibrary
 
-    from enthought.block_canvas.app import app
+    from blockcanvas.app import app
 
 
     library = FunctionLibrary(modules=['os','cp.rockphysics'])

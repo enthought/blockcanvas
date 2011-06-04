@@ -11,7 +11,7 @@ from traitsui.api import View, Item, Group, TextEditor
 
 # Block Canvas imports
 from enthought.contexts.api import IListenableContext
-from enthought.block_canvas.block_display.execution_model import ExecutionModel
+from blockcanvas.block_display.execution_model import ExecutionModel
 
 # Local imports
 from editors import int_eval_editor, float_eval_editor, array_eval_editor
@@ -94,7 +94,7 @@ class SimpleInteractor(HasTraits):
 
 
 if __name__ == "__main__":
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     # Experiment setup.
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.app.experiment import Experiment
+    from blockcanvas.app.experiment import Experiment
     context = DataContext(name='Data')
     context['a'] = 1
     context['b'] = 2

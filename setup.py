@@ -43,7 +43,7 @@ DOCLINES = __doc__.split("\n")
 
 # Build Python extensions
 cobyla = Extension(
-    'enthought.block_canvas.cobyla2c.moduleCobyla',
+    'blockcanvas.cobyla2c.moduleCobyla',
     sources=[
         'enthought/block_canvas/cobyla2c/cobyla.c',
         'enthought/block_canvas/cobyla2c/moduleCobyla.c'

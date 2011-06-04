@@ -5,7 +5,7 @@ import imp
 import sys
 
 # Local imports
-from enthought.block_canvas.function_tools.search_package import (is_package, is_module,
+from blockcanvas.function_tools.search_package import (is_package, is_module,
                                            find_package_sub_modules,
                                            find_functions_import_recurse,
                                            python_path_from_file_path,

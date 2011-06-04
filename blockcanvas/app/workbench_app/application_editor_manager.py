@@ -31,7 +31,7 @@ class ApplicationEditorManager(EditorManager):
             #        registry of editors.
         """
 
-        from enthought.block_canvas.app.experiment import Experiment
+        from blockcanvas.app.experiment import Experiment
         from editors.experiment_canvas_editor import  ExperimentCanvasEditor
 
         # fixme: ?? This fails when it shouldn't because of what appear

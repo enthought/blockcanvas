@@ -185,7 +185,7 @@ if __name__ == '__main__':
 #    from scimath.units.api import UnitArray
 #    from scimath.units.length import meter
 
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \

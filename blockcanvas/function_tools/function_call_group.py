@@ -23,17 +23,17 @@ from traits.api import \
     Property, Instance, List, Str, Bool, Any, on_trait_change
 
 # Enthought BlockCanvas import
-from enthought.block_canvas.app import scripting
+from blockcanvas.app import scripting
 
-from enthought.block_canvas.function_tools.function_call import \
+from blockcanvas.function_tools.function_call import \
     FunctionCall
-from enthought.block_canvas.function_tools.callable_info import \
+from blockcanvas.function_tools.callable_info import \
     CallableInfo
-from enthought.block_canvas.function_tools.function_search import \
+from blockcanvas.function_tools.function_search import \
     FunctionSearch
-from enthought.block_canvas.function_tools.function_library import \
+from blockcanvas.function_tools.function_library import \
     FunctionLibrary
-from enthought.block_canvas.class_tools.class_library import \
+from blockcanvas.class_tools.class_library import \
     ClassLibrary
 
 # Local import
@@ -114,7 +114,7 @@ class FunctionCallGroup(FunctionCall):
         """
         
         # To avoid circular imports
-        from enthought.block_canvas.app.app import Application
+        from blockcanvas.app.app import Application
         
         code = None       
         app_exist = False
@@ -382,7 +382,7 @@ class FunctionCallGroup(FunctionCall):
             
 if __name__ == '__main__':
 
-    from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
+    from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
     
     f1code = "def foo(x=3, y=4):\n" \
     "    z = x + y\n" \

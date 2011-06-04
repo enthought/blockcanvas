@@ -12,9 +12,9 @@ import os, unittest, tempfile
 from enthought.blocks.api import Block
 
 # Local imports
-from enthought.block_canvas.app.utils import create_unique_project_name
-from enthought.block_canvas.app.block_application import BlockApplication
-from enthought.block_canvas.block_display.block_unit import BlockUnit
+from blockcanvas.app.utils import create_unique_project_name
+from blockcanvas.app.block_application import BlockApplication
+from blockcanvas.block_display.block_unit import BlockUnit
 from enthought.contexts.api import DataContext
 
 #-------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ class ProjectTestCase(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.code = 'from enthought.block_canvas.debug.my_operator import add\n' \
+        self.code = 'from blockcanvas.debug.my_operator import add\n' \
                     'c = add(a,b)\n'
         self.dir_name = tempfile.gettempdir()
         self.app = BlockApplication(block_unit=BlockUnit())

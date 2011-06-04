@@ -30,14 +30,14 @@ from enthought.blocks.analysis import walk
 from enthought.blocks.api import parse
 
 # Enthought BlockCanvas
-from enthought.block_canvas.function_tools.function_variables \
+from blockcanvas.function_tools.function_variables \
     import InputVariable, OutputVariable
     
-from enthought.block_canvas.function_tools.general_expression \
+from blockcanvas.function_tools.general_expression \
     import StatementWalker, GeneralExpression
    
-from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup
-from enthought.block_canvas.function_tools.utils import reindent, is_str
+from blockcanvas.function_tools.function_call_group import FunctionCallGroup
+from blockcanvas.function_tools.utils import reindent, is_str
 
 logger = logging.getLogger(__name__)
 
@@ -295,7 +295,7 @@ if __name__ == '__main__':
     from execution_model import ExecutionModelExtended as ExecutionModel
 
            
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
        "def bar(xx,yy):\n" \
        "    k = xx * yy\n" \
        "    return k\n\n" \

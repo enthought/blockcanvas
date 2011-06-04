@@ -5,7 +5,7 @@ import imp
 import sys
 
 # Local imports
-from enthought.block_canvas.class_tools.search_package import (
+from blockcanvas.class_tools.search_package import (
                                            find_classes,
                                            find_classes_import_recurse,
                                            )

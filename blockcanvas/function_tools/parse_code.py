@@ -16,7 +16,7 @@ from compiler.ast import CallFunc
 import __builtin__
 builtin_names = set(dir(__builtin__))
 
-from enthought.block_canvas.function_tools.general_expression \
+from blockcanvas.function_tools.general_expression \
     import StatementWalker
     
 # CodeTools imports

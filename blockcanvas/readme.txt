@@ -8,8 +8,8 @@ user to search for functions that match a particular string.  The typical usage
 is as follows:
 
 {{{
-    from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-    from enthought.block_canvas.function_tools.function_search import FunctionSearch
+    from blockcanvas.function_tools.function_library import FunctionLibrary
+    from blockcanvas.function_tools.function_search import FunctionSearch
 
     # Find the functions in the os module and the xml package.
     library = FunctionLibrary(modules=['os','xml'])

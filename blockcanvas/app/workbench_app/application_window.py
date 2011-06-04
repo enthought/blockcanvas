@@ -12,9 +12,9 @@ from enthought.undo.action.api import ClearRecordingAction, EndRecordingAction
 from enthought.undo.action.api import CommandAction, RedoAction, UndoAction
 
 # Block Canvas imports
-from enthought.block_canvas.app.ui.function_search_ui import function_search_view
-from enthought.block_canvas.app.project import Project
-from enthought.block_canvas.app.experiment import Experiment
+from blockcanvas.app.ui.function_search_ui import function_search_view
+from blockcanvas.app.project import Project
+from blockcanvas.app.experiment import Experiment
 
 # Local imports.
 from views.traits_ui_view import TraitsUIView

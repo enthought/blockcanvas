@@ -14,7 +14,7 @@ import _ast
 # Enthought library imports
 from traits.api import Str, List
 
-from enthought.block_canvas.function_tools.parse_tools import \
+from blockcanvas.function_tools.parse_tools import \
     function_arguments_from_ast, function_returns_from_ast
 
 

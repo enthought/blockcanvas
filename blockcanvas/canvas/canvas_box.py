@@ -147,8 +147,8 @@ class CanvasBox(Container, SelectableComponentMixin):
         """ Double click opens the edit dialog for the function.
             FIXME:  Double Click should trigger editing of self.graph_node
         """
-        from enthought.block_canvas.app import scripting
-        from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup
+        from blockcanvas.app import scripting
+        from blockcanvas.function_tools.function_call_group import FunctionCallGroup
         
         # It is not necessary to clone the whole container for a group of
         # statements (i.e. FunctionCallGroup object) so let's edit the original 
@@ -204,7 +204,7 @@ class CanvasBox(Container, SelectableComponentMixin):
     def expand_clicked(self):
         """ Called when the expand button is clicked.
         """
-        from enthought.block_canvas.app.scripting import app
+        from blockcanvas.app.scripting import app
         if self.expanded:
             app.collapse_box(self)
         else:
@@ -220,7 +220,7 @@ class CanvasBox(Container, SelectableComponentMixin):
                 selection = self.container.selection_manager.selection
             else:
                 selection = [self]
-            from enthought.block_canvas.app.scripting import app
+            from blockcanvas.app.scripting import app
             for item in selection:
                 app.remove_function_from_execution_model(item.graph_node)
         return

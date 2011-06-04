@@ -19,7 +19,7 @@ from traits.etsconfig.api import ETSConfig
 from traits.logger.api import add_log_queue_handler, create_log_file_handler
 
 # Local imports
-from enthought.block_canvas.app.block_application import BlockApplication
+from blockcanvas.app.block_application import BlockApplication
 from enthought.contexts.data_context import DataContext
 
 def initialize_logger():
@@ -66,7 +66,7 @@ def hardcode_vars():
     """
     context.defer_events = False
 
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "from numpy import arange\n" \
            "x = arange(0,10,.1)\n" \
            "c1 = mul(a,a)\n" \

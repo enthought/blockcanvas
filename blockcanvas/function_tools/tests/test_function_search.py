@@ -5,9 +5,9 @@ import sys
 import unittest
 
 # local imports
-from enthought.block_canvas.function_tools.function_search import \
+from blockcanvas.function_tools.function_search import \
     FunctionSearch
-from enthought.block_canvas.function_tools.function_library import \
+from blockcanvas.function_tools.function_library import \
     FunctionLibrary
 
 class FunctionSearchTestCase(unittest.TestCase):

@@ -5,12 +5,12 @@ import unittest
 from enthought.blocks.api import Block
 
 # Local library imports
-from enthought.block_canvas.function_tools.function_call import \
+from blockcanvas.function_tools.function_call import \
     FunctionCall
-from enthought.block_canvas.function_tools.function_info import \
+from blockcanvas.function_tools.function_info import \
     find_functions
 
-from enthought.block_canvas.function_tools.tests.typical_functions import simple, with_defaults, \
+from blockcanvas.function_tools.tests.typical_functions import simple, with_defaults, \
     with_defaults_none, with_varargs, with_kwargs, with_varargs_kwargs, \
     no_return, empty_return
 
@@ -241,7 +241,7 @@ class FunctionCallTestCase(unittest.TestCase):
     # Test pre-processing step
     #
     def test_import_preprocessing(self):
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \
@@ -250,7 +250,7 @@ class FunctionCallTestCase(unittest.TestCase):
         foo_block = Block(code)
         info = find_functions(foo_block.ast)
 
-        desired = 'enthought.block_canvas.debug.my_operator'
+        desired = 'blockcanvas.debug.my_operator'
         assert 'add' in info
         assert info['add']
         add_func = info['add']
@@ -262,7 +262,7 @@ class FunctionCallTestCase(unittest.TestCase):
         self.assertEqual(mul_func.module, desired)
 
     def test_import_rename_preprocessing(self):
-        code = "from enthought.block_canvas.debug.my_operator import add as add1\n" \
+        code = "from blockcanvas.debug.my_operator import add as add1\n" \
                "a = add1(1,2)\n" \
                "b = add1(a,3)"
 
@@ -273,7 +273,7 @@ class FunctionCallTestCase(unittest.TestCase):
         assert not( 'add' in info )
         assert info['add1']
 
-        desired = 'enthought.block_canvas.debug.my_operator'
+        desired = 'blockcanvas.debug.my_operator'
         add1_func = info['add1']
         self.assertEqual(add1_func.module, desired)
 
@@ -292,7 +292,7 @@ class FunctionCallTestCase(unittest.TestCase):
     # Test from_ast()
     #
     def test_import(self):
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \
@@ -307,7 +307,7 @@ class FunctionCallTestCase(unittest.TestCase):
 
 
     def test_import_and_rename(self):
-        code = "from enthought.block_canvas.debug.my_operator import add as add1\n" \
+        code = "from blockcanvas.debug.my_operator import add as add1\n" \
                "a = add1(1,2)\n" \
                "b = add1(a,3)"
         foo_block = Block(code)

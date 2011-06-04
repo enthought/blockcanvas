@@ -4,10 +4,10 @@ import unittest
 import os
 
 # Enthought library imports
-from enthought.block_canvas.function_tools.search_package import get_module_path
+from blockcanvas.function_tools.search_package import get_module_path
 
 # local imports
-from enthought.block_canvas.function_tools.python_function_info import \
+from blockcanvas.function_tools.python_function_info import \
     PythonFunctionInfo
 
 from typical_functions import empty, simple, \
@@ -113,7 +113,7 @@ class PythonFunctionInfoTestCase(unittest.TestCase):
     def test_parse_error(self):
         # Because having a function checked in with a parse error creates problems
         # with the egg builder, we take an existing file and modify it.
-        old_module = 'enthought.block_canvas.function_tools.tests.sample_package.error_package'
+        old_module = 'blockcanvas.function_tools.tests.sample_package.error_package'
         old_filename = get_module_path(old_module)
         new_filename = old_filename[:-3] + '2.py'
         new_module = old_module+'2'

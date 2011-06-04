@@ -12,7 +12,7 @@ class BlockRestrictestCase(unittest.TestCase):
     """
 
     def test_simple_output_reduction(self):
-        code = 'from enthought.block_canvas.debug.my_operator import add, mul\n' \
+        code = 'from blockcanvas.debug.my_operator import add, mul\n' \
                 'c = add(a,b)\n' \
                 'd = mul(a,16)\n'
 
@@ -30,7 +30,7 @@ class BlockRestrictestCase(unittest.TestCase):
         self.assertEqual(context['d'], 16)
 
     def test_dependent_output_reduction(self):
-        code = 'from enthought.block_canvas.debug.my_operator import add, mul\n' \
+        code = 'from blockcanvas.debug.my_operator import add, mul\n' \
                 'c = add(a,b)\n' \
                 'd = mul(c,16)\n'
 
@@ -50,7 +50,7 @@ class BlockRestrictestCase(unittest.TestCase):
         self.assertEqual(context['d'], 48)
 
     def test_unbound_inputs(self):
-        code = 'from enthought.block_canvas.debug.my_operator import add, mul\n' \
+        code = 'from blockcanvas.debug.my_operator import add, mul\n' \
                "c = add(a,b)\n" \
                "d = mul(c,a)\n" \
                "z = add(b, 2)"

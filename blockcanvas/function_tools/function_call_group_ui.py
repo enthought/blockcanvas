@@ -17,9 +17,9 @@ from traitsui.api import (View, HSplit, VSplit, Item,
                                      InstanceEditor)
 
 # Enthought BlockCanvas import
-from enthought.block_canvas.block_display.block_editor import BlockEditor
-from enthought.block_canvas.app.ui.function_search_ui import function_search_view
-from enthought.block_canvas.app.block_application_view_handler import BlockApplicationViewHandler
+from blockcanvas.block_display.block_editor import BlockEditor
+from blockcanvas.app.ui.function_search_ui import function_search_view
+from blockcanvas.app.block_application_view_handler import BlockApplicationViewHandler
 
 def create_view(model=None):
     view = View( 

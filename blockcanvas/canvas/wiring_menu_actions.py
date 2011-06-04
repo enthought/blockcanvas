@@ -30,7 +30,7 @@ class AddSuffixAction(Action):
                 for field in self.selected_fields:
                     old_text = field.variable.binding
                     if not old_text.isdigit():
-                        from enthought.block_canvas.app.scripting import app
+                        from blockcanvas.app.scripting import app
                         new_text = old_text + '_' + suffix
                         app.update_function_variable_binding(field.box.graph_node,
                                                              field.variable, new_text)
@@ -57,7 +57,7 @@ class ChangeSuffixAction(Action):
                         i = old_text.rfind('_')
                         if i > 0:
                             base = old_text[:i]
-                            from enthought.block_canvas.app.scripting import app
+                            from blockcanvas.app.scripting import app
                             new_text = base + '_' + suffix
                             app.update_function_variable_binding(field.box.graph_node,
                                                                  field.variable, new_text)

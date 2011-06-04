@@ -190,7 +190,7 @@ class WiringTool(AbstractOverlay, DragTool):
                     matches = self.match_inputs2outputs()
                     for input, pairs in matches.items():
                         for pair in pairs:
-                            from enthought.block_canvas.app.scripting import app
+                            from blockcanvas.app.scripting import app
                             # Set the input (pair[0]) binding to output(pair[1])
                             app.update_function_variable_binding(field.box.graph_node,
                                                                  pair[0],

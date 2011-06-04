@@ -12,10 +12,10 @@ from traitsui.api import View, Item, InstanceEditor
 from pyface.workbench.api import View as WorkbenchView
 
 # Block Canvas imports
-from enthought.block_canvas.function_tools.function_search import FunctionSearch
-from enthought.block_canvas.app.ui.function_search_ui import \
+from blockcanvas.function_tools.function_search import FunctionSearch
+from blockcanvas.app.ui.function_search_ui import \
     function_search_view, AppFunctionSearchUIHandler
-from enthought.block_canvas.app.workbench_app.application import Application
+from blockcanvas.app.workbench_app.application import Application
 
 # Local imports
 from traits_ui_view import TraitsUIView

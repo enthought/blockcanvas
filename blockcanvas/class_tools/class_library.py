@@ -7,7 +7,7 @@ from traits.api import (HasTraits, Str, List, Dict,
 
 # Local imports
 from search_package import find_classes
-from enthought.block_canvas.function_tools.search_package import get_module_path
+from blockcanvas.function_tools.search_package import get_module_path
 from i_minimal_class_info import MinimalClassInfo
 
 class ClassLibrary(HasTraits):

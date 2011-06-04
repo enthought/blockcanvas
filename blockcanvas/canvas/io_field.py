@@ -1,5 +1,5 @@
 # Enthought Library imports
-from enthought.block_canvas.function_tools.function_variables import Variable
+from blockcanvas.function_tools.function_variables import Variable
 from enable.api import ColorTrait, Container
 from traits.api import Any, Bool, Enum, Float, Instance, Tuple
 
@@ -144,7 +144,7 @@ class IOField(Container):
         """
         if is_a_context_variable(event.obj):
             result = 'copy'
-            from enthought.block_canvas.app.scripting import app
+            from blockcanvas.app.scripting import app
             app.update_function_variable_binding(self.box.graph_node,
                 self.variable, event.obj.name)
         else:
@@ -201,7 +201,7 @@ if (__name__=='__main__'):
     from enable.api import Window
     from enable.api import Container
     from enable.example_support import DemoFrame, demo_main
-    from enthought.block_canvas.function_tools.function_variables import InputVariable
+    from blockcanvas.function_tools.function_variables import InputVariable
 
     class MyFrame(DemoFrame):
         def _create_window(self):

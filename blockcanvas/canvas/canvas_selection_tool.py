@@ -156,7 +156,7 @@ class CanvasSelectionTool(DragTool):
         """
         controller = self.component.graph_controller
         mgr = self.component.selection_manager
-        from enthought.block_canvas.app import scripting
+        from blockcanvas.app import scripting
 
         # fixme: Get rid of hard coded keys using KeyBindings.
         if event.control_down and event.character == "g":

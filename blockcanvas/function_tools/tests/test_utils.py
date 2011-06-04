@@ -2,7 +2,7 @@
 import os, unittest
 
 # Local library imports
-from enthought.block_canvas.function_tools.utils import initialize_user_data_dir
+from blockcanvas.function_tools.utils import initialize_user_data_dir
 
 
 class UtilsTestCase(unittest.TestCase):

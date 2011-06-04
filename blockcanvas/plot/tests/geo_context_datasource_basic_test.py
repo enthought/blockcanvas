@@ -4,7 +4,7 @@ from numpy import array
 
 # Local imports
 from enthought.contexts.geo_context import GeoContext
-from enthought.block_canvas.plot.data_context_datasource import DataContextDataSource
+from blockcanvas.plot.data_context_datasource import DataContextDataSource
 
 class GeoContextDataSourceBasicTest(unittest.TestCase):
 

@@ -9,14 +9,14 @@ from uuid import UUID
 
 # ETS imports
 from enthought.execution.interfaces import IExecutable
-from enthought.block_canvas.function_tools.function_info import find_functions
-from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
-from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
-from enthought.block_canvas.function_tools.function_call import FunctionCall
-from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup
-from enthought.block_canvas.function_tools.general_expression import GeneralExpression
-from enthought.block_canvas.function_tools.group_spec import GroupSpec
-from enthought.block_canvas.function_tools.parse_code import retrieve_inputs_and_outputs
+from blockcanvas.function_tools.function_info import find_functions
+from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
+from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
+from blockcanvas.function_tools.function_call import FunctionCall
+from blockcanvas.function_tools.function_call_group import FunctionCallGroup
+from blockcanvas.function_tools.general_expression import GeneralExpression
+from blockcanvas.function_tools.group_spec import GroupSpec
+from blockcanvas.function_tools.parse_code import retrieve_inputs_and_outputs
 from enthought.blocks.analysis import walk, is_const
 from enthought.blocks.api import (Block, unparse)
 from traits.api import \

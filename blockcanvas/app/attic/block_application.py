@@ -25,25 +25,25 @@ from pyface.api \
 from enthought.blocks.api \
     import Block, unparse
 
-from enthought.block_canvas.block_display.block_unit \
+from blockcanvas.block_display.block_unit \
     import BlockUnit
 
 from enthought.contexts.data_context \
     import DataContext
 
-from enthought.block_canvas.context.editors.context_shell_editor \
+from blockcanvas.context.editors.context_shell_editor \
     import ContextShellEditor
 
-from enthought.block_canvas.function_tools.handled_function_search \
+from blockcanvas.function_tools.handled_function_search \
     import HandledFunctionSearch
 
-from enthought.block_canvas.function_tools.function_library \
+from blockcanvas.function_tools.function_library \
     import FunctionLibrary
 
-from enthought.block_canvas.function_tools.utils \
+from blockcanvas.function_tools.utils \
     import USER_MODULE_NAME
 
-from enthought.block_canvas.interactor.configurable_interactor \
+from blockcanvas.interactor.configurable_interactor \
      import INTERACTOR_LIST
 
 # Local imports:
@@ -195,7 +195,7 @@ class BlockApplication(HasTraits):
           menubar   = BlockApplicationMenuBar,
           width     = 800,
           height    = 600,
-          id        = 'enthought.block_canvas.app.block_application',
+          id        = 'blockcanvas.app.block_application',
           resizable = True,
           handler   = BlockApplicationViewHandler,
         )

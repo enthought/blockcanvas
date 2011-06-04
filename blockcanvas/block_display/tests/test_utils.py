@@ -5,7 +5,7 @@ import unittest
 from enthought.blocks.api import Block, unparse
 
 # Local imports
-from enthought.block_canvas.block_display.utils import *
+from blockcanvas.block_display.utils import *
 
 
 class BlockGraphTestCase(unittest.TestCase):

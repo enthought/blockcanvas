@@ -8,15 +8,15 @@ from traitsui.api import HSplit, Item, VGroup, View, VSplit, \
 from enthought.appscripting.api import scriptable
 
 # Block Canvas imports
-from enthought.block_canvas.block_display.block_editor import BlockEditor
-from enthought.block_canvas.context.ui.context_variable import ContextVariableList
-from enthought.block_canvas.context.ui.context_variable_ui import context_variables_view
-from enthought.block_canvas.function_tools.function_search import FunctionSearch
-from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-from enthought.block_canvas.function_tools.html_info_ui import HtmlInfoUI
-from enthought.block_canvas.app import scripting
-from enthought.block_canvas.app.project import Project
-from enthought.block_canvas.app.experiment import Experiment
+from blockcanvas.block_display.block_editor import BlockEditor
+from blockcanvas.context.ui.context_variable import ContextVariableList
+from blockcanvas.context.ui.context_variable_ui import context_variables_view
+from blockcanvas.function_tools.function_search import FunctionSearch
+from blockcanvas.function_tools.function_library import FunctionLibrary
+from blockcanvas.function_tools.html_info_ui import HtmlInfoUI
+from blockcanvas.app import scripting
+from blockcanvas.app.project import Project
+from blockcanvas.app.experiment import Experiment
 
 class Application(HasTraits):
     """ The Application object that ties together an execution model,
@@ -217,7 +217,7 @@ class Application(HasTraits):
 
 if __name__ == '__main__':
 
-    code =  "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code =  "from blockcanvas.debug.my_operator import add, mul\n" \
        "def foo(x, y=3):\n" \
        "    z = x + y\n" \
        "    return z\n" \

@@ -6,8 +6,8 @@ import tempfile
 import unittest
 
 
-from enthought.block_canvas.app.experiment import Experiment
-from enthought.block_canvas.app.tests.experiment_utils import (create_simple_experiment,
+from blockcanvas.app.experiment import Experiment
+from blockcanvas.app.tests.experiment_utils import (create_simple_experiment,
     compare_experiments)
 
 

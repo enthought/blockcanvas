@@ -23,7 +23,7 @@ from traitsui.api import (View, Item, HGroup, CodeEditor,
         ButtonEditor, VGroup, spring)
 
 # CodeTools imports
-#from enthought.block_canvas.app.experiment import Experiment
+#from blockcanvas.app.experiment import Experiment
 
 # Local imports
 from callable_info import CallableInfo
@@ -347,7 +347,7 @@ if __name__ == '__main__':
 
     from function_info import find_functions
     from enthought.blocks.api import Block
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \

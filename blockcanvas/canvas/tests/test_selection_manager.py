@@ -2,8 +2,8 @@ import unittest
 
 from traits.api import Any, HasTraits, Enum, implements
 
-from enthought.block_canvas.canvas.selection_manager import SelectionManager
-from enthought.block_canvas.canvas.i_selectable import ISelectable
+from blockcanvas.canvas.selection_manager import SelectionManager
+from blockcanvas.canvas.i_selectable import ISelectable
 
 class Event(HasTraits):
     """

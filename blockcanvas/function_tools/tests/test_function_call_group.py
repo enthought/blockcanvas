@@ -5,16 +5,16 @@ import unittest
 from enthought.blocks.api import Block
 
 # Local library imports
-from enthought.block_canvas.function_tools.function_call import \
+from blockcanvas.function_tools.function_call import \
     FunctionCall
 
-from enthought.block_canvas.function_tools.group_spec import \
+from blockcanvas.function_tools.group_spec import \
     GroupSpec
 
-from enthought.block_canvas.function_tools.function_call_group import \
+from blockcanvas.function_tools.function_call_group import \
     FunctionCallGroup
     
-from enthought.block_canvas.function_tools.tests.typical_functions import simple, with_defaults, \
+from blockcanvas.function_tools.tests.typical_functions import simple, with_defaults, \
     with_defaults_none, with_varargs, with_kwargs, with_varargs_kwargs, \
     no_return, empty_return
 

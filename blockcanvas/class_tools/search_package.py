@@ -13,10 +13,10 @@ import logging
 
 
 # local copy of Python 2.5 pkgutil.py
-from enthought.block_canvas.function_tools import _pkgutil
+from blockcanvas.function_tools import _pkgutil
 
 # Import from function_tools
-from enthought.block_canvas.function_tools.search_package import get_module_path, \
+from blockcanvas.function_tools.search_package import get_module_path, \
     find_package_sub_modules, find_path_sub_modules, python_path_from_file_path, \
     is_package, is_module
 

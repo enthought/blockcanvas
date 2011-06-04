@@ -7,7 +7,7 @@ import re
 # Enthought library imports.
 from traits.api import HasTraits, List, Str, on_trait_change, Bool
 
-from enthought.block_canvas.function_tools.function_search import regex_from_str
+from blockcanvas.function_tools.function_search import regex_from_str
 
 # Local imports
 

@@ -88,7 +88,7 @@ class Variable(HasTraits):
         # Checking for old and new values to avoid executing
         # when a binding is first being set on start up.
         if old and new:
-            from enthought.block_canvas.app.scripting import app
+            from blockcanvas.app.scripting import app
             app.execute_for_binding(self, old, new)
 
 

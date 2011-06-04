@@ -9,7 +9,7 @@ import unittest
 import xml
 
 # Local library imports
-from enthought.block_canvas.function_tools.function_call import \
+from blockcanvas.function_tools.function_call import \
     FunctionCall
 
 

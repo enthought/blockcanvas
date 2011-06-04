@@ -19,27 +19,27 @@ from enthought.execution.executing_context import ExecutingContext
 from enthought.contexts.api import DataContext, MultiContext
 
 # Block canvas imports
-from enthought.block_canvas.block_display.block_editor import BlockEditor
-from enthought.block_canvas.block_display.execution_model import ExecutionModel
-from enthought.block_canvas.context.ui.context_variable import ContextVariableList
-from enthought.block_canvas.function_tools.function_search import FunctionSearch
-from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-from enthought.block_canvas.function_tools.html_info_ui import HtmlInfoUI
-from enthought.block_canvas.app.ui.function_search_ui import function_search_view
-from enthought.block_canvas.app import scripting
-from enthought.block_canvas.function_tools.i_minimal_function_info import \
+from blockcanvas.block_display.block_editor import BlockEditor
+from blockcanvas.block_display.execution_model import ExecutionModel
+from blockcanvas.context.ui.context_variable import ContextVariableList
+from blockcanvas.function_tools.function_search import FunctionSearch
+from blockcanvas.function_tools.function_library import FunctionLibrary
+from blockcanvas.function_tools.html_info_ui import HtmlInfoUI
+from blockcanvas.app.ui.function_search_ui import function_search_view
+from blockcanvas.app import scripting
+from blockcanvas.function_tools.i_minimal_function_info import \
     MinimalFunctionInfo
-from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
-from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
-from enthought.block_canvas.function_tools.function_call import FunctionCall
-from enthought.block_canvas.function_tools.general_expression import GeneralExpression
+from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
+from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
+from blockcanvas.function_tools.function_call import FunctionCall
+from blockcanvas.function_tools.general_expression import GeneralExpression
 
 # New imports - Eraldo 
-from enthought.block_canvas.function_tools.group_spec import GroupSpec
-from enthought.block_canvas.function_tools.function_call_group import FunctionCallGroup 
+from blockcanvas.function_tools.group_spec import GroupSpec
+from blockcanvas.function_tools.function_call_group import FunctionCallGroup 
 ######################
 
-from enthought.block_canvas.class_tools.class_library import ClassLibrary
+from blockcanvas.class_tools.class_library import ClassLibrary
 
 # Local, relative imports
 from experiment import Experiment
@@ -206,7 +206,7 @@ class Application(HasTraits):
               menubar   = BlockApplicationMenuBar,
               width     = 1024,
               height    = 768,
-              id        = 'enthought.block_canvas.app.application',
+              id        = 'blockcanvas.app.application',
               resizable = True,
               handler   = BlockApplicationViewHandler(model=self),
               key_bindings = KeyBindings(
@@ -244,7 +244,7 @@ class Application(HasTraits):
                       menubar   = BlockApplicationMenuBar,
                       width     = 800,
                       height    = 600,
-                      id        = 'enthought.block_canvas.app.application.simple',
+                      id        = 'blockcanvas.app.application.simple',
                       resizable = True,
                       handler   = BlockApplicationViewHandler(model=self),
                       key_bindings = KeyBindings(
@@ -861,7 +861,7 @@ class Application(HasTraits):
 
 if __name__ == '__main__':
 
-    code =  "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code =  "from blockcanvas.debug.my_operator import add, mul\n" \
        "def foo(x, y=3):\n" \
        "    z = x + y\n" \
        "    return z\n" \

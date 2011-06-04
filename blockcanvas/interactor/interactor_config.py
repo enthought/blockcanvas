@@ -9,7 +9,7 @@ from traitsui.menu import OKCancelButtons
 from traitsui.api import WindowColor
 
 # Application imports
-from enthought.block_canvas.ui.table_menu_handler import new_delete_menu, TableMenuHandler
+from blockcanvas.ui.table_menu_handler import new_delete_menu, TableMenuHandler
 
 
 class InteractorConfigHandler(TableMenuHandler):
@@ -131,11 +131,11 @@ class InteractorConfig(HasTraits):
 if __name__ == "__main__":
     import numpy as np
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.block_display.block_unit_variables import BlockUnitVariableList
+    from blockcanvas.block_display.block_unit_variables import BlockUnitVariableList
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.app.experiment import Experiment
+    from blockcanvas.app.experiment import Experiment
 
-    code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \

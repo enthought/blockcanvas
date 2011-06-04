@@ -13,7 +13,7 @@ from traitsui.api import BasicEditorFactory, Editor, Item, View
 
 # Application imports
 from enthought.contexts.i_context import IListenableContext
-from enthought.block_canvas.interactor.interactor_config import PlotConfig
+from blockcanvas.interactor.interactor_config import PlotConfig
 
 
 # Local Imports

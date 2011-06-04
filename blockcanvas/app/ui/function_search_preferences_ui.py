@@ -13,7 +13,7 @@ from traitsui.api import View, VGroup, HGroup, Item, \
 from traitsui.menu import OKCancelButtons
 
 # Local imports
-from enthought.block_canvas.app import scripting
+from blockcanvas.app import scripting
 
 
 
@@ -122,8 +122,8 @@ function_search_preferences_view = \
 
 if __name__ == "__main__":
 
-    from enthought.block_canvas.function_tools.function_library import FunctionLibrary
-    from enthought.block_canvas.app import app
+    from blockcanvas.function_tools.function_library import FunctionLibrary
+    from blockcanvas.app import app
 
 
     library = FunctionLibrary(modules=['os','cp.rockphysics'])

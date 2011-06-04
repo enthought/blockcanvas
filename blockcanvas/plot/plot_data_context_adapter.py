@@ -8,7 +8,7 @@ from chaco.abstract_plot_data import AbstractPlotData
 from enthought.contexts.data_context import DataContext
 from traits.api import on_trait_change, Instance
 from enthought.contexts.i_context import IListenableContext
-from enthought.block_canvas.plot.data_context_datasource import DataContextDataSource
+from blockcanvas.plot.data_context_datasource import DataContextDataSource
 
 
 class PlotDataContextAdapter(AbstractPlotData):

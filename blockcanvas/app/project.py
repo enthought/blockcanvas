@@ -12,7 +12,7 @@ from traits.api import (Directory, HasTraits, Instance, Int, List,
 
 # Block canvas imports
 from enthought.contexts.api import IListenableContext
-from enthought.block_canvas.app import scripting
+from blockcanvas.app import scripting
 from enthought.contexts.api import DataContext
 
 # Local relative imports

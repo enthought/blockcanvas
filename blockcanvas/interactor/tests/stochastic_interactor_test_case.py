@@ -12,7 +12,7 @@ from enthought.numerical_modeling.workflow.api import Block
 
 # Local imports
 from enthought.contexts.api import DataContext, MultiContext
-from enthought.block_canvas.interactor.stochastic_interactor import \
+from blockcanvas.interactor.stochastic_interactor import \
      StochasticInteractor
 
 
@@ -21,7 +21,7 @@ class StochasticInteractorTestCase(unittest.TestCase):
     """
 
     def setUp(self):
-        code = "from enthought.block_canvas.debug.my_operator import add\n"\
+        code = "from blockcanvas.debug.my_operator import add\n"\
                "c = add(a,b)"
         self.block = Block(code)
 

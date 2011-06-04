@@ -5,7 +5,7 @@
 import unittest
 
 # Local imports
-from enthought.block_canvas.interactor.parametric_item import ParametricItem
+from blockcanvas.interactor.parametric_item import ParametricItem
 
 
 class ParametricItemTestCase(unittest.TestCase):

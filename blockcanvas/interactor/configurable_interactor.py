@@ -11,7 +11,7 @@ from traitsui.api import View, Group, Item, Handler, InstanceEditor
 from traitsui.menu import OKButton, Action
 
 # Application imports
-from enthought.block_canvas.plot.configurable_context_plot \
+from blockcanvas.plot.configurable_context_plot \
         import ConfigurableContextPlot
 
 # Local imports
@@ -346,9 +346,9 @@ class ConfigurableInteractor(SimpleInteractor):
 def new_main():
     from numpy import linspace
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.block_display.block_unit_variables import BlockUnitVariableList
+    from blockcanvas.block_display.block_unit_variables import BlockUnitVariableList
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.app.experiment import Experiment
+    from blockcanvas.app.experiment import Experiment
 
     code = "y = a*x*x + b*x + c"
     context = DataContext(name='Data')

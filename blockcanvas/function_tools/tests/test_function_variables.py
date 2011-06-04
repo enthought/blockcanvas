@@ -5,7 +5,7 @@ import unittest
 from traits.api import TraitError
 
 # local imports
-from enthought.block_canvas.function_tools.function_variables import \
+from blockcanvas.function_tools.function_variables import \
     Variable, InputVariable, OutputVariable
 
 

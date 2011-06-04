@@ -5,7 +5,7 @@
 import logging
 
 # ETS imports
-from enthought.block_canvas.app.utils import create_unique_project_name
+from blockcanvas.app.utils import create_unique_project_name
 from traits.api import HasTraits, Str, Directory
 from traitsui.api import View, Item, Handler
 

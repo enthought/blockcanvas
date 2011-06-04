@@ -3,9 +3,9 @@ import unittest
 import compiler
 
 # Enthought library imports
-from enthought.block_canvas.function_tools.local_function_info import \
+from blockcanvas.function_tools.local_function_info import \
     LocalFunctionInfo
-from enthought.block_canvas.function_tools.parse_tools import find_local_defs
+from blockcanvas.function_tools.parse_tools import find_local_defs
 
 
 class LocalFunctionInfoTestCase(unittest.TestCase):

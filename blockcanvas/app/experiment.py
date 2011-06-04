@@ -12,16 +12,16 @@ from enthought.execution.executing_context import ExecutingContext
 
 
 # Block canvas imports
-from enthought.block_canvas.block_display.block_graph_controller import BlockGraphController
-from enthought.block_canvas.block_display.execution_model import ExecutionModel
-from enthought.block_canvas.canvas.block_canvas import BlockCanvas
+from blockcanvas.block_display.block_graph_controller import BlockGraphController
+from blockcanvas.block_display.execution_model import ExecutionModel
+from blockcanvas.canvas.block_canvas import BlockCanvas
 from enthought.contexts.api import (DataContext,
     FunctionFilterContext, IListenableContext, MultiContext)
 from enthought.execution.executing_context import ExecutingContext
-from enthought.block_canvas.function_tools.local_function_info import LocalFunctionInfo
-from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
+from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
+from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
 
-from enthought.block_canvas.app.export import export_as_script, export_as_function
+from blockcanvas.app.export import export_as_script, export_as_function
 
 class Experiment(HasTraits):
     """

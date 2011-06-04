@@ -20,9 +20,9 @@ from traits.api import HasTraits, Instance, Property, \
                                  List, Str, Int
 
 # Enthought BlockCanvas imports
-from enthought.block_canvas.function_tools.function_variables \
+from blockcanvas.function_tools.function_variables \
     import InputVariable, OutputVariable
-from enthought.block_canvas.function_tools.general_expression \
+from blockcanvas.function_tools.general_expression \
     import GeneralExpression
 
 

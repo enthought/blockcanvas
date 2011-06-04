@@ -9,14 +9,14 @@ from enthought.blocks.api import Block
 
 # Local imports
 from enthought.contexts.api import DataContext, MultiContext
-from enthought.block_canvas.interactor.configurable_interactor import \
+from blockcanvas.interactor.configurable_interactor import \
     ConfigurableInteractor
-from enthought.block_canvas.interactor.interactor_config import \
+from blockcanvas.interactor.interactor_config import \
     InteractorConfig, VariableConfig, PlotConfig
-from enthought.block_canvas.interactor.shadow_interactor import ShadowInteractor
-from enthought.block_canvas.interactor.parametric_interactor import \
+from blockcanvas.interactor.shadow_interactor import ShadowInteractor
+from blockcanvas.interactor.parametric_interactor import \
     ParametricInteractor
-from enthought.block_canvas.interactor.stochastic_interactor import \
+from blockcanvas.interactor.stochastic_interactor import \
      StochasticInteractor
 
 
@@ -25,7 +25,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
     """
 
     def setUp(self):
-        code = "from enthought.block_canvas.debug.my_operator import add,mul\n"\
+        code = "from blockcanvas.debug.my_operator import add,mul\n"\
                "c = add(a, b)\n" \
                "d = mul(c, 2)\n" \
                "e = mul(c, 3)\n" \
@@ -353,7 +353,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         """ Do global ranges get overwritten by the project settings ?
         """
 
-        code = "from enthought.block_canvas.debug.my_operator import add,mul\n"\
+        code = "from blockcanvas.debug.my_operator import add,mul\n"\
                "d = mul(a, b)\n" \
                "e = mul(c, 3)\n" \
                "f = add(d,e)"
@@ -401,7 +401,7 @@ class ConfigurableInteractorTestCase(unittest.TestCase):
         """ Do global ranges get used when there are no project settings ?
         """
 
-        code = "from enthought.block_canvas.debug.my_operator import add,mul\n"\
+        code = "from blockcanvas.debug.my_operator import add,mul\n"\
                "d = mul(a, b)\n" \
                "e = mul(c, 3)\n" \
                "f = add(d,e)"

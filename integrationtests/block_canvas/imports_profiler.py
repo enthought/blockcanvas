@@ -43,7 +43,7 @@ def main():
     # I have to import 'enthought' to get the namespace loaded. Not sure why,
     #    probably setuptools related
     import enthought
-    from enthought.block_canvas.app.block_application import BlockApplication
+    from blockcanvas.app.block_application import BlockApplication
     d = BlockApplication(code = '')
     d.edit_traits(kind='nonmodal')
 

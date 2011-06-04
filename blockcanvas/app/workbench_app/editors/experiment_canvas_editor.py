@@ -2,7 +2,7 @@
 from traitsui.api import View, Item
 from traits.api import Any
 from pyface.workbench.traits_ui_editor import TraitsUIEditor
-from enthought.block_canvas.block_display.block_editor import BlockEditor
+from blockcanvas.block_display.block_editor import BlockEditor
 
 
 class ExperimentCanvasEditor(TraitsUIEditor):

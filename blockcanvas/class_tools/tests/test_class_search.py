@@ -5,8 +5,8 @@ import sys
 import unittest
 
 # local imports
-from enthought.block_canvas.class_tools.class_search import ClassSearch
-from enthought.block_canvas.class_tools.class_library import ClassLibrary
+from blockcanvas.class_tools.class_search import ClassSearch
+from blockcanvas.class_tools.class_library import ClassLibrary
 
 class ClassSearchTestCase(unittest.TestCase):
 

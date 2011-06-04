@@ -18,10 +18,10 @@ from traits.etsconfig.api import ETSConfig
 
 # Local imports
 from enthought.contexts.api import DataContext
-from enthought.block_canvas.app.ui.configurable_import_ui import ConfigurableImportUI
-from enthought.block_canvas.app.ui.project_folder_ui import ProjectFolderUI
-from enthought.block_canvas.app.utils import create_unique_project_name
-#from enthought.block_canvas.plot.context_plot import ContextPlot
+from blockcanvas.app.ui.configurable_import_ui import ConfigurableImportUI
+from blockcanvas.app.ui.project_folder_ui import ProjectFolderUI
+from blockcanvas.app.utils import create_unique_project_name
+#from blockcanvas.plot.context_plot import ContextPlot
 
 # Global logger
 logger = logging.getLogger(__name__)

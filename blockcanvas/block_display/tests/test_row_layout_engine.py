@@ -6,8 +6,8 @@ from random import randint
 from traits.api import push_exception_handler, pop_exception_handler
 
 # Application imports
-from enthought.block_canvas.block_display.execution_model import ExecutionModel
-from enthought.block_canvas.block_display.block_graph_controller import BlockGraphController
+from blockcanvas.block_display.execution_model import ExecutionModel
+from blockcanvas.block_display.block_graph_controller import BlockGraphController
 
 
 # Module-level setup and teardown.
@@ -27,7 +27,7 @@ class RowLayoutEngineTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        self.code = 'from enthought.block_canvas.debug.my_operator import mul, add\n' \
+        self.code = 'from blockcanvas.debug.my_operator import mul, add\n' \
                     'a = mul(1,2)\n' \
                     'b = mul(5,6)\n' \
                     'c = add(a,b)'

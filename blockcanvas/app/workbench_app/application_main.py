@@ -6,7 +6,7 @@ from traits.api import Instance
 from pyface.api import GUI, YES
 from pyface.workbench.api import Workbench
 
-from enthought.block_canvas.function_tools.function_library import FunctionLibrary
+from blockcanvas.function_tools.function_library import FunctionLibrary
 
 # Local imports.
 from application import Application

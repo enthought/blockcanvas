@@ -81,7 +81,7 @@ view = View(
 )
 
 if __name__ == "__main__":
-    from enthought.block_canvas.function_tools.local_python_function import \
+    from blockcanvas.function_tools.local_python_function import \
         LocalPythonFunction
 
     code = "def new_function():\n" \

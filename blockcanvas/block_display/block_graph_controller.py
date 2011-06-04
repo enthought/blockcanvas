@@ -11,9 +11,9 @@ from traits.api import (Any, Bool, Dict, HasTraits,
 from traits.protocols.api import adapt
 
 from enable.api import Component, Container
-from enthought.block_canvas.app import scripting
-from enthought.block_canvas.canvas.enable_line import EnableLine
-from enthought.block_canvas.function_tools.i_minimal_function_info import \
+from blockcanvas.app import scripting
+from blockcanvas.canvas.enable_line import EnableLine
+from blockcanvas.function_tools.i_minimal_function_info import \
     IMinimalFunctionInfo
 
 # Local imports:
@@ -94,7 +94,7 @@ class BlockGraphController(HasTraits):
         """
         dragged_obj = self._unpack_drag_event( event )
         if dragged_obj is not None:
-            from enthought.block_canvas.app.scripting import app
+            from blockcanvas.app.scripting import app
             app.add_function_object_to_model(dragged_obj, event.x, event.y)
         else:
             event.window.set_drag_result( "none" )

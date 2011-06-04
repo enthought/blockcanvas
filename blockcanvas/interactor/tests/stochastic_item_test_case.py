@@ -5,7 +5,7 @@
 import numpy, unittest
 
 # Local imports
-from enthought.block_canvas.interactor.stochastic_item import StochasticItem
+from blockcanvas.interactor.stochastic_item import StochasticItem
 from traits.util.distribution.distribution import (Constant, Gaussian,
                                                       Uniform, Triangular)
 

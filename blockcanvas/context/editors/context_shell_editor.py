@@ -21,7 +21,7 @@ from traitsui.api import Editor
 from traitsui.api import BasicEditorFactory
 
 # App imports
-from enthought.block_canvas.context.shell.context_shell import ContextPythonShell
+from blockcanvas.context.shell.context_shell import ContextPythonShell
 
 #-------------------------------------------------------------------------------
 #  '_ContextShellEditor' class:

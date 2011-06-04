@@ -12,8 +12,8 @@ from traitsui.menu import OKCancelButtons
 
 from enthought.contexts.api import (DataContext, IContext,
     IListenableContext)
-from enthought.block_canvas.interactor.editors import array_eval_editor
-from enthought.block_canvas.app.utils import regex_from_str
+from blockcanvas.interactor.editors import array_eval_editor
+from blockcanvas.app.utils import regex_from_str
 
 
 def set_var_value(value):
@@ -36,7 +36,7 @@ def set_var_value(value):
 
     Examples
     --------
-    >>> from enthought.block_canvas.context.ui.context_variable import set_var_value
+    >>> from blockcanvas.context.ui.context_variable import set_var_value
     >>> set_var_value('') is None
     True
     >>> set_var_value('None') is None

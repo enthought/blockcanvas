@@ -9,7 +9,7 @@ from enable.tools.api import ViewportPanTool
 from enable.api import Window
 
 # Block canvas imports
-from enthought.block_canvas.canvas.canvas_viewport import CanvasViewport
+from blockcanvas.canvas.canvas_viewport import CanvasViewport
 
 
 class _BlockEditor(Editor):

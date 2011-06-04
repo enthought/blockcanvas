@@ -1,6 +1,6 @@
 import unittest
 
-from enthought.block_canvas.interactor.simple_interactor import SimpleInteractor
+from blockcanvas.interactor.simple_interactor import SimpleInteractor
 from enthought.contexts.api import DataContext
 from enthought.blocks.api import Block
 

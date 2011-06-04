@@ -15,7 +15,7 @@ from traitsui.menu import NoButtons, OKCancelButtons
 
 # App imports
 if ETSConfig.toolkit == 'wx':
-    from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
+    from blockcanvas.ui.hyperlink_editor import HyperlinkEditor
 else:
     from traitsui.api import ButtonEditor as HyperlinkEditor
 

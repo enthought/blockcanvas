@@ -16,10 +16,10 @@ import os
 from enthought.blocks.api import Block
 
 # Local imports
-from enthought.block_canvas.app.block_application import BlockApplication
-from enthought.block_canvas.block_display.block_unit import BlockUnit
-from enthought.block_canvas.function_tools.handled_function_search import HandledFunctionSearch
-from enthought.block_canvas.function_tools.function_library import Module
+from blockcanvas.app.block_application import BlockApplication
+from blockcanvas.block_display.block_unit import BlockUnit
+from blockcanvas.function_tools.handled_function_search import HandledFunctionSearch
+from blockcanvas.function_tools.function_library import Module
 
 from enthought.contexts.data_context import DataContext
 
@@ -68,11 +68,11 @@ def main():
         sys.exit(0)
 
 
-    from enthought.block_canvas.interactor.configurable_interactor import ConfigurableInteractor
-    from enthought.block_canvas.interactor.shadow_interactor import ShadowInteractor
-    from enthought.block_canvas.interactor.interactor_config import PlotConfig, InteractorConfig, VariableConfig
-    from enthought.block_canvas.plot.configurable_context_plot import ConfigurableContextPlot
-    from enthought.block_canvas.block_display.block_unit_variables import \
+    from blockcanvas.interactor.configurable_interactor import ConfigurableInteractor
+    from blockcanvas.interactor.shadow_interactor import ShadowInteractor
+    from blockcanvas.interactor.interactor_config import PlotConfig, InteractorConfig, VariableConfig
+    from blockcanvas.plot.configurable_context_plot import ConfigurableContextPlot
+    from blockcanvas.block_display.block_unit_variables import \
             BlockUnitVariableList
     from threading import Thread
 

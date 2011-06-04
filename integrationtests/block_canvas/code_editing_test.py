@@ -11,7 +11,7 @@ from traitsui.api import View, Item
 
 class CodeEditingTest(HasTraits):
     block_code_editor = Instance(wx.Control, allow_none=False)
-    code = Code("""from enthought.block_canvas.debug.my_operator import add, mul
+    code = Code("""from blockcanvas.debug.my_operator import add, mul
 from numpy import arange
 x = arange(0,10,.1)
 c1 = mul(a,a)
@@ -85,7 +85,7 @@ y = add(t3,c)
 
     def __init__(self, **kwtraits):
         super(CodeEditingTest, self).__init__(**kwtraits)
-        from enthought.block_canvas.block_display.code_block_ui import editor_control
+        from blockcanvas.block_display.code_block_ui import editor_control
         self.block_code_editor = editor_control()
         self.random_seed = int(random()*1000000)
         return

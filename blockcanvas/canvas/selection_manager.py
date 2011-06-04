@@ -81,7 +81,7 @@ class SelectionManager(HasTraits):
             if item.graph_node:
                 node = item.graph_node
                 if hasattr(node, 'function'):
-                    from enthought.block_canvas.app.scripting import app
+                    from blockcanvas.app.scripting import app
                     app.html_window_set_function_help(node.function.name, node.function.module)
 
     def select_items(self, items, allow_remove=True):

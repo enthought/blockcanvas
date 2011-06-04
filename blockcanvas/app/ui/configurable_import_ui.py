@@ -5,7 +5,7 @@
 import os
 
 # Enthought library imports
-from enthought.block_canvas.app.utils import create_geo_context
+from blockcanvas.app.utils import create_geo_context
 from enthought.contexts.data_context import DataContext
 from pyface.api import FileDialog
 from traits.api import HasTraits, Any, Str, Instance, Trait
@@ -16,7 +16,7 @@ from traitsui.menu import OKButton, CancelButton, Action
 # Geo library imports/ dependencies
 try:
     has_geo = True
-    from enthought.block_canvas.app.segy_reader.segy_reader import SegyReader
+    from blockcanvas.app.segy_reader.segy_reader import SegyReader
     from geo.io.ui.file_log_reader_ui import FileLogReaderUI
 except ImportError:
     has_geo = False

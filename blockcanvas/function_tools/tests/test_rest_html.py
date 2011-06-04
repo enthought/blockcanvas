@@ -2,9 +2,9 @@
 import unittest, platform
 
 # Local imports
-from enthought.block_canvas.function_tools.rest_html import convert_string, get_html_from_function_info
+from blockcanvas.function_tools.rest_html import convert_string, get_html_from_function_info
 
-from enthought.block_canvas.function_tools.python_function_info import PythonFunctionInfo
+from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
 
 class RestHTMLTestCase(unittest.TestCase):
 

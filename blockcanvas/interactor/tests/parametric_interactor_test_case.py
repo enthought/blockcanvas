@@ -14,7 +14,7 @@ from enthought.blocks.api import Block
 
 # Local imports
 from enthought.contexts.api import DataContext, MultiContext
-from enthought.block_canvas.interactor.parametric_interactor import ParametricInteractor
+from blockcanvas.interactor.parametric_interactor import ParametricInteractor
 
 
 class ParametricInteractorTestCase(unittest.TestCase):
@@ -22,7 +22,7 @@ class ParametricInteractorTestCase(unittest.TestCase):
     """
 
     def setUp(self):
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
                "c = add(a,b)\n" \
                "d = mul(c, 2)\n" \
                "e = mul(c, 3)\n" \

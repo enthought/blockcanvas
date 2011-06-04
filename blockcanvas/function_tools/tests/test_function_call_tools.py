@@ -4,7 +4,7 @@ import sys
 import unittest
 
 # Enthought library imports
-from enthought.block_canvas.function_tools.function_call_tools import localify_func_code
+from blockcanvas.function_tools.function_call_tools import localify_func_code
 
 
 def local_path():

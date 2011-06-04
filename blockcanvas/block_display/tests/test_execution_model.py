@@ -2,17 +2,17 @@
 import unittest
 
 # ETS imports
-from enthought.block_canvas.block_display.execution_model import ExecutionModel
+from blockcanvas.block_display.execution_model import ExecutionModel
 from enthought.blocks.api import Block, unparse
-from enthought.block_canvas.function_tools.function_call import FunctionCall
-from enthought.block_canvas.function_tools.function_info import find_functions
+from blockcanvas.function_tools.function_call import FunctionCall
+from blockcanvas.function_tools.function_info import find_functions
 
 
 class ExecutionModelTestCase(unittest.TestCase):
 
     def setUp(self):
         self.exec_code = (
-            "from enthought.block_canvas.debug.my_operator import add, mul\n"
+            "from blockcanvas.debug.my_operator import add, mul\n"
             "c = mul(a,b)\n"
             "d = add(c,b)\n"
             "f = mul(d,e)\n"
@@ -26,18 +26,18 @@ class ExecutionModelTestCase(unittest.TestCase):
 
     def test_import_func_with_const(self):
 
-        code = "from enthought.block_canvas.debug.my_operator import mul\n" \
+        code = "from blockcanvas.debug.my_operator import mul\n" \
                "a = mul(1.0, 2.0)\n" \
 
-        desired = "from enthought.block_canvas.debug.my_operator import mul\n\na = mul(1.0, 2.0)"
+        desired = "from blockcanvas.debug.my_operator import mul\n\na = mul(1.0, 2.0)"
         model = ExecutionModel.from_code(code)
         self.assertEqual(model.code, desired)
 
     def test_imported_func_code(self):
-        code = "from enthought.block_canvas.debug.my_operator import mul\n" \
+        code = "from blockcanvas.debug.my_operator import mul\n" \
                "c = mul(a, b)\n" \
 
-        desired = "from enthought.block_canvas.debug.my_operator import mul\n\nc = mul(a, b)"
+        desired = "from blockcanvas.debug.my_operator import mul\n\nc = mul(a, b)"
         model = ExecutionModel.from_code(code)
         self.assertEqual(model.code, desired)
 
@@ -45,7 +45,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         """ Right now, we can't ensure the order of the import statements nor
             can we consolidate imports from the same locations. """
 
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
                "a = add(1.0,2.0)\n" \
                "b = add(a,3.0)\n" \
                "c = mul(b,b)\n" \
@@ -109,14 +109,14 @@ class ExecutionModelTestCase(unittest.TestCase):
             correctly?
         """
 
-        code = "from enthought.block_canvas.debug.my_operator import add\n" \
+        code = "from blockcanvas.debug.my_operator import add\n" \
                "a = add(1, 2)\n"
 
         model = ExecutionModel.from_code(code)
         func_call = model.statements[0]
         func_call.inputs[0].binding = '2'
 
-        desired = "from enthought.block_canvas.debug.my_operator import add\n\n" \
+        desired = "from blockcanvas.debug.my_operator import add\n\n" \
                   "a = add(2, 2)"
         self.assertEqual(desired, model.code)
 
@@ -133,20 +133,20 @@ class ExecutionModelTestCase(unittest.TestCase):
 
     def test_import_code(self):
 
-        code = "from enthought.block_canvas.debug.my_operator import mul\n" \
+        code = "from blockcanvas.debug.my_operator import mul\n" \
                "def foo(a):\n" \
                "\tb = a\n" \
                "\treturn b\n" \
                "a = mul(1.0, 2.0)\n" \
                "b = foo(a)\n"
 
-        desired = 'from enthought.block_canvas.debug.my_operator import mul\n'
+        desired = 'from blockcanvas.debug.my_operator import mul\n'
         model = ExecutionModel.from_code(code)
         assert model.code.find(desired) == 0
 
     def test_local_def_code(self):
 
-        code = "from enthought.block_canvas.debug.my_operator import mul\n" \
+        code = "from blockcanvas.debug.my_operator import mul\n" \
                "def foo(a):\n" \
                "\tb = a\n" \
                "\treturn b\n" \
@@ -160,7 +160,7 @@ class ExecutionModelTestCase(unittest.TestCase):
 
     def test_merge_statements(self):
 
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
                "a = mul(1.0,2.0)\n" \
                "b = add(1.0,3.0)\n" \
 
@@ -169,7 +169,7 @@ class ExecutionModelTestCase(unittest.TestCase):
 
     def test_unmerge_statements(self):
 
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
                "a = mul(1.0,2.0)\n" \
                "b = add(1.0,3.0)\n" \
 
@@ -178,7 +178,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         model.unmerge_statements(model.statements[0].uuid)
 
     def test_restricted(self):
-        code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+        code = "from blockcanvas.debug.my_operator import add, mul\n" \
                "c = mul(a,b)\n" \
                "d = add(c,b)\n" \
                "f = mul(d,e)\n"
@@ -201,13 +201,13 @@ class ExecutionModelTestCase(unittest.TestCase):
         # These imports need to be inside these test functions in order to
         # preserve identity for some weird reason I haven't had time to
         # investigate.
-        from enthought.block_canvas.debug.my_operator import add, mul
+        from blockcanvas.debug.my_operator import add, mul
         context = self.simple_context
         self.exec_model.execute(context)
         self.assertEqual(context, dict(a=2, b=4, e=5, c=8, d=12, f=60, add=add, mul=mul))
 
     def test_reexecution(self):
-        from enthought.block_canvas.debug.my_operator import add, mul
+        from blockcanvas.debug.my_operator import add, mul
         context = self.simple_context
         self.exec_model.execute(context)
         context['b'] = 3
@@ -215,7 +215,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         self.assertEqual(context, dict(a=2, b=3, e=5, c=6, d=9, f=45, add=add, mul=mul))
 
     def test_execution_restrict_inputs(self):
-        from enthought.block_canvas.debug.my_operator import add, mul
+        from blockcanvas.debug.my_operator import add, mul
         context = self.simple_context
         self.exec_model.execute(context)
         # We'll change `a` and `e` but lie to .execute() and only tell it about `e`.
@@ -225,7 +225,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         self.assertEqual(context, dict(a=3, b=4, e=4, c=8, d=12, f=48, add=add, mul=mul))
 
     def test_execution_restrict_outputs(self):
-        from enthought.block_canvas.debug.my_operator import add, mul
+        from blockcanvas.debug.my_operator import add, mul
         context = self.simple_context
         self.exec_model.execute(context)
         context['b'] = 3
@@ -234,7 +234,7 @@ class ExecutionModelTestCase(unittest.TestCase):
         self.assertEqual(context, dict(a=2, b=3, e=10, c=6, d=9, f=60, add=add, mul=mul))
 
     def test_execution_restrict_inputs_and_outputs(self):
-        from enthought.block_canvas.debug.my_operator import add, mul
+        from blockcanvas.debug.my_operator import add, mul
         context = self.simple_context
         self.exec_model.execute(context)
         context['b'] = 3

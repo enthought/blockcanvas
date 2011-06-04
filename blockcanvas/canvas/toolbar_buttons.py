@@ -5,7 +5,7 @@ from enable.kiva.traits.api import KivaFont
 from traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 
 # Block canvas imports
-from enthought.block_canvas.canvas.block_canvas import BlockCanvas
+from blockcanvas.canvas.block_canvas import BlockCanvas
 
 class Button(Component):
 
@@ -163,7 +163,7 @@ class CollapseAllButton(BlockCanvasButton):
     label = Str('Collapse All')
 
     def perform(self, event):
-        from enthought.block_canvas.app.scripting import app
+        from blockcanvas.app.scripting import app
         app.collapse_all_boxes()
         return
 
@@ -172,7 +172,7 @@ class ExpandAllButton(BlockCanvasButton):
     label = Str('Expand All')
 
     def perform(self, event):
-        from enthought.block_canvas.app.scripting import app
+        from blockcanvas.app.scripting import app
         app.expand_all_boxes()
 
 class ScaleAndCenterButton(BlockCanvasButton):
@@ -180,7 +180,7 @@ class ScaleAndCenterButton(BlockCanvasButton):
     label = Str('Fit to Screen')
 
     def perform(self, event):
-        from enthought.block_canvas.app.scripting import app
+        from blockcanvas.app.scripting import app
         app.scale_and_center()
         return
 
@@ -189,7 +189,7 @@ class RelayoutButton(BlockCanvasButton):
     label = Str('Auto-Arrange')
 
     def perform(self, event):
-        from enthought.block_canvas.app.scripting import app
+        from blockcanvas.app.scripting import app
         app.relayout_boxes()
         return
 

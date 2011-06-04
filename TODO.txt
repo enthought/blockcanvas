@@ -2,5 +2,5 @@
 
 * Remove test reliance on nose.
 
-* Remove reliance on wx in enthought.block_canvas, or at least make it optional.
+* Remove reliance on wx in blockcanvas, or at least make it optional.
 

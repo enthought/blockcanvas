@@ -1,5 +1,5 @@
 # Enthought Library imports
-from enthought.block_canvas.function_tools.function_variables import Variable
+from blockcanvas.function_tools.function_variables import Variable
 from traits.api import Any, Bool, Instance, on_trait_change, Str
 
 # Local imports
@@ -103,7 +103,7 @@ class EnableBoxField(EditField):
             # Try to change the function definition's binding
             old_var = self.unmodified_text.strip()
             new_var = self.text.strip()
-            from enthought.block_canvas.app.scripting import app
+            from blockcanvas.app.scripting import app
             app.update_function_variable_binding(self.box.graph_node, self.variable, new_var)
 
     def _set_text(self, val):

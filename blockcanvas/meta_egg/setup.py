@@ -9,7 +9,7 @@ setup(name             = "block_canvas_deps",
       license          = 'BSD',
       zip_safe         = True,
       install_requires = [
-        "enthought.block_canvas",
+        "blockcanvas",
         "chaco>=3.0a1",
         "enthought.debug",
         "enable>=3.0a1",

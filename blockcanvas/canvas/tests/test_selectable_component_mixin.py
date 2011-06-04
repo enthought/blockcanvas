@@ -2,7 +2,7 @@
 import unittest
 
 # Local imports
-from enthought.block_canvas.canvas.selectable_component_mixin import SelectableComponentMixin
+from blockcanvas.canvas.selectable_component_mixin import SelectableComponentMixin
 
 
 class SelectableComponentMixinTestCase(unittest.TestCase):

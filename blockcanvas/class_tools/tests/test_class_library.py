@@ -5,7 +5,7 @@ import unittest
 
 # Enthought library imports
 
-from enthought.block_canvas.class_tools.class_library import ClassLibrary
+from blockcanvas.class_tools.class_library import ClassLibrary
 
 def local_path():
     return os.path.dirname(__file__)

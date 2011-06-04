@@ -3,7 +3,7 @@ import unittest
 import compiler
 
 # local imports
-from enthought.block_canvas.function_tools.parse_tools import \
+from blockcanvas.function_tools.parse_tools import \
     function_returns_from_function, function_arguments_from_function, \
     function_arguments_from_ast
 

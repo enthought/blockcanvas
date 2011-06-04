@@ -129,9 +129,9 @@ def round_two_places(value):
 
 def new_main():
     from enthought.contexts.api import DataContext
-    from enthought.block_canvas.app.experiment import Experiment
+    from blockcanvas.app.experiment import Experiment
 
-    code2 = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
+    code2 = "from blockcanvas.debug.my_operator import add, mul\n" \
            "c = mul(a,b)\n" \
            "d = mul(c, 2)\n" \
            "e = mul(c, 3)\n" \

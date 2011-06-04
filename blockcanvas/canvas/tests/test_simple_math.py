@@ -6,7 +6,7 @@ import unittest
 from traits.testing.api import doctest_for_module
 
 # Local imports
-from enthought.block_canvas.canvas import simple_math
+from blockcanvas.canvas import simple_math
 
 class SimpleMathTestCase(doctest_for_module(simple_math)):
     pass

@@ -7,9 +7,9 @@ from traitsui.extras.edit_column import EditColumn
 from traitsui import menu
 from traitsui.api import WindowColor
 
-from enthought.block_canvas.interactor.interactor_config import (InteractorConfig,
+from blockcanvas.interactor.interactor_config import (InteractorConfig,
         VariableConfig)
-from enthought.block_canvas.interactor.configurable_interactor import ConfigurableInteractor
+from blockcanvas.interactor.configurable_interactor import ConfigurableInteractor
 
 from context_variable import ContextVariable
 
@@ -86,7 +86,7 @@ class CVLHandler(tui.Controller):
         """ Bring up a ConfigurableInteractor on the selected variables
         """
         try:
-            from enthought.block_canvas.app import scripting
+            from blockcanvas.app import scripting
         except:
             return
         app = scripting.app

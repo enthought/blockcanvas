@@ -3,7 +3,7 @@ import unittest
 import inspect
 
 # local imports
-from enthought.block_canvas.function_tools.decorator_tools import getsource
+from blockcanvas.function_tools.decorator_tools import getsource
 from decorator_tools_test_functions import add, non_decorated_add
 
 

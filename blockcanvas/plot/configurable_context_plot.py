@@ -4,7 +4,7 @@ from traitsui.api import View, Item
 
 # Application imports
 from enthought.contexts.i_context import IListenableContext
-#from enthought.block_canvas.interactor.interactor_config import PlotConfig
+#from blockcanvas.interactor.interactor_config import PlotConfig
 
 # Local imports
 from context_plot import ContextPlotEditor

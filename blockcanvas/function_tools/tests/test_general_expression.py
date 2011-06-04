@@ -12,8 +12,8 @@ def teardown_module():
     pop_exception_handler
 
 
-from enthought.block_canvas.function_tools.function_variables import OutputVariable
-from enthought.block_canvas.function_tools.general_expression import StatementWalker, GeneralExpression
+from blockcanvas.function_tools.function_variables import OutputVariable
+from blockcanvas.function_tools.general_expression import StatementWalker, GeneralExpression
 
 
 def test_simple_statement_walker():
