@@ -19,20 +19,20 @@ import wx
 
 from numpy import arange, array, compress, cos, sin, transpose
 
-from enthought.enable.traits.api import RGBAColor
+from enable.traits.api import RGBAColor
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, Array, Instance, List, Str, Enum, \
            Tuple, Button, Event, Property
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, Item, HSplit, VSplit, HGroup, VGroup, Tabbed, SetEditor, \
            ListEditor, InstanceEditor, TableEditor, CustomEditor, Handler
 
-from enthought.traits.ui.menu \
+from traitsui.menu \
     import NoButtons
 
-from enthought.traits.ui.table_column \
+from traitsui.table_column \
     import NumericColumn, ObjectColumn
 
 from enthought.model.traits.ui.wx.numeric_editor \
@@ -43,37 +43,37 @@ from enthought.model.api \
            SelectionReductionModel, NumericItem, ExpressionFilter, \
            IndexFilter, PolygonFilter
 
-from enthought.pyface.timer.api \
+from pyface.timer.api \
     import do_later
 
-from enthought.chaco.plot_canvas \
+from chaco.plot_canvas \
     import PlotCanvas
 
-from enthought.chaco.plot_value \
+from chaco.plot_value \
     import PlotValue
 
-from enthought.chaco.plot_group \
+from chaco.plot_group \
     import PlotGroup
 
-from enthought.chaco.plot_overlay \
+from chaco.plot_overlay \
     import PlotOverlay
 
-from enthought.chaco.plot_axis \
+from chaco.plot_axis \
     import PlotAxis
 
-from enthought.chaco.plot_component \
+from chaco.plot_component \
     import PlotComponent
 
-from enthought.chaco.plot_data \
+from chaco.plot_data \
     import PlotData
 
-from enthought.chaco.plot_interaction \
+from chaco.plot_interaction \
     import PlotInteraction
 
-from enthought.enable.api \
+from enable.api \
     import Window
 
-from enthought.kiva.constants \
+from enable.kiva.constants \
     import STROKE
 
 

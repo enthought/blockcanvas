@@ -2,12 +2,12 @@
 from helper import get_scale
 
 # Enthought Library Imports
-from enthought.enable.api import Component
-from enthought.enable.colors import ColorTrait
-from enthought.enable.font_metrics_provider import font_metrics_provider
-from enthought.enable.traits.api import RGBAColor
-from enthought.kiva.traits.api import KivaFont
-from enthought.traits.api import (Any, Bool, Dict, Event, Int, List, Property)
+from enable.api import Component
+from enable.colors import ColorTrait
+from enable.font_metrics_provider import font_metrics_provider
+from enable.traits.api import RGBAColor
+from enable.kiva.traits.api import KivaFont
+from traits.api import (Any, Bool, Dict, Event, Int, List, Property)
 
 
 class EditField(Component):

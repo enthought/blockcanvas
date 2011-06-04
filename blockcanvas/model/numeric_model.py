@@ -16,14 +16,14 @@
 
 import scipy as scipy_base
 
-from enthought.enable.traits.api import RGBAColor
+from enable.traits.api import RGBAColor
 
-from enthought.traits.api \
+from traits.api \
     import HasTraits, HasPrivateTraits, Event, List, Str, Instance, Property, \
            Delegate, Expression, Constant, Callable, Enum, Bool, Int, Array, \
            Any, Float, true, false
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View
 
 from numpy import compress, concatenate, array, repeat, newaxis, ones, zeros, \

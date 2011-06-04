@@ -7,19 +7,19 @@
 import logging, os, shutil
 
 # Enthought library imports:
-from enthought.etsconfig.api \
+from traits.etsconfig.api \
     import ETSConfig
 
 from enthought.naming.unique_name \
     import make_unique_name
 
-from enthought.traits.api \
+from traits.api \
     import HasTraits, Property, Instance, Str, File, Any, on_trait_change
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, VGroup, Item, HSplit, VSplit, InstanceEditor, ValueEditor
 
-from enthought.pyface.api \
+from pyface.api \
     import DirectoryDialog
 
 from enthought.blocks.api \

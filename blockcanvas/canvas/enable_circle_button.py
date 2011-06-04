@@ -4,10 +4,10 @@
 """
 
 # Enthought library imports
-from enthought.traits.api import Str
-from enthought.kiva.traits.api import KivaFont
-from enthought.enable.api import Component
-from enthought.enable.traits.api import RGBAColor
+from traits.api import Str
+from enable.kiva.traits.api import KivaFont
+from enable.api import Component
+from enable.traits.api import RGBAColor
 
 
 class EnableCircleButton(Component):

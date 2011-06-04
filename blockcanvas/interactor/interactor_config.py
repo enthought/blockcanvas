@@ -2,11 +2,11 @@
 from numpy import ndarray
 
 # ETS imports
-from enthought.traits.api import HasTraits, List, Str, Int, Enum
-from enthought.traits.ui.api import View, Item, Label, TableEditor, EnumEditor
-from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui.menu import OKCancelButtons
-from enthought.traits.ui.api import WindowColor
+from traits.api import HasTraits, List, Str, Int, Enum
+from traitsui.api import View, Item, Label, TableEditor, EnumEditor
+from traitsui.table_column import ObjectColumn
+from traitsui.menu import OKCancelButtons
+from traitsui.api import WindowColor
 
 # Application imports
 from enthought.block_canvas.ui.table_menu_handler import new_delete_menu, TableMenuHandler

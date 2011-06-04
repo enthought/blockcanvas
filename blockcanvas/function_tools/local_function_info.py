@@ -5,7 +5,7 @@ import compiler
 
 # Enthought library imports
 from enthought.blocks.api import unparse
-from enthought.traits.api import Str
+from traits.api import Str
 
 
 # Local imports

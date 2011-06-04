@@ -6,8 +6,8 @@ import os
 import re
 
 # Enthought library imports
-from enthought.etsconfig.api import ETSConfig
-from enthought.pyface.api import confirm, error, YES
+from traits.etsconfig.api import ETSConfig
+from pyface.api import confirm, error, YES
 
 # Local imports
 #from function_definition import FunctionDefinition

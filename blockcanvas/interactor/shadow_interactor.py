@@ -3,9 +3,9 @@ from math import log10, ceil
 import numpy
 
 # ETS imports
-from enthought.traits.api import Float, Int
-from enthought.traits.ui.api import Item, HGroup, TextEditor, RangeEditor
-from enthought.units.unit_scalar import UnitScalar
+from traits.api import Float, Int
+from traitsui.api import Item, HGroup, TextEditor, RangeEditor
+from scimath.units.unit_scalar import UnitScalar
 
 # Local imports
 from editors import array_eval_editor

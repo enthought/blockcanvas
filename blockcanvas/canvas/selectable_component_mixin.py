@@ -1,5 +1,5 @@
 # Enthought library imports
-from enthought.traits.api import Any, Enum, implements, HasTraits, Property
+from traits.api import Any, Enum, implements, HasTraits, Property
 
 # Local library imports
 from i_selectable import ISelectable

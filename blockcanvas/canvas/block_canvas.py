@@ -4,8 +4,8 @@ import pickle
 import warnings
 
 # Enthought library imports
-from enthought.traits.api import Any, Bool, false, Float, Instance
-from enthought.enable.api import Canvas
+from traits.api import Any, Bool, false, Float, Instance
+from enable.api import Canvas
 
 # Local imports
 from style_manager import StyleManager

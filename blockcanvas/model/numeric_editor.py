@@ -14,13 +14,13 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, Instance
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import TreeEditor, TreeNode, View, HGroup, VGroup, Item
 
-from enthought.traits.ui.menu \
+from traitsui.menu \
     import NoButtons
 
 from numeric_model \

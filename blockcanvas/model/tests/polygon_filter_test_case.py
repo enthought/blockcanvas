@@ -7,7 +7,7 @@ from nose import DeprecatedTest, SkipTest
 
 from numpy import arange
 
-from enthought.traits.api import Array, HasTraits
+from traits.api import Array, HasTraits
 
 from enthought.model.api import NumericModel, NumericItem, PolygonFilter
 

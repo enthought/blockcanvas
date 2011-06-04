@@ -14,10 +14,10 @@ logger = logging.getLogger(__name__)
 trans_table = string.maketrans('/.\\@#$%^&*()-+=<>', '_________________')
 
 # Enthought library imports
-from enthought.traits.api import \
+from traits.api import \
     HasTraits, Str, List, Unicode, File, Directory
 
-from enthought.traits.ui.api import \
+from traitsui.api import \
     View, Item, CheckListEditor
 
 #-------------------------------------------------------------------------------

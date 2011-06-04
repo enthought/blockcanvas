@@ -7,9 +7,9 @@
 import platform
 
 # Enthought library imports.
-from enthought.traits.api import HasTraits, Str
-from enthought.traits.ui.api import View, Item
-from enthought.traits.ui.menu import NoButtons
+from traits.api import HasTraits, Str
+from traitsui.api import View, Item
+from traitsui.menu import NoButtons
 
 # Try using the fancy new IE widget if on windows.
 # Note: The IE widget takes about about 25 MB of memory on its own, so it
@@ -18,11 +18,11 @@ from enthought.traits.ui.menu import NoButtons
 # fixme: Need to check traits.ui backend.
 #        How do you ask a traits.ui toolkit() what it's backend is?
 if platform.system() == 'Windows':
-    from enthought.traits.ui.wx.extra.windows.ie_html_editor import \
+    from traitsui.wx.extra.windows.ie_html_editor import \
         IEHTMLEditor as HTMLEditor
     html_editor = HTMLEditor()
 else:
-    from enthought.traits.ui.api import HTMLEditor
+    from traitsui.api import HTMLEditor
     html_editor = HTMLEditor(format_text=False)
 
 

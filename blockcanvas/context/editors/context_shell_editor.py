@@ -16,9 +16,9 @@
 #-------------------------------------------------------------------------------
 
 # ETS imports
-from enthought.traits.api import Str, Any
-from enthought.traits.ui.api import Editor
-from enthought.traits.ui.api import BasicEditorFactory
+from traits.api import Str, Any
+from traitsui.api import Editor
+from traitsui.api import BasicEditorFactory
 
 # App imports
 from enthought.block_canvas.context.shell.context_shell import ContextPythonShell
@@ -104,8 +104,8 @@ class ContextShellEditor ( BasicEditorFactory ):
 
 
 if __name__ == "__main__":
-    from enthought.traits.api import HasTraits
-    from enthought.traits.ui.api import View, Item, Group
+    from traits.api import HasTraits
+    from traitsui.api import View, Item, Group
     from enthought.contexts.multi_context import MultiContext
 
     class ContextWrapper(HasTraits):

@@ -7,12 +7,12 @@ import re
 import time
 
 # Enthought library imports
-from enthought.pyface.message_dialog import MessageDialog
-from enthought.traits.api import Instance, Str, Bool, HasTraits, on_trait_change
+from pyface.message_dialog import MessageDialog
+from traits.api import Instance, Str, Bool, HasTraits, on_trait_change
 from enthought.appscripting.api import scriptable
-from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
+from traitsui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor, CodeEditor
-from enthought.traits.ui.key_bindings import KeyBinding, KeyBindings
+from traitsui.key_bindings import KeyBinding, KeyBindings
 
 # CodeTools Imports
 from enthought.execution.executing_context import ExecutingContext

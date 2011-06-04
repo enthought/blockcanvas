@@ -5,7 +5,7 @@ import os
 from os.path import join
 
 # Enthought library imports
-from enthought.traits.api import HasTraits, Instance, on_trait_change, Property, String
+from traits.api import HasTraits, Instance, on_trait_change, Property, String
 
 # CodeTools imports
 from enthought.execution.executing_context import ExecutingContext

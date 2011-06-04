@@ -3,12 +3,12 @@
 
 import numpy
 
-from enthought.pyface.timer.api import do_later
-from enthought.traits.api import (Any, Bool, Event, HasTraits, Instance, List,
+from pyface.timer.api import do_later
+from traits.api import (Any, Bool, Event, HasTraits, Instance, List,
     Property, Str, TraitError, Undefined, on_trait_change)
-import enthought.traits.ui.api as tui
-from enthought.traits.protocols.api import AdaptationFailure, adapt
-from enthought.traits.ui.menu import OKCancelButtons
+import traitsui.api as tui
+from traits.protocols.api import AdaptationFailure, adapt
+from traitsui.menu import OKCancelButtons
 
 from enthought.contexts.api import (DataContext, IContext,
     IListenableContext)

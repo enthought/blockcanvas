@@ -1,5 +1,5 @@
 # Enthought library imports
-from enthought.traits.api import Interface
+from traits.api import Interface
 
 
 class ICanvasNodeFactory(Interface):

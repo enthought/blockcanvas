@@ -1,8 +1,8 @@
 from numpy import array
 
 # ETS imports
-from enthought.traits.api import HasTraits, Instance, List, Str
-from enthought.traits.ui.api import Item, Group, View, SetEditor, InstanceEditor, VSplit
+from traits.api import HasTraits, Instance, List, Str
+from traitsui.api import Item, Group, View, SetEditor, InstanceEditor, VSplit
 from enthought.contexts.i_context import IListenableContext
 
 # Local imports

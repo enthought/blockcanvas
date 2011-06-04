@@ -17,10 +17,10 @@ from enthought.numerical_modeling.numeric_context.tests.mapping_object_test_case
     BasicMappingProtocolTest, adapt_keys
 from enthought.numerical_modeling.numeric_context.api import \
      NumericContext, DerivativeContext, PassThruContext, TraitsContext, CachedContext
-from enthought.units.api import UnitArray
-from enthought.traits.api import Int
-from enthought.util.functional import compose
-from enthought.util.sequence import union
+from scimath.units.api import UnitArray
+from traits.api import Int
+from traits.util.functional import compose
+from traits.util.sequence import union
 
 # Local imports
 from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor, \

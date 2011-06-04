@@ -5,8 +5,8 @@ from wx.stc import STC_CMD_DELETEBACK
 from random import Random, random
 
 # Enthought Library Imports
-from enthought.traits.api import HasTraits, Instance, Code, Int, Bool, Any
-from enthought.traits.ui.api import View, Item
+from traits.api import HasTraits, Instance, Code, Int, Bool, Any
+from traitsui.api import View, Item
 
 
 class CodeEditingTest(HasTraits):

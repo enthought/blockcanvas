@@ -29,10 +29,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import Any, Bool, Int, Property
 
-from enthought.pyface.timer.api \
+from pyface.timer.api \
     import do_after
 
 from context_modified \

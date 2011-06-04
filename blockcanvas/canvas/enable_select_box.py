@@ -1,6 +1,6 @@
 # Enthought library imports
-from enthought.traits.api import Tuple
-from enthought.enable.api import ColorTrait, Component, LineStyle
+from traits.api import Tuple
+from enable.api import ColorTrait, Component, LineStyle
 
 class EnableSelectBox(Component):
     """ Implements generic behavior for a selection box

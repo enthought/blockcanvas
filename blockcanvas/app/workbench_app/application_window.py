@@ -1,12 +1,12 @@
 # Enthought library imports.
-from enthought.traits.api import Instance, on_trait_change, List, Callable
+from traits.api import Instance, on_trait_change, List, Callable
 
-from enthought.pyface.workbench.api import Perspective, PerspectiveItem
-from enthought.pyface.action.api import Action, Group, MenuManager
-from enthought.pyface.workbench.api import WorkbenchWindow
-from enthought.pyface.workbench.action.api import MenuBarManager
-from enthought.pyface.workbench.action.api import ToolBarManager
-from enthought.pyface.workbench.action.api import ViewMenuManager
+from pyface.workbench.api import Perspective, PerspectiveItem
+from pyface.action.api import Action, Group, MenuManager
+from pyface.workbench.api import WorkbenchWindow
+from pyface.workbench.action.api import MenuBarManager
+from pyface.workbench.action.api import ToolBarManager
+from pyface.workbench.action.api import ViewMenuManager
 from enthought.undo.action.api import BeginRecordingAction
 from enthought.undo.action.api import ClearRecordingAction, EndRecordingAction
 from enthought.undo.action.api import CommandAction, RedoAction, UndoAction
@@ -125,7 +125,7 @@ class ApplicationWindow(WorkbenchWindow):
         # reference to its toolkit-specific control etc.).
 
         # fixme: Ask Martin why he put this here instead of at the top.
-        from enthought.pyface.workbench.debug.api import DebugView
+        from pyface.workbench.debug.api import DebugView
 
         # fixme: This doesn't appear to be updating.
         debug_view = DebugView(window=self)

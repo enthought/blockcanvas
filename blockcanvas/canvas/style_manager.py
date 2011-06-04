@@ -1,6 +1,6 @@
 # Enthought library imports
-from enthought.enable.api import TextFieldStyle
-from enthought.traits.api import Float, HasTraits, Instance, Tuple
+from enable.api import TextFieldStyle
+from traits.api import Float, HasTraits, Instance, Tuple
 
 # Local imports
 from canvas_box_style import CanvasBoxStyle

@@ -18,16 +18,16 @@
 from NumericModel \
     import NumericItem, NumericModelBase, NumericModel, DerivationModel
 
-from enthought.traits.api \
+from traits.api \
     import Category
 
-from enthought.units \
+from scimath.units \
     import unit_manager
 
-from enthought.units.quantity \
+from scimath.units.quantity \
     import Quantity
 
-from enthought.units.SI \
+from scimath.units.SI \
     import dimensionless
 
 #-------------------------------------------------------------------------------

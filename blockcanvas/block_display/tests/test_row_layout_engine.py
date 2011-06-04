@@ -3,7 +3,7 @@ import unittest, os
 from random import randint
 
 # Enthought library imports
-from enthought.traits.api import push_exception_handler, pop_exception_handler
+from traits.api import push_exception_handler, pop_exception_handler
 
 # Application imports
 from enthought.block_canvas.block_display.execution_model import ExecutionModel

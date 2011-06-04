@@ -18,10 +18,10 @@
 from numpy \
     import array, shape
 
-from enthought.kiva.agg \
+from enable.kiva.agg \
     import points_in_polygon  # FIXME: bad dependency
 
-from enthought.traits.api \
+from traits.api \
     import List, String, Tuple
 
 from numeric_model \

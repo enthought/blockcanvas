@@ -5,7 +5,7 @@ import nose
 from nose.tools import assert_equal
 
 # ETS Imports
-from enthought.traits.api import push_exception_handler, pop_exception_handler
+from traits.api import push_exception_handler, pop_exception_handler
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
 from enthought.block_canvas.function_tools.i_minimal_function_info import MinimalFunctionInfo
 from enthought.block_canvas.app.app import Application

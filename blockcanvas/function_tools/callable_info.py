@@ -6,7 +6,7 @@ from types import FunctionType, BuiltinFunctionType
 from numpy import ufunc
 
 # Enthought library imports
-from enthought.traits.api import HasTraits, Str, Bool, List, Property,  \
+from traits.api import HasTraits, Str, Bool, List, Property,  \
                                  Trait
 
 

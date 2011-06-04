@@ -1,4 +1,4 @@
-from enthought.traits.api import Interface, Enum
+from traits.api import Interface, Enum
 
 
 class ISelectable(Interface):

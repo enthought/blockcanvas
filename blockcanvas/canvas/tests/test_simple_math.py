@@ -3,7 +3,7 @@ import sys
 import unittest
 
 # Enthought library imports
-from enthought.testing.api import doctest_for_module
+from traits.testing.api import doctest_for_module
 
 # Local imports
 from enthought.block_canvas.canvas import simple_math

@@ -24,7 +24,7 @@ from numpy import ndarray
 from enthought.numerical_modeling.numeric_context.event \
     import single_event
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, Constant, Event, TraitDictEvent, Undefined, \
            Property, Bool
 

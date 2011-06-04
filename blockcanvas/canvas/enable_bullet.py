@@ -1,7 +1,7 @@
 # Enthought library imports
-from enthought.enable.api import ColorTrait, Component, Pointer
-from enthought.enable.tools.api import DragTool
-from enthought.traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
+from enable.api import ColorTrait, Component, Pointer
+from enable.tools.api import DragTool
+from traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 
 # Local imports
 import enable_glyph_lib

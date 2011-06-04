@@ -2,7 +2,7 @@
 import unittest
 
 # Enthought library imports
-from enthought.traits.api import TraitError
+from traits.api import TraitError
 
 # local imports
 from enthought.block_canvas.function_tools.function_variables import \

@@ -5,10 +5,10 @@
 import os, sys, string
 
 # Enthought library imports
-from enthought.etsconfig.api import ETSConfig
+from traits.etsconfig.api import ETSConfig
 from enthought.blocks.analysis import walk
 
-from enthought.traits.api import \
+from traits.api import \
     HasTraits, Str, List, Unicode, File, Directory
     
 # Global assignment

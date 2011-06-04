@@ -2,9 +2,9 @@ from wx import HL_ALIGN_CENTRE
 from wx.lib.hyperlink import (HyperLinkCtrl, EVT_HYPERLINK_LEFT,
                               EVT_HYPERLINK_MIDDLE, EVT_HYPERLINK_RIGHT)
 
-from enthought.traits.api import Str
-from enthought.traits.ui.api import BasicEditorFactory
-from enthought.traits.ui.wx.editor import Editor
+from traits.api import Str
+from traitsui.api import BasicEditorFactory
+from traitsui.wx.editor import Editor
 
 class _HyperlinkEditor(Editor):
 

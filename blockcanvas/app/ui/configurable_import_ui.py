@@ -7,11 +7,11 @@ import os
 # Enthought library imports
 from enthought.block_canvas.app.utils import create_geo_context
 from enthought.contexts.data_context import DataContext
-from enthought.pyface.api import FileDialog
-from enthought.traits.api import HasTraits, Any, Str, Instance, Trait
-from enthought.traits.ui.api import View, Item, Tabbed, Group, HGroup, VGrid, \
+from pyface.api import FileDialog
+from traits.api import HasTraits, Any, Str, Instance, Trait
+from traitsui.api import View, Item, Tabbed, Group, HGroup, VGrid, \
      RangeEditor, Handler, InstanceEditor
-from enthought.traits.ui.menu import OKButton, CancelButton, Action
+from traitsui.menu import OKButton, CancelButton, Action
 
 # Geo library imports/ dependencies
 try:

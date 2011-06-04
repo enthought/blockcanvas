@@ -23,7 +23,7 @@
 
 from numpy import maximum, minimum
 
-from enthought.traits.api \
+from traits.api \
     import List, Property, Enum
 
 from a_numeric_filter \

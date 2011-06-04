@@ -5,9 +5,9 @@
 from numpy import delete, typeDict
 
 # ETS imports
-from enthought.traits.api import TraitError, Any
-from enthought.traits.ui.api import TextEditor, TabularEditor
-from enthought.traits.ui.tabular_adapter import TabularAdapter
+from traits.api import TraitError, Any
+from traitsui.api import TextEditor, TabularEditor
+from traitsui.tabular_adapter import TabularAdapter
 
 
 #-------------------------------------------------------------------------------

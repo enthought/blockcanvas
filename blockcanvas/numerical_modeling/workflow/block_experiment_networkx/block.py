@@ -7,11 +7,11 @@ from copy import copy
 from cStringIO import StringIO
 from networkx import DiGraph, Graph, topological_sort
 
-from enthought.traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
+from traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
                                   Instance, List, Property, Str, Trait)
-from enthought.util.dict import map_keys, map_values
-from enthought.util.networkx_ import reachable_graph
-from enthought.util.sequence import is_sequence
+from traits.util.dict import map_keys, map_values
+from traits.util.networkx_ import reachable_graph
+from traits.util.sequence import is_sequence
 
 from enthought.blocks.analysis import NameFinder
 from enthought.blocks.compiler_.api \

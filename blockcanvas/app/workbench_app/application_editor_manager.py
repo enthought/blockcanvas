@@ -1,7 +1,7 @@
-from enthought.traits.api import Any
+from traits.api import Any
 
-from enthought.pyface.workbench.api import EditorManager
-from enthought.pyface.workbench.traits_ui_editor import TraitsUIEditor
+from pyface.workbench.api import EditorManager
+from pyface.workbench.traits_ui_editor import TraitsUIEditor
 
 
 class MyTraitsUIEditor(TraitsUIEditor):

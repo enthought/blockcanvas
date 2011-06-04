@@ -1,6 +1,6 @@
 import unittest
 
-from enthought.traits.api import Any, HasTraits, Enum, implements
+from traits.api import Any, HasTraits, Enum, implements
 
 from enthought.block_canvas.canvas.selection_manager import SelectionManager
 from enthought.block_canvas.canvas.i_selectable import ISelectable

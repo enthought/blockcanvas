@@ -1,7 +1,7 @@
 # Enthought Library Imports
-from enthought.enable.font_metrics_provider import font_metrics_provider
-from enthought.kiva.traits.api import KivaFont
-from enthought.traits.api import Any, Dict, HasTraits
+from enable.font_metrics_provider import font_metrics_provider
+from enable.kiva.traits.api import KivaFont
+from traits.api import Any, Dict, HasTraits
 
 class FontMetricsCache(HasTraits):
     """ A shared cache containing height and width metrics for

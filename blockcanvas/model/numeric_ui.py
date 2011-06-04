@@ -20,19 +20,19 @@ import wx
 from numpy import \
     arange
 
-from enthought.traits.api \
+from traits.api \
     import List, Str, Instance, Enum
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, Item, HSplit
 
-from enthought.traits.ui.table_column \
+from traitsui.table_column \
     import NumericColumn
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import Editor
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import BasicEditorFactory
 
 from enthought.model.traits.ui.wx.numeric_editor \
@@ -45,19 +45,19 @@ from enthought.model.api \
 from enthought.model.numeric_model_explorer \
     import ModelData, SelectionData, NumericModelExplorerInteraction
 
-from enthought.chaco.plot_canvas \
+from chaco.plot_canvas \
     import PlotCanvas
 
-from enthought.chaco.plot_value \
+from chaco.plot_value \
     import PlotValue
 
-from enthought.chaco.plot_axis \
+from chaco.plot_axis \
     import PlotAxis
 
-from enthought.chaco.plot_component \
+from chaco.plot_component \
     import PlotComponent
 
-from enthought.enable.api \
+from enable.api \
     import Window
 
 

@@ -8,13 +8,13 @@
 import os, logging
 
 # Enthought library imports
-from enthought.traits.api import on_trait_change
-from enthought.traits.ui.api import Controller
-from enthought.traits.ui.menu import MenuBar, Menu, Action
-from enthought.pyface.action.api import Group
-from enthought.pyface.api import DirectoryDialog, FileDialog
-import enthought.pyface.api as pyface
-from enthought.etsconfig.api import ETSConfig
+from traits.api import on_trait_change
+from traitsui.api import Controller
+from traitsui.menu import MenuBar, Menu, Action
+from pyface.action.api import Group
+from pyface.api import DirectoryDialog, FileDialog
+import pyface.api as pyface
+from traits.etsconfig.api import ETSConfig
 
 # Local imports
 from enthought.contexts.api import DataContext

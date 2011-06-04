@@ -24,34 +24,34 @@ interface toolkit.
 
 import wx
 
-from enthought.enable.traits.api import RGBAColor
+from enable.traits.api import RGBAColor
 
 from numpy \
     import compress
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, List, Enum, Str, Instance, Int, Any, Callable, \
            Color, Font, Bool, Expression, Property, true, false
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, VGroup, Item, SetEditor, TableEditor, EnumEditor
 
-from enthought.traits.ui.menu \
+from traitsui.menu \
     import Menu, Action, ToolBar, NoButtons
 
-from enthought.traits.ui.table_column \
+from traitsui.table_column \
     import NumericColumn, ObjectColumn
 
-from enthought.pyface.timer.api \
+from pyface.timer.api \
     import do_later
 
-from enthought.pyface.ui.wx.grid.api \
+from pyface.ui.wx.grid.api \
     import Grid
 
-from enthought.pyface.sizers.flow \
+from pyface.sizers.flow \
     import FlowSizer
 
-from enthought.pyface.image_resource \
+from pyface.image_resource \
     import ImageResource
 
 from enthought.model.api \
@@ -64,16 +64,16 @@ from enthought.model.numeric_editor \
 from numeric_editor_model \
     import NumericEditorModel
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import WindowColor
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import Editor
 
-from enthought.traits.ui.wx.basic_editor_factory \
+from traitsui.wx.basic_editor_factory \
     import BasicEditorFactory
 
-from enthought.traits.ui.wx.helper \
+from traitsui.wx.helper \
     import traits_ui_panel
 
 #-------------------------------------------------------------------------------
@@ -702,7 +702,7 @@ class NumericEditor ( Editor ):
             view = View( [ Item( 'columns', id     = 'columns',
                                             editor = columns_table_editor ),
                            '|<>' ],
-                         id        = 'enthought.traits.ui.wx.numeric_editor.display_columns',
+                         id        = 'traitsui.wx.numeric_editor.display_columns',
                          title     = 'Edit column properties',
                          width     = 0.7,
                          height    = 0.3,
@@ -1031,7 +1031,7 @@ class NumericFilterView ( HasPrivateTraits ):
                                on_select = 'object._filter_selected' ) ),
             show_labels = False
         ),
-        id        = 'enthought.traits.ui.wx.numeric_editor.filter_editor',
+        id        = 'traitsui.wx.numeric_editor.filter_editor',
         width     = 0.35,
         height    = 0.4,
         resizable = True,
@@ -1147,7 +1147,7 @@ class SyntheticColumn ( HasPrivateTraits ):
 
     view = View( 'evaluate', 'name', 'label', '_',
                  'format', 'foreground_color', 'background_color',
-                 id        = 'enthought.traits.ui.wx.numeric_editor.synthetic_column',
+                 id        = 'traitsui.wx.numeric_editor.synthetic_column',
                  title     = 'Define evaluated column',
                  kind      = 'livemodal',
                  resizable = True,
@@ -1234,7 +1234,7 @@ class SyntheticColumnDeleter ( HasPrivateTraits ):
                                   name               = 'all_synthetic',
                                   left_column_title  = 'Columns to be deleted:',
                                   right_column_title = 'Columns to keep:' ) ),
-                 id        = 'enthought.traits.ui.wx.numeric_editor.delete_synthetic_editor',
+                 id        = 'traitsui.wx.numeric_editor.delete_synthetic_editor',
                  title     = 'Delete evaluated columns',
                  resizable = True,
                  width     = 0.20,

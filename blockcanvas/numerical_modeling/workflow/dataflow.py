@@ -1,5 +1,5 @@
 from numpy import alltrue
-from enthought.util.sequence import all
+from traits.util.sequence import all
 
 from enthought.blocks.api import Block
 

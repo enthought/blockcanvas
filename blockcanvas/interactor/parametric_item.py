@@ -8,9 +8,9 @@
 import numpy
 
 # ETS imports
-from enthought.units.unit_scalar import UnitScalar
-from enthought.traits.api import HasTraits, Str, Any, List
-from enthought.traits.ui.api import View, Item, HGroup
+from scimath.units.unit_scalar import UnitScalar
+from traits.api import HasTraits, Str, Any, List
+from traitsui.api import View, Item, HGroup
 
 # Local imports
 from editors import int_eval_editor, float_eval_editor

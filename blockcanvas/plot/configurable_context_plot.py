@@ -1,6 +1,6 @@
 # ETS imports
-from enthought.traits.api import HasTraits, Instance, List, Str
-from enthought.traits.ui.api import View, Item
+from traits.api import HasTraits, Instance, List, Str
+from traitsui.api import View, Item
 
 # Application imports
 from enthought.contexts.i_context import IListenableContext

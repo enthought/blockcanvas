@@ -8,9 +8,9 @@
 from numpy import arange, empty
 
 # Enthought library imports
-from enthought.traits.api import Array, Instance, Bool, Any, on_trait_change
-from enthought.enable.api import AbstractOverlay
-from enthought.kiva.image import GraphicsContext
+from traits.api import Array, Instance, Bool, Any, on_trait_change
+from enable.api import AbstractOverlay
+from enable.kiva.image import GraphicsContext
 
 # Local imports
 from canvas_grid_style import CanvasGridStyle

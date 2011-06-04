@@ -2,8 +2,8 @@
 """
 
 # Enthought library imports
-from enthought.traits.api import (HasTraits, Instance, Str, on_trait_change)
-from enthought.traits.ui.api import HSplit, Item, VGroup, View, VSplit, \
+from traits.api import (HasTraits, Instance, Str, on_trait_change)
+from traitsui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
 from enthought.appscripting.api import scriptable
 

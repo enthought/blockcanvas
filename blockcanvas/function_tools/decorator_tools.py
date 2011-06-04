@@ -9,7 +9,7 @@ from docutils.utils import new_document
 import compiler, inspect, linecache, re, string
 
 # ETS imports
-from enthought.units.variable import Variable
+from scimath.units.variable import Variable
 
 
 #-------------------------------------------------------------------------------

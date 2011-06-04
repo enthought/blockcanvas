@@ -1,8 +1,8 @@
 
 # Enthought Library imports
-from enthought.traits.api import HasTraits, Instance, Property, Any
-from enthought.traits.ui.api import View, Item, InstanceEditor
-from enthought.pyface.workbench.api import View as WorkbenchView
+from traits.api import HasTraits, Instance, Property, Any
+from traitsui.api import View, Item, InstanceEditor
+from pyface.workbench.api import View as WorkbenchView
 
 # Block Canvas imports
 from enthought.block_canvas.app.project import Project

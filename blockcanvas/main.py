@@ -15,8 +15,8 @@ import os
 
 # Enthought library imports
 from enthought.blocks.api import Block
-from enthought.etsconfig.api import ETSConfig
-from enthought.logger.api import add_log_queue_handler, create_log_file_handler
+from traits.etsconfig.api import ETSConfig
+from traits.logger.api import add_log_queue_handler, create_log_file_handler
 
 # Local imports
 from enthought.block_canvas.app.block_application import BlockApplication
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     import sys, os.path
     # fixme: This code only works on platforms for which a wx.GCDC context is
     # defined...
-    #from enthought.traits.ui.dock_window_theme \
+    #from traitsui.dock_window_theme \
     #    import dock_window_theme, button_dock_window_theme
     #
     #dock_window_theme( button_dock_window_theme )

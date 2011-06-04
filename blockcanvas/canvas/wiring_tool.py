@@ -2,11 +2,11 @@
 import copy
 
 # Enthought Library imports
-from enthought.traits.api import Any, Bool, Instance, Int, List, Tuple
-from enthought.enable.api import AbstractOverlay
-from enthought.enable.tools.api import DragTool
-from enthought.enable.traits.api import RGBAColor
-from enthought.pyface.action.api import Group, MenuManager
+from traits.api import Any, Bool, Instance, Int, List, Tuple
+from enable.api import AbstractOverlay
+from enable.tools.api import DragTool
+from enable.traits.api import RGBAColor
+from pyface.action.api import Group, MenuManager
 
 # Local imports
 from canvas_box import CanvasBox
@@ -129,7 +129,7 @@ class WiringTool(AbstractOverlay, DragTool):
                     real_x, real_y = event._pos_stack[0]
                 else:
                     real_x, real_y = event.x, event.y
-                from enthought.pyface.api import GUI
+                from pyface.api import GUI
                 GUI.invoke_later(menu.show, real_x - 10, event.window._flip_y(real_y))
                 self.component.request_redraw()
         event.handled = True

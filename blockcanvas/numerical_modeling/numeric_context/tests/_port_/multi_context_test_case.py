@@ -3,7 +3,7 @@ import unittest
 import timeit
 
 # Enthought library imports
-from enthought.traits.api import Any
+from traits.api import Any
 
 # Geo library imports
 from abstract_context_test_case import AbstractContextTestCase

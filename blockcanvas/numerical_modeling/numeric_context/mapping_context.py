@@ -23,7 +23,7 @@
 
 from numpy import arange, ones, putmask, take
 
-from enthought.traits.api \
+from traits.api \
     import Property, Undefined
 
 from constants \

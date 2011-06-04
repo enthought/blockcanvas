@@ -1,11 +1,11 @@
 import numpy
 
-from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui import api as tui
-from enthought.traits.ui.extras.api import CheckboxColumn
-from enthought.traits.ui.extras.edit_column import EditColumn
-from enthought.traits.ui import menu
-from enthought.traits.ui.api import WindowColor
+from traitsui.table_column import ObjectColumn
+from traitsui import api as tui
+from traitsui.extras.api import CheckboxColumn
+from traitsui.extras.edit_column import EditColumn
+from traitsui import menu
+from traitsui.api import WindowColor
 
 from enthought.block_canvas.interactor.interactor_config import (InteractorConfig,
         VariableConfig)

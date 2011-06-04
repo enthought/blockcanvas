@@ -21,10 +21,10 @@
 
 from numpy import issubdtype
 
-from enthought.traits.api \
+from traits.api \
     import Expression, Property
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View
 
 from enthought.blocks.api \

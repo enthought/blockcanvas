@@ -19,9 +19,9 @@
 
 from numpy import nan
 
-from enthought.enable.colors import ColorTrait
+from enable.colors import ColorTrait
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, Instance, List, Any, Str
 
 from a_numeric_context import ANumericContext

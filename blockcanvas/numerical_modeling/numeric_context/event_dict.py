@@ -1,8 +1,8 @@
 from UserDict import DictMixin
 
-from enthought.traits.api import \
+from traits.api import \
     Bool, Dict, Event, HasTraits, Instance, Property, TraitDictEvent
-from enthought.util.dict import sub_dict
+from traits.util.dict import sub_dict
 
 from enthought.numerical_modeling.numeric_context.event import (
     merge_trait_dict_events, single_event

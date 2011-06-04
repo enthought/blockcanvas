@@ -21,7 +21,7 @@
 
 from numpy import ndarray, nan
 
-from enthought.traits.api \
+from traits.api \
     import Undefined
 
 #-------------------------------------------------------------------------------

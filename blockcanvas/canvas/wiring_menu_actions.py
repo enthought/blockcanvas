@@ -1,7 +1,7 @@
 #Enthought Library Imports
-from enthought.traits.api import HasTraits, List, Str
-from enthought.traits.ui.api import View, Item
-from enthought.pyface.action.api import Action
+from traits.api import HasTraits, List, Str
+from traitsui.api import View, Item
+from pyface.action.api import Action
 
 
 class SuffixDialog(HasTraits):

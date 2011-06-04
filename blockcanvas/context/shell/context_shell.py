@@ -6,11 +6,11 @@ import wx
 
 # Enthought Library imports:
 from enthought.numerical_modeling.numeric_context.api import NumericContext
-from enthought.pyface.python_shell import PythonShell
-from enthought.pyface.ui.wx.python_shell import PyShell #temporary
-#from enthought.pyface.ui.qt4.python_shell import PyShell #temporary
-from enthought.traits.api import Instance, Property, Any
-from enthought.util.wx.drag_and_drop import PythonDropTarget
+from pyface.python_shell import PythonShell
+from pyface.ui.wx.python_shell import PyShell #temporary
+#from pyface.ui.qt4.python_shell import PyShell #temporary
+from traits.api import Instance, Property, Any
+from traits.util.wx.drag_and_drop import PythonDropTarget
 
 # Local imports:
 from global_and_local_interpreter import GlobalAndLocalInterpreter

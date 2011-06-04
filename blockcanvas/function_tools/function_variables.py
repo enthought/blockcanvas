@@ -9,7 +9,7 @@
 import re
 
 # enthought library imports
-from enthought.traits.api import HasTraits, Any, Bool, Str, Property, TraitError
+from traits.api import HasTraits, Any, Bool, Str, Property, TraitError
 
 
 python_name = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')

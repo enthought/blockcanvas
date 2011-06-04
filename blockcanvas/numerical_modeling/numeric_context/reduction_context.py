@@ -24,7 +24,7 @@
 from numpy \
     import compress, nonzero, put, putmask
 
-from enthought.traits.api \
+from traits.api \
     import Bool, Property, Undefined
 
 from constants \

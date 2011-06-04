@@ -5,7 +5,7 @@
 """
 
 #Enthought Library imports
-from enthought.traits.api import Dict, Any
+from traits.api import Dict, Any
 
 # Local imports
 from i_adapter import IAdapter

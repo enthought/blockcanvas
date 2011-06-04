@@ -2,9 +2,9 @@
 """
 
 # Enthought lib imports
-from enthought.traits.ui.api import View, Item, Group, HGroup, VGrid, \
+from traitsui.api import View, Item, Group, HGroup, VGrid, \
      RangeEditor, Handler, Tabbed
-from enthought.traits.ui.menu import OKCancelButtons
+from traitsui.menu import OKCancelButtons
 
 #------------------------------------------------------------------------------
 #  SegyReaderUIHandler class

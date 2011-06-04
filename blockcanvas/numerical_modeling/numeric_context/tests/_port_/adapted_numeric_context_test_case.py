@@ -3,8 +3,8 @@ import unittest
 from numpy import all, allclose, array, isnan, linspace, nan
 
 # Enthought imports
-from enthought.units import convert
-from enthought.units.length import feet, fathom, meters, yard
+from scimath.units import convert
+from scimath.units.length import feet, fathom, meters, yard
 
 # Geo imports
 from geo.context.api import (NumericContext, ReductionContext, PassThruContext,

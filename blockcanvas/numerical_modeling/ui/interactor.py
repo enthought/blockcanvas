@@ -2,7 +2,7 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-import enthought.traits.ui.menu as menu
+import traitsui.menu as menu
 
 from cPickle \
     import load, dump
@@ -16,22 +16,22 @@ from enthought.numerical_modeling.workflow.api \
 from enthought.numerical_modeling.numeric_context.api \
     import NumericContext
 
-from enthought.traits.api \
+from traits.api \
     import HasTraits, HasPrivateTraits, Float, Int, Any, Str, Enum, Dict, \
         List, Event, Bool
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import TextEditor, View, HGroup, Item, ViewHandler
 
-from enthought.traits.ui.menu \
+from traitsui.menu \
     import Action
 
-from enthought.traits.ui.instance_choice \
+from traitsui.instance_choice \
     import InstanceFactoryChoice
 
-from enthought.pyface.api import GUI
+from pyface.api import GUI
 
-from enthought.util.distribution.api \
+from traits.util.distribution.api \
     import Distribution, Constant, Gaussian, Triangular, Uniform
 
 from types \

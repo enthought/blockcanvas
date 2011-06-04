@@ -14,16 +14,16 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import HasPrivateTraits, Instance
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, Item, VSplit, VGroup
 
-from enthought.traits.ui.menu \
+from traitsui.menu \
     import NoButtons
 
-from enthought.traits.ui.table_column \
+from traitsui.table_column \
     import NumericColumn
 
 from enthought.model.traits.ui.wx.numeric_editor \

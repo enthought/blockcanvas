@@ -6,7 +6,7 @@
     a log 'depth' in meters that we want to ensure is in 'feet'.  The adapter
     enforces this.
 
-    >>> from enthought.units.length import meters, feet
+    >>> from scimath.units.length import meters, feet
     >>> from geo.log import Log
     >>> from geo.context.api import AdaptedDataContext, DataContext
     >>> from geo.context.api import UnitConversionAdapter

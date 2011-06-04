@@ -5,7 +5,7 @@
     This file also holds a simple implementation of that interface that
     may be useful to applications.
 """
-from enthought.traits.api import Interface, Str, HasTraits, implements
+from traits.api import Interface, Str, HasTraits, implements
 
 class IMinimalClassInfo(Interface):
     """ Structure to hold module and name of a class.

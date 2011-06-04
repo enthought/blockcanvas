@@ -19,7 +19,7 @@ import __builtin__
 builtin_names = set(dir(__builtin__))
 
 # Enthought Traits import
-from enthought.traits.api import \
+from traits.api import \
     Property, Instance, List, Str, Bool, Any, on_trait_change
 
 # Enthought BlockCanvas import

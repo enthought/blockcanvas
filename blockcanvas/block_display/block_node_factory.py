@@ -1,5 +1,5 @@
 # Enthought library imports
-from enthought.traits.api import HasTraits, implements, Instance
+from traits.api import HasTraits, implements, Instance
 
 # Application imports
 from enthought.block_canvas.canvas.i_canvas_node_factory import ICanvasNodeFactory

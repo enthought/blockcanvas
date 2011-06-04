@@ -1,7 +1,7 @@
 import sys, unittest
 from numpy import all, arange, array, ndarray
 
-from enthought.testing.api import doctest_for_module
+from traits.testing.api import doctest_for_module
 
 from enthought.blocks.api import Block
 from enthought.numerical_modeling.numeric_context.context_factory import default_context

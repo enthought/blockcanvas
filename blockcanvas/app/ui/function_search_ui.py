@@ -15,14 +15,14 @@
 #    fixme: Not been tested against a library with extension functions in it.
 
 # Enthought library imports.
-from enthought.etsconfig.api import ETSConfig
-from enthought.traits.api import Any, Property, Event, Str, Font, Bool, \
+from traits.etsconfig.api import ETSConfig
+from traits.api import Any, Property, Event, Str, Font, Bool, \
                                  List, Instance, cached_property
-from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
+from traitsui.api import View, VGroup, VSplit, HGroup, Item, \
     Handler, Label, Group, InstanceEditor, TabularEditor, SearchEditor
-from enthought.traits.ui.menu import NoButtons, OKCancelButtons
-from enthought.pyface.api import error
-from enthought.pyface.image_resource import ImageResource
+from traitsui.menu import NoButtons, OKCancelButtons
+from pyface.api import error
+from pyface.image_resource import ImageResource
 
 # Block Canvas imports
 from enthought.block_canvas.function_tools.i_minimal_function_info import \
@@ -38,7 +38,7 @@ from enthought.block_canvas.function_tools.general_expression import GeneralExpr
 if ETSConfig.toolkit == 'wx':
     from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
 else:
-    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor
+    from traitsui.api import ButtonEditor as HyperlinkEditor
 
 # Local imports
 from function_search_preferences_ui import function_search_preferences_view

@@ -1,9 +1,9 @@
-from enthought.traits.ui.api import (View, Group, HGroup, VGroup, VSplit, Item,
+from traitsui.api import (View, Group, HGroup, VGroup, VSplit, Item,
                                      Label, TableEditor, CodeEditor, InstanceEditor, spring, Tabbed)
-from enthought.traits.ui import menu
-from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui.api import WindowColor
-from enthought.traits.ui.editors import ButtonEditor
+from traitsui import menu
+from traitsui.table_column import ObjectColumn
+from traitsui.api import WindowColor
+from traitsui.editors import ButtonEditor
 
 
 def create_view(readonly = False, show_units = False):

@@ -7,11 +7,11 @@ import logging, os, struct, string
 
 # Enthought lib imports
 from enthought.contexts.data_context import DataContext
-from enthought.pyface.api import ProgressDialog
-from enthought.traits.api import HasTraits, File, Int, Enum, Float, Property, \
+from pyface.api import ProgressDialog
+from traits.api import HasTraits, File, Int, Enum, Float, Property, \
      Any, Instance, on_trait_change
-from enthought.units.quantity_traits import QuantityTrait
-from enthought.units.time import msec
+from scimath.units.quantity_traits import QuantityTrait
+from scimath.units.time import msec
 
 # Geo imports
 from geo.io.segy.segy import Segy

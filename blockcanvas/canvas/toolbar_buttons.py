@@ -1,8 +1,8 @@
 # Enthought library imports
-from enthought.enable.api import ColorTrait, Component
-from enthought.enable.font_metrics_provider import font_metrics_provider
-from enthought.kiva.traits.api import KivaFont
-from enthought.traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
+from enable.api import ColorTrait, Component
+from enable.font_metrics_provider import font_metrics_provider
+from enable.kiva.traits.api import KivaFont
+from traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 
 # Block canvas imports
 from enthought.block_canvas.canvas.block_canvas import BlockCanvas

@@ -21,7 +21,7 @@
 
 from numpy import ones, zeros
 
-from enthought.traits.api \
+from traits.api \
     import List, Int, Bool
 
 from a_numeric_filter \

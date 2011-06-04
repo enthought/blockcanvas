@@ -1,6 +1,6 @@
 # Enthought Library imports
 from enthought.block_canvas.function_tools.function_variables import Variable
-from enthought.traits.api import Any, Bool, Instance, on_trait_change, Str
+from traits.api import Any, Bool, Instance, on_trait_change, Str
 
 # Local imports
 from edit_field import EditField

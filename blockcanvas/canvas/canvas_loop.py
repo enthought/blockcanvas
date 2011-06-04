@@ -1,9 +1,9 @@
 """ Basic movable and labeled Loop for a Canvas.
 """
 # Enthought library imports
-from enthought.enable.api import Container
-from enthought.enable.font_metrics_provider import font_metrics_provider
-from enthought.traits.api import Any, Bool, Float, Instance, List, on_trait_change, Property, Str
+from enable.api import Container
+from enable.font_metrics_provider import font_metrics_provider
+from traits.api import Any, Bool, Float, Instance, List, on_trait_change, Property, Str
 
 # Local library imports
 from canvas_box import CanvasBox

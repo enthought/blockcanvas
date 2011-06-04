@@ -11,11 +11,11 @@
     is updating correctly based on changes to its code.
 """
 
-from enthought.traits.ui.api import (View, Group, HGroup, VGroup, VSplit, Item,
+from traitsui.api import (View, Group, HGroup, VGroup, VSplit, Item,
                                      Label, TableEditor, CodeEditor)
-from enthought.traits.ui import menu
-from enthought.traits.ui.table_column import ObjectColumn
-from enthought.traits.ui.api import WindowColor
+from traitsui import menu
+from traitsui.table_column import ObjectColumn
+from traitsui.api import WindowColor
 
 
 input_columns = [ObjectColumn(name='name', label='Name', editable=False, width=0.4),

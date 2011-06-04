@@ -6,9 +6,9 @@
 import os, logging
 
 # ETS imports
-from enthought.traits.api import Any, Instance, Str, Dict
-from enthought.traits.ui.api import View, Group, Item, Handler, InstanceEditor
-from enthought.traits.ui.menu import OKButton, Action
+from traits.api import Any, Instance, Str, Dict
+from traitsui.api import View, Group, Item, Handler, InstanceEditor
+from traitsui.menu import OKButton, Action
 
 # Application imports
 from enthought.block_canvas.plot.configurable_context_plot \

@@ -1,7 +1,7 @@
 # Enthought Library imports
-from enthought.traits.ui.api import View, Item
-from enthought.traits.api import Any
-from enthought.pyface.workbench.traits_ui_editor import TraitsUIEditor
+from traitsui.api import View, Item
+from traits.api import Any
+from pyface.workbench.traits_ui_editor import TraitsUIEditor
 from enthought.block_canvas.block_display.block_editor import BlockEditor
 
 

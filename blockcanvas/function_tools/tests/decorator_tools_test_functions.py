@@ -2,7 +2,7 @@
 """
 
 # ETS imports
-from enthought.units.api import has_units
+from scimath.units.api import has_units
 
 
 # The following two functions are the same code, except for the first one being

@@ -23,14 +23,14 @@ logger = logging.getLogger( __name__ )
 from numpy \
     import ndarray, arange, array, empty
 
-from enthought.traits.api \
+from traits.api \
     import HasTraits, Instance, Str, List, Property, Undefined, \
            TraitDictEvent, TraitError, Dict, Bool
 
-from enthought.util.dict \
+from traits.util.dict \
     import sub_dict
 
-from enthought.util.sequence \
+from traits.util.sequence \
     import concat, disjoint
 
 

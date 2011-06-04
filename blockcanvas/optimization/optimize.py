@@ -1,8 +1,8 @@
 from numpy import zeros, arange
 
 # Enthought library imports
-from enthought.traits.api import HasTraits, Instance, Str, Int, Float, List
-from enthought.traits.ui.api import View, Item, TableEditor
+from traits.api import HasTraits, Instance, Str, Int, Float, List
+from traitsui.api import View, Item, TableEditor
 from enthought.blocks.api import Block
 from enthought.contexts.parametric_context import ShadowContext
 from enthought.contexts.parametric_context import ParametricContext
@@ -13,7 +13,7 @@ from enthought.greenlet import greenlet
 from enthought.block_canvas.plot.configurable_context_plot import ConfigurableContextPlot
 from enthought.block_canvas.interactor.interactor_config import PlotConfig
 from enthought.block_canvas.plot.context_plot import ContextPlotEditor
-from enthought.traits.ui.table_column import ObjectColumn
+from traitsui.table_column import ObjectColumn
 
 # FIXME this has many limitations -- mostly realted to dealing with only
 # one variable at a time

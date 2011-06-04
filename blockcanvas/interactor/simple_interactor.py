@@ -5,9 +5,9 @@
 import numpy
 
 # ETS imports
-from enthought.traits.api import (Any, Dict, HasTraits, Instance, List,
+from traits.api import (Any, Dict, HasTraits, Instance, List,
         on_trait_change)
-from enthought.traits.ui.api import View, Item, Group, TextEditor
+from traitsui.api import View, Item, Group, TextEditor
 
 # Block Canvas imports
 from enthought.contexts.api import IListenableContext

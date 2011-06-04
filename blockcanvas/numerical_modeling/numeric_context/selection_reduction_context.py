@@ -24,7 +24,7 @@
 from numpy \
     import compress, nonzero, put
 
-from enthought.traits.api \
+from traits.api \
     import Constant, Undefined
 
 from termination_context \

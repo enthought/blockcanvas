@@ -1,17 +1,17 @@
-from enthought.traits.api import Str
-from enthought.pyface.image_resource import ImageResource
+from traits.api import Str
+from pyface.image_resource import ImageResource
 
 import sys
 from zipfile import ZipFile, is_zipfile
 from cStringIO import StringIO
 from os.path import abspath
 from types import TupleType
-from enthought.kiva.image import Image
+from enable.kiva.image import Image
 
 # The gc_image_for() function was formerly in Enable but was deprecated,
 # and since the StringImage class is the only place that used it, it has
 # been moved here.  The parts of it that referenced the images/ directory
-# in enthought.enable have been removed.
+# in enable have been removed.
 
 # Image cache dictionary (indexed by 'normalized' filename):
 _image_cache = {}

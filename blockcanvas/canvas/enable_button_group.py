@@ -5,10 +5,10 @@
 """
 
 # Enthought library imports
-from enthought.traits.api import List, Int, Delegate, on_trait_change
-from enthought.enable.abstract_layout_controller import \
+from traits.api import List, Int, Delegate, on_trait_change
+from enable.abstract_layout_controller import \
     AbstractLayoutController
-from enthought.enable.container import Container
+from enable.container import Container
 
 
 class HorizontalLayoutController(AbstractLayoutController):

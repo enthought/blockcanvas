@@ -6,8 +6,8 @@ import logging
 
 # ETS imports
 from enthought.block_canvas.app.utils import create_unique_project_name
-from enthought.traits.api import HasTraits, Str, Directory
-from enthought.traits.ui.api import View, Item, Handler
+from traits.api import HasTraits, Str, Directory
+from traitsui.api import View, Item, Handler
 
 # Global logger
 logger = logging.getLogger(__name__)

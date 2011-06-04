@@ -5,7 +5,7 @@
 """
 
 # Enthought library imports
-from enthought.traits.api import HasTraits, List, Bool
+from traits.api import HasTraits, List, Bool
 
 # Local imports
 from i_selectable import ISelectable

@@ -13,7 +13,7 @@ Created on -- Feb 7, 2011 --
 """
 
 # Enthought TraitsUI imports
-from enthought.traits.ui.api import (View, HSplit, VSplit, Item,
+from traitsui.api import (View, HSplit, VSplit, Item,
                                      InstanceEditor)
 
 # Enthought BlockCanvas import

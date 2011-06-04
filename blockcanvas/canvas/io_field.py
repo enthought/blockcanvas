@@ -1,7 +1,7 @@
 # Enthought Library imports
 from enthought.block_canvas.function_tools.function_variables import Variable
-from enthought.enable.api import ColorTrait, Container
-from enthought.traits.api import Any, Bool, Enum, Float, Instance, Tuple
+from enable.api import ColorTrait, Container
+from traits.api import Any, Bool, Enum, Float, Instance, Tuple
 
 # Local imports
 from edit_field import EditField
@@ -198,9 +198,9 @@ class IOField(Container):
 
 
 if (__name__=='__main__'):
-    from enthought.enable.api import Window
-    from enthought.enable.api import Container
-    from enthought.enable.example_support import DemoFrame, demo_main
+    from enable.api import Window
+    from enable.api import Container
+    from enable.example_support import DemoFrame, demo_main
     from enthought.block_canvas.function_tools.function_variables import InputVariable
 
     class MyFrame(DemoFrame):

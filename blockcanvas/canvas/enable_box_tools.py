@@ -1,8 +1,8 @@
 
 # Enthought library imports
-from enthought.enable.api import BaseTool
-from enthought.enable.tools.api import DragTool
-from enthought.traits.api import Any, Event, Bool, Float, Int, List, Tuple
+from enable.api import BaseTool
+from enable.tools.api import DragTool
+from traits.api import Any, Event, Bool, Float, Int, List, Tuple
 
 
 class BoxResizeTool(DragTool):

@@ -5,8 +5,8 @@
 import numpy, os
 
 # ETS imports
-from enthought.units.unit_db import UnitDB
-from enthought.units.unit_manager import unit_manager
+from scimath.units.unit_db import UnitDB
+from scimath.units.unit_manager import unit_manager
 
 
 #-------------------------------------------------------------------------------

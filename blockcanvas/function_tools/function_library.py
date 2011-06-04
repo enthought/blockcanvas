@@ -2,7 +2,7 @@
 import os
 
 # Enthought library imports
-from enthought.traits.api import (HasTraits, Str, List, Dict,
+from traits.api import (HasTraits, Str, List, Dict,
                                   Callable, implements)
 
 # Local imports

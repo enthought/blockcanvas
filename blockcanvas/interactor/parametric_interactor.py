@@ -11,8 +11,8 @@
 import logging
 
 # ETS imports
-from enthought.traits.api import Instance, Any, Button
-from enthought.traits.ui.api import (Item, InstanceEditor, View, HGroup, Group,
+from traits.api import Instance, Any, Button
+from traitsui.api import (Item, InstanceEditor, View, HGroup, Group,
                                      spring)
 
 # Application imports
@@ -182,8 +182,8 @@ if __name__ == '__main__':
     from enthought.blocks.api import Block
     from enthought.contexts.api import DataContext, MultiContext
 #    from context.api import GeoContext
-#    from enthought.units.api import UnitArray
-#    from enthought.units.length import meter
+#    from scimath.units.api import UnitArray
+#    from scimath.units.length import meter
 
     code = "from enthought.block_canvas.debug.my_operator import add, mul\n" \
            "c = add(a,b)\n" \

@@ -6,9 +6,9 @@
 """
 
 # ETS imports
-from enthought.traits.api import HasTraits, Instance, Str, Property
-from enthought.traits.ui.api import View, Item, HGroup
-from enthought.util.distribution.distribution import \
+from traits.api import HasTraits, Instance, Str, Property
+from traitsui.api import View, Item, HGroup
+from traits.util.distribution.distribution import \
      Constant, Distribution, Gaussian, Triangular, Uniform
 
 

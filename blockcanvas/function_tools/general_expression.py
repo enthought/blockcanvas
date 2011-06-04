@@ -8,8 +8,8 @@ from compiler.ast import AssTuple
 from enthought.blocks.analysis import walk
 from enthought.blocks.api import parse, unparse
 from uuid import UUID, uuid4
-from enthought.traits.api import List, HasTraits, Instance, Property, Str, on_trait_change
-from enthought.traits.ui import api as tui
+from traits.api import List, HasTraits, Instance, Property, Str, on_trait_change
+from traitsui import api as tui
 
 from function_variables import InputVariable, OutputVariable
 

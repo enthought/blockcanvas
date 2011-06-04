@@ -6,8 +6,8 @@ import timeit
 from numpy import all
 
 # Enthought Library imports
-from enthought.units.length import meters, feet
-from enthought.units.time import second
+from scimath.units.length import meters, feet
+from scimath.units.time import second
 
 # Geo Library imports
 from geo.log import Log
@@ -130,7 +130,7 @@ class UnitConversionContextAdapterTestCase(unittest.TestCase):
 
         ### Standard execution ################################################
         setup = "from numpy import arange\n" \
-                "from enthought.units.length import meters, feet\n" \
+                "from scimath.units.length import meters, feet\n" \
                 "from enthought import units\n" \
                 "depth_meters = arange(1000)\n"
         code = "depth_feet = units.convert(depth_meters, meters, feet)\n" \
@@ -143,7 +143,7 @@ class UnitConversionContextAdapterTestCase(unittest.TestCase):
         # Adapter is set up to convert depth meters->feet and
         # depth2 feet->meters
         setup = "from numpy import arange\n" \
-                "from enthought.units.length import meters, feet\n" \
+                "from scimath.units.length import meters, feet\n" \
                 "from geo.context.api import DataContext, AdaptedDataContext\n" \
                 "from geo.log import Log\n" \
                 "from geo.context.api import UnitConversionAdapter\n" \

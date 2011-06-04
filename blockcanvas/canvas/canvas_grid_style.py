@@ -1,6 +1,6 @@
 # Enthought library imports
-from enthought.traits.api import (HasTraits, Int, Bool, List)
-from enthought.enable.traits.api import RGBAColor
+from traits.api import (HasTraits, Int, Bool, List)
+from enable.traits.api import RGBAColor
 
 
 class CanvasGridStyle(HasTraits):

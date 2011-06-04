@@ -19,9 +19,9 @@ from enthought.block_canvas.function_tools.group_spec import GroupSpec
 from enthought.block_canvas.function_tools.parse_code import retrieve_inputs_and_outputs
 from enthought.blocks.analysis import walk, is_const
 from enthought.blocks.api import (Block, unparse)
-from enthought.traits.api import \
+from traits.api import \
     (Any, cached_property, HasTraits, List, Property, implements, Instance, Bool, List)
-from enthought.util import graph
+from traits.util import graph
 
 
 python_name = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')

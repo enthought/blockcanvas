@@ -19,28 +19,28 @@ PyFace grid control.
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import HasTraits, HasPrivateTraits, Any, Str, Int, List, Instance, Event
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import Editor
 
-from enthought.traits.ui.table_column \
+from traitsui.table_column \
     import NumericColumn
 
-from enthought.traits.ui.table_filter \
+from traitsui.table_filter \
     import TableFilter
 
-from enthought.traits.ui.ui_traits \
+from traitsui.ui_traits \
     import SequenceTypes
 
 from enthought.model.api \
     import ANumericModel, SortFilter
 
-from enthought.pyface.ui.wx.grid.api \
+from pyface.ui.wx.grid.api \
     import GridModel, GridSortEvent
 
-from enthought.pyface.ui.wx.grid.trait_grid_cell_adapter \
+from pyface.ui.wx.grid.trait_grid_cell_adapter \
     import TraitGridCellAdapter
 
 #-------------------------------------------------------------------------------

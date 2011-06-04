@@ -19,7 +19,7 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import Instance, Property, TraitDictEvent
 
 from a_numeric_context \

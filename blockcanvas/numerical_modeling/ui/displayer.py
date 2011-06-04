@@ -1,4 +1,4 @@
-import enthought.traits.ui.menu as menu
+import traitsui.menu as menu
 
 from enthought.numerical_modeling.numeric_context.api \
     import ANumericContext
@@ -6,10 +6,10 @@ from enthought.numerical_modeling.numeric_context.api \
 from enthought.numerical_modeling.workflow.api \
     import Block
 
-from enthought.traits.api \
+from traits.api \
     import *
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import *
 
 #-------------------------------------------------------------------------------

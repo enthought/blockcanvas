@@ -23,10 +23,10 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import Enum
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View
 
 from expression_filter \

@@ -1,5 +1,5 @@
 # Enthought Library imports
-from enthought.traits.ui.api import View, Item, InstanceEditor, CodeEditor
+from traitsui.api import View, Item, InstanceEditor, CodeEditor
 
 # Local imports
 from traits_ui_view import TraitsUIView

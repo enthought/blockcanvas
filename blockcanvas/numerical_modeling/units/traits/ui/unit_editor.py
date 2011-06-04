@@ -8,25 +8,25 @@
 #
 #-------------------------------------------------------------------------------
 
-from enthought.traits.api \
+from traits.api \
     import CFloat, false, HasPrivateTraits, Instance, Str
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import View, HGroup, Item, Label
 
-from enthought.traits.ui.ui_editor \
+from traitsui.ui_editor \
     import UIEditor
 
-from enthought.traits.ui.api \
+from traitsui.api \
     import EditorFactory
 
-from enthought.units.convert \
+from scimath.units.convert \
     import convert
 
-from enthought.units.unit \
+from scimath.units.unit \
     import unit
 
-from enthought.units.unit_scalar \
+from scimath.units.unit_scalar \
     import UnitArray
 
 class UnitView ( HasPrivateTraits ):

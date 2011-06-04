@@ -23,7 +23,7 @@
 
 from numpy import isfinite, logical_not
 
-from enthought.traits.api \
+from traits.api \
     import Bool
 
 from a_numeric_filter \

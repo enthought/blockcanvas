@@ -5,8 +5,8 @@ from numpy import ndarray, all
 
 # ETS imports
 from enthought.numerical_modeling.numeric_context.api import ANumericContext
-from enthought.util.dict import dict_zip
-from enthought.util.sequence import union
+from traits.util.dict import dict_zip
+from traits.util.sequence import union
 
 ###############################################################################
 # Support

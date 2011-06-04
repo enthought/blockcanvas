@@ -7,10 +7,10 @@
     #       modal (modules).  That seems a little goofy.
 
 # Enthought library imports.
-from enthought.traits.api import List, Str
-from enthought.traits.ui.api import View, VGroup, HGroup, Item, \
+from traits.api import List, Str
+from traitsui.api import View, VGroup, HGroup, Item, \
                                     Handler, Label, Group, ListStrEditor
-from enthought.traits.ui.menu import OKCancelButtons
+from traitsui.menu import OKCancelButtons
 
 # Local imports
 from enthought.block_canvas.app import scripting

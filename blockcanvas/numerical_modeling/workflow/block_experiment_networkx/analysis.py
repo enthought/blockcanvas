@@ -10,12 +10,12 @@ import logging
 logger = logging.getLogger(__name__)
 from networkx import DiGraph, is_directed_acyclic_graph, topological_sort
 
-from enthought.util.dict import map_keys, map_items, map_values
-from enthought.util.functional import partial
-from enthought.util.networkx_ import CyclicGraph, closure, graph_map
-from enthought.util.sequence import \
+from traits.util.dict import map_keys, map_items, map_values
+from traits.util.functional import partial
+from traits.util.networkx_ import CyclicGraph, closure, graph_map
+from traits.util.sequence import \
     all, any, disjoint, intersect, is_sequence, union
-import enthought.util.tree as tree
+import traits.util.tree as tree
 
 # Extend compiler.ast.Node with a structure-preserving children query
 import \

@@ -26,7 +26,7 @@
 from numpy \
     import maximum, sum
 
-from enthought.traits.api \
+from traits.api \
     import Property
 
 from constants \

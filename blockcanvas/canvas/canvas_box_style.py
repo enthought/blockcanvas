@@ -1,6 +1,6 @@
-from enthought.traits.api import HasTraits, Int
-from enthought.kiva.traits.api import KivaFont
-from enthought.enable.traits.api import RGBAColor
+from traits.api import HasTraits, Int
+from enable.kiva.traits.api import KivaFont
+from enable.traits.api import RGBAColor
 
 
 

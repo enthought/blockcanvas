@@ -16,7 +16,7 @@ Created on -- Jan 28, 2011 --
 from compiler.ast import AssTuple, AssName, CallFunc, Name
 
 # Enthought Traits imports
-from enthought.traits.api import HasTraits, Instance, Property, \
+from traits.api import HasTraits, Instance, Property, \
                                  List, Str, Int
 
 # Enthought BlockCanvas imports

@@ -2,14 +2,14 @@ from numpy import array, ndarray, min, max
 from colorsys import hsv_to_rgb
 
 # Enthought library imports
-from enthought.chaco.api import PlotComponent, VPlotContainer, HPlotContainer, hsv
-from enthought.chaco.plot import Plot
-from enthought.chaco.tools.pan_tool import PanTool
-from enthought.chaco.plot_containers import OverlayPlotContainer
-from enthought.enable.api import Window
-from enthought.traits.api import HasTraits, Instance, Bool, List
-from enthought.traits.trait_types import Enum
-from enthought.traits.ui.api import BasicEditorFactory, Editor, Item, View
+from chaco.api import PlotComponent, VPlotContainer, HPlotContainer, hsv
+from chaco.plot import Plot
+from chaco.tools.pan_tool import PanTool
+from chaco.plot_containers import OverlayPlotContainer
+from enable.api import Window
+from traits.api import HasTraits, Instance, Bool, List
+from traits.trait_types import Enum
+from traitsui.api import BasicEditorFactory, Editor, Item, View
 
 # Application imports
 from enthought.contexts.i_context import IListenableContext
@@ -18,8 +18,8 @@ from enthought.block_canvas.interactor.interactor_config import PlotConfig
 
 # Local Imports
 from plot_data_context_adapter import PlotDataContextAdapter
-from enthought.chaco.data_range_1d import DataRange1D
-from enthought.chaco.default_colormaps import gray
+from chaco.data_range_1d import DataRange1D
+from chaco.default_colormaps import gray
 
 
 def color_generator():

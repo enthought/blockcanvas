@@ -17,9 +17,9 @@ import warnings
 
 # enthought library imports
 from uuid import UUID, uuid4
-from enthought.traits.api import (Any, Delegate, Event, HasTraits, Instance, 
+from traits.api import (Any, Delegate, Event, HasTraits, Instance, 
         List, on_trait_change, Property, Str)
-from enthought.traits.ui.api import (View, Item, HGroup, CodeEditor, 
+from traitsui.api import (View, Item, HGroup, CodeEditor, 
         ButtonEditor, VGroup, spring)
 
 # CodeTools imports

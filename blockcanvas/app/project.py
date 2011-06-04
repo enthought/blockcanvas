@@ -7,7 +7,7 @@ import os
 from os.path import abspath, join
 
 # Enthought library imports
-from enthought.traits.api import (Directory, HasTraits, Instance, Int, List,
+from traits.api import (Directory, HasTraits, Instance, Int, List,
         on_trait_change, Property, Trait)
 
 # Block canvas imports

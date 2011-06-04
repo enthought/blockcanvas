@@ -4,10 +4,10 @@
 # Major library imports
 
 # Enthought library imports
-from enthought.units.api import UnitArray as UA
-from enthought.units.traits.ui.unit_editor \
+from scimath.units.api import UnitArray as UA
+from scimath.units.traits.ui.unit_editor \
     import UnitEditor
-from enthought.traits.api import Instance, TraitFactory
+from traits.api import Instance, TraitFactory
 
 # Local Imports
 

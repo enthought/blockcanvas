@@ -2,9 +2,9 @@
 import logging
 
 # Enthought library imports.
-from enthought.traits.api import Instance
-from enthought.pyface.api import GUI, YES
-from enthought.pyface.workbench.api import Workbench
+from traits.api import Instance
+from pyface.api import GUI, YES
+from pyface.workbench.api import Workbench
 
 from enthought.block_canvas.function_tools.function_library import FunctionLibrary
 

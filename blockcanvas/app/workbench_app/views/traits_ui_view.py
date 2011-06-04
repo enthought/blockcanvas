@@ -2,9 +2,9 @@
 """
 
 # Enthought library imports
-from enthought.traits.api import HasTraits, Instance, Any
-from enthought.traits.ui.api import View
-from enthought.pyface.workbench.api import View as WorkbenchView
+from traits.api import HasTraits, Instance, Any
+from traitsui.api import View
+from pyface.workbench.api import View as WorkbenchView
 
 class TraitsUIView(WorkbenchView):
     """ Workbench view of an object using traits UI.

@@ -5,19 +5,19 @@
 """
 
 # Enthought library imports.
-from enthought.etsconfig.api import ETSConfig
-from enthought.pyface.image_resource import ImageResource
-from enthought.traits.api import Any, Property, Event, Str, Font, Bool, Dict
-from enthought.traits.ui.api import View, VGroup, VSplit, HGroup, Item, \
+from traits.etsconfig.api import ETSConfig
+from pyface.image_resource import ImageResource
+from traits.api import Any, Property, Event, Str, Font, Bool, Dict
+from traitsui.api import View, VGroup, VSplit, HGroup, Item, \
                            Handler, Label, Group, TabularEditor, SearchEditor
-from enthought.traits.ui.tabular_adapter import TabularAdapter
-from enthought.traits.ui.menu import NoButtons, OKCancelButtons
+from traitsui.tabular_adapter import TabularAdapter
+from traitsui.menu import NoButtons, OKCancelButtons
 
 # App imports
 if ETSConfig.toolkit == 'wx':
     from enthought.block_canvas.ui.hyperlink_editor import HyperlinkEditor
 else:
-    from enthought.traits.ui.api import ButtonEditor as HyperlinkEditor
+    from traitsui.api import ButtonEditor as HyperlinkEditor
 
 # Local imports
 from python_function_info import PythonFunctionInfo
