@@ -9,14 +9,14 @@ import time
 # Enthought library imports
 from pyface.message_dialog import MessageDialog
 from traits.api import Instance, Str, Bool, HasTraits, on_trait_change
-from enthought.appscripting.api import scriptable
+from apptools.appscripting.api import scriptable
 from traitsui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor, CodeEditor
 from traitsui.key_bindings import KeyBinding, KeyBindings
 
 # CodeTools Imports
-from enthought.execution.executing_context import ExecutingContext
-from enthought.contexts.api import DataContext, MultiContext
+from codetools.execution.executing_context import ExecutingContext
+from codetools.contexts.api import DataContext, MultiContext
 
 # Block canvas imports
 from blockcanvas.block_display.block_editor import BlockEditor

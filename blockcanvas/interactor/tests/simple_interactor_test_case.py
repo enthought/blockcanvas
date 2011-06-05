@@ -1,8 +1,8 @@
 import unittest
 
 from blockcanvas.interactor.simple_interactor import SimpleInteractor
-from enthought.contexts.api import DataContext
-from enthought.blocks.api import Block
+from codetools.contexts.api import DataContext
+from codetools.blocks.api import Block
 
 class SimpleInteractorTestCase(unittest.TestCase):
 

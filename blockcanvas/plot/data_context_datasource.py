@@ -1,7 +1,7 @@
 from traits.api import Instance, Str
 from chaco.array_data_source import ArrayDataSource
 from chaco.abstract_data_source import AbstractDataSource
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 from traits.api import on_trait_change
 
 class DataContextDataSource(ArrayDataSource):

@@ -6,7 +6,7 @@ from numpy import array
 import logging, os, struct, string
 
 # Enthought lib imports
-from enthought.contexts.data_context import DataContext
+from codetools.contexts.data_context import DataContext
 from pyface.api import ProgressDialog
 from traits.api import HasTraits, File, Int, Enum, Float, Property, \
      Any, Instance, on_trait_change

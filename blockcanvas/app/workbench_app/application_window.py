@@ -7,9 +7,9 @@ from pyface.workbench.api import WorkbenchWindow
 from pyface.workbench.action.api import MenuBarManager
 from pyface.workbench.action.api import ToolBarManager
 from pyface.workbench.action.api import ViewMenuManager
-from enthought.undo.action.api import BeginRecordingAction
-from enthought.undo.action.api import ClearRecordingAction, EndRecordingAction
-from enthought.undo.action.api import CommandAction, RedoAction, UndoAction
+from apptools.undo.action.api import BeginRecordingAction
+from apptools.undo.action.api import ClearRecordingAction, EndRecordingAction
+from apptools.undo.action.api import CommandAction, RedoAction, UndoAction
 
 # Block Canvas imports
 from blockcanvas.app.ui.function_search_ui import function_search_view

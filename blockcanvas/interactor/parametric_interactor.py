@@ -16,7 +16,7 @@ from traitsui.api import (Item, InstanceEditor, View, HGroup, Group,
                                      spring)
 
 # Application imports
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 
 # Local imports
 from parametric_item import ParametricItem
@@ -179,8 +179,8 @@ class ParametricInteractor(SimpleInteractor):
 
 # Test
 if __name__ == '__main__':
-    from enthought.blocks.api import Block
-    from enthought.contexts.api import DataContext, MultiContext
+    from codetools.blocks.api import Block
+    from codetools.contexts.api import DataContext, MultiContext
 #    from context.api import GeoContext
 #    from scimath.units.api import UnitArray
 #    from scimath.units.length import meter

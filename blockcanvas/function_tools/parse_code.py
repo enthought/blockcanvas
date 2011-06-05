@@ -20,8 +20,8 @@ from blockcanvas.function_tools.general_expression \
     import StatementWalker
     
 # CodeTools imports
-from enthought.blocks.api import parse
-from enthought.blocks.analysis import walk
+from codetools.blocks.api import parse
+from codetools.blocks.analysis import walk
 
 
 def retrieve_inputs_and_outputs(code="",reserved_inputs=[],reserved_outputs=[]):

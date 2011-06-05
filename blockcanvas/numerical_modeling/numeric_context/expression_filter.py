@@ -27,7 +27,7 @@ from traits.api \
 from traitsui.api \
     import View
 
-from enthought.blocks.api \
+from codetools.blocks.api \
     import Expression as ExpressionBlock
 
 from a_numeric_filter \

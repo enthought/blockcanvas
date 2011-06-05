@@ -3,7 +3,7 @@ from traits.api import HasTraits, Instance, List, Str
 from traitsui.api import View, Item
 
 # Application imports
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 #from blockcanvas.interactor.interactor_config import PlotConfig
 
 # Local imports

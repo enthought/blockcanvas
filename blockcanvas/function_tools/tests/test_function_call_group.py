@@ -2,7 +2,7 @@
 import unittest
 
 # Enthought library imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 
 # Local library imports
 from blockcanvas.function_tools.function_call import \

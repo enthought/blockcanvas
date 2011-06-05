@@ -4,7 +4,7 @@ import traceback
 import compiler
 
 # Enthought library imports
-from enthought.blocks.api import unparse
+from codetools.blocks.api import unparse
 from traits.api import Str
 
 

@@ -7,13 +7,13 @@
 
 # Enable the trace() function that is handy as a replacement for print
 try:
-    from enthought.debug.injectrace import trace
+    from etsdevtools.debug.injectrace import trace
 except ImportError:
     pass
 import os
 
 # Enthought library imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 
 # Local imports
 from blockcanvas.app.block_application import BlockApplication
@@ -21,7 +21,7 @@ from blockcanvas.block_display.block_unit import BlockUnit
 from blockcanvas.function_tools.handled_function_search import HandledFunctionSearch
 from blockcanvas.function_tools.function_library import Module
 
-from enthought.contexts.data_context import DataContext
+from codetools.contexts.data_context import DataContext
 
 
 def main():

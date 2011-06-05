@@ -10,7 +10,7 @@ import logging, os, shutil
 from traits.etsconfig.api \
     import ETSConfig
 
-from enthought.naming.unique_name \
+from apptools.naming.unique_name \
     import make_unique_name
 
 from traits.api \
@@ -22,13 +22,13 @@ from traitsui.api \
 from pyface.api \
     import DirectoryDialog
 
-from enthought.blocks.api \
+from codetools.blocks.api \
     import Block, unparse
 
 from blockcanvas.block_display.block_unit \
     import BlockUnit
 
-from enthought.contexts.data_context \
+from codetools.contexts.data_context \
     import DataContext
 
 from blockcanvas.context.editors.context_shell_editor \

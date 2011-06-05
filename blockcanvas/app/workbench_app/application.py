@@ -5,7 +5,7 @@
 from traits.api import (HasTraits, Instance, Str, on_trait_change)
 from traitsui.api import HSplit, Item, VGroup, View, VSplit, \
                                     InstanceEditor
-from enthought.appscripting.api import scriptable
+from apptools.appscripting.api import scriptable
 
 # Block Canvas imports
 from blockcanvas.block_display.block_editor import BlockEditor

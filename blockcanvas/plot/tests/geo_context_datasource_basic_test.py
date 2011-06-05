@@ -3,7 +3,7 @@ import unittest
 from numpy import array
 
 # Local imports
-from enthought.contexts.geo_context import GeoContext
+from codetools.contexts.geo_context import GeoContext
 from blockcanvas.plot.data_context_datasource import DataContextDataSource
 
 class GeoContextDataSourceBasicTest(unittest.TestCase):

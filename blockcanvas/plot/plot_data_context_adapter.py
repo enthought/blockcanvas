@@ -5,9 +5,9 @@ from numpy import arange
 
 # Enthought library imports
 from chaco.abstract_plot_data import AbstractPlotData
-from enthought.contexts.data_context import DataContext
+from codetools.contexts.data_context import DataContext
 from traits.api import on_trait_change, Instance
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 from blockcanvas.plot.data_context_datasource import DataContextDataSource
 
 

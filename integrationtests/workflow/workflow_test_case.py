@@ -3,7 +3,7 @@ import unittest
 from traits.testing.api import doctest_for_module
 
 import blockcanvas.numerical_modeling.workflow.dataflow as dataflow
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 from blockcanvas.numerical_modeling.workflow.dataflow import Dataflow
 
 class DataflowDocTestCase(doctest_for_module(dataflow)):

@@ -19,7 +19,7 @@ import codetools.util.tree as tree
 
 # Extend compiler.ast.Node with a structure-preserving children query
 import \
-    enthought.blocks.compiler_.ast.get_children_tree
+    codetools.blocks.compiler_.ast.get_children_tree
 
 # XXX Hack
 from blockcanvas.numerical_modeling.name_magic import magically_bound_names

@@ -26,8 +26,8 @@ builtin_names = set(dir(__builtin__))
 
  
 # Enthought CodeTools
-from enthought.blocks.analysis import walk
-from enthought.blocks.api import parse
+from codetools.blocks.analysis import walk
+from codetools.blocks.api import parse
 
 # Enthought BlockCanvas
 from blockcanvas.function_tools.function_variables \
@@ -291,7 +291,7 @@ if __name__ == '__main__':
     """
     Test code
     """
-    from enthought.contexts.api import DataContext 
+    from codetools.contexts.api import DataContext 
     from execution_model import ExecutionModelExtended as ExecutionModel
 
            

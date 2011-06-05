@@ -11,7 +11,7 @@ import nose
 from blockcanvas.numerical_modeling.workflow.api import Block
 
 # Local imports
-from enthought.contexts.api import DataContext, MultiContext
+from codetools.contexts.api import DataContext, MultiContext
 from blockcanvas.interactor.stochastic_interactor import \
      StochasticInteractor
 

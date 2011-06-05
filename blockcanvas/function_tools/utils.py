@@ -6,7 +6,7 @@ import os, sys, string
 
 # Enthought library imports
 from traits.etsconfig.api import ETSConfig
-from enthought.blocks.analysis import walk
+from codetools.blocks.analysis import walk
 
 from traits.api import \
     HasTraits, Str, List, Unicode, File, Directory

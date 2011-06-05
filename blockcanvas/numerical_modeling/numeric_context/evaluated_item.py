@@ -22,7 +22,7 @@
 from traits.api \
     import Property, Expression
 
-from enthought.blocks.api \
+from codetools.blocks.api \
     import Expression as ExpressionBlock
 
 from a_numeric_item \
