@@ -18,13 +18,9 @@
 interface toolkit.
 .
 """
-#-------------------------------------------------------------------------------
-#  Imports:
-#-------------------------------------------------------------------------------
-
 import wx
 
-from enable.traits.api import RGBAColor
+from enable.trait_defs.api import RGBAColor
 
 from numpy \
     import compress
