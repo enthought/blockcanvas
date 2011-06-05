@@ -21,7 +21,7 @@ from enthought.blocks.analysis import walk, is_const
 from enthought.blocks.api import (Block, unparse)
 from traits.api import \
     (Any, cached_property, HasTraits, List, Property, implements, Instance, Bool, List)
-from traits.util import graph
+from codetools.util import graph
 
 
 python_name = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')

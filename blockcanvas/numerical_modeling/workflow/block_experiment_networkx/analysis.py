@@ -10,12 +10,12 @@ import logging
 logger = logging.getLogger(__name__)
 from networkx import DiGraph, is_directed_acyclic_graph, topological_sort
 
-from traits.util.dict import map_keys, map_items, map_values
-from traits.util.functional import partial
-from traits.util.networkx_ import CyclicGraph, closure, graph_map
-from traits.util.sequence import \
+from codetools.util.dict import map_keys, map_items, map_values
+from codetools.util.functional import partial
+from .util.networkx_ import CyclicGraph, closure, graph_map
+from codetools.util.sequence import \
     all, any, disjoint, intersect, is_sequence, union
-import traits.util.tree as tree
+import codetools.util.tree as tree
 
 # Extend compiler.ast.Node with a structure-preserving children query
 import \

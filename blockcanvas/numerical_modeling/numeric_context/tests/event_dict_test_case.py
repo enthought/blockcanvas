@@ -3,7 +3,7 @@ from cPickle import dumps, loads
 from nose.tools import assert_equal, assert_not_equal, assert_raises
 import nose
 
-from traits.util.sequence import union
+from codetools.util.sequence import union
 
 from blockcanvas.numerical_modeling.numeric_context.api import EventDict
 

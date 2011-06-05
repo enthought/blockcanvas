@@ -1,4 +1,4 @@
-from traits.util.sequence import disjoint
+from codetools.util.sequence import disjoint
 
 # The two 'merge_*_events' methods below have a very similar structure...
 # Should 'ContextModified' subtype 'TraitDictEvent'? (As of now they are
