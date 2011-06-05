@@ -5,7 +5,7 @@
 
 # Enthought library imports
 from traits.api import Str
-from enable.kiva.traits.api import KivaFont
+from kiva.traits.api import KivaFont
 from enable.api import Component
 from enable.traits.api import RGBAColor
 

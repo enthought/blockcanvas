@@ -1,5 +1,5 @@
 from traits.api import HasTraits, Int
-from enable.kiva.traits.api import KivaFont
+from kiva.traits.api import KivaFont
 from enable.traits.api import RGBAColor
 
 

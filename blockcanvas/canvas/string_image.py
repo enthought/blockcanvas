@@ -6,7 +6,7 @@ from zipfile import ZipFile, is_zipfile
 from cStringIO import StringIO
 from os.path import abspath
 from types import TupleType
-from enable.kiva.image import Image
+from kiva.image import Image
 
 # The gc_image_for() function was formerly in Enable but was deprecated,
 # and since the StringImage class is the only place that used it, it has

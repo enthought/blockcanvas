@@ -73,7 +73,7 @@ from chaco.plot_interaction \
 from enable.api \
     import Window
 
-from enable.kiva.constants \
+from kiva.constants \
     import STROKE
 
 

@@ -18,7 +18,7 @@
 from numpy \
     import array, shape
 
-from enable.kiva.agg \
+from kiva.agg \
     import points_in_polygon  # FIXME: bad dependency
 
 from traits.api \
