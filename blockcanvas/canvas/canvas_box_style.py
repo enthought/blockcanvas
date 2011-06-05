@@ -1,6 +1,6 @@
 from traits.api import HasTraits, Int
-from kiva.traits.api import KivaFont
-from enable.traits.api import RGBAColor
+from kiva.trait_defs.api import KivaFont
+from enable.trait_defs.api import RGBAColor
 
 
 

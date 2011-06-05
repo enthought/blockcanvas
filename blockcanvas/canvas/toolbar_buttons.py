@@ -1,7 +1,7 @@
 # Enthought library imports
 from enable.api import ColorTrait, Component
 from enable.font_metrics_provider import font_metrics_provider
-from kiva.traits.api import KivaFont
+from kiva.trait_defs.api import KivaFont
 from traits.api import Bool, Enum, Instance, Int, Property, Str, Tuple
 
 # Block canvas imports

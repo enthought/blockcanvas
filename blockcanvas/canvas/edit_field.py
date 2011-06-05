@@ -5,8 +5,8 @@ from helper import get_scale
 from enable.api import Component
 from enable.colors import ColorTrait
 from enable.font_metrics_provider import font_metrics_provider
-from enable.traits.api import RGBAColor
-from kiva.traits.api import KivaFont
+from enable.trait_defs.api import RGBAColor
+from kiva.trait_defs.api import KivaFont
 from traits.api import (Any, Bool, Dict, Event, Int, List, Property)
 
 
