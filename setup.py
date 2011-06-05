@@ -53,21 +53,21 @@ cobyla = Extension(
 greenlet = Extension(
     'blockcanvas.greenlet.greenlet',
     sources = [
-        'enthought/greenlet/greenlet.c',
+        'blockcanvas/greenlet/greenlet.c',
         ],
     include_dirs = [
-        'enthought/greenlet',
+        'blockcanvas/greenlet',
         ],
     depends=[
-        'enthought/greenlet/greenlet.h',
-        'enthought/greenlet/slp_platformselect.h',
-        'enthought/greenlet/switch_amd64_unix.h',
-        'enthought/greenlet/switch_ppc_macosx.h',
-        'enthought/greenlet/switch_ppc_unix.h',
-        'enthought/greenlet/switch_s390_unix.h',
-        'enthought/greenlet/switch_sparc_sun_gcc.h',
-        'enthought/greenlet/switch_x86_msvc.h',
-        'enthought/greenlet/switch_x86_unix.h',
+        'blockcanvas/greenlet/greenlet.h',
+        'blockcanvas/greenlet/slp_platformselect.h',
+        'blockcanvas/greenlet/switch_amd64_unix.h',
+        'blockcanvas/greenlet/switch_ppc_macosx.h',
+        'blockcanvas/greenlet/switch_ppc_unix.h',
+        'blockcanvas/greenlet/switch_s390_unix.h',
+        'blockcanvas/greenlet/switch_sparc_sun_gcc.h',
+        'blockcanvas/greenlet/switch_x86_msvc.h',
+        'blockcanvas/greenlet/switch_x86_unix.h',
         ],
     )
 
