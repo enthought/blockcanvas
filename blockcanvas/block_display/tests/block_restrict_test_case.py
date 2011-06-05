@@ -1,10 +1,10 @@
 import unittest
 
 # ETS imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 
 # application imports
-from enthought.contexts.api import DataContext
+from codetools.contexts.api import DataContext
 
 class BlockRestrictestCase(unittest.TestCase):
     """ Block restriction is tested in the numerical_modeling code, these

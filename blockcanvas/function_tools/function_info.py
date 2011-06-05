@@ -4,8 +4,8 @@
 import warnings
 
 # Enthought Library imports
-from enthought.blocks.analysis import walk
-from enthought.blocks.api import unparse
+from codetools.blocks.analysis import walk
+from codetools.blocks.api import unparse
 
 # Local imports
 import _pkgutil

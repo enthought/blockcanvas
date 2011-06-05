@@ -9,13 +9,13 @@ raise nose.SkipTest("BlockApplication is deprecated")
 import os, unittest, tempfile
 
 # ETS library imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 
 # Local imports
 from blockcanvas.app.utils import create_unique_project_name
 from blockcanvas.app.block_application import BlockApplication
 from blockcanvas.block_display.block_unit import BlockUnit
-from enthought.contexts.api import DataContext
+from codetools.contexts.api import DataContext
 
 #-------------------------------------------------------------------------------
 #   ProjectTestCase

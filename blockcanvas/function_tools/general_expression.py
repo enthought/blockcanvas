@@ -5,8 +5,8 @@ It can be used in many of the places FunctionCall is used.
 
 from compiler.ast import AssTuple
 
-from enthought.blocks.analysis import walk
-from enthought.blocks.api import parse, unparse
+from codetools.blocks.analysis import walk
+from codetools.blocks.api import parse, unparse
 from uuid import UUID, uuid4
 from traits.api import List, HasTraits, Instance, Property, Str, on_trait_change
 from traitsui import api as tui

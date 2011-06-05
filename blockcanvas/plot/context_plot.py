@@ -12,7 +12,7 @@ from traits.trait_types import Enum
 from traitsui.api import BasicEditorFactory, Editor, Item, View
 
 # Application imports
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 from blockcanvas.interactor.interactor_config import PlotConfig
 
 
@@ -215,7 +215,7 @@ class ContextPlot(HasTraits):
 
 
 if __name__ == '__main__':
-    from enthought.contexts.geo_context import GeoContext
+    from codetools.contexts.geo_context import GeoContext
 
     context = GeoContext()
     context['a'] = array([5, 2, 1, 7, 10])

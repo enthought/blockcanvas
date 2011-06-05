@@ -8,19 +8,19 @@
 
 # Enable the trace() function that is handy as a replacement for print
 try:
-    from enthought.debug.injectrace import trace
+    from etsdevtools.debug.injectrace import trace
 except ImportError:
     pass
 import os
 
 # Enthought library imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 from traits.etsconfig.api import ETSConfig
 from traits.logger.api import add_log_queue_handler, create_log_file_handler
 
 # Local imports
 from blockcanvas.app.block_application import BlockApplication
-from enthought.contexts.data_context import DataContext
+from codetools.contexts.data_context import DataContext
 
 def initialize_logger():
     import logging

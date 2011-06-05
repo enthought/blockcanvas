@@ -4,7 +4,7 @@
 
 from blockcanvas.app.experiment import Experiment
 from blockcanvas.app.project import Project
-from enthought.contexts.api import DataContext
+from codetools.contexts.api import DataContext
 
 
 #-------------------------------------------------------------------------------

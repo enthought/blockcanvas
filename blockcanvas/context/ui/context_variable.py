@@ -10,7 +10,7 @@ import traitsui.api as tui
 from traits.protocols.api import AdaptationFailure, adapt
 from traitsui.menu import OKCancelButtons
 
-from enthought.contexts.api import (DataContext, IContext,
+from codetools.contexts.api import (DataContext, IContext,
     IListenableContext)
 from blockcanvas.interactor.editors import array_eval_editor
 from blockcanvas.app.utils import regex_from_str
@@ -406,7 +406,7 @@ class ContextVariableList(HasTraits):
 
 if __name__ == '__main__':
     import pprint
-    from enthought.contexts.api import DataContext
+    from codetools.contexts.api import DataContext
     from context_variable_ui import context_variables_view
 
     dc = DataContext()

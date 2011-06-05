@@ -2,7 +2,7 @@
 import unittest
 
 # Geo library imports
-from enthought.contexts.api import MultiContext, DataContext
+from codetools.contexts.api import MultiContext, DataContext
 from blockcanvas.context.shell.global_and_local_interpreter import \
                                         GlobalAndLocalInterpreter
 

@@ -106,7 +106,7 @@ class ContextShellEditor ( BasicEditorFactory ):
 if __name__ == "__main__":
     from traits.api import HasTraits
     from traitsui.api import View, Item, Group
-    from enthought.contexts.multi_context import MultiContext
+    from codetools.contexts.multi_context import MultiContext
 
     class ContextWrapper(HasTraits):
         context = MultiContext({"a":100, "b":200, "c":50})

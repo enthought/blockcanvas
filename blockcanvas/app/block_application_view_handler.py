@@ -2,7 +2,7 @@
     primary purpose is to set up/call actions for menu items.
 
 """
-#from enthought.contexts.data_context import DataContext
+#from codetools.contexts.data_context import DataContext
 
 # Standard imports
 import os, logging
@@ -17,7 +17,7 @@ import pyface.api as pyface
 from traits.etsconfig.api import ETSConfig
 
 # Local imports
-from enthought.contexts.api import DataContext
+from codetools.contexts.api import DataContext
 from blockcanvas.app.ui.configurable_import_ui import ConfigurableImportUI
 from blockcanvas.app.ui.project_folder_ui import ProjectFolderUI
 from blockcanvas.app.utils import create_unique_project_name

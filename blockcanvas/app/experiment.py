@@ -8,16 +8,16 @@ from os.path import join
 from traits.api import HasTraits, Instance, on_trait_change, Property, String
 
 # CodeTools imports
-from enthought.execution.executing_context import ExecutingContext
+from codetools.execution.executing_context import ExecutingContext
 
 
 # Block canvas imports
 from blockcanvas.block_display.block_graph_controller import BlockGraphController
 from blockcanvas.block_display.execution_model import ExecutionModel
 from blockcanvas.canvas.block_canvas import BlockCanvas
-from enthought.contexts.api import (DataContext,
+from codetools.contexts.api import (DataContext,
     FunctionFilterContext, IListenableContext, MultiContext)
-from enthought.execution.executing_context import ExecutingContext
+from codetools.execution.executing_context import ExecutingContext
 from blockcanvas.function_tools.local_function_info import LocalFunctionInfo
 from blockcanvas.function_tools.python_function_info import PythonFunctionInfo
 

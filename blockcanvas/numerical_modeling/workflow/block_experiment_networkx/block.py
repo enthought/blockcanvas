@@ -13,10 +13,10 @@ from traits.util.dict import map_keys, map_values
 from traits.util.networkx_ import reachable_graph
 from traits.util.sequence import is_sequence
 
-from enthought.blocks.analysis import NameFinder
-from enthought.blocks.compiler_.api \
+from codetools.blocks.analysis import NameFinder
+from codetools.blocks.compiler_.api \
     import compile_ast, parse
-from enthought.blocks.parser_ import BlockTransformer
+from codetools.blocks.parser_ import BlockTransformer
 from uuid import UUID, uuid4
 
 ###############################################################################

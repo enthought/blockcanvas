@@ -3,11 +3,11 @@ from numpy import zeros, arange
 # Enthought library imports
 from traits.api import HasTraits, Instance, Str, Int, Float, List
 from traitsui.api import View, Item, TableEditor
-from enthought.blocks.api import Block
-from enthought.contexts.parametric_context import ShadowContext
-from enthought.contexts.parametric_context import ParametricContext
+from codetools.blocks.api import Block
+from codetools.contexts.parametric_context import ShadowContext
+from codetools.contexts.parametric_context import ParametricContext
 
-from enthought.contexts.data_context import DataContext
+from codetools.contexts.data_context import DataContext
 from blockcanvas.cobyla2c.cobyla import minimize
 from blockcanvas.greenlet import greenlet
 from blockcanvas.plot.configurable_context_plot import ConfigurableContextPlot

@@ -5,10 +5,10 @@
 import os, tempfile, unittest
 
 # ETS imports
-from enthought.blocks.api import Block
+from codetools.blocks.api import Block
 
 # Local imports
-from enthought.contexts.api import DataContext, MultiContext
+from codetools.contexts.api import DataContext, MultiContext
 from blockcanvas.interactor.configurable_interactor import \
     ConfigurableInteractor
 from blockcanvas.interactor.interactor_config import \

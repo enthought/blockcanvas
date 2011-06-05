@@ -3,7 +3,7 @@ from numpy import array
 # ETS imports
 from traits.api import HasTraits, Instance, List, Str
 from traitsui.api import Item, Group, View, SetEditor, InstanceEditor, VSplit
-from enthought.contexts.i_context import IListenableContext
+from codetools.contexts.i_context import IListenableContext
 
 # Local imports
 from context_plot import ContextPlotEditor
@@ -61,7 +61,7 @@ class SelectablePlot(HasTraits):
 
 
 if __name__ == '__main__':
-    from enthought.contexts.geo_context import GeoContext
+    from codetools.contexts.geo_context import GeoContext
     context = GeoContext()
     context['a'] = array([5, 2, 1, 7, 10])
     context['b'] = array([9, 29, 1, 12, 6])

@@ -1,7 +1,7 @@
 from nose.tools import assert_raises
 
-from enthought.blocks.analysis import walk
-from enthought.blocks.api import parse, unparse
+from codetools.blocks.analysis import walk
+from codetools.blocks.api import parse, unparse
 from traits.api import push_exception_handler, pop_exception_handler
 
 # Module-level setup and teardown.

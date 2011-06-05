@@ -345,9 +345,9 @@ class ConfigurableInteractor(SimpleInteractor):
 
 def new_main():
     from numpy import linspace
-    from enthought.contexts.api import DataContext
+    from codetools.contexts.api import DataContext
     from blockcanvas.block_display.block_unit_variables import BlockUnitVariableList
-    from enthought.contexts.api import DataContext
+    from codetools.contexts.api import DataContext
     from blockcanvas.app.experiment import Experiment
 
     code = "y = a*x*x + b*x + c"

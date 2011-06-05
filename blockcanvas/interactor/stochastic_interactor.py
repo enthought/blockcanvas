@@ -206,7 +206,7 @@ class StochasticInteractor(SimpleInteractor):
 # Test
 if __name__ == '__main__':
     from blockcanvas.numerical_modeling.workflow.api import Block
-    from enthought.contexts.api import DataContext, MultiContext
+    from codetools.contexts.api import DataContext, MultiContext
 
     code = "from blockcanvas.debug.my_operator import add, mul\n"\
            "c = add(a,b)\n"\
