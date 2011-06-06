@@ -174,6 +174,7 @@ class WiringTool(AbstractOverlay, DragTool):
         self.component.request_redraw()
 
     def drag_end(self, event):
+
         field = self._get_underlying_box_field(event.x, event.y)
         if field is self._start_field:
             return
@@ -185,6 +186,7 @@ class WiringTool(AbstractOverlay, DragTool):
             field.icon.bullet_state = 'up'
             if ((start_type == 'output' and end_type == 'input') or
                 (start_type == 'input' and end_type == 'output')):
+                               
                 self.add_to_selection(self._end_field)
                 if len(self.input_selected_fields) == len(self.output_selected_fields):
                     matches = self.match_inputs2outputs()
@@ -195,6 +197,39 @@ class WiringTool(AbstractOverlay, DragTool):
                             app.update_function_variable_binding(field.box.graph_node,
                                                                  pair[0],
                                                                  pair[1].binding)
+                    
+                    # If the updated of the binding were successful, add this connection
+                    # to the canvas_box that holds the input field (an input can receive 
+                    # just one connection rather than an output that could be connected
+                    # with different blocks)
+                    if self._start_field.type == 'input':
+                        update_conn_field = self._start_field
+                        ref_field = self._end_field
+                    else:
+                        update_conn_field = self._end_field
+                        ref_field = self._start_field
+                    
+                    # UUID of the referenced graph_node
+                    ref_uuid = ref_field.box.graph_node.uuid
+                        
+                    # Check if there exist an entry for this referenced graph_node in the
+                    # current "source" graph_node
+                    if ref_uuid in update_conn_field.box.connections: 
+                        # Check if there is a tuple for the current variables that are to 
+                        # be connected. 
+                        conn_list = update_conn_field.box.connections[ref_uuid]
+                        is_in = False
+                        for connection in conn_list:
+                            if connection == (update_conn_field.variable,ref_field.variable):
+                                is_in = True
+                        if not is_in:
+                            conn_list.append((update_conn_field.variable,ref_field.variable))
+                    else:
+                       update_conn_field.box.connections[ref_uuid] = [(update_conn_field.variable,ref_field.variable)] 
+                                                  
+                    print "function: %s" % update_conn_field.box.graph_node.call_signature
+                    print "connection: %s " % update_conn_field.box.connections                                
+                       
         self.drag_cancel(event)
 
     def dragging(self, event):

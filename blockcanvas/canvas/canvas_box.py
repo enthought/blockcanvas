@@ -67,6 +67,23 @@ class CanvasBox(Container, SelectableComponentMixin):
     # Location of the bottom center point of the box.
     bottom_center = Property(depends_on=['position', 'bounds'])
 
+    # Instead of using just top_center and bottom_center we would keep a list
+    # of points that are connected together. 
+    input_connection_points = Property(depends_on=['position',\
+                                       'bounds',\
+                                       'input_fields.anchor'])
+    _input_connection_points = {}
+    
+    output_connection_points = Property(depends_on=['position',\
+                                       'bounds',\
+                                       'output_fields.anchor'])
+    _output_connection_points = {}
+    
+    # Forward connections. A dictionary attribute that contains elements like
+    # {variable_name:connection_description} where connection_description is
+    # equal to {starting_node_uuid:starting_node_variable}. 
+    connections = {}
+    
     # Displayed label
     label = Property
     _label = Str()
@@ -559,6 +576,21 @@ class CanvasBox(Container, SelectableComponentMixin):
 
     def _update_io_fields(self):
         pass
+    
+    #--- Get/Set methods -------------------------------------------------
+    
+    def _get_input_connection_points(self):
+        self._input_connection_points = {} 
+        for input in self.input_fields:
+            self._input_connection_points.update({input.variable.name:input.anchor})
+        return self._input_connection_points
+        
+    def _get_output_connection_points(self):
+        self._output_connection_points = {} 
+        for output in self.output_fields:
+            self._output_connection_points.update({output.variable.name:output.anchor})
+        return self._output_connection_points
+    
 
 #EOF
 
