@@ -5,7 +5,11 @@ import copy
 from traits.api import Any, Bool, Instance, Int, List, Tuple
 from enable.api import AbstractOverlay
 from enable.tools.api import DragTool
+<<<<<<< .merge_file_xaASe7
 from enable.trait_defs.rgba_color_trait import RGBAColor
+=======
+from enable.trait_defs.api import RGBAColor
+>>>>>>> .merge_file_4nNd16
 from pyface.action.api import Group, MenuManager
 
 # Local imports

@@ -5,9 +5,9 @@
 
 # Enthought library imports
 from traits.api import Str
-from enable.kiva.traits.api import KivaFont
+from kiva.trait_defs.api import KivaFont
 from enable.api import Component
-from enable.traits.api import RGBAColor
+from enable.trait_defs.api import RGBAColor
 
 
 class EnableCircleButton(Component):

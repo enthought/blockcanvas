@@ -5,8 +5,13 @@ from helper import get_scale
 from enable.api import Component
 from enable.colors import ColorTrait
 from enable.font_metrics_provider import font_metrics_provider
+<<<<<<< .merge_file_Pu23y4
 from enable.trait_defs.rgba_color_trait import RGBAColor
 from enable.kiva.trait_defs.kiva_font_trait import KivaFont
+=======
+from enable.trait_defs.api import RGBAColor
+from kiva.trait_defs.api import KivaFont
+>>>>>>> .merge_file_x4umh4
 from traits.api import (Any, Bool, Dict, Event, Int, List, Property)
 
 

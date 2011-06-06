@@ -27,10 +27,10 @@ from traits.api \
     import HasTraits, Instance, Str, List, Property, Undefined, \
            TraitDictEvent, TraitError, Dict, Bool
 
-from traits.util.dict \
+from codetools.util.dict \
     import sub_dict
 
-from traits.util.sequence \
+from codetools.util.sequence \
     import concat, disjoint
 
 

@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 #
 #  Classes for defining Traits-based numeric array models efficiently.
 #
@@ -8,15 +8,11 @@
 #
 #  (c) Copyright 2005 by Enthought, Inc.
 #
-#-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
-#  Imports:
-#-------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 
 import scipy as scipy_base
 
-from enable.traits.api import RGBAColor
+from enable.trait_defs.api import RGBAColor
 
 from traits.api \
     import HasTraits, HasPrivateTraits, Event, List, Str, Instance, Property, \

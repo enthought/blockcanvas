@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 #
 #  Data Explorer: A tool for displaying, manipulating and visualizing sets of
 #                 numbers
@@ -9,17 +9,13 @@
 #
 #  (c) Copyright 2005 by Enthought, Inc.
 #
-#-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
-#  Imports:
-#-------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 
 import wx
 
 from numpy import arange, array, compress, cos, sin, transpose
 
-from enable.traits.api import RGBAColor
+from enable.trait_defs.api import RGBAColor
 
 from traits.api \
     import HasPrivateTraits, Array, Instance, List, Str, Enum, \
@@ -73,7 +69,7 @@ from chaco.plot_interaction \
 from enable.api \
     import Window
 
-from enable.kiva.constants \
+from kiva.constants \
     import STROKE
 
 

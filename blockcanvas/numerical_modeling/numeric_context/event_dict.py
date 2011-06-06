@@ -2,7 +2,7 @@ from UserDict import DictMixin
 
 from traits.api import \
     Bool, Dict, Event, HasTraits, Instance, Property, TraitDictEvent
-from traits.util.dict import sub_dict
+from codetools.util.dict import sub_dict
 
 from blockcanvas.numerical_modeling.numeric_context.event import (
     merge_trait_dict_events, single_event

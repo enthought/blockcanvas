@@ -1,6 +1,6 @@
 # Enthought Library Imports
 from enable.font_metrics_provider import font_metrics_provider
-from enable.kiva.traits.api import KivaFont
+from kiva.trait_defs.api import KivaFont
 from traits.api import Any, Dict, HasTraits
 
 class FontMetricsCache(HasTraits):
