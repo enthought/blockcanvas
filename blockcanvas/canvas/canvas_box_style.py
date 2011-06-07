@@ -1,13 +1,6 @@
 from traits.api import HasTraits, Int
-<<<<<<< .merge_file_Y2wPp2
-from enable.kiva.trait_defs.kiva_font_trait import KivaFont
-from enable.trait_defs.rgba_color_trait import RGBAColor
-=======
 from kiva.trait_defs.api import KivaFont
 from enable.trait_defs.api import RGBAColor
->>>>>>> .merge_file_Jd2C1Y
-
-
 
 class CanvasBoxStyle(HasTraits):
     """ This class holds style settings for rendering an EnableBox on the canvas.
