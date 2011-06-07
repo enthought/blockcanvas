@@ -16,7 +16,7 @@ import os
 # Enthought library imports
 from codetools.blocks.api import Block
 from traits.etsconfig.api import ETSConfig
-from traits.logger.api import add_log_queue_handler, create_log_file_handler
+from apptools.logger.api import add_log_queue_handler, create_log_file_handler
 
 # Local imports
 from blockcanvas.app.block_application import BlockApplication
