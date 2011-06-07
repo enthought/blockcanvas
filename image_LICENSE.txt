@@ -13,14 +13,14 @@ released under a 3 clause BSD license.
 
 Files and original authors:
 ----------------------------------------------------------------------------
-enthought/block_canvas/block_display/images:
+blockcanvas/block_display/images:
            bound_input_variable.png | Enthought
           bound_output_variable.png | Enthought
               function_variable.png | Nuvola
          unbound_input_variable.png | Enthought
         unbound_output_variable.png | Enthought
 
-enthought/block_canvas/canvas/images:
+blockcanvas/canvas/images:
                      bluebullet.png | Nuvola
                  bluebulletover.png | Nuvola
             close_button_normal.png | GV
@@ -30,10 +30,10 @@ enthought/block_canvas/canvas/images:
                      input_icon.png | CP
                     output_icon.png | CP
 
-enthought/block_canvas/function_tools/images:
+blockcanvas/function_tools/images:
               function_variable.png | Nuvola
              preferences_button.png | CP
 
-enthought/model/images:
+blockcanvas/model/images:
               filter_expression.png | CP
                    filter_group.png | GV
