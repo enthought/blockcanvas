@@ -1,32 +1,5 @@
-#!/usr/bin/env python
-#
 # Copyright (c) 2008-2011 by Enthought, Inc.
 # All rights reserved.
-
-"""
-Numerical Modeling
-
-The BlockCanvas project provides a visual environment for creating simulation
-experiments, where function and data are separated. Thus, you can define your
-simulation algorithm by visually connecting function blocks into a data flow
-network, and then run it with various data sets (known as "contexts");
-likewise, you can use the same context in a different functional simulation.
-
-The project provides support for plotting, function searching and inspection,
-and optimization. It includes a stand-alone application that demonstrates the
-block-canvas environment, but the same functionality can be incorporated into
-other applications.
-
-The BlockCanvas project relies on included libraries that allow multiple data
-sets using Numeric arrays to be incorporated in a Traits-based model in a
-way that is simple, fast, efficient, and consistent.
-
-Prerequisites
--------------
-If you want to build BlockCanvas from source, you must first install
-`setuptools <http://pypi.python.org/pypi/setuptools/0.6c8>`_.
-
-"""
 
 from setuptools import setup, Extension, find_packages
 
@@ -35,10 +8,6 @@ from setuptools import setup, Extension, find_packages
 setup_data = dict(__name__='', __file__='setup_data.py')
 execfile('setup_data.py', setup_data)
 INFO = setup_data['INFO']
-
-
-# Pull the description values for the setup keywords from our file docstring.
-DOCLINES = __doc__.split("\n")
 
 
 # Build Python extensions
@@ -77,10 +46,10 @@ setup(
     author = 'Enthought, Inc',
     author_email = 'info@enthought.com',
     download_url = (
-        'http://www.enthought.com/repo/ets/BlockCanvas-%s.tar.gz' %
+        'http://www.enthought.com/repo/ets/blockcanvas-%s.tar.gz' %
         INFO['version']),
     classifiers = [c.strip() for c in """\
-        Development Status :: 5 - Production/Stable
+        Development Status :: 4 - Beta
         Intended Audience :: Developers
         Intended Audience :: Science/Research
         License :: OSI Approved :: BSD License
@@ -95,7 +64,8 @@ setup(
         Topic :: Software Development
         Topic :: Software Development :: Libraries
         """.splitlines() if len(c.strip()) > 0],
-    description = DOCLINES[1],
+    description = 'visual environment for creating simulation experiments',
+    long_description = open('README.rst').read(),
     # Note: The greenlet package is very old and has not been ported to
     #       Windows amd64.  Since it is very deprecated, we keep the code
     #       around, but exclude it form being build as an extension module.
@@ -103,7 +73,6 @@ setup(
     include_package_data = True,
     install_requires = INFO['install_requires'],
     license = 'BSD',
-    long_description = '\n'.join(DOCLINES[3:]),
     maintainer = 'ETS Developers',
     maintainer_email = 'enthought-dev@enthought.com',
     name = 'BlockCanvas',
