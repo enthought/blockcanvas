@@ -204,7 +204,12 @@ class ContextVariableList(HasTraits):
     # Tell listeners to delete the given names.
     delete_names = Event()
 
-
+    # To avoid loop when an item is modified in the context. Now it rise an
+    # event that update the view and the view itself, when this update event
+    # happen, rise an event to update the context like when you edit the variable 
+    # straight in the ContextView panel. 
+    allow_item_modified_event = Bool(True)
+    
     def __init__(self, **traits):
         super(ContextVariableList, self).__init__(**traits)
         # Be sure to read the context on initialization.
@@ -221,6 +226,9 @@ class ContextVariableList(HasTraits):
     def context_items_modified(self, event):
         """ Propagate changes from the context to the list.
         """
+        
+        self.allow_item_modified_event = False
+                
         cvs = {}
         for cv in self.variables:
             cvs[cv.name] = cv
@@ -239,6 +247,8 @@ class ContextVariableList(HasTraits):
         self._extract_variables_from_context(self.context, event.added)
 
         self.variables = newvariables
+        
+        self.allow_item_modified_event = True
 
     @on_trait_change('search_term,variables')
     def _update_search_results(self):
@@ -256,6 +266,10 @@ class ContextVariableList(HasTraits):
     def _item_value_changed(self, obj, name, new):
         """ Update the context when a variable's value is changed in the table.
         """
+
+        if not self.allow_item_modified_event:
+            return
+               
         if name == 'value':
             name = str(obj.name)
             self.context[name] = obj.value
