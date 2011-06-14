@@ -10,7 +10,7 @@ from pyface.python_shell import PythonShell
 from pyface.ui.wx.python_shell import PyShell #temporary
 #from pyface.ui.qt4.python_shell import PyShell #temporary
 from traits.api import Instance, Property, Any
-from traits.util.wx.drag_and_drop import PythonDropTarget
+from pyface.wx.drag_and_drop import PythonDropTarget
 
 # Local imports:
 from global_and_local_interpreter import GlobalAndLocalInterpreter
