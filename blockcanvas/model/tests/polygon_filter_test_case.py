@@ -11,7 +11,6 @@ from traits.api import Array, HasTraits
 
 from blockcanvas.model.api import NumericModel, NumericItem, PolygonFilter
 
-
 # Setup a logger for this module.
 logger = logging.getLogger(__name__)
 

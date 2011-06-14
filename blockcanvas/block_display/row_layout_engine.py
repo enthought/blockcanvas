@@ -10,7 +10,7 @@ from traits.api import HasTraits
 
 class RowLayoutEngine(HasTraits):
     """ Layout a visual representation of a graph such that the nodes
-        are orgnaized into consecutive rows based on their dependencies. The
+        are organized into consecutive rows based on their dependencies. The
         algorithm is only suitable for acyclic graphs (and currently will hang
         if given a cyclic one).
     """

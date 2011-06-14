@@ -1,5 +1,6 @@
 
 # Major library imports
+import os
 import pickle
 import warnings
 
@@ -89,6 +90,9 @@ class BlockCanvas(Canvas):
             except:
                 pass
 
+        ## On the initial layout, the boxes haven't been created yet.
+        self.graph_controller.update_nodes([self.graph_controller.execution_model.dep_graph.keys()],[],[])
+        
     def save_layout(self, filename):
         """ Save the layout of the canvas to the given filename.
         """
@@ -99,7 +103,7 @@ class BlockCanvas(Canvas):
         file = open(filename, 'w')
         pickle.dump(id_position_map, file)
         file.close()
-
+        
     #---------------------------------------------------------------------
     # Container interface.
     #---------------------------------------------------------------------

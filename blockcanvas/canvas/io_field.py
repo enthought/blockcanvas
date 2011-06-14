@@ -36,7 +36,7 @@ class IOField(Container):
 
     # Wiring target icon for this input/output
     icon = Instance(Bullet)
-
+    
     # Label for this variable
     label = Instance(EditField)
 
@@ -64,9 +64,8 @@ class IOField(Container):
     # Bullet style information
     # FIXME: should be in style_manager when we figure out how to look these
     # styles up over several layers.
-    bullet_input_color = Tuple((0.7, 0.7, 0.7, 0.8))
-    bullet_output_color = Tuple((0.7, 0.7, 0.7, 0.8))
-
+    bullet_input_color = ColorTrait("red") #Tuple((0.8, 0.1, 0, 1))
+    bullet_output_color = ColorTrait("red") #Tuple((0.7, 0.7, 0.7, 0.8))
 
     #---------------------------------------------------------------------
     # Public methods
@@ -80,10 +79,12 @@ class IOField(Container):
         self.add(self.value)
         self.width = self.icon.width + self.label.width + self.value.width + 2*self.x_offset
         if self.type == "input":
-            self.icon.position = [self.x_offset,0]
+            self.icon.color = self.bullet_input_color
+            self.icon.position = [0,0]
             self.label.position = [self.icon.x2,0]
             self.value.position = [self.label.x2, 0]
         else:
+            self.icon.color = self.bullet_output_color
             self.label.position = [0,0]
             self.value.position = [self.label.x2, 0]
             self.icon.position = [self.value.x2+self.x_offset, 0]
@@ -184,10 +185,10 @@ class IOField(Container):
     #--- Trait listeners -------------------------------------------------
 
 
-    def variable_binding_changed(self):
+    def variable_binding_changed(self): 
         self.value.text = str(self.variable.binding)
 
-    def _variable_changed(self, old, new):
+    def _variable_changed(self, old, new): 
         self.label.text = new.name
         self.value.text = str(new.binding)
 

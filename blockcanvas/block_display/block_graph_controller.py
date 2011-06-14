@@ -234,74 +234,48 @@ class BlockGraphController(HasTraits):
         self.canvas.remove(*self._edges)
         self._edges = []
         for dest, sources in graph.items():
-            #print "*"*30
-            #print "stop_UUID = %s" % dest.uuid
             for source in sources:
-                #print "start_UUID = %s" % source.uuid
                 if self._nodes.has_key(source) and self._nodes.has_key(dest):
-                    line = EnableLine(start_node=self._nodes[source],
-                                      end_node=self._nodes[dest])
-                    self._edges.append(line)
-            #print "+"*30
+                    matchs =self._match_variables(dest,source) 
+                    for (end_var,start_var) in matchs:
+                        line = EnableLine(start_node=self._nodes[source],start_var=start_var,
+                                          end_node=self._nodes[dest],end_var=end_var)
+                        self._edges.append(line)
         self.canvas.add(*self._edges)
 
         # We've (possibly) rebuilt the graph, so we don't need to again
         self._rebuild_graph = False
-
-#    def position_nodes(self):
-#
-#        hierarchy = self.layout_engine.organize_rows(self.execution_model.dep_graph)
-#        if not hierarchy:
-#            return
-#
-#        # FIME:  Hack for Mac
-#        # On the initial layout, the boxes haven't been created yet.
-#        if not self._nodes:
-#            self.update_nodes([self.execution_model.dep_graph.keys()],[],[])
-#
-#        x_gap = self.gap[0]
-#        y_gap = self.gap[1]
-#
-#        max_length = 0
-#        max_on_row = 0
-#        total_height = 0
-#        for row in hierarchy:
-#            row_length = 0
-#            row_height = 0
-#            for func in row:
-#                n = self._nodes[func]
-#                row_length += n.bounds[0] + x_gap
-#                if n.bounds[1] > row_height:
-#                    row_height = n.bounds[1]
-#            if row_length > max_length:
-#                max_length = row_length
-#                max_on_row = len(row)
-#            row_height += y_gap
-#            total_height += row_height
-#        avg_space = max_length / max_on_row
-#
-#        for i, row in enumerate(hierarchy):
-#            x_pos =  max_length / (len(row) + 1)
-#            if i > 0:
-#                y = self._find_min_y(hierarchy[i-1])
-#            else:
-#                y = total_height
-#
-#             Initial positions
-#            for graph_node in row:
-#                n = self._nodes[graph_node]
-#                uuid = graph_node.uuid
-#                saved = self.saved_node_positions
-#                if uuid in saved:
-#                    n.x = saved[uuid][0]
-#                    n.y = saved[uuid][1]
-#                else:
-#                    row_y = y - n.bounds[1] - y_gap
-#                    n.y = row_y
-#                    n.x = x_pos
-#                    x_pos = x_pos + n.bounds[0] + x_gap
-#        self.scale_and_center()
-
+        
+    #    def rebuild_nodes_connections(self):
+    #        # This methods recreate the connections dictionary of each box using the
+    #        # self.execution_model.dep_graph and checking for binded variables. 
+    #        # There is no other way to reconstruct the connections graph of a saved 
+    #        # project because its execution model is not pickled but saved as plain 
+    #        # code parsed again at loading time to reconstruct the dep_graph. Also 
+    #        # layout save and reload is affected. 
+    #        # FIXME: Actually  the reloading of an old layout is just a fake because the 
+    #        # uuid of each FunctionCall object is recreated at loading time so it is 
+    #        # different from what it was when the process were saved. The position_node
+    #        # method will never find a useful math so that it can restore the saved layout.
+    #        
+    #        graph = self.execution_model.dep_graph
+    #        for node, box in self._nodes.items():
+    #            dep_nodes = graph[node]
+    #            for d_n in dep_nodes:
+    #                matchs = self._match_variables(node, d_n)
+    #                box.connections[d_n.uuid] = matchs
+        
+    def _match_variables(self,ingoing,outgoing):
+        # This function finds match between input variables of the ingoing objects 
+        # and output variables of the outgoing object.  
+        # FIXME: should this function be moved outside of the class? 
+        match_list=[]
+        for in_var in ingoing.inputs:
+            for out_var in outgoing.outputs:
+                if in_var.binding == out_var.binding:
+                    match_list.append((in_var,out_var))
+        return match_list
+        
     def position_nodes(self):
 
         hierarchy = self.layout_engine.organize_rows(self.execution_model.dep_graph)
@@ -339,17 +313,19 @@ class BlockGraphController(HasTraits):
             if col_height > max_height:
                 max_height = col_height 
                 max_on_col = len(col)
-            col_width += x_gap
             total_width += col_width
+            
+        max_width += x_gap
         avg_space = max_height / max_on_col 
          
         for i, col in enumerate(hierarchy):
-            y_pos =  max_height / (len(col) + 1)
             
+            y_pos =  max_height / (len(col) + 1)
+
             if i > 0:
-                x = self._find_max_x(hierarchy[i-1])
+                x = self._find_max_x(hierarchy[i-1]) + max_width
             else:
-                x = 0
+                x = max_width
 
             # Initial positions
             for graph_node in col:
@@ -360,10 +336,11 @@ class BlockGraphController(HasTraits):
                     n.x = saved[uuid][0]
                     n.y = saved[uuid][1]
                 else:
-                    row_x = x + n.bounds[0] + x_gap
-                    n.x = row_x
+                    x_pos = x - n.bounds[0] + x_gap
+                    n.x = x_pos
                     n.y = y_pos
                     y_pos = y_pos + n.bounds[1] + y_gap
+                    
         self.scale_and_center()
 
     def _find_min_y(self, graph_nodes):

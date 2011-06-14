@@ -82,7 +82,7 @@ class CanvasBox(Container, SelectableComponentMixin):
     # Forward connections. A dictionary attribute that contains elements like
     # {variable_name:connection_description} where connection_description is
     # equal to {starting_node_uuid:starting_node_variable}. 
-    connections = {}
+    #connections = {}
     
     # Displayed label
     label = Property
@@ -306,7 +306,7 @@ class CanvasBox(Container, SelectableComponentMixin):
             output_diff = 0
             input_diff = len_output - len_input
 
-        x = self._style.corner_radius
+        x = -6.28 #self._style.corner_radius
         y_space = self.cell_height + self.cell_padding
         y = input_diff * y_space + self._style.corner_radius
         # Traverse in reverse order since we're positioning
@@ -317,7 +317,7 @@ class CanvasBox(Container, SelectableComponentMixin):
             y = y + y_space
 
         y = output_diff * y_space + self._style.corner_radius
-        x2 = self._style.corner_radius + max_input_width + self.cell_padding + max_output_width
+        x2 = self._style.corner_radius + 6.28*2 + max_input_width + self.cell_padding + max_output_width
         # Traverse in reverse order since we're positioning
         # cells from bottom to top
         for i in range(len(self.output_fields)-1, -1, -1):

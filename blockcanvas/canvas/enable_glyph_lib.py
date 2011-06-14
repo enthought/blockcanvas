@@ -334,30 +334,30 @@ def close_button_over(gc, x, y, height, width):
 
     return
 
-def io_bullet_up(gc, x, y, height, width):
+def io_bullet_up(gc, x, y, height, width, fill_color=(0.5, 0.5, 0.5, 1.0)):
     _io_bullet_draw(gc, x, y, height, width,
-                          fill_color=(0.5, 0.5, 0.5, 1.0),
+                          fill_color=fill_color,
                           border_color=(0.4, 0.4, 0.4, 1.0))
 
-def io_bullet_over(gc, x, y, height, width):
+def io_bullet_over(gc, x, y, height, width, fill_color=(0.5, 0.5, 0.5, 0.8)):
     _io_bullet_draw(gc, x, y, height, width,
-                          fill_color=(0.5, 0.5, 0.5, 0.8),
+                          fill_color=fill_color,
                           border_color=(0.4, 0.4, 0.4, 1.0),
                           highlight_color=(0.6, 0.8, 0.9, 0.7))
 
-def io_bullet_drag(gc, x, y, height, width):
+def io_bullet_drag(gc, x, y, height, width, fill_color=(0.5, 0.5, 0.5, 0.3)):
     _io_bullet_draw(gc, x, y, height, width,
-                          fill_color=(0.5, 0.5, 0.5, 0.3),
+                          fill_color=fill_color,
                           border_color=(0.4, 0.4, 0.4, 0.5))
 
-def io_bullet_down(gc, x, y, height, width):
+def io_bullet_down(gc, x, y, height, width, fill_color=(0.3, 0.3, 0.3, 1.0)):
     _io_bullet_draw(gc, x, y, height, width,
-                          fill_color=(0.3, 0.3, 0.3, 1.0),
+                          fill_color=fill_color,
                           border_color=(0.4, 0.4, 0.4, 1.0))
 
-def io_bullet_drop_target(gc, x, y, height, width):
+def io_bullet_drop_target(gc, x, y, height, width, fill_color=(0.3, 0.3, 0.3, 1.0)):
     _io_bullet_draw(gc, x, y, height, width,
-                          fill_color=(0.3, 0.3, 0.3, 1.0),
+                          fill_color=fill_color,
                           border_color=(0.4, 0.4, 0.4, 1.0),
                           highlight_color=(0.9, 0.8, 0.6, 0.7))
 
