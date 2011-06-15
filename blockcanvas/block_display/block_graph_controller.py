@@ -291,7 +291,7 @@ class BlockGraphController(HasTraits):
         y_gap = self.gap[1]
 
 
-        max_width  = 0
+        max_width  = []
         max_height = 0
         max_on_col = 0
         total_width = 0
@@ -307,25 +307,20 @@ class BlockGraphController(HasTraits):
                 # one in the col
                 if n.bounds[0] > col_width:
                     col_width = n.bounds[0]
-            if col_width > max_width:
-                max_width = col_width
-                
+            max_width.append(col_width)
             if col_height > max_height:
                 max_height = col_height 
                 max_on_col = len(col)
             total_width += col_width
             
-        max_width += x_gap
-        avg_space = max_height / max_on_col 
-         
         for i, col in enumerate(hierarchy):
             
             y_pos =  max_height / (len(col) + 1)
 
-            if i > 0:
-                x = self._find_max_x(hierarchy[i-1]) + max_width
+            if i>0:
+                x += max_width[i-1] + x_gap
             else:
-                x = max_width
+                x = 0
 
             # Initial positions
             for graph_node in col:
@@ -336,7 +331,7 @@ class BlockGraphController(HasTraits):
                     n.x = saved[uuid][0]
                     n.y = saved[uuid][1]
                 else:
-                    x_pos = x - n.bounds[0] + x_gap
+                    x_pos = x + (max_width[i] - n.bounds[0])
                     n.x = x_pos
                     n.y = y_pos
                     y_pos = y_pos + n.bounds[1] + y_gap
