@@ -317,7 +317,12 @@ class CanvasBox(Container, SelectableComponentMixin):
             y = y + y_space
 
         y = output_diff * y_space + self._style.corner_radius
+        
+        [box_w,box_h] = self.box_bounds
+        # It is necessary when the label is so large to extend the box 
+        x2_dueto_box = box_w + 6.28
         x2 = self._style.corner_radius + 6.28*2 + max_input_width + self.cell_padding + max_output_width
+        x2 = max(x2,x2_dueto_box)
         # Traverse in reverse order since we're positioning
         # cells from bottom to top
         for i in range(len(self.output_fields)-1, -1, -1):
