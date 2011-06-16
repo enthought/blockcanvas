@@ -571,8 +571,8 @@ class CanvasBox(Container, SelectableComponentMixin):
 
         # Show text at the same scale as graphics context
         scale = get_scale(gc)
-        x = self.x + scale * (self._style.corner_radius + self._style.title_x_offset)
-        y = self.y2 - scale * (self._style.sash_height - self._style.title_y_offset)
+        x = self.x + self._style.corner_radius + self._style.title_x_offset
+        y = self.y2 - self._style.sash_height + self._style.title_y_offset
         
         gc.show_text_at_point(self.label, x, y)
 
