@@ -9,7 +9,13 @@ import enable_glyph_lib
 class Bullet(Component):
 
     color = ColorTrait("gray")
-
+    
+    c_selected = ColorTrait("yellow")
+    c_up = ColorTrait("yellow")
+    c_dragging = ColorTrait("yellow")
+    c_over = ColorTrait("yellow")
+    c_dropping = ColorTrait("yellow")
+    
     drag_color = ColorTrait((0.6, 0.6, 0.6, 0.5))
     border_color = ColorTrait((0.4, 0.4, 0.4, 1.0))
     bgcolor = "clear"
@@ -33,17 +39,17 @@ class Bullet(Component):
 
     def _draw_mainlayer(self, gc, view_bounds, mode="default"):
         if self.event_state == "selected":
-            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height, self.c_selected_)
         elif self.bullet_state == "up":
-            enable_glyph_lib.io_bullet_up(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_up(gc, self.x, self.y, self.width, self.height, self.color_)
         elif self.bullet_state == "dragging":
-            enable_glyph_lib.io_bullet_drag(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_drag(gc, self.x, self.y, self.width, self.height, self.c_dragging_)
         elif self.bullet_state == "over":
-            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_over(gc, self.x, self.y, self.width, self.height, self.c_over_)
         elif self.bullet_state == "dropping":
-            enable_glyph_lib.io_bullet_drop_target(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_drop_target(gc, self.x, self.y, self.width, self.height, self.color_)
         else:
-            enable_glyph_lib.io_bullet_down(gc, self.x, self.y, self.width, self.height)
+            enable_glyph_lib.io_bullet_down(gc, self.x, self.y, self.width, self.height, self.color_)
 
         return
 

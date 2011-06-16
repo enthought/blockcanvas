@@ -3,6 +3,7 @@ from traits.api import (HasTraits, Int, Bool, List)
 from enable.trait_defs.api import RGBAColor
 
 
+
 class CanvasGridStyle(HasTraits):
     """ Grid line style settings.
 

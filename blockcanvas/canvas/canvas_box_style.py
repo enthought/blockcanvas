@@ -3,7 +3,6 @@ from kiva.trait_defs.api import KivaFont
 from enable.trait_defs.api import RGBAColor
 
 
-
 class CanvasBoxStyle(HasTraits):
     """ This class holds style settings for rendering an EnableBox on the canvas.
 

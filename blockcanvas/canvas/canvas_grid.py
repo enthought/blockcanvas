@@ -30,7 +30,7 @@ class CanvasGrid(AbstractOverlay):
 
     # Should we backbuffer the grid to speed up drawing?
     # Faster if this is on, less memory if it is off.
-    backbuffer = Bool(False)
+    backbuffer = Bool(True)
 
     ### private traits #######################################################
 

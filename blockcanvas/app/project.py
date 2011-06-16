@@ -179,6 +179,10 @@ class Project(HasTraits):
         proj_config = config["Project"]
         if proj_config.has_key("active_experiment"):
             self.active_experiment = self.find_experiment(proj_config["active_experiment"])
+            
+        # Update Project Save Path 
+        self.project_save_path = dirname
+        
         return
 
     def save(self, dirname=""):

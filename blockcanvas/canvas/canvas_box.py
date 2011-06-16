@@ -67,6 +67,23 @@ class CanvasBox(Container, SelectableComponentMixin):
     # Location of the bottom center point of the box.
     bottom_center = Property(depends_on=['position', 'bounds'])
 
+    # Instead of using just top_center and bottom_center we would keep a list
+    # of points that are connected together. 
+    input_connection_points = Property(depends_on=['position',\
+                                       'bounds',\
+                                       'input_fields.anchor'])
+    _input_connection_points = {}
+    
+    output_connection_points = Property(depends_on=['position',\
+                                       'bounds',\
+                                       'output_fields.anchor'])
+    _output_connection_points = {}
+    
+    # Forward connections. A dictionary attribute that contains elements like
+    # {variable_name:connection_description} where connection_description is
+    # equal to {starting_node_uuid:starting_node_variable}. 
+    #connections = {}
+    
     # Displayed label
     label = Property
     _label = Str()
@@ -289,7 +306,7 @@ class CanvasBox(Container, SelectableComponentMixin):
             output_diff = 0
             input_diff = len_output - len_input
 
-        x = self._style.corner_radius
+        x = -6.28 #self._style.corner_radius
         y_space = self.cell_height + self.cell_padding
         y = input_diff * y_space + self._style.corner_radius
         # Traverse in reverse order since we're positioning
@@ -300,7 +317,12 @@ class CanvasBox(Container, SelectableComponentMixin):
             y = y + y_space
 
         y = output_diff * y_space + self._style.corner_radius
-        x2 = self._style.corner_radius + max_input_width + self.cell_padding + max_output_width
+        
+        [box_w,box_h] = self.box_bounds
+        # It is necessary when the label is so large to extend the box 
+        x2_dueto_box = box_w + 6.28
+        x2 = self._style.corner_radius + 6.28*2 + max_input_width + self.cell_padding + max_output_width
+        x2 = max(x2,x2_dueto_box)
         # Traverse in reverse order since we're positioning
         # cells from bottom to top
         for i in range(len(self.output_fields)-1, -1, -1):
@@ -549,9 +571,10 @@ class CanvasBox(Container, SelectableComponentMixin):
 
         # Show text at the same scale as graphics context
         scale = get_scale(gc)
-        pos = (scale * (self.x + self._style.corner_radius + self._style.title_x_offset),
-               scale * (self.y2 - self._style.sash_height + self._style.title_y_offset))
-        gc.show_text(self.label, pos)
+        x = self.x + self._style.corner_radius + self._style.title_x_offset
+        y = self.y2 - self._style.sash_height + self._style.title_y_offset
+        
+        gc.show_text_at_point(self.label, x, y)
 
         gc.restore_state()
 
@@ -559,6 +582,21 @@ class CanvasBox(Container, SelectableComponentMixin):
 
     def _update_io_fields(self):
         pass
+    
+    #--- Get/Set methods -------------------------------------------------
+    
+    def _get_input_connection_points(self):
+        self._input_connection_points = {} 
+        for input in self.input_fields:
+            self._input_connection_points.update({input.variable.name:input.anchor})
+        return self._input_connection_points
+        
+    def _get_output_connection_points(self):
+        self._output_connection_points = {} 
+        for output in self.output_fields:
+            self._output_connection_points.update({output.variable.name:output.anchor})
+        return self._output_connection_points
+    
 
 #EOF
 

@@ -319,7 +319,7 @@ class ExecutionModel(HasTraits):
 
         # Big optimization with small effort! The exec command works 
         # really bad when the passed context contains "big" object like
-        # that produced by our computations. We remove all of them there are 
+        # that produced by our computations. We remove all of them that are 
         # going to be overwritten. 
         restricted._clean_old_results_from_context(context)
 
@@ -490,12 +490,14 @@ class ExecutionModel(HasTraits):
         """
         available_names = set(available_names)
         # Add each output variable name to the set of available names.
-        for stmt in self.statements:
-            for ov in stmt.outputs:
-                available_names.add(ov.binding)
-            if isinstance(stmt,FunctionCallGroup):
-                for celem in stmt.gfunc.curr_elemts:
-                    available_names.add(celem.outputs[0].binding)
+        #        for stmt in self.statements:
+        #            for ov in stmt.outputs:
+        #                available_names.add(ov.binding)
+        #            if isinstance(stmt,FunctionCallGroup):
+        #                for celem in stmt.gfunc.curr_elemts:
+        #                    available_names.add(celem.outputs[0].binding)
+        
+        available_names.update(available_names_retrive(self.statements))
 
         # Add the builtins, too.
         available_names.update(builtin_names)
@@ -548,7 +550,6 @@ class ExecutionModel(HasTraits):
         if ids is not None:
             assert(cids==[])
             
-
     def _clean_old_results_from_context(self,context):
         """ Cleans old results in the context.
         
@@ -588,15 +589,17 @@ class ExecutionModel(HasTraits):
 
         local_funcs = []
         imports = {}
-        function_calls = [statement for statement in self.statements \
-                               if isinstance(statement, FunctionCall) ]
-        
-        # Function calls merged into a group 
-        for stmt in self.statements:
-            if isinstance(stmt, FunctionCallGroup):
-                for statement in stmt.group_statements:
-                    function_calls.append(statement)
+        #        function_calls = [statement for statement in self.statements \
+        #                               if isinstance(statement, FunctionCall) ]
+        #        
+        #        # Function calls merged into a group 
+        #        for stmt in self.statements:
+        #            if isinstance(stmt, FunctionCallGroup):
+        #                for statement in stmt.group_statements:
+        #                    function_calls.append(statement)
                 
+        
+        function_calls = explode_model_func_calls(self.statements)
                 
         info_items = set([(call.label_name, call.function) for call in function_calls])
         for name, func in info_items:
@@ -692,4 +695,38 @@ def funcs_name_retrieve(stmt):
 
     return functions
 
+def explode_model_func_calls(stmt):
+    """ Return the list of function_call included in the model.
+    
+    It recursively run when a FunctionCallGroup is encountered. 
+    """
+    
+    function_calls = [statement for statement in stmt \
+                           if isinstance(statement, FunctionCall) ]
+    
+    # Function calls merged into a group 
+    for statement in stmt:
+        if isinstance(statement, FunctionCallGroup):
+            function_calls.extend(explode_model_func_calls(statement.group_statements))    
+            
+    return function_calls
+
+def available_names_retrive(stmt):
+    """ Return the list of available_names in the model.
+    
+    It recursively run when a FunctionCallGroup is encountered. 
+    """
+
+    available_names = set()
+    
+    for statement in stmt:
+        for ov in statement.outputs:
+            available_names.add(ov.binding)
+        if isinstance(statement,FunctionCallGroup):
+            for celem in statement.gfunc.curr_elemts:
+                available_names.add(celem.outputs[0].binding)
+            available_names.update(available_names_retrive(statement.group_statements))
+                    
+    return available_names
+                        
 # EOF

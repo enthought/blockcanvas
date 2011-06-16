@@ -8,6 +8,7 @@ from traits.api import Enum, Float, Instance, on_trait_change
 from enable.api import Component, ColorTrait
 
 # Local imports
+from blockcanvas.function_tools.function_variables import Variable
 from canvas_box import CanvasBox
 from simple_math import distance_to_line, point_in_box
 
@@ -26,12 +27,14 @@ class EnableLine(Component):
 
     # CanvasBox who's output is the start of the line
     start_node = Instance(CanvasBox)
-
+    start_var = Instance(Variable)
+    
     # CanvasBox who's input is the end of the line
     end_node = Instance(CanvasBox)
+    end_var = Instance(Variable)
 
     # Whether to draw as a straight line or a bezier curve
-    curve_type = Enum('line', 'curve')
+    curve_type = Enum('line','curve')
 
     #########################################################################
     # Component traits
@@ -91,16 +94,25 @@ class EnableLine(Component):
 
     def _draw_ports(self, gc):
         gc.save_state()
-        start = self.start_node.bottom_center
-        end = self.end_node.top_center
+        
+        # Start and end point are now obtained directly for the nodes using
+        # their connections dictionary. It is created by the wiring tool and
+        # the corresponding positions in the canvas are obtained from the
+        # input_connection_points and output_connection_points properties of 
+        # each node.
+
+        start = self.start_node.output_connection_points[self.start_var.name]
+        end = self.end_node.input_connection_points[self.end_var.name]
 
         gc.set_stroke_color(self.container.style_manager.port_border_color)
 
         # Draw Port Out
         gc.set_fill_color(self.container.style_manager.port_out_color)
         gc.begin_path()
+        #gc.arc(start[0], start[1], self.container.style_manager.port_radius,
+        #        3.14159, 2 * 3.14159)
         gc.arc(start[0], start[1], self.container.style_manager.port_radius,
-                3.14159, 2 * 3.14159)
+                0, 0)
         gc.close_path()
         gc.draw_path()
 
@@ -108,24 +120,36 @@ class EnableLine(Component):
         gc.set_fill_color(self.container.style_manager.port_in_color)
         gc.begin_path()
         # seems to be off by one, so subtract one
-        gc.arc(end[0], end[1]-1, self.container.style_manager.port_radius,
-                0,  3.14159)
+        #gc.arc(end[0], end[1]-1, self.container.style_manager.port_radius,
+        #        0,  3.14159)
+        gc.arc(end[0], end[1], self.container.style_manager.port_radius,
+                0,  0)
         gc.close_path()
         gc.draw_path()
+
 
         gc.restore_state()
 
     def _draw_line(self, gc):
+        
         gc.save_state()
-        start = self.start_node.bottom_center
-        end = self.end_node.top_center
+        
+        # Start and end point are now obtained directly for the nodes using
+        # their connections dictionary. It is created by the wiring tool and
+        # the corresponding positions in the canvas are obtained from the
+        # input_connection_points and output_connection_points properties of 
+        # each node.
+        start = self.start_node.output_connection_points[self.start_var.name]
+        end = self.end_node.input_connection_points[self.end_var.name]
+        
         gc.set_fill_color(self.container.style_manager.line_edge_color)
         gc.set_line_width(2.0)
         gc.begin_path()
         gc.move_to(start[0], start[1])
         gc.line_to(end[0], end[1])
         gc.stroke_path()
-
+ 
+            
         gc.restore_state()
 
         self._draw_ports(gc)
@@ -133,8 +157,14 @@ class EnableLine(Component):
     def _draw_bezier(self, gc):
         gc.save_state()
 
-        start = self.start_node.bottom_center
-        end = self.end_node.top_center
+        # Start and end point are now obtained directly for the nodes using
+        # their connections dictionary. It is created by the wiring tool and
+        # the corresponding positions in the canvas are obtained from the
+        # input_connection_points and output_connection_points properties of 
+        # each node.
+        start = self.start_node.output_connection_points[self.start_var.name]
+        end = self.end_node.input_connection_points[self.end_var.name]
+                    
         # control points for bezier curves...
         y_diff = abs(start[1] - end[1])
         control1 = [ start[0], start[1]-y_diff ]
@@ -174,6 +204,7 @@ class EnableLine(Component):
                         control2[0]+width, control2[1]-width,
                         end[0]+width, end[1])
         gc.stroke_path()
+
         gc.restore_state()
 
         self._draw_ports(gc)
