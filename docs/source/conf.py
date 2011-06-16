@@ -35,16 +35,16 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General substitutions.
-project = 'BlockCanvas'
-copyright = '2008, Enthought'
+project = 'blockcanvas'
+copyright = '2008-2011, Enthought'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
 # The short X.Y version.
-sys.path.insert(0, os.path.join('..', '..'))
-from setup_data import INFO
-version = release = INFO['version']
+d = {}
+execfile(os.path.join('..', '..', 'blockcanvas', '__init__.py'), d)
+version = release = d['__version__']
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
