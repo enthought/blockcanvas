@@ -1,13 +1,11 @@
 # Copyright (c) 2008-2011 by Enthought, Inc.
 # All rights reserved.
-
+from os.path import join
 from setuptools import setup, Extension, find_packages
 
-# This works around a setuptools bug which gets setup_data.py metadata
-# from incorrect packages.
-setup_data = dict(__name__='', __file__='setup_data.py')
-execfile('setup_data.py', setup_data)
-INFO = setup_data['INFO']
+
+info = {}
+execfile(join('blockcanvas', '__init__.py'), info)
 
 
 # Build Python extensions
@@ -43,11 +41,16 @@ greenlet = Extension(
 
 # The actual setup call.
 setup(
+    name = 'blockcanvas',
+    version = info['__version__'],
     author = 'Enthought, Inc',
     author_email = 'info@enthought.com',
+    maintainer = 'ETS Developers',
+    maintainer_email = 'enthought-dev@enthought.com',
+    url = 'http://code.enthought.com/projects/block_canvas.php',
     download_url = (
         'http://www.enthought.com/repo/ets/blockcanvas-%s.tar.gz' %
-        INFO['version']),
+        info['__version__']),
     classifiers = [c.strip() for c in """\
         Development Status :: 4 - Beta
         Intended Audience :: Developers
@@ -71,18 +74,9 @@ setup(
     #       around, but exclude it form being build as an extension module.
     ext_modules = [cobyla], # greenlet],
     include_package_data = True,
-    install_requires = INFO['install_requires'],
+    install_requires = info['__requires__'],
     license = 'BSD',
-    maintainer = 'ETS Developers',
-    maintainer_email = 'enthought-dev@enthought.com',
-    name = 'BlockCanvas',
-    packages = find_packages(exclude=[
-        'integrationtests',
-        'integrationtests.*',
-        ]),
+    packages = find_packages(),
     platforms = ["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
-    test_suite = 'nose.collector',
-    url = 'http://code.enthought.com/projects/block_canvas.php',
-    version = INFO['version'],
     zip_safe = False,
 )
