@@ -12,7 +12,6 @@ from enable_button_group import EnableButtonGroup, EnableTopRightButtonGroup
 from enable_glyph_button import EnableGlyphButton
 from io_field import IOField
 from selectable_component_mixin import SelectableComponentMixin
-from helper import get_scale
 
 class CanvasBox(Container, SelectableComponentMixin):
     """ Implements behavior for a selectable, movable box on
@@ -570,7 +569,6 @@ class CanvasBox(Container, SelectableComponentMixin):
         gc.set_font(self._style.title_font)
 
         # Show text at the same scale as graphics context
-        scale = get_scale(gc)
         x = self.x + self._style.corner_radius + self._style.title_x_offset
         y = self.y2 - self._style.sash_height + self._style.title_y_offset
         
