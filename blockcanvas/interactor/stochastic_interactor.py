@@ -8,7 +8,7 @@ import logging
 from traits.api import Button, Enum, Any
 from traitsui.api import (Item, View, HGroup, spring, InstanceEditor,
                                      Group)
-from traits.util.distribution.distribution import \
+from enthought.util.distribution.distribution import \
      Distribution, Constant, Gaussian, Triangular, Uniform
 
 # Local imports

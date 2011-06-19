@@ -1,5 +1,5 @@
 from numpy import alltrue
-from traits.util.sequence import all
+from codetools.util.sequence import all
 
 from codetools.blocks.api import Block
 

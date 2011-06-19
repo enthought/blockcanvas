@@ -8,7 +8,7 @@
 # ETS imports
 from traits.api import HasTraits, Instance, Str, Property
 from traitsui.api import View, Item, HGroup
-from traits.util.distribution.distribution import \
+from enthought.util.distribution.distribution import \
      Constant, Distribution, Gaussian, Triangular, Uniform
 
 

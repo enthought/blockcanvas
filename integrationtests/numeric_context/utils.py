@@ -5,8 +5,8 @@ from numpy import ndarray, all
 
 # ETS imports
 from blockcanvas.numerical_modeling.numeric_context.api import ANumericContext
-from traits.util.dict import dict_zip
-from traits.util.sequence import union
+from codetools.util.dict import dict_zip
+from codetools.util.sequence import union
 
 ###############################################################################
 # Support

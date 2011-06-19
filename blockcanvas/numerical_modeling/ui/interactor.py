@@ -31,7 +31,7 @@ from traitsui.instance_choice \
 
 from pyface.api import GUI
 
-from traits.util.distribution.api \
+from enthought.util.distribution.api \
     import Distribution, Constant, Gaussian, Triangular, Uniform
 
 from types \

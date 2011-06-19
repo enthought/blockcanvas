@@ -3,8 +3,8 @@
 from networkx import \
     DiGraph, Graph, all_pairs_shortest_path, bfs, is_directed_acyclic_graph
 
-from traits.util.dict import map_items, map_keys
-from traits.util.sequence import union
+from codetools.util.dict import map_items, map_keys
+from codetools.util.sequence import union
 
 class CyclicGraph(Exception):
     def __init__(self, msg=''):

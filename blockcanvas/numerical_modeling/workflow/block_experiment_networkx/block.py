@@ -9,9 +9,9 @@ from networkx import DiGraph, Graph, topological_sort
 
 from traits.api import (Any, Bool, Default, Dict, Either, HasTraits,
                                   Instance, List, Property, Str, Trait)
-from traits.util.dict import map_keys, map_values
+from codetools.util.dict import map_keys, map_values
 from traits.util.networkx_ import reachable_graph
-from traits.util.sequence import is_sequence
+from codetools.util.sequence import is_sequence
 
 from codetools.blocks.analysis import NameFinder
 from codetools.blocks.compiler_.api \

@@ -19,8 +19,8 @@ from blockcanvas.numerical_modeling.numeric_context.api import \
      NumericContext, DerivativeContext, PassThruContext, TraitsContext, CachedContext
 from scimath.units.api import UnitArray
 from traits.api import Int
-from traits.util.functional import compose
-from traits.util.sequence import union
+from codetools.util.functional import compose
+from codetools.util.sequence import union
 
 # Local imports
 from utils import DictModifiedEventMonitor, ContextModifiedEventMonitor, \
