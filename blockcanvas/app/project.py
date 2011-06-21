@@ -195,7 +195,7 @@ class Project(HasTraits):
         """
         if dirname == "":
             dirname = self.project_save_path
-        elif self.project_save_path == "":
+        else: 
             self.project_save_path = dirname
 
         # Do some error checking

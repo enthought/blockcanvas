@@ -1,6 +1,3 @@
-# Local imports
-from helper import get_scale
-
 # Enthought Library Imports
 from enable.api import Component
 from enable.colors import ColorTrait
@@ -168,9 +165,8 @@ class EditField(Component):
         gc.save_state()
 
         self.set_font(gc)
-        scale = get_scale(gc)
-        x = scale * (self.x + self.offset)
-        y = scale * self.y
+        x = self.x + self.offset
+        y = self.y
         gc.show_text_at_point(self.text, x, y)
 
         if self._draw_cursor:
