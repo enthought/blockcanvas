@@ -6,9 +6,9 @@
 __version__ = '4.0.0'
 
 __requires__ = [
-    'codetools >= 3.2.1.dev',
-    'apptools >= 3.4.1.dev',
-    'chaco >= 3.4.0.dev',
-    'etsdevtools >= 3.1.1.dev',
-    'scimath >= 3.0.7.dev',
+    'codetools',
+    'apptools',
+    'chaco',
+    'etsdevtools',
+    'scimath',
 ]
