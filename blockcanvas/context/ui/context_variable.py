@@ -76,12 +76,12 @@ def set_var_value(value):
                 pass
 
         namespace = dict(
-            numpy = numpy,
-            arange = numpy.arange,
-            array = numpy.array,
-            linspace = numpy.linspace,
-            zeros = numpy.zeros,
-            ones = numpy.ones,
+            numpy=numpy,
+            arange=numpy.arange,
+            array=numpy.array,
+            linspace=numpy.linspace,
+            zeros=numpy.zeros,
+            ones=numpy.ones,
         )
         if new_value is None:
             try:
@@ -209,7 +209,7 @@ class ContextVariableList(HasTraits):
     # happen, rise an event to update the context like when you edit the variable 
     # straight in the ContextView panel. 
     allow_item_modified_event = Bool(True)
-    
+
     def __init__(self, **traits):
         super(ContextVariableList, self).__init__(**traits)
         # Be sure to read the context on initialization.
@@ -226,9 +226,9 @@ class ContextVariableList(HasTraits):
     def context_items_modified(self, event):
         """ Propagate changes from the context to the list.
         """
-        
+
         self.allow_item_modified_event = False
-                
+
         cvs = {}
         for cv in self.variables:
             cvs[cv.name] = cv
@@ -247,7 +247,7 @@ class ContextVariableList(HasTraits):
         self._extract_variables_from_context(self.context, event.added)
 
         self.variables = newvariables
-        
+
         self.allow_item_modified_event = True
 
     @on_trait_change('search_term,variables')
@@ -257,8 +257,8 @@ class ContextVariableList(HasTraits):
         # XXX: this is getting called far too often.
         items = []
         for filter in regex_from_str(self.search_term):
-            items.extend( item for item in self.variables
-                          if filter.match( item.name ) is not None )
+            items.extend(item for item in self.variables
+                          if filter.match(item.name) is not None)
         items.sort(key=lambda x: x.name)
         self.search_results = items
 
@@ -269,7 +269,7 @@ class ContextVariableList(HasTraits):
 
         if not self.allow_item_modified_event:
             return
-               
+
         if name == 'value':
             name = str(obj.name)
             self.context[name] = obj.value
@@ -316,7 +316,7 @@ class ContextVariableList(HasTraits):
         if self.context is not None:
             variables = self._extract_variables_from_context(self.context)
 
-        self.variables = [var for var in self.variables if var.value != '']
+        self.variables = [var for var in self.variables if numpy.all(var.value != '')]
 
         self._update_search_results()
 
@@ -353,9 +353,9 @@ class ContextVariableList(HasTraits):
                     found = True
             if not found:
                 var = ContextVariable(
-                    name = key,
-                    type = 'unbound_input',
-                    value = value,
+                    name=key,
+                    type='unbound_input',
+                    value=value,
                 )
                 self.variables.append(var)
 
