@@ -2,7 +2,7 @@
 blockcanvas: visual environment for creating simulation experiments
 ===================================================================
 
-http://github.enthought.com/blockcanvas
+http://docs.enthought.com/blockcanvas
 
 The blockcanvas project provides a visual environment for creating simulation
 experiments, where function and data are separated. Thus, you can define your
