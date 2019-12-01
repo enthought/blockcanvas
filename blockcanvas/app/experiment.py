@@ -5,7 +5,8 @@ import os
 from os.path import join
 
 # Enthought library imports
-from traits.api import HasTraits, Instance, on_trait_change, Property, String
+from traits.api import (HasTraits, Instance, on_trait_change, Property, String,
+    OBJECT_IDENTITY_COMPARE)
 
 # CodeTools imports
 from codetools.execution.executing_context import ExecutingContext
@@ -63,12 +64,13 @@ class Experiment(HasTraits):
 
     # A shadow trait for **shared_context** property
     _shared_context = Instance(IListenableContext, adapt='yes',
-        rich_compare=False)
+        comparison_mode=OBJECT_IDENTITY_COMPARE)
 
     # The context in which all of our execution model's generated values are
     # stored.  This context is exposed as part of self.context.  This remains
     # constant even as the _shared_context gets changed.
-    _local_context = Instance(IListenableContext, rich_compare=False)
+    _local_context = Instance(IListenableContext,
+        comparison_mode=OBJECT_IDENTITY_COMPARE)
 
     # Class-level generator for the name of the local context; takes
     # **self** as an argument.

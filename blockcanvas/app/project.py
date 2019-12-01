@@ -8,7 +8,7 @@ from os.path import abspath, join
 
 # Enthought library imports
 from traits.api import (Directory, HasTraits, Instance, Int, List,
-        on_trait_change, Property, Trait)
+        on_trait_change, Property, Trait, OBJECT_IDENTITY_COMPARE)
 
 # Block canvas imports
 from codetools.contexts.api import IListenableContext
@@ -27,7 +27,8 @@ class Project(HasTraits):
     """
 
     # A list of contexts that are associated with the project
-    contexts = List(Instance(IListenableContext, adapt='yes', rich_compare=False))
+    contexts = List(Instance(IListenableContext, adapt='yes',
+        comparison_mode=OBJECT_IDENTITY_COMPARE))
 
     # A list of the experiments in this project
     experiments = List(Instance(Experiment))

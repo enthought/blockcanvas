@@ -5,7 +5,8 @@ import numpy
 
 from pyface.timer.api import do_later
 from traits.api import (Any, Bool, Event, HasTraits, Instance, List,
-    Property, Str, TraitError, Undefined, on_trait_change)
+    Property, Str, TraitError, Undefined, on_trait_change,
+    OBJECT_IDENTITY_COMPARE)
 import traitsui.api as tui
 from traits.protocols.api import AdaptationFailure, adapt
 from traitsui.menu import OKCancelButtons
@@ -184,7 +185,7 @@ class ContextVariableList(HasTraits):
 
     # The context to be viewed.
     context = Instance(IListenableContext, factory=DataContext, adapt='yes',
-        rich_compare=False)
+        comparison_mode=OBJECT_IDENTITY_COMPARE)
 
     # One ContextVariable for each name in the context.
     variables = List(Any())
