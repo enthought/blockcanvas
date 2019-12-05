@@ -27,7 +27,7 @@ from numpy \
 
 from traits.api \
     import HasPrivateTraits, List, Enum, Str, Instance, Int, Any, Callable, \
-           Color, Font, Bool, Expression, Property, true, false
+           Color, Font, Bool, Expression, Property
 
 from traitsui.api \
     import View, VGroup, Item, SetEditor, TableEditor, EnumEditor
@@ -1364,16 +1364,16 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     klass = NumericEditor
 
     # Should an external selection be automatically selected in the editor?
-    auto_select = true
+    auto_select = Bool(True)
 
     # Can the user add new columns to the model?
-    extendable = true
+    extendable = Bool(True)
 
     # Where should new columns be added
     new_columns = Enum( 'last', [ 'first', 'last' ] )
 
     # Can the user configure the table columns?
-    configurable = true
+    configurable = Bool(True)
 
     # List of initial table column descriptors
     columns = List( NumericColumn )
@@ -1382,13 +1382,13 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     other_columns = List( NumericColumn )
 
     # Can the user choose the selection filter?
-    choose_selection_filter = true
+    choose_selection_filter = Bool(True)
 
     # Can the user edit the selection filter?
-    edit_selection_filter = true
+    edit_selection_filter = Bool(True)
 
     # Can the user edit the selection colors?
-    edit_selection_colors = true
+    edit_selection_colors = Bool(True)
 
     # The filter to use for selecting model data. This trait is mutually
     # exclusive with **selection_filter_name**.
@@ -1403,10 +1403,10 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     user_selection_filter = Instance( IndexFilter )
 
     # Can the user choose the reduction filter?
-    choose_reduction_filter = true
+    choose_reduction_filter = Bool(True)
 
     # Can the user edit the reduction filter?
-    edit_reduction_filter = true
+    edit_reduction_filter = Bool(True)
 
     # The filter to use for reducing the model data. This trait is mutually
     # exclusive with **reduction_filter_name**.
@@ -1417,22 +1417,22 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     reduction_filter_name = Str
 
     # Are rows deletable from the table?
-    deletable = false
+    deletable = Bool(False)
 
     # Can the user sort the data?
-    sortable = false
+    sortable = Bool(False)
 
     # Does sorting affect the model?
-    sort_model = false
+    sort_model = Bool(False)
 
     # Is the table editable?
-    editable = true
+    editable = Bool(True)
 
     # Should the cells of the table automatically size to the optimal size?
-    auto_size = false
+    auto_size = Bool(False)
 
     # Should grid lines be shown on the table?
-    show_lines = true
+    show_lines = Bool(True)
 
     # Default context menu to display when any cell is right_clicked
     menu = Instance( Menu )
@@ -1441,7 +1441,7 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     line_color = Color( 0xC4C0A9 )
 
     # Should column labels be displayed?
-    show_column_labels = true
+    show_column_labels = Bool(True)
 
     # The default font to use for text in cells
     cell_font = Font
@@ -1481,4 +1481,3 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
 
     # Called when a table item is double-clicked
     on_dclick = Callable
-

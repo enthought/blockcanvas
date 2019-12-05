@@ -17,7 +17,7 @@ from enable.trait_defs.api import RGBAColor
 from traits.api \
     import HasTraits, HasPrivateTraits, Event, List, Str, Instance, Property, \
            Delegate, Expression, Constant, Callable, Enum, Bool, Int, Array, \
-           Any, Float, true, false
+           Any, Float
 
 from traitsui.api \
     import View
@@ -560,7 +560,7 @@ class ANumericItem ( HasPrivateTraits ):
     slicer = Callable
 
     # Does the value have an associated quantity?
-    is_quantity = false
+    is_quantity = Bool(False)
 
 #-- View related ---------------------------------------------------------------
 
@@ -1170,7 +1170,7 @@ class ReductionModel ( FilterModel ):
 
     # Should filtered out values be set to a specified value, rather than
     # discarded?
-    use_value = false
+    use_value = Bool(False)
 
     #---------------------------------------------------------------------------
     #  Gets a ReductionModel associated with the model:
@@ -1474,4 +1474,3 @@ class PassThruModel ( TerminationModel ):
         """ The generic implementation of the item data property.
         """
         return getattr( self.model, name )
-
