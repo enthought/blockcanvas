@@ -19,7 +19,7 @@ from NumericModel \
     import NumericItem, NumericModelBase, NumericModel, DerivationModel
 
 from traits.api \
-    import Category
+    import Bool, Category
 
 from scimath.units \
     import unit_manager
@@ -41,7 +41,7 @@ class QuantityNumericItem ( Category, NumericItem ):
     #---------------------------------------------------------------------------
 
     # Is the referenced value an array or a Quantity (i.e. has units)?
-    is_quantity = false
+    is_quantity = Bool(False)
 
     # The current value of the associated numeric array (override):
     data = Property
@@ -182,4 +182,3 @@ class QuantityDerivationModel ( Category, DerivationModel ):
             item.
         """
         return self.model._get_quantity_for( name )
-

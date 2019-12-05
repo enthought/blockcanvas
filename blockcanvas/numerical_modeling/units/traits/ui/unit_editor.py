@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 from traits.api \
-    import CFloat, false, HasPrivateTraits, Instance, Str
+    import Bool, CFloat, HasPrivateTraits, Instance, Str
 
 from traitsui.api \
     import View, HGroup, Item, Label
@@ -89,7 +89,7 @@ class SimpleEditor ( UIEditor ):
     unit_view = Instance( UnitView )
 
     # should this editor be readonly?
-    readonly = false
+    readonly = Bool(False)
 
     #-- Trait Views ------------------------------------------------------------
 

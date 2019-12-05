@@ -5,7 +5,7 @@ import pickle
 import warnings
 
 # Enthought library imports
-from traits.api import Any, Bool, false, Float, Instance
+from traits.api import Any, Bool, Float, Instance
 from enable.api import Canvas
 
 # Local imports
@@ -28,7 +28,7 @@ class BlockCanvas(Canvas):
 
     # Override from DragTool base class.  Do not end drag operation
     # upon leaving the component.
-    end_drag_on_leave = false
+    end_drag_on_leave = Bool(False)
 
     #---------------------------------------------------------------------
     # Component traits
@@ -92,7 +92,7 @@ class BlockCanvas(Canvas):
 
         ## On the initial layout, the boxes haven't been created yet.
         self.graph_controller.update_nodes([self.graph_controller.execution_model.dep_graph.keys()],[],[])
-        
+
     def save_layout(self, filename):
         """ Save the layout of the canvas to the given filename.
         """
@@ -103,7 +103,7 @@ class BlockCanvas(Canvas):
         file = open(filename, 'w')
         pickle.dump(id_position_map, file)
         file.close()
-        
+
     #---------------------------------------------------------------------
     # Container interface.
     #---------------------------------------------------------------------
