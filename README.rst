@@ -1,3 +1,9 @@
+This package is no longer maintained, and no current projects should rely on it.
+If you encounter projects that still depend on enthought/blockcanvas, please open
+issues against those projects.
+
+----
+
 ===================================================================
 blockcanvas: visual environment for creating simulation experiments
 ===================================================================
